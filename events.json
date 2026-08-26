@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-26T07:38:38.755311+00:00",
-  "count": 175,
+  "generated_at": "2026-08-26T07:43:15.264616+00:00",
+  "count": 128,
   "events": [
     {
       "source": "allevents",
@@ -13,18 +13,6 @@
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czMvYmFubmVycy81MTM0YWE5ZDU0OWI3ODNhMWVjZDFmNmY0N2NlMjgyZjYzODU2NDJjN2UxNjk3ZWY2NTBiOWU1MTJjMDVhNDZlLXJpbWctdzEyMDAtaDU2OS1kYzE5MTkxYy1nbWlyLmpwZz92PTE3ODEwNzQxOTk.avif",
       "lat": null,
       "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "ASICS Running Club Malaysia",
-      "date": "",
-      "time": "",
-      "venue": "Institut Sukan Negara",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/asics-running-club-malaysia/100001979511686742",
-      "image": "https://dyn-image.allevents.in/generate-image?v=4&title=ASICS+Running+Club+Malaysia&date=Wed+Aug+26+2026&bg=3",
-      "lat": 3.0526575,
-      "lon": 101.6915288
     },
     {
       "source": "allevents",
@@ -76,18 +64,6 @@
     },
     {
       "source": "allevents",
-      "name": "Dinner Buffet at ORBIT Revolving Dining in KL Tower",
-      "date": "",
-      "time": "",
-      "venue": "ORBIT Restaurant KL Tower",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/things-to-do/dinner-buffet-at-orbit-revolving-dining-in-kl-tower-aidmhm2h0b?ref=eventlist",
-      "image": "https://cdn2.allevents.in/transup/de/02bfbe15ca4a10a8891df2c8aadb37/image.jpg",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
       "name": "East-West Connection walk in Kuala Lumpur (tip-based)-Sunday session",
       "date": "",
       "time": "",
@@ -112,78 +88,6 @@
     },
     {
       "source": "allevents",
-      "name": "Hi-Tea Buffet at ORBIT Revolving Dining in KL Tower",
-      "date": "",
-      "time": "",
-      "venue": "ORBIT Restaurant KL Tower",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/things-to-do/hi-tea-buffet-at-orbit-revolving-dining-in-kl-tower-aidmhjts10?ref=eventlist",
-      "image": "https://cdn2.allevents.in/transup/5c/01186895424a758a6c7de06530a2fe/image.jpg",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "ISO 9001 FAST TRACK Training",
-      "date": "",
-      "time": "",
-      "venue": "Pavilion KL",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/iso-9001-fast-track-training/200030238763349",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czkvYmFubmVycy9iZjg0ODFkYTU3YjBlZWE1MTAwY2UyNTRjOTAyNmQ4ODc4NWYxNDI1NzA1MGI3ZTcwNDAxMjdmYmVhMWZjMjZlLXJpbWctdzg1My1oMTI4MC1kY2YwZWZmNC1nbWlyP3Y9MTc4MTU0NjYyOQ.avif",
-      "lat": 3.1480011,
-      "lon": 101.713539
-    },
-    {
-      "source": "allevents",
-      "name": "Lunch Buffet at ORBIT Revolving Dining in KL Tower",
-      "date": "",
-      "time": "",
-      "venue": "ORBIT Restaurant KL Tower",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/things-to-do/lunch-buffet-at-orbit-revolving-dining-in-kl-tower-aidmhjsef3?ref=eventlist",
-      "image": "https://cdn2.allevents.in/transup/6c/1ff76dfa6443bfab1711d7b2b86a88/image.jpg",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Plaza Premium First Lounge: KLIA Terminal 1",
-      "date": "",
-      "time": "",
-      "venue": "Plaza Premium First",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/things-to-do/plaza-premium-first-lounge-klia-terminal-1-aidmhjw1hn?ref=eventlist",
-      "image": "https://cdn2.allevents.in/transup/0e/69d2fc8bf144e0bbdfffbe2603c95e/image.jpg",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Plaza Premium Lounge: KLIA Terminal 1",
-      "date": "",
-      "time": "",
-      "venue": "Plaza Premium Lounge",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/things-to-do/plaza-premium-lounge-klia-terminal-1-aidmhmi0na?ref=eventlist",
-      "image": "https://cdn2.allevents.in/transup/fb/d4eec7c51f4ae5843af0d6f43479a0/image.jpg",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Plaza Premium Lounge: KLIA Terminal 2",
-      "date": "",
-      "time": "",
-      "venue": "Plaza Premium Lounge KLIA 2",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/things-to-do/plaza-premium-lounge-klia-terminal-2-aidmhj6u2h?ref=eventlist",
-      "image": "https://cdn2.allevents.in/transup/3a/4cf785b126468881ab5d6df7084508/image.jpg",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
       "name": "SIP & SOCIAL",
       "date": "",
       "time": "",
@@ -191,42 +95,6 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/sip-and-social/100001994571897237",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy8zNjU4ODA2MGVmZTc3OGNhN2Q2NjA2NzY2ODNjYzE0Zjk2MGFmMmFiZmZkODMyYTU2MTMxMTFmOWI4MDUyZmE2LXJpbWctdzU5NC1oODQxLWRjMmMyZjNlLWdtaXIuanBnP3Y9MTc4NDU2NTI4MA.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "The Weeknd in Kuala Lumpur",
-      "date": "",
-      "time": "",
-      "venue": "TM Stadium Nasional",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/the-weeknd-in-kuala-lumpur/3300030336038502",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czMvYmFubmVycy81ZWNiYWRlMC03NTBjLTExZjEtYTg3Yy01NTJlMzIyMzA0ZTYtcmltZy13MTIwMC1oNjc1LWRjZjhmM2ZhLWdtaXIud2VicD92PTE3ODI4ODMxNDE.avif",
-      "lat": 3.0546755,
-      "lon": 101.691369
-    },
-    {
-      "source": "allevents",
-      "name": "The World Cosplay Summit Malaysia 2027 National Championship",
-      "date": "",
-      "time": "",
-      "venue": "Petaling Jaya Performing Arts Centre - PJPAC",
-      "description": "",
-      "link": "https://allevents.in/petaling-jaya/the-world-cosplay-summit-malaysia-2027-national-championship/200029709138930",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEwL2Jhbm5lcnMvYWRhZTMxYWU1MWIwMmE1YjA0YjdjMDAwZTczYWE3MTQ0NjAzNzBkZTM4Y2I3NTE2Mjk4NThhY2E4NWZmOWY5MC1yaW1nLXcxMjAwLWg1MjctZGMwODI4NDgtZ21pcj92PTE3ODcyOTc2Mzc.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Weekly ISO 90012015 FAST TRACK Training Session (for Micro SME Owner Small SME Owner)",
-      "date": "",
-      "time": "",
-      "venue": "Pavilion, Jalan Bukit Bintang (5 mins walk)",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/weekly-iso-9001-2015-fast-track-training-session-for-micro-sme-owner-small-sme-owner/200030238767007",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy84YzY1YmFmZTdhNjY0YTBkNjgzNzY4NDEzYmMzNjMzYzA5YzE4Njc3ZGQwYmUyNTc1OTBkNTY4YzI3ODM4MDNiLXJpbWctdzY1My1oNzI1LWRjZmZmZmZmLWdtaXI_dj0xNzgxNTQ2NjQ2.avif",
       "lat": null,
       "lon": null
     },
@@ -323,18 +191,6 @@
       "description": "*SCHOOL OF THOUGHT SOCIETY* invites you to: **Men's Circle August Discussion: Self-Sabotage** 📍 Where: [Violet Flame KL](http://www.thevioletflamekl.org/find-us-easy) 📅 When: Wednesday, 26 August 2026 🕗 Time: 8:00PM – 10:00PM 📞 Reservation: +6019 723 2112 Sometimes, we know exactly what we want. Yet somehow, we find a way to get in our own way. We postpone what matters. We walk away when things begin to work. We push people away when they get too close. For men, this can show up in our careers, relationships, finances, health, fatherhood and even the way we see ourselves. Self-sabotage happens when our behaviours interfere with the goals that matter to us. It can take many forms such as avoidance, procrastination, comfort eating, substance use, or self-isolation. What makes it difficult is that we are not always aware we are doing it. Sometimes what looks like self-defeat began as a way of coping or protecting ourselves from something we have yet to face. Just men, honest reflection and the courage to ask hard questions.",
       "link": "https://www.meetup.com/mens-circle-of-malaysia/events/316127444/",
       "image": "/images/fallbacks/redesign/group-cover-1-square.webp",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Sustainability Environment Asia (SEA) 2026",
-      "date": "2026-08-26",
-      "time": "10:00",
-      "venue": "MITEC - Malaysia International Trade and Exhibition Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/sustainability-environment-asia-sea-2026/200030609264942",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czIvYmFubmVycy80ZWJlOTI5YjA4MTYxMTczNDYxMjg1OTMzNzhhZGNlZTdiY2I5YTljZDZmYmY4YmE3OGRlNTdmMTQyYmY2OWQ5LXJpbWctdzEyMDAtaDYyMy1kY2Y4ZjhmOC1nbWlyP3Y9MTc4NzU3ODc4MQ.avif",
       "lat": null,
       "lon": null
     },
@@ -555,30 +411,6 @@
       "lon": 101.6870347
     },
     {
-      "source": "allevents",
-      "name": "Absolutely Free Dance Classes & Social Salsa Bachata Kizomba & More",
-      "date": "2026-08-29",
-      "time": "19:00",
-      "venue": "Nu Sentral, Level 6, 201, Jalan Tun Sambanthan, Kuala Lumpur, Malaysia",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/absolutely-free-dance-classes-and-social-salsa-bachata-kizomba-and-more/200030609024145",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czYvYmFubmVycy9kZDI5ZWVkMjA4YTE1MzM2MzY2NWVlNjJlNDM4ZTkzZGZjMjIzZGVjMmQ0MGZhZTYwMDEyOWM2NjllYzE5NjcwLXJpbWctdzEwODAtaDYwOC1kYzA4MTgyOC1nbWlyP3Y9MTc4NzU3NTU0NQ.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Christian Singles Mixer",
-      "date": "2026-08-29",
-      "time": "12:30",
-      "venue": "Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/christian-singles-mixer/100001996637657983",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEvYmFubmVycy84ODg3NDk4ZTdmMzg4MjRiODg3YmYyY2E5NTVhZmJhYTc5NTkxY2M1NDA2YzY2ZDAzMjI2Mjk2NGNkMmNhNDZkLXJpbWctdzEyMDAtaDYwMC1kY2Y4ZThlOC1nbWlyLmpwZz92PTE3ODYzNDI2Mjg.avif",
-      "lat": 3.1407927,
-      "lon": 101.6939439
-    },
-    {
       "source": "eventbrite",
       "name": "KOA Run Club - Long Run - Hosted by KOA Fitness, KL's All Women's Gym",
       "date": "2026-08-29",
@@ -599,18 +431,6 @@
       "description": "Hey everyone! In a city that never sleeps, our 7:00 PM Saturday meetups offer a pause for real connection [Click this WhatsApp groupchat link to join ](https://chat.whatsapp.com/HnQ47nqnaaWD5CFMEeRmKv) Atendees in their 20s and 30s gather for language practice and cultural stories. Whether you’re stopping by or staying long, you’ll find global minds and friendly faces waiting. Come join the buzz — with fewer skyscrapers and more smiles.",
       "link": "https://www.meetup.com/language-exchange-social-in-kuala-lumpur/events/315948384/",
       "image": "/images/fallbacks/redesign/group-cover-1-square.webp",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Little Chefs My Merdeka Rainbow Fried Rice",
-      "date": "2026-08-29",
-      "time": "17:00",
-      "venue": "The Atmosphere, Seri Kembangan",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/little-chefs-·-my-merdeka-rainbow-fried-rice/200030588245820",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czMvYmFubmVycy9mYTE5MWZhZTM5MGQ0Zjg3MTBhMzdjNTU2YWRmMDAyZDczYTliYmM2NTAwZDA3NWMwODZiZDlkMDhkMzI2MzA4LXJpbWctdzEyMDAtaDEyMDAtZGNmOGY4ZTgtZ21pcj92PTE3ODcyMTM0Nzk.avif",
       "lat": null,
       "lon": null
     },
@@ -663,18 +483,6 @@
       "lon": null
     },
     {
-      "source": "allevents",
-      "name": "The Click Five in Kuala Lumpur",
-      "date": "2026-08-30",
-      "time": "19:00",
-      "venue": "Zepp Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/the-click-five-in-kuala-lumpur/3300030147929252",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEvYmFubmVycy9lOTg4ZDhhMC01YTcxLTExZjEtYjc1NS1hZDU0NWRkMTI5YzUtcmltZy13NTAwLWg0MDItZGMwNTA1MDYtZ21pci5qcGc_dj0xNzc5OTU4MDcy.avif",
-      "lat": 3.1394413,
-      "lon": 101.7091281
-    },
-    {
       "source": "luma",
       "name": "MOODROOM's MATCHA HOURS 🍵😄",
       "date": "2026-08-31",
@@ -709,18 +517,6 @@
       "image": "https://cdn.evbstatic.com/s3-build/perm_001/6ce389/django/images/logos/eb_orange_on_white_1200x630.png",
       "lat": 3.2161237,
       "lon": 101.6449285
-    },
-    {
-      "source": "allevents",
-      "name": "PEM Week Fun Run 2026",
-      "date": "2026-09-01",
-      "time": "07:30",
-      "venue": "Dataran DBKL, Menara DBKL 1, Jalan Raja Laut",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/pem-week-fun-run-2026/200030238753001",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEwL2Jhbm5lcnMvYWFkNjFjOWU4M2RmNjVkMzMyNDUwNGU4MTIwYTU5OWJjY2UxOWRjNTNjMzcxM2VlNWNmNWY0YTZiNDFiMDJiYi1yaW1nLXcxMDAwLWgxMjUwLWRjZjhmOGY4LWdtaXI_dj0xNzg3MTIzMzQ0.avif",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
@@ -831,18 +627,6 @@
       "lon": 101.7132345
     },
     {
-      "source": "allevents",
-      "name": "MONEY SMART KIDS SCHOOL HOLIDAY KUALA LUMPUR",
-      "date": "2026-09-03",
-      "time": "09:00",
-      "venue": "UTM Library Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/money-smart-kids-school-holiday-kuala-lumpur/200030584553248",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy84NDFmNjM5MzM0NTNhNWViMTRiZmU4YTYxMWI0MzNlNDkxOGZlZDkzN2RjZTBkNzFkOWE3MTU0MTkyNDEwYTQzLXJpbWctdzEyMDAtaDYwMC1kYzA4Mzg3OC1nbWlyP3Y9MTc4NzE0OTc4Nw.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "Parents Information Evening with Imperial, Cambridge and St Andrews",
       "date": "2026-09-03",
@@ -879,18 +663,6 @@
       "lon": 101.7020252
     },
     {
-      "source": "allevents",
-      "name": "Yokai Tales Japans 47 Prefectures",
-      "date": "2026-09-04",
-      "time": "14:00",
-      "venue": "KL Tower (Menara Kuala Lumpur)",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/yokai-tales-japans-47-prefectures/200030584552944",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEvYmFubmVycy80NzQ3NjhjYjEwODk0NzJjZTMwNWQxNDgwODI1OWFjODY0NDdiYzk3NTM0ZjA1ZDk5NGM0NmU0ODUyMmRmMzMyLXJpbWctdzgyMC1oMzYwLWRjMTgxODM4LWdtaXI_dj0xNzg3MTQ5Nzgy.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "meetup",
       "name": "🍜Asian Background Social: Lounge Asia Meetup (Easy English) @ KL 7pm",
       "date": "2026-09-04",
@@ -913,18 +685,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1190180979%2F315165973029%2F1%2Foriginal.20260803-093021?crop=focalpoint&fit=crop&w=400&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.517&fp-y=0.687&s=ec7bde0625fc80fcfd59163355f186b7",
       "lat": 3.1890556,
       "lon": 101.6806402
-    },
-    {
-      "source": "allevents",
-      "name": "Icon for Hire - Atlanta",
-      "date": "2026-09-05",
-      "time": "18:00",
-      "venue": "WhAt The \"HELL\"",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/icon-for-hire-atlanta/200030442751906",
-      "image": "https://dyn-image.allevents.in/generate-image?v=4&title=Icon+for+Hire+-+Atlanta&date=Sat+Sep+05+2026+at+06%3A00+pm&bg=2",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
@@ -963,18 +723,6 @@
       "lon": 101.67445384034008
     },
     {
-      "source": "allevents",
-      "name": "Larian Anak Malaysia - Powered by Tenacore",
-      "date": "2026-09-06",
-      "time": "06:30",
-      "venue": "Dataran DBKL",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/larian-anak-malaysia-powered-by-tenacore/200030586083838",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEwL2Jhbm5lcnMvNTUyNTg1N2ZlM2UwODlkNTU5ZDJjM2ZhZDJlNmZkNDU2NTY0ZTc5ZjUzZDVlZWMwNTkzMWQxNjI3MzhkM2ViMi1yaW1nLXc2MDAtaDYwMC1kY2Y4ZDgxOC1nbWlyP3Y9MTc4NzE3NjUzNQ.avif",
-      "lat": 3.1517136,
-      "lon": 101.6941707
-    },
-    {
       "source": "eventbrite",
       "name": "REAL Manifesting Secrets - Mastermind #1 (Chapter One)",
       "date": "2026-09-06",
@@ -985,18 +733,6 @@
       "image": "https://cdn.evbstatic.com/s3-build/perm_001/6ce389/django/images/logos/eb_orange_on_white_1200x630.png",
       "lat": 3.1664256,
       "lon": 101.6924194
-    },
-    {
-      "source": "allevents",
-      "name": "Squeeze",
-      "date": "2026-09-06",
-      "time": "19:00",
-      "venue": "Pavilion KL",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/squeeze/200030564076857",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czYvYmFubmVycy8zYmRjODA3NDI5ZTliNTIzZGE0NGYyNGFkYWRiZmVlOWQ2MjFiZWI4NmY5NWRiNDgyZWE1MjdjNjJlMGMwZWY2LXJpbWctdzEwMjQtaDczNC1kYzI4MjgwOC1nbWlyP3Y9MTc4NzQyOTQxNg.avif",
-      "lat": 3.1480011,
-      "lon": 101.713539
     },
     {
       "source": "luma",
@@ -1021,18 +757,6 @@
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2YTYwNmIxOWViZWVhLmpwZw.avif",
       "lat": 3.1533264,
       "lon": 101.6927379
-    },
-    {
-      "source": "allevents",
-      "name": "Hillsong Worship Night Kuala Lumpur",
-      "date": "2026-09-09",
-      "time": "20:00",
-      "venue": "Mega Star Arena",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/hillsong-worship-night-kuala-lumpur/200030295183433",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy82ZDZkMjQyODE0MzY4MjI4YTFlZmUyN2E5OTg3ZDI2MzkzZWE5M2NiYmNjNTQ4NWY1ZTMwODQwNzMyZTNiOGRiLXJpbWctdzEyMDAtaDYyOC1kYzA4NThlOC1nbWlyP3Y9MTc4NzY2MzY4Nw.avif",
-      "lat": 3.1444087,
-      "lon": 101.7113286
     },
     {
       "source": "luma",
@@ -1081,18 +805,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1191212577%2F2943004378871%2F1%2Foriginal.20260817-025817?crop=focalpoint&fit=crop&w=512&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=55f8c9a5e23f89684567b6ca4a79a779",
       "lat": 3.1513526,
       "lon": 101.7124766
-    },
-    {
-      "source": "allevents",
-      "name": "& - &",
-      "date": "2026-09-10",
-      "time": "20:15",
-      "venue": "InnerArt Therapy Studio",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/【线上and实体】儿童艺术育疗陪伴课程-初阶and进阶/200030486812212",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czcvYmFubmVycy82OGYyMjczYzE4MGNhNGJhZjg4NWQ5NzE5NWY0MWUwMmM5OTE0M2I5MGJkMjRiY2JiMTNmMzliNGVjNDdiNTQzLXJpbWctdzEyMDAtaDE4ODgtZGNmOGY4ZTgtZ21pcj92PTE3ODc1ODE5Nzc.avif",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
@@ -1312,30 +1024,6 @@
     },
     {
       "source": "allevents",
-      "name": "KUALA LUMPUR PHOTO WORKSHOP with Sean Gallagher",
-      "date": "2026-09-12",
-      "time": "09:00",
-      "venue": "Kuala Lumpur, Malaysia",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/kuala-lumpur-photo-workshop-with-sean-gallagher/200030533865045",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy8yMmEwMDI4ZWYyODUzMWU1YTY5YTczYzEyNTllYmYxYTkyNWY5YjBlYjUwMjk0YWYzYTE1MmYyMzdjOGNkNmIzLXJpbWctdzEyMDAtaDgwMC1kY2Y4ZjhmOC1nbWlyP3Y9MTc4NzExNDk0MQ.avif",
-      "lat": 3.075797,
-      "lon": 101.7056009
-    },
-    {
-      "source": "allevents",
-      "name": "Malaysia Primary School Band Festival 2026",
-      "date": "2026-09-12",
-      "time": "09:00",
-      "venue": "中国华小 ( SJK(C) Chung Kwo )",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/malaysia-primary-school-band-festival-2026/200030238751554",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy9lZDMxYzliYjZkNjk5NjQzYzRmYjY1ZjIyYTM0NDRhZTIxNWJiNjZlZTI3ZmVlMmUxYjE2YWVmY2U4YWMzODVmLXJpbWctdzEyMDAtaDQzMy1kY2Y4ZDhlOC1nbWlyP3Y9MTc4NzExNzI1OQ.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
       "name": "Godrej Properties NRI Expo Malaysia Exclusive Investment Showcase",
       "date": "2026-09-13",
       "time": "11:00",
@@ -1443,54 +1131,6 @@
       "lon": 101.7126118
     },
     {
-      "source": "allevents",
-      "name": "3rd Global Congress on Public Health Healthcare Innovation & Health Equity",
-      "date": "2026-09-18",
-      "time": "11:00",
-      "venue": "Federal Territory of Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/3rd-global-congress-on-public-health-healthcare-innovation-and-health-equity/80002965094429",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2OTJlOTYxNDgzODdhLmpwZw.avif",
-      "lat": 3.1533264,
-      "lon": 101.6927379
-    },
-    {
-      "source": "allevents",
-      "name": "Keichan Piano Asia Tour ROOM",
-      "date": "2026-09-19",
-      "time": "20:00",
-      "venue": "Dominus Arts Venue",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/keichan-piano-asia-tour-‘room/80003640846366",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2YTU1YTQwYTVhMmQwLmpwZw.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "MNKL KARNIVAL UNITY FUND RUN 2026",
-      "date": "2026-09-20",
-      "time": "07:30",
-      "venue": "Masjid Negara Malaysia, Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/mnkl-karnival-unity-fund-run-2026/200030586083737",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEvYmFubmVycy9hYTA5NDg5MzYwY2U1ZWJkYzMwZTA0Mzk2MzlhODQwMWM1ZmRmYWI5MjZhNTFkNWQ2OTQ1YjI1Yzc1OTIyMGVlLXJpbWctdzEyMDAtaDEyMDAtZGNmOGY4ZjgtZ21pcj92PTE3ODcxNzY1MzY.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Post-16th Conference Workshop Music Therapy in End-of-Life Care20 September 2026.",
-      "date": "2026-09-20",
-      "time": "10:00",
-      "venue": "To News editor -: Post-16th Conference Workshop :Music Therapy in End-of-Life Care,20 September 2026.",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/post-16th-conference-workshop-music-therapy-in-end-of-life-care20-september-2026/80001146575288",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2YTJkODkxYzBhZjY2LmpwZw.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "AI Revolution Summit - Malaysia",
       "date": "2026-09-22",
@@ -1575,18 +1215,6 @@
       "lon": 101.6924639
     },
     {
-      "source": "allevents",
-      "name": "Hexa Food at MIHAS 2026",
-      "date": "2026-09-23",
-      "time": "10:00",
-      "venue": "MITEC - Malaysia International Trade and Exhibition Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/hexa-food-at-mihas-2026/200030588245719",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czIvYmFubmVycy9jN2RkOTNlODFmYTU4ZTM2NDVhMzZmZTc3NzgyMDc1Y2M2Nzk2ZTZhNDY0NWY2MTdkZmQ3NGNkYWY5ZTExZmQ4LXJpbWctdzEyMDAtaDYwMC1kYzA4MTg0OC1nbWlyP3Y9MTc4NzIxMzQ3OQ.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "Pilot Test Symposium",
       "date": "2026-09-23",
@@ -1624,18 +1252,6 @@
     },
     {
       "source": "allevents",
-      "name": "Sara Landry in Kuala Lumpur",
-      "date": "2026-09-25",
-      "time": "20:00",
-      "venue": "XOX Arena",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/sara-landry-in-kuala-lumpur/3300030280494829",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEwL2Jhbm5lcnMvYTFhMjNkZDAtNmRhMi0xMWYxLWJkZDAtYTk3N2M2NmU5ZDY2LXJpbWctdzEyMDAtaDY3NS1kY2ZmZmZmZi1nbWlyLndlYnA_dj0xNzgyMDY4MDY5.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
       "name": "Unleash 2026 Prophetic Healing & Revival Meeting",
       "date": "2026-09-26",
       "time": "16:30",
@@ -1657,18 +1273,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1189948495%2F3004757639822%2F1%2Foriginal.20260730-105345?crop=focalpoint&fit=crop&w=512&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=535f9b11f8db9bab91fef3b443e45dec",
       "lat": 3.1390664,
       "lon": 101.6978452
-    },
-    {
-      "source": "allevents",
-      "name": "Agents Of Time in Kuala Lumpur",
-      "date": "2026-09-27",
-      "time": "22:30",
-      "venue": "Time Machine",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/agents-of-time-in-kuala-lumpur/3300030441483800",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czcvYmFubmVycy8yNzQwMzNmMC04NjBhLTExZjEtYThhNC02MzFiMTc1ZjNkNzgtcmltZy13MTIwMC1oNjc1LWRjYzNkNGRhLWdtaXIud2VicD92PTE3ODQ3NTEzNTk.avif",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "allevents",
@@ -1707,30 +1311,6 @@
       "lon": 101.6684571
     },
     {
-      "source": "allevents",
-      "name": "ALLSTAR LEGENDS FOOTBALL MATCH",
-      "date": "2026-10-03",
-      "time": "20:45",
-      "venue": "TM National Stadium Bukit Jalil",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/allstar-legends-football-match/200030582139552",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czIvYmFubmVycy8yYWE1NjhiZjQ1MTg5YzU1YTRlZGJiNzc2MWQ5ZjZmMTRmZDU3ZGU1ODk3YTUwYWFiYjA2ZTViMTQxZGI3NGI4LXJpbWctdzEyMDAtaDYwMC1kYzA4MDgwOC1nbWlyP3Y9MTc4NzExNDg3MQ.avif",
-      "lat": 3.0546755,
-      "lon": 101.691369
-    },
-    {
-      "source": "allevents",
-      "name": "Showcase JIWARASA Nizam Laksamana & Kawan-Kawan 5.0",
-      "date": "2026-10-03",
-      "time": "20:00",
-      "venue": "Noah Grand Ballroom",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/showcase-jiwarasa-nizam-laksamana-and-kawan-kawan-50/200030603206056",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czQvYmFubmVycy9iYzQ2MWIxNTlmMmNjODQ5OGVkYmIyNDFmMjRjMWI2MmEyZWE4YTRkNjk0MjU2YTlmODY5Mzg0YTg5ZTY4Zjc3LXJpbWctdzEyMDAtaDY3NS1kY2Y4ZDhhOC1nbWlyP3Y9MTc4NzQ1ODY3Ng.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "Build Better Kuala Lumpur 2026",
       "date": "2026-10-08",
@@ -1756,18 +1336,6 @@
     },
     {
       "source": "allevents",
-      "name": "Nature Walk for World Mental Health Month 2026",
-      "date": "2026-10-10",
-      "time": "06:30",
-      "venue": "Bukit Kiara",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/nature-walk-for-world-mental-health-month-2026/200030582139449",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy9hNTY0MWJkNDIwZDM4ZWJkYmNjMmE3ODgxMTBjYjdmYzNiMmZmZmNmNTYyMDQ4NjZiYjdmM2Q4N2QxM2M4N2M5LXJpbWctdzEwMDEtaDQ5OS1kY2Y4ZjhmOC1nbWlyP3Y9MTc4NzExNDg2OA.avif",
-      "lat": 3.1404447,
-      "lon": 101.644898
-    },
-    {
-      "source": "allevents",
       "name": "The Nutcracker Returns to KL Saint Petersburg National Ballet Theatre",
       "date": "2026-10-11",
       "time": "20:00",
@@ -1777,18 +1345,6 @@
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy83OWI1NjNhZjk2OTE3MGExNmRmNTE3NDhmNzQ2NWI1YWJkN2EyMzhjN2MzZDIxMjMzYjZmYzgwNzljNTgwOWUxLXJpbWctdzEyMDAtaDY3NS1kYzM4MDgwOC1nbWlyLmpwZz92PTE3ODc1NjAzNDc.avif",
       "lat": null,
       "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "ART KL",
-      "date": "2026-10-15",
-      "time": "17:00",
-      "venue": "A Place Where - APW",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/art-kl/200030533865146",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEvYmFubmVycy9kYjJkYzc0NWM4MmMyNjkxYzJjYzhhY2Y4ZmI3MTc2NWJkZDBkODkwOTMzMTg1Y2YxOTNlNmEwYzBhYTM0YjBhLXJpbWctdzExNzAtaDg3OC1kY2Y4ZjhmOC1nbWlyP3Y9MTc4NzExNDkzOQ.avif",
-      "lat": 3.1233391,
-      "lon": 101.6744098
     },
     {
       "source": "allevents",
@@ -1803,30 +1359,6 @@
       "lon": null
     },
     {
-      "source": "allevents",
-      "name": "I LOVE U RUN 2026",
-      "date": "2026-10-24",
-      "time": "06:45",
-      "venue": "UM Arena, University Malaya, KL",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/i-love-u-run-2026/200030582141304",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEvYmFubmVycy85ZGYxYzczYjVlZThmMmZkMjVhNWJmYWNlMjNjNWMxODhjNGMyMjI0MDE0NzBhMDIzMDk3NzNmMmJjOWU4ZDkyLXJpbWctdzgwMC1oNDAwLWRjZjhmOGY4LWdtaXI_dj0xNzg3MTE0ODg0.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "Kasa Sound Therapy Training Malaysia",
-      "date": "2026-10-25",
-      "time": "10:00",
-      "venue": "Jalan Kurau, Bangsar",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/kasa-sound-therapy-training-malaysia/200030557216236",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEwL2Jhbm5lcnMvMGVkMGQ5NDdiZWIwNmEyZDY1NGU0MzI1OGMwMTYxNTE2MjhlNWM1MGQyMzQ4ZjhjODU3ZmQ1YzA0MTgzODUwNy1yaW1nLXcxMDgwLWgxMDgwLWRjZDg4ODY4LWdtaXI_dj0xNzg3NDY1NzU3.avif",
-      "lat": 3.1221897,
-      "lon": 101.6706563
-    },
-    {
       "source": "eventbrite",
       "name": "Business Catalyst III",
       "date": "2026-10-29",
@@ -1837,18 +1369,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1191686763%2F277873140850%2F1%2Foriginal.20260823-071544?w=355&auto=format%2Ccompress&q=75&sharp=10&s=b834872ce6c4d5276f7684c96e963a94",
       "lat": 3.1141124,
       "lon": 101.6632718
-    },
-    {
-      "source": "allevents",
-      "name": "-",
-      "date": "2026-11-01",
-      "time": "00:00",
-      "venue": "Salak South, Kuala Lumpur, Malaysia",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/锡安团契-少年组/200029792714237",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy9mZDVmNjM1ZDIzZDExYTRkZjY1ZWRlMzdjOWU0ZjBlMmMxNjFiMDE4MmVmNzFhODk1MzFjOWE3NDQ5ZjQ5M2QxLXJpbWctdzcyMC1oMTI4MC1kY2Y4ZjhmOC1nbWlyP3Y9MTc4NzE3ODAxMg.avif",
-      "lat": 3.0813054,
-      "lon": 101.7112631
     },
     {
       "source": "eventbrite",
@@ -1887,18 +1407,6 @@
       "lon": 101.7123797
     },
     {
-      "source": "allevents",
-      "name": "TCGKL CONVENTION 2026",
-      "date": "2026-11-06",
-      "time": "10:00",
-      "venue": "KLCC Convention Centre (Kuala Lumpur Convention Centre)",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/tcgkl-convention-2026/200030587704352",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy8xYzJlMDNjMGQ2ZWI1YjZkNzMyNGE4ZGNhZDIwZjViZjFkZWEyZDU5MTlmMGM2YmU0NTFmNzk1ODBkYjJhZDdlLXJpbWctdzEwODAtaDE0NDAtZGNmOGY4ZjgtZ21pcj92PTE3ODcyMDY2MTA.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "Business IT Architecture Series (BITAS) Conference 2026, Malaysia",
       "date": "2026-11-12",
@@ -1909,30 +1417,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1191493505%2F208688571342%2F1%2Foriginal.20260820-081145?crop=focalpoint&fit=crop&w=512&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=281d0cfd7b24293078d563ccf5afbda4",
       "lat": 3.1192423,
       "lon": 101.6775025
-    },
-    {
-      "source": "allevents",
-      "name": "BABYMONSTER in Kuala Lumpur",
-      "date": "2026-11-14",
-      "time": "17:00",
-      "venue": "UNIFI ARENA",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/babymonster-in-kuala-lumpur/3300030433301953",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEwL2Jhbm5lcnMvODk2YjkzNDAtODRlMi0xMWYxLWEwZjAtYjNmYzA1OTMwZTE2LXJpbWctdzEyMDAtaDY3NS1kY2Q3ZDVkYS1nbWlyLndlYnA_dj0xNzg0NjI0Mzky.avif",
-      "lat": 3.0537311,
-      "lon": 101.6934618
-    },
-    {
-      "source": "allevents",
-      "name": "LL in Kuala Lumpur",
-      "date": "2026-11-21",
-      "time": "19:00",
-      "venue": "idea Live Arena",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/lØlØ-in-kuala-lumpur/3300030126290352",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czcvYmFubmVycy8xNmQ3YmNkMC01ODNlLTExZjEtYjZjYi00MTgwMmM4OTkwNjktcmltZy13MTIwMC1oNjc1LWRjMDQwMzA3LWdtaXIud2VicD92PTE3Nzk3MTU5MTI.avif",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "allevents",
@@ -2003,56 +1487,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/19th-global-nursing-and-patient-safety-summit-and-exhibition/100001988844241665",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czMvYmFubmVycy85YTAyMWNjNGFiMGEyMTBkZmQzNjNiNzExMjYxN2MyNDE5YTJlMzQxOWY2MjcwNzE3OGM4NmE3NDI4MzBiYTIyLXJpbWctdzEwODAtaDEwODAtZGNlNmVjZjUtZ21pci5qcGc_dj0xNzc4MTUyNDU1.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "16th World Probiotics Nutrition Gut Health Conference and Exhibition",
-      "date": "2026-12-10",
-      "time": "08:00",
-      "venue": "Kuala Lumpur, Malaysia",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/16th-world-probiotics-nutrition-gut-health-conference-and-exhibition/80002396858344",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2OWY4ODMzYzc0ZTE3LmpwZw.avif",
       "lat": 3.075797,
       "lon": 101.7056009
-    },
-    {
-      "source": "allevents",
-      "name": "Christmas party",
-      "date": "2026-12-25",
-      "time": "00:00",
-      "venue": "Kaula Lampur,Malasia",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/christmas-party/200029792716747",
-      "image": "https://dyn-image.allevents.in/generate-image?v=4&title=Christmas+party+&date=Fri+Dec+25+2026+at+12%3A00+am&bg=3",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "6th International Dental Advanced Dentistry Oral Health Conference & Exhibition",
-      "date": "2027-02-04",
-      "time": "08:00",
-      "venue": "Federal Territory of Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/6th-international-dental-advanced-dentistry-oral-health-conference-and-exhibition/80001632348306",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2OWY4ODJjM2FjZWQyLmpwZw.avif",
-      "lat": 3.1533264,
-      "lon": 101.6927379
-    },
-    {
-      "source": "allevents",
-      "name": "Chinese New Year 2026 gathering.",
-      "date": "2027-02-06",
-      "time": "00:00",
-      "venue": "Pudu Ulu, Kuala Lumpur, Malaysia",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/chinese-new-year-2026-gathering/200029792715343",
-      "image": "https://dyn-image.allevents.in/generate-image?v=4&title=Chinese+New+Year+2026+gathering.+&date=Sat+Feb+06+2027+at+12%3A00+am&bg=4",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
