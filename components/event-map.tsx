@@ -17,6 +17,7 @@ const SOURCE_COLORS: Record<string, string> = {
   allevents: "#0ea5e9",
   devpost: "#10b981",
   devfolio: "#22c55e",
+  manual: "#eab308",
 };
 
 function markerIcon(color: string) {

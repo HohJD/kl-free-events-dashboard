@@ -22,6 +22,7 @@ const SOURCE_COLORS: Record<string, string> = {
   allevents: "bg-[#93d8ff]",
   devpost: "bg-[#8ceedd]",
   devfolio: "bg-[#a5e8a2]",
+  manual: "bg-[#ffd02f]",
 };
 
 const FALLBACK_IMAGE = `data:image/svg+xml;utf8,${encodeURIComponent(

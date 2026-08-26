@@ -20,6 +20,16 @@ Events are scraped by `../kl-free-events-scraper/kl_events_scraper.py` from:
 - Eventbrite
 - Luma (lu.ma)
 - AllEvents.in
+- Devpost (hackathons)
+- Devfolio (hackathons)
+- `manual_events.json` — hand-curated events found on Facebook, X, Instagram,
+  government announcements, posters, etc. Edit
+  `../kl-free-events-scraper/manual_events.json` (or ask your Hermes agent on
+  Telegram to add an entry) and it's published on the next daily run. Manual
+  entries win over scraped duplicates.
+
+Facebook, X, and Instagram cannot be scraped directly (login walls, paid/closed
+APIs) — the manual file is the supported channel for events found there.
 
 ## Project structure
 
