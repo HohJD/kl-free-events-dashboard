@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-26T07:50:08.232564+00:00",
-  "count": 127,
+  "generated_at": "2026-08-26T09:53:54.569069+00:00",
+  "count": 99,
   "events": [
     {
       "source": "allevents",
@@ -147,18 +147,6 @@
       "lon": 101.7116105
     },
     {
-      "source": "luma",
-      "name": "Digital Desiners Meetup_V1🎨💻",
-      "date": "2026-08-26",
-      "time": "13:30",
-      "venue": "Taman Mutiara Barat",
-      "description": "A third place for digital creatives to create, learn, and meet like-minded people.",
-      "link": "https://lu.ma/cfw3emxo",
-      "image": "https://images.lumacdn.com/uploads/au/3624770b-57a1-4f9c-8e35-a04aaba4bce1.png",
-      "lat": 3.0907146502931115,
-      "lon": 101.738968592989
-    },
-    {
       "source": "devfolio",
       "name": "MUBA Blockchain Hackathon",
       "date": "2026-08-26",
@@ -191,18 +179,6 @@
       "description": "**🍺 Drink and connect with fellow digital nomads in the city! 🍺** Join us every Wednesday for a fun night out with fellow digital nomads! We'll be hitting up different bars in the vibrant Bukit Bintang/KLCC area. It's the perfect chance to unwind, share stories, and maybe even pick up a few travel tips! **Event Details:** ⏰ **When:** Every Wednesday at 7 PM 📍 **Where:** Wagon/Change Every Week (KLCC/Bukit Bintang area) 💰 **Fee:** Pay for what you eat and drink 🙋‍♀️ **Host:** Could it be you? We're on the lookout! **👩‍💻 Fuel Your Productivity Before the Night Begins 👩‍💻** We also host a coworking event every Wednesday. Come boost your productivity with fellow nomads during the day, then join us for drinks afterward! 👉 [Schedule](https://www.meetup.com/digital-nomad/events/) **Join the Chat:** **💬** 📱 We use a **WhatsApp Community** to stay in touch and coordinate. Please make sure to join! Kindly note that we’re not able to respond to chats or comments on Meetup.com. [kl.digital-nomad.asia/join-wa/meetups](https://kl.digital-nomad.asia/join-wa/meetups) **👉️Find more events for digital nomads:** [linktr.ee/kl.digital.nomad](https://linktr.ee/kl.digital.nomad) 🌟 Be Our Co-host! 🌟 To keep our Meetups running smoothly, we’re planning to have a rotating team of **4 more hosts**. If you’re interested in helping out, feel free to talk to the main host, **Mayo**, during the event!",
       "link": "https://www.meetup.com/digital-nomad/events/315959629/",
       "image": "/images/fallbacks/redesign/group-cover-4-square.webp",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "2026 Asia BuildingIndonesiaExpo",
-      "date": "2026-08-27",
-      "time": "10:00",
-      "venue": "马来西亚国际贸易与会展中心",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/2026-asia-building（indonesia）expo/100001979283930517",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy8yNTkwOTY4OWQ2ZmUxNzQ5ZWNhZDZlNmU4NmYwNzExNDViYjE5NGU5NDFkZWQ0ZTVjMzcxZGMyMGFiOWNlN2FmLXJpbWctdzEyMDAtaDY3NS1kYzAzNTFmYy1nbWlyLmpwZz92PTE3Njc3MDMyNTg.avif",
       "lat": null,
       "lon": null
     },
@@ -459,18 +435,6 @@
       "lon": 101.6969491
     },
     {
-      "source": "allevents",
-      "name": "Founders Live Kuala Lumpur",
-      "date": "2026-08-30",
-      "time": "13:00",
-      "venue": "Lucky Cup Jln Tun Perak",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/founders-live-kuala-lumpur/100001997251433803",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEvYmFubmVycy9lMjBkMDA4NzQwMDkyY2I3MTY4MGFlZDA2MDBjNzNhMDI4YzJkZGNjYTM3OWQ5NjU2YmZkNDlhN2E4MTBiYzZjLXJpbWctdzEyMDAtaDYwMC1kY2Y4ZjhmOC1nbWlyLmpwZz92PTE3ODYzNDI2Mzc.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "luma",
       "name": "MOODROOM's MATCHA HOURS 🍵😄",
       "date": "2026-08-31",
@@ -481,18 +445,6 @@
       "image": "https://images.lumacdn.com/uploads/ob/abc974c9-a1af-47b1-b70b-2f3737e6bb53.png",
       "lat": 3.1430624,
       "lon": 101.72195839999999
-    },
-    {
-      "source": "allevents",
-      "name": "RSVP",
-      "date": "2026-08-31",
-      "time": "16:00",
-      "venue": "Uncle Don's (Fortune Avenue, Kepong)",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/新加坡张学友聚会｜rsvp/100001998167916026",
-      "image": "https://dyn-image.allevents.in/generate-image?v=4&title=%E6%96%B0%E5%8A%A0%E5%9D%A1%E5%BC%A0%E5%AD%A6%E5%8F%8B%E8%81%9A%E4%BC%9A%EF%BD%9CRSVP&date=Mon+Aug+31+2026+at+04%3A00+pm&bg=2",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
@@ -517,18 +469,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1190967446%2F2995505973337%2F1%2Foriginal.20260813-102852?crop=focalpoint&fit=crop&w=355&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=11537e92295a9d7f27ac74d116a24ced",
       "lat": 3.166432,
       "lon": 101.6783671
-    },
-    {
-      "source": "allevents",
-      "name": "Research Seminar Series Prof. Sam Yam",
-      "date": "2026-09-02",
-      "time": "12:30",
-      "venue": "Asia School of Business (ASB) Academic",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/research-seminar-series-prof-sam-yam/100001998521089377",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy8wNDkwMDNhNWY5Yzg0YmY3NjY1NGRkNWYxZjdjMzI5Mjk1YzFlMTdhODJhNzJkOTcxMzhmY2ZiMjVlMDFjY2I1LXJpbWctdzEyMDAtaDYwMC1kYzM4MzgzOC1nbWlyLmpwZz92PTE3ODc0MDY0MjQ.avif",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
@@ -567,18 +507,6 @@
       "lon": 101.6709084
     },
     {
-      "source": "allevents",
-      "name": "Free Learning (Classroom) Homestay Business & Regulations in Malaysia",
-      "date": "2026-09-03",
-      "time": "11:00",
-      "venue": "WORQ Sunway Putra",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/free-learning-classroom-homestay-business-and-regulations-in-malaysia/100001997820340418",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czYvYmFubmVycy9kZTM4OWFjYTdkNzFiZjMwNGM5MDNjYWIxYjZhN2NiM2RmNTY4NzYyNzMxOTk2NTczOWM3Y2IzMjk2YjQwZWU4LXJpbWctdzEyMDAtaDY3Ni1kY2Y4ZjhmOC1nbWlyLmpwZz92PTE3ODY2NDE5NjM.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "Free Learning (Classroom): Homestay Business & Regulations in Malaysia",
       "date": "2026-09-03",
@@ -589,18 +517,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1190957735%2F1227742434853%2F1%2Foriginal.20260813-065912?crop=focalpoint&fit=crop&w=512&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.566&fp-y=0.497&s=e8a76b79d4438d8bea38d2b5883bfa37",
       "lat": 3.1664256,
       "lon": 101.6924194
-    },
-    {
-      "source": "allevents",
-      "name": "Join Biggest Community Investors & Founders Kuala Lumpur Online",
-      "date": "2026-09-03",
-      "time": "19:00",
-      "venue": "Federal Territory of Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/join-biggest-community-investors-and-founders-kuala-lumpur-online/100001975105068428",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9pbWcuZXZidWMuY29tL2h0dHBzJTNBJTJGJTJGY2RuLmV2YnVjLmNvbSUyRmltYWdlcyUyRjExNzkyNjY3NTIlMkYyODM3NDU2MDE2MjUxJTJGMSUyRm9yaWdpbmFsLjIwMjYwMzA3LTA3NTY0OD9hdXRvPWZvcm1hdCUyQ2NvbXByZXNzJnE9NzUmc2hhcnA9MTAmcz1mMWRlODkxYjAzNTkxZWMzZjM4MTk2NmRjNDY5MWEzYg.avif",
-      "lat": 3.1533264,
-      "lon": 101.6927379
     },
     {
       "source": "eventbrite",
@@ -687,18 +603,6 @@
       "lon": 101.6682474
     },
     {
-      "source": "allevents",
-      "name": "Wire and Cable Show Malaysia 2027",
-      "date": "2026-09-05",
-      "time": "10:00",
-      "venue": "马来西亚国际贸易与会展中心",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/wire-and-cable-show-malaysia-2027/100001995410358096",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czQvYmFubmVycy9iNTJlODcwNDhhZWUwNjdmMGNkMGNhYWY2NDQ4OGMzODdkZmY1NmMwMTAyMWI5NzFjNzA3NTFjNTM5MzA4ODNmLXJpbWctdzEyMDAtaDUyMC1kY2YzZjNmMy1nbWlyLmpwZz92PTE3ODUzMjg2ODU.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "luma",
       "name": "AI Video Hackathon KL 2026",
       "date": "2026-09-06",
@@ -771,18 +675,6 @@
       "lon": 101.6920343
     },
     {
-      "source": "allevents",
-      "name": "The Cash-Rich SME Reduce late payments and eliminate bad debt",
-      "date": "2026-09-09",
-      "time": "13:00",
-      "venue": "Novotel Kuala Lumpur City Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/the-cash-rich-sme-reduce-late-payments-and-eliminate-bad-debt/100001991683652419",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czcvYmFubmVycy8xZDdjYWU4OWEyMjI0MzdhMjFhNDE3MmI1M2UzOWJiN2YxYzg1MTBmZTUzNmM2N2IzNzgwYTkyNmM5MmM4NTQ2LXJpbWctdzEyMDAtaDU2OC1kY2Y4ZjhmOC1nbWlyLmpwZz92PTE3ODcxMDAwNjM.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "The Cash-Rich SME: Reduce late payments and eliminate bad debt",
       "date": "2026-09-09",
@@ -832,18 +724,6 @@
     },
     {
       "source": "allevents",
-      "name": "Agri Malaysia 2026",
-      "date": "2026-09-10",
-      "time": "10:00",
-      "venue": "Malaysia International Trade and Exhibition Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/agri-malaysia-2026/100001976686322000",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy8wMWU0N2M2ZGU1ZDc2YzU2YWQ2NTE3MzIzNmEyMjJjOTQ4NDNjMDA0ZTJiNjIyYzI5Y2RmYTBjM2UzMDIwZWEyLXJpbWctdzEyMDAtaDgwMC1kYzE1MTcxYi1nbWlyLmpwZz92PTE3NjU0Nzc5OTk.avif",
-      "lat": 3.1790267,
-      "lon": 101.6678236
-    },
-    {
-      "source": "allevents",
       "name": "Cyber Security Summit Malaysia 2026",
       "date": "2026-09-10",
       "time": "09:00",
@@ -865,18 +745,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1191399995%2F3005511805283%2F1%2Foriginal.20260819-051025?crop=focalpoint&fit=crop&w=512&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.93&fp-y=0.494&s=e2f35669a7d0282822842bc91262d946",
       "lat": 3.1790514,
       "lon": 101.6682474
-    },
-    {
-      "source": "allevents",
-      "name": "Cyberjaya CEO Sustainability Dialogue ISW 2026",
-      "date": "2026-09-10",
-      "time": "11:00",
-      "venue": "Malaysia International Trade and Exhibition Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/cyberjaya-ceo-sustainability-dialogue-isw-2026/100001993592972246",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czQvYmFubmVycy9jODQxN2M4N2VlNTEzZDYxMDI3NDdhZWFkN2Q3M2IxMDdjNGM4MTViOWVmMDViNWVmZTJmZjYzYjJhNDQ1MmM1LXJpbWctdzEyMDAtaDYwMC1kY2Y4ZjhmOC1nbWlyLmpwZz92PTE3ODcyNTk3NDg.avif",
-      "lat": 3.1790267,
-      "lon": 101.6678236
     },
     {
       "source": "eventbrite",
@@ -903,42 +771,6 @@
       "lon": 101.6682474
     },
     {
-      "source": "allevents",
-      "name": "Inside EXPO 2025 Osaka ISW 2026",
-      "date": "2026-09-10",
-      "time": "14:00",
-      "venue": "Malaysia International Trade and Exhibition Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/inside-expo-2025-osaka-isw-2026/100001994494188809",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czcvYmFubmVycy9jMDg2NTBmYWUyZGE0MDg3MjBiYjVmY2I4YzVmZmUwNmVjNDVkYWJhOTYyZWQ2NDcyNmFjNjhjOWQxOGFlMjEzLXJpbWctdzEyMDAtaDYwMC1kY2YzZjNmNC1nbWlyLmpwZz92PTE3ODQ3NDU0NjM.avif",
-      "lat": 3.1790267,
-      "lon": 101.6678236
-    },
-    {
-      "source": "allevents",
-      "name": "139",
-      "date": "2026-09-11",
-      "time": "09:00",
-      "venue": "Infinity Hub",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/易经富有密码第139期/100001993982628719",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czcvYmFubmVycy9jMzBlN2U0MTZhODk2MTlkYTE1NTg1YmYyNmE1OTZhNmFkZDdhNTE3YWQyNDQ4NjBlMmU2YTU1M2NlMjgzNmEzLXJpbWctdzEyMDAtaDY3NS1kY2ZlZjdiOS1nbWlyLmpwZz92PTE3ODQyMDA0NzQ.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "CoolPro High Energy Efficient Building Solutions at ISW 2026",
-      "date": "2026-09-11",
-      "time": "10:00",
-      "venue": "Malaysia International Trade and Exhibition Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/coolpro-high-energy-efficient-building-solutions-at-isw-2026/100001994494593018",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czYvYmFubmVycy9kNTA5MDQwZGZkY2ZlOWJjNjQ0Y2VjZTUxZDdmNzAxZjNiNGYzZjVkYWQ1M2EyNGI3ODMwOGUwZTQ3YjUwNzBiLXJpbWctdzEyMDAtaDU5NC1kY2Y4ZjhmOC1nbWlyLmpwZz92PTE3ODY4NjE0ODU.avif",
-      "lat": 3.1790267,
-      "lon": 101.6678236
-    },
-    {
       "source": "eventbrite",
       "name": "CoolPro – High Energy Efficient Building Solutions at ISW 2026",
       "date": "2026-09-11",
@@ -963,18 +795,6 @@
       "lon": 101.6682474
     },
     {
-      "source": "allevents",
-      "name": "Malaysia-China Green Development & ESG Management Forum by CCOIC ISW 2026",
-      "date": "2026-09-11",
-      "time": "09:30",
-      "venue": "Malaysia International Trade and Exhibition Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/malaysia-china-green-development-and-esg-management-forum-by-ccoic-isw-2026/100001997966568791",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czkvYmFubmVycy83MDAyZmQ0ZjA1NWE1M2ViYzZhNDU5YTM0MjIzZmQ3NGExNzM1Y2IyMWNjODlkZGMyNzFjNzc1YmQwMDI4Y2RjLXJpbWctdzEyMDAtaDYwMC1kY2Y4ZjhmOC1nbWlyLmpwZz92PTE3ODY4NjIwMDc.avif",
-      "lat": 3.1790267,
-      "lon": 101.6678236
-    },
-    {
       "source": "eventbrite",
       "name": "Strengthen Your Business Advantage with ESG @ ISW 2026",
       "date": "2026-09-11",
@@ -987,18 +807,6 @@
       "lon": 101.6682474
     },
     {
-      "source": "allevents",
-      "name": "Strengthen Your Business Advantage with ESG ISW 2026",
-      "date": "2026-09-11",
-      "time": "12:00",
-      "venue": "Malaysia International Trade and Exhibition Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/strengthen-your-business-advantage-with-esg-isw-2026/100001994494913978",
-      "image": "https://dyn-image.allevents.in/generate-image?v=4&title=Strengthen+Your+Business+Advantage+with+ESG+%40+ISW+2026&date=Fri+Sep+11+2026+at+12%3A00+pm&bg=4",
-      "lat": 3.1790267,
-      "lon": 101.6678236
-    },
-    {
       "source": "luma",
       "name": "Builders & Brews Malaysia",
       "date": "2026-09-12",
@@ -1009,18 +817,6 @@
       "image": "https://images.lumacdn.com/uploads/kt/74e84f62-3e34-42c6-9c1a-d9f5ff1f0333.jpg",
       "lat": 3.15393912111472,
       "lon": 101.691045330562
-    },
-    {
-      "source": "allevents",
-      "name": "Godrej Properties NRI Expo Malaysia Exclusive Investment Showcase",
-      "date": "2026-09-13",
-      "time": "11:00",
-      "venue": "Aloft by Marriott Kuala Lumpur Sentral",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/godrej-properties-nri-expo-malaysia-exclusive-investment-showcase/100001995064403336",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czQvYmFubmVycy80ZjE4NDNkNjY5NTM3MTJkMmY5YTg0NjVmZTgxZGMzMmU0OWMzNTU2NjEzMGM2OGZjZmI2NjI5YjViOTk5NTNlLXJpbWctdzEyMDAtaDYwMC1kY2VmZWZlZS1nbWlyLmpwZz92PTE3ODQ5OTczNTk.avif",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
@@ -1071,30 +867,6 @@
       "lon": 101.7135918
     },
     {
-      "source": "allevents",
-      "name": "2026 KOREA-MALAYSIA ICT BUSINESS SUMMIT",
-      "date": "2026-09-16",
-      "time": "10:00",
-      "venue": "Four Seasons Hotel Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/2026-korea-malaysia-ict-business-summit-tickets/80001246966440",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2YTg1OWVmMzdmZjJlLmpwZw.avif",
-      "lat": 3.1580799,
-      "lon": 101.7138657
-    },
-    {
-      "source": "allevents",
-      "name": "2026 Asia Fashion Malaysia Show",
-      "date": "2026-09-17",
-      "time": "10:00",
-      "venue": "马来西亚国际贸易与会展中心",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/2026-asia-fashion-（malaysia）-show/100001840776063759",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czcvYmFubmVycy82NmIyYzIwZGIxNGZmMjI4MzJiYTU5ODJjNjdiZmVmZWE3Y2U4YmNkZWE1ZDRmOGY0MDY5MTYzYWIxNzFmMjg5LXJpbWctdzc4OS1oNTIyLWRjNWU1YzYwLWdtaXIuanBnP3Y9MTc2MTg1MjQyOA.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "2026 Asia Fashion （Malaysia） Show",
       "date": "2026-09-17",
@@ -1131,18 +903,6 @@
       "lon": 101.713873
     },
     {
-      "source": "allevents",
-      "name": "AI Revolution Summit - Malaysia",
-      "date": "2026-09-22",
-      "time": "09:00",
-      "venue": "CROWNE PLAZA KUALA LUMPUR CITY CENTRE, MALAYSIA",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/ai-revolution-summit-malaysia-tickets/80001648111538",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2YTcwMjhiZDYyNzBlLmpwZw.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
       "source": "eventbrite",
       "name": "ENGINEER & MARVEX 2026",
       "date": "2026-09-22",
@@ -1163,18 +923,6 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/engineer-and-marvex-2026-aseans-key-engineering-and-hvacandr-exhibition-and-conferences-tickets/80003176385255",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2OTY1YmE0MWI3ZjA0LmpwZw.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "MALAYSIA HR TECH & INNOVATION 2026 CONFERENCE & EXHIBITION",
-      "date": "2026-09-22",
-      "time": "08:30",
-      "venue": "Connexion Conference & Event Centre (Nexus), Bangsar South, Kuala Lumpur",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/malaysia-hr-tech-and-innovation-2026-conference-and-exhibition/100001989198706880",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czgvYmFubmVycy85ZmVkOGZmNGRhYWVkYmZkYTM0N2U3ZmFlYTJjNzdhNTdiNjhiOWQxOTU4YWE0MWFiY2ZkMjgyNzljOWJmYzIyLXJpbWctdzEyMDAtaDYwMC1kY2YxZjFmMi1nbWlyLmpwZz92PTE3NzkzNTkwMDA.avif",
       "lat": null,
       "lon": null
     },
@@ -1215,18 +963,6 @@
       "lon": 101.678354
     },
     {
-      "source": "allevents",
-      "name": "Pilot Test Symposium",
-      "date": "2026-09-23",
-      "time": "10:00",
-      "venue": "Cititel Mid Valley",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/pilot-test-symposium/100001997955434488",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czYvYmFubmVycy81NTQ4MzQyZTk3YWZmZTU5Mzk1M2Q2ODg3ZTFkOWQ5YzgxMDhhNWZjZTc4ZmJiYjc5YmRlYmM3ZTc2M2RjOWNlLXJpbWctdzk0MC1oNDcwLWRjMTgxODE4LWdtaXIuanBnP3Y9MTc4Njg2MTQ4MQ.avif",
-      "lat": 3.1178809,
-      "lon": 101.6783238
-    },
-    {
       "source": "eventbrite",
       "name": "Business Catalyst II",
       "date": "2026-09-24",
@@ -1237,18 +973,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1191686763%2F277873140850%2F1%2Foriginal.20260823-071544?w=355&auto=format%2Ccompress&q=75&sharp=10&s=b834872ce6c4d5276f7684c96e963a94",
       "lat": 3.1141124,
       "lon": 101.6632718
-    },
-    {
-      "source": "allevents",
-      "name": "Unleash 2026 Prophetic Healing & Revival Meeting",
-      "date": "2026-09-26",
-      "time": "16:30",
-      "venue": "Kuala Lumpur & Selangor Chinese Assembly Hall (KLSCAH)",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/unleash-2026-prophetic-healing-and-revival-meeting/100001996085898656",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czQvYmFubmVycy83Mzc0NDE4MzM5YWEwY2NjZjYzYTM5MzlmNGM3N2U0MGIzZTM1NTYwOTI1ZmFmNDQ3ZTlkMmE4MzBiNjIxODcyLXJpbWctdzEyMDAtaDYwMC1kYzA4MDgwOC1nbWlyLmpwZz92PTE3ODU0NDEwOTg.avif",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
@@ -1312,18 +1036,6 @@
     },
     {
       "source": "allevents",
-      "name": "Build Better Kuala Lumpur 2026",
-      "date": "2026-10-08",
-      "time": "14:00",
-      "venue": "Pullman Kuala Lumpur City Centre - Hotel & Residences",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/build-better-kuala-lumpur-2026/100001983366097388",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czYvYmFubmVycy9kYzRkZDc3MDIwM2ZlMThhOTJjMTBhNTBiNDBiYzc2MGI2ZWU0NWMxNmU4ZGY1ZmE0ODAxYzllN2QyNjU2ZWY3LXJpbWctdzEyMDAtaDYwMC1kY2YzZjNlZS1nbWlyLnBuZz92PTE3NzE5NTA5NTU.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
       "name": "The Nutcracker Returns to KL Saint Petersburg National Ballet Theatre",
       "date": "2026-10-11",
       "time": "20:00",
@@ -1383,18 +1095,6 @@
       "lon": 101.7122335
     },
     {
-      "source": "allevents",
-      "name": "Global7z Summit Conference 2026",
-      "date": "2026-11-01",
-      "time": "10:00",
-      "venue": "Suria KLCC",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/global7z-summit-conference-2026/100001994111847215",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czMvYmFubmVycy8xNmM4NTE0ODgzZDVmZGFjZWM0OTc5YjkyZWIwYmQ5NDg3ZWEyMjU3YzdlNDFlMGM3ZjBlMzlmNzM3YTFkYmQwLXJpbWctdzk0MC1oNDcwLWRjMDYxMzE5LWdtaXIuanBnP3Y9MTc4NDIwMDUxNw.avif",
-      "lat": 3.1573751,
-      "lon": 101.7123797
-    },
-    {
       "source": "eventbrite",
       "name": "Business IT Architecture Series (BITAS) Conference 2026, Malaysia",
       "date": "2026-11-12",
@@ -1444,18 +1144,6 @@
     },
     {
       "source": "allevents",
-      "name": "SEA SHOP & The 4th Malaysia Retail Technology & Supermarket Equipment Expo",
-      "date": "2026-11-27",
-      "time": "10:00",
-      "venue": "马来西亚国际贸易与会展中心",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/sea-shop-and-the-4th-malaysia-retail-technology-and-supermarket-equipment-expo/100001992110383784",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2YTVkZjU0NTFmYzM2LmpwZw.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "allevents",
       "name": "WFF OMNIVERSE MALAYSIA 2026",
       "date": "2026-11-29",
       "time": "12:00",
@@ -1501,30 +1189,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1189283213%2F189159550466%2F1%2Foriginal.20260721-074233?w=200&auto=format%2Ccompress&q=75&sharp=10&s=86713fbaca1a68ca33a741ccea2436a2",
       "lat": 3.1568055,
       "lon": 101.7132345
-    },
-    {
-      "source": "allevents",
-      "name": "INTERNATIONAL BEAUTY EXPO (IBE) 2027",
-      "date": "2027-05-01",
-      "time": "11:00",
-      "venue": "Kuala Lumpur Convention Centre",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/international-beauty-expo-ibe-2027-tickets/80002820195011",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2YTVmMzk4ZDE5OGM0LmpwZw.avif",
-      "lat": null,
-      "lon": null
-    },
-    {
-      "source": "eventbrite",
-      "name": "Haiwei Conference with AI 2028",
-      "date": "2028-04-22",
-      "time": "",
-      "venue": "Malaysia International Trade and Exhibition Centre",
-      "description": "Dive into the future with Haiwei Conference with AI 2028—where live tech meets next-gen vibes!",
-      "link": "https://www.eventbrite.nl/e/haiwei-conference-with-ai-2028-tickets-1994755522465",
-      "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1189364147%2F3008248048844%2F1%2Foriginal.png?w=512&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C940%2C470&s=ef60f98dcec6ba13e4b9348cc3de20ba",
-      "lat": 3.1790514,
-      "lon": 101.6682474
     }
   ]
 }
