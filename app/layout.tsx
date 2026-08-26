@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo_Black, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 
-const display = Archivo_Black({
-  weight: "400",
+const display = Bricolage_Grotesque({
+  weight: ["600", "700", "800"],
   subsets: ["latin"],
   variable: "--font-display",
 });
 
-const body = Space_Grotesk({
+const body = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-body",
 });

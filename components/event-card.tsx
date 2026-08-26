@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   MapPin,
-  Clock,
   ArrowUpRight,
   Navigation,
   Heart,
@@ -16,16 +15,8 @@ import { Event } from "@/lib/events";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { cn } from "@/lib/utils";
 
-const SOURCE_COLORS: Record<string, string> = {
-  meetup: "bg-[#f65858]",
-  eventbrite: "bg-[#ff8a3d]",
-  luma: "bg-[#b78aff]",
-  allevents: "bg-[#6ecbff]",
-  devpost: "bg-[#5eead4]",
-};
-
 const FALLBACK_IMAGE = `data:image/svg+xml;utf8,${encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="640" height="360" fill="#ffd02f"/><circle cx="500" cy="80" r="120" fill="#161412" opacity="0.08"/><circle cx="140" cy="300" r="90" fill="#161412" opacity="0.08"/></svg>'
+  '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="640" height="360" fill="#ffd02f"/><circle cx="500" cy="80" r="120" fill="#161412" opacity="0.06"/><circle cx="140" cy="300" r="90" fill="#161412" opacity="0.06"/></svg>'
 )}`;
 
 function dayLabel(iso: string): string | null {
@@ -115,14 +106,14 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
       transition={{ duration: 0.35, delay: Math.min((index % 6) * 0.04, 0.2) }}
       className="h-full"
     >
-      <div className="group flex h-full flex-col border-2 border-border bg-card shadow-brutal transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg">
+      <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5">
         {/* Image */}
-        <div className="relative h-44 w-full overflow-hidden border-b-2 border-border">
+        <div className="relative h-44 w-full overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={event.image}
             alt={event.name}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
             loading="lazy"
             onError={(e) => {
               (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
@@ -134,54 +125,38 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
             onClick={() => onToggleSave(event.link)}
             aria-label={saved ? "Remove from saved" : "Save event"}
             className={cn(
-              "absolute left-3 top-3 flex size-8 items-center justify-center border-2 border-border transition-all active:translate-y-px",
-              saved ? "bg-[#f65858] text-white" : "bg-background text-foreground"
+              "absolute left-3 top-3 flex size-8 items-center justify-center rounded-full shadow-sm transition-all active:scale-90",
+              saved
+                ? "bg-foreground text-background"
+                : "bg-white/90 text-black hover:bg-white"
             )}
           >
             <Heart className={cn("size-4", saved && "fill-current")} />
           </button>
 
           {/* Date chip */}
-          <div className="absolute right-0 top-0">
-            <span
-              className={cn(
-                "block border-b-2 border-l-2 border-border px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wide",
-                urgency ? "bg-accent text-accent-foreground" : "bg-background"
-              )}
-            >
-              {urgency || dateLabel}
-            </span>
-          </div>
-
-          {/* Source ribbon */}
-          <div className="absolute bottom-0 left-0 flex">
-            <span
-              className={cn(
-                "border-r-2 border-t-2 border-border px-2 py-0.5 font-mono text-[10px] font-bold uppercase text-black",
-                SOURCE_COLORS[event.source] || "bg-muted"
-              )}
-            >
-              {event.source}
-            </span>
-            <span className="border-r-2 border-t-2 border-border bg-background px-2 py-0.5 font-mono text-[10px] font-bold uppercase">
-              {event.category}
-            </span>
-          </div>
+          <span
+            className={cn(
+              "absolute right-3 top-3 rounded-full px-2.5 py-1 font-mono text-[11px] font-medium shadow-sm",
+              urgency
+                ? "bg-accent text-accent-foreground"
+                : "bg-white/90 text-black"
+            )}
+          >
+            {urgency || dateLabel}
+          </span>
         </div>
 
         {/* Body */}
         <div className="flex flex-1 flex-col p-4">
-          <p className="font-mono text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+          <p className="font-mono text-xs text-muted-foreground">
             {dateLabel}
-            {timeLabel ? (
-              <>
-                {" · "}
-                <Clock className="mb-0.5 inline size-3" /> {timeLabel}
-              </>
-            ) : null}
+            {timeLabel ? ` · ${timeLabel}` : ""}
+            <span className="mx-1.5 opacity-40">/</span>
+            {event.category}
           </p>
 
-          <h3 className="mt-1.5 line-clamp-2 text-base font-bold leading-snug md:text-lg">
+          <h3 className="mt-1.5 line-clamp-2 font-display text-base font-bold leading-snug md:text-lg">
             {event.name}
           </h3>
 
@@ -203,11 +178,11 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
               href={event.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 border-2 border-border bg-primary px-3 py-1.5 font-mono text-xs font-bold uppercase text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+              className="inline-flex items-center gap-1 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-85"
             >
-              View <ArrowUpRight className="size-3.5" />
+              View event <ArrowUpRight className="size-3.5" />
             </a>
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-0.5">
               {calendarUrl ? (
                 <a
                   href={calendarUrl}
@@ -215,7 +190,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                   rel="noopener noreferrer"
                   aria-label="Add to Google Calendar"
                   title="Add to calendar"
-                  className="flex size-8 items-center justify-center border-2 border-border bg-background transition-all hover:-translate-y-px hover:shadow-brutal-sm active:translate-y-0 active:shadow-none"
+                  className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
                   <CalendarPlus className="size-4" />
                 </a>
@@ -227,7 +202,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                   rel="noopener noreferrer"
                   aria-label="Get directions"
                   title="Directions"
-                  className="flex size-8 items-center justify-center border-2 border-border bg-background transition-all hover:-translate-y-px hover:shadow-brutal-sm active:translate-y-0 active:shadow-none"
+                  className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
                   <Navigation className="size-4" />
                 </a>
@@ -236,7 +211,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                 onClick={handleShare}
                 aria-label="Share event"
                 title="Share"
-                className="flex size-8 items-center justify-center border-2 border-border bg-background transition-all hover:-translate-y-px hover:shadow-brutal-sm active:translate-y-0 active:shadow-none"
+                className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
                 {shared ? (
                   <Check className="size-4 text-green-600" />

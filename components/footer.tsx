@@ -4,9 +4,9 @@ import { Heart } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t-2 border-border px-4 py-8">
+    <footer className="border-t border-border px-4 py-8">
       <div className="container mx-auto flex max-w-6xl flex-col items-center gap-2 text-center">
-        <p className="flex items-center gap-1.5 font-mono text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        <p className="flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
           Made with <Heart className="size-3.5 fill-[#f65858] text-[#f65858]" />{" "}
           in Kuala Lumpur
         </p>
