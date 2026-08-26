@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KL Free Events Dashboard
 
-## Getting Started
+A beautiful, static, single-page dashboard for free events in Kuala Lumpur. Built with **Next.js 14**, **TypeScript**, **Tailwind CSS**, and **shadcn/ui**.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Hero section** with live event counts (total, sources, today, this week)
+- **Search & filter bar** by keyword, source, category, and date range
+- **Interactive event map** (Leaflet) with theme-aware tiles and per-source colored markers — reflects active filters
+- **Responsive event cards** with real event images (fallback gradient art), title, date, time, venue, source badge, event link, and Google Maps directions
+- **Dark mode toggle** with system preference support
+- **Smooth animations** powered by Framer Motion
+- **Mobile-first responsive** design
+
+## Data sources
+
+Events are scraped by `../kl-free-events-scraper/kl_events_scraper.py` from:
+
+- Meetup
+- Eventbrite
+- Luma (lu.ma)
+- AllEvents.in
+
+## Project structure
+
+```
+app/
+  globals.css          # Tailwind CSS variables and base styles
+  layout.tsx           # Root layout with Geist local fonts + theme provider
+  page.tsx             # Server page that loads events.json
+  providers.tsx        # next-themes provider
+components/
+  dashboard.tsx        # Client dashboard wiring
+  event-card.tsx       # Individual event card
+  event-grid.tsx       # Filtered grid of event cards
+  filters.tsx          # Search and filter controls
+  hero.tsx             # Hero with stats
+  navbar.tsx           # Sticky navbar + theme toggle
+  theme-toggle.tsx     # Dark/light mode switch
+  ui/                  # shadcn/ui-style components (Button, Card, Badge, Input)
+lib/
+  events.ts            # Events.json loader + categorisation/image helpers
+  utils.ts             # cn() utility
+events.json            # Source data from the scraper
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Install dependencies**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+   ```bash
+   npm install
+   ```
 
-## Learn More
+2. **Run the development server**
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm run dev
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   Open [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Build a static export**
 
-## Deploy on Vercel
+   ```bash
+   npm run build
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   Static files are output to the `dist/` directory. Open `dist/index.html` in a browser or serve it:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   npx serve dist
+   ```
+
+## Data
+
+The dashboard reads from `events.json` at build time. Past events are automatically removed by the scraper.
+
+### Automated daily updates
+
+A Hermes cron job (`kl_free_events_update`, daily at 07:00 MYT) runs
+`~/.hermes/scripts/kl_events_update.sh`, which:
+
+1. Runs the scraper (`~/kl-free-events-scraper/kl_events_scraper.py --run-once`)
+2. Copies the fresh `events.json` into this project
+3. Deploys to Vercel (`vercel --prod`)
+4. Sends a summary to Telegram
+
+Manage it with `hermes cron list` / `hermes cron run kl_free_events_update`.
