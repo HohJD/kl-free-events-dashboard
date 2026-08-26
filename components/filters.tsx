@@ -49,10 +49,10 @@ function Pill({
     <button
       onClick={onClick}
       className={cn(
-        "shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
+        "shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-all",
         active
-          ? "bg-primary text-primary-foreground"
-          : "text-muted-foreground hover:bg-muted hover:text-foreground"
+          ? "border-border bg-accent text-accent-foreground shadow-brutal-sm"
+          : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
       )}
     >
       {children}

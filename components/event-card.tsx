@@ -15,6 +15,14 @@ import { Event } from "@/lib/events";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { cn } from "@/lib/utils";
 
+const SOURCE_COLORS: Record<string, string> = {
+  meetup: "bg-[#ff9d9d]",
+  eventbrite: "bg-[#ffb47d]",
+  luma: "bg-[#cdb0ff]",
+  allevents: "bg-[#93d8ff]",
+  devpost: "bg-[#8ceedd]",
+};
+
 const FALLBACK_IMAGE = `data:image/svg+xml;utf8,${encodeURIComponent(
   '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="640" height="360" fill="#ffd02f"/><circle cx="500" cy="80" r="120" fill="#161412" opacity="0.06"/><circle cx="140" cy="300" r="90" fill="#161412" opacity="0.06"/></svg>'
 )}`;
@@ -106,7 +114,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
       transition={{ duration: 0.35, delay: Math.min((index % 6) * 0.04, 0.2) }}
       className="h-full"
     >
-      <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5">
+      <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-brutal transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg">
         {/* Image */}
         <div className="relative h-44 w-full overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -137,13 +145,23 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
           {/* Date chip */}
           <span
             className={cn(
-              "absolute right-3 top-3 rounded-full px-2.5 py-1 font-mono text-[11px] font-medium shadow-sm",
+              "absolute right-3 top-3 rounded-full border border-border px-2.5 py-1 font-mono text-[11px] font-semibold",
               urgency
                 ? "bg-accent text-accent-foreground"
-                : "bg-white/90 text-black"
+                : "bg-white/95 text-black"
             )}
           >
             {urgency || dateLabel}
+          </span>
+
+          {/* Source chip */}
+          <span
+            className={cn(
+              "absolute bottom-3 left-3 rounded-full border border-border px-2.5 py-0.5 font-mono text-[10px] font-semibold text-black",
+              SOURCE_COLORS[event.source] || "bg-white/95"
+            )}
+          >
+            {event.source}
           </span>
         </div>
 
@@ -178,7 +196,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
               href={event.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-85"
+              className="inline-flex items-center gap-1 rounded-full border border-border bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
             >
               View event <ArrowUpRight className="size-3.5" />
             </a>

@@ -15,10 +15,10 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        brutal: "4px 4px 0 0 hsl(var(--shadow))",
-        "brutal-sm": "2px 2px 0 0 hsl(var(--shadow))",
-        "brutal-lg": "6px 6px 0 0 hsl(var(--shadow))",
-        "brutal-xl": "8px 8px 0 0 hsl(var(--shadow))",
+        brutal: "4px 4px 0 0 hsl(var(--shadow) / 0.85)",
+        "brutal-sm": "2px 2px 0 0 hsl(var(--shadow) / 0.85)",
+        "brutal-lg": "6px 6px 0 0 hsl(var(--shadow) / 0.85)",
+        "brutal-xl": "8px 8px 0 0 hsl(var(--shadow) / 0.85)",
       },
       colors: {
         border: "hsl(var(--border))",

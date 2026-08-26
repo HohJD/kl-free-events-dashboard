@@ -14,7 +14,7 @@ export function Navbar({
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/90 backdrop-blur-sm">
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <div className="flex items-center gap-2.5">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+          <div className="flex size-8 items-center justify-center rounded-lg border border-border bg-accent text-accent-foreground shadow-brutal-sm">
             <MapPin className="size-4" strokeWidth={2.25} />
           </div>
           <span className="font-display text-lg font-bold tracking-tight">
@@ -26,7 +26,7 @@ export function Navbar({
           <button
             onClick={onRefresh}
             disabled={refreshing}
-            className="flex h-8 items-center gap-1.5 rounded-lg px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground disabled:opacity-50"
+            className="flex h-8 items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 text-xs font-medium shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none disabled:opacity-50"
           >
             <RefreshCw
               className={refreshing ? "size-3.5 animate-spin" : "size-3.5"}

@@ -21,11 +21,11 @@
     --accent-foreground: 30 8% 10%;
     --destructive: 4 84% 55%;
     --destructive-foreground: 42 38% 97%;
-    --border: 38 12% 86%;
-    --input: 38 12% 82%;
+    --border: 30 8% 28%;
+    --input: 30 8% 28%;
     --ring: 30 8% 10%;
-    --shadow: 30 8% 10%;
-    --radius: 0.75rem;
+    --shadow: 30 8% 15%;
+    --radius: 1rem;
   }
 
   .dark {
@@ -45,10 +45,10 @@
     --accent-foreground: 30 8% 10%;
     --destructive: 4 84% 55%;
     --destructive-foreground: 42 38% 97%;
-    --border: 30 5% 20%;
-    --input: 30 5% 24%;
+    --border: 42 12% 72%;
+    --input: 42 12% 72%;
     --ring: 42 25% 92%;
-    --shadow: 0 0% 0%;
+    --shadow: 42 15% 65%;
   }
 
   * {
@@ -81,13 +81,13 @@ a,
 
 /* Marker-pen highlight for headline words */
 .marker-highlight {
-  background: linear-gradient(
-    to top,
-    hsl(var(--accent)) 0%,
-    hsl(var(--accent)) 42%,
-    transparent 42%
-  );
-  padding: 0 0.08em;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  padding: 0 0.14em;
+  border-radius: 0.18em;
+  display: inline-block;
+  transform: rotate(-1deg);
+  box-shadow: 0.1em 0.1em 0 0 hsl(var(--shadow) / 0.85);
 }
 
 /* Map marker pulse */

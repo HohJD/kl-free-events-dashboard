@@ -33,13 +33,13 @@ export function Hero({ stats }: { stats: HeroStats }) {
   });
 
   const chips = [
-    { label: "free events", value: stats.total },
-    { label: "today", value: stats.today },
-    { label: "this week", value: stats.thisWeek },
+    { label: "free events", value: stats.total, bg: "bg-accent" },
+    { label: "today", value: stats.today, bg: "bg-[#7dd4fc]" },
+    { label: "this week", value: stats.thisWeek, bg: "bg-[#86efac]" },
   ];
 
   return (
-    <section className="px-4 pb-10 pt-12 md:pt-18">
+    <section className="border-b border-border/50 px-4 pb-10 pt-12 md:pt-16">
       <div className="container mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -50,7 +50,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
             Updated {updated} · {stats.sources} sources · always free
           </p>
 
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl md:text-6xl">
+          <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl">
             Free things to do in{" "}
             <span className="marker-highlight whitespace-nowrap">
               Kuala Lumpur
@@ -65,14 +65,17 @@ export function Hero({ stats }: { stats: HeroStats }) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15 }}
-            className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3"
+            className="mt-7 flex flex-wrap gap-3"
           >
             {chips.map((chip) => (
-              <div key={chip.label} className="flex items-baseline gap-2">
-                <span className="font-display text-3xl font-bold tabular-nums tracking-tight md:text-4xl">
+              <div
+                key={chip.label}
+                className={`flex items-baseline gap-2 rounded-xl border border-border px-4 py-2.5 shadow-brutal ${chip.bg} text-black`}
+              >
+                <span className="font-display text-2xl font-bold tabular-nums md:text-3xl">
                   <CountUp value={chip.value} />
                 </span>
-                <span className="text-sm text-muted-foreground">
+                <span className="font-mono text-[11px] font-medium">
                   {chip.label}
                 </span>
               </div>
