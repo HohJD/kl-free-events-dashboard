@@ -26,17 +26,17 @@ export function MapSection({ events }: { events: Event[] }) {
       className="container mx-auto max-w-6xl px-4 pb-4"
     >
       <div className="mb-3 flex items-center justify-between">
-        <h2 className="flex items-center gap-2 text-lg font-semibold tracking-tight">
-          <span className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-rose-500 to-indigo-500 text-white">
+        <h2 className="flex items-center gap-2 font-display text-lg uppercase tracking-tight">
+          <span className="flex size-7 items-center justify-center border-2 border-border bg-accent text-accent-foreground shadow-brutal-sm">
             <MapPin className="size-4" />
           </span>
           Event map
         </h2>
-        <p className="text-xs text-muted-foreground">
-          {located.length} of {events.length} events mapped
+        <p className="font-mono text-xs font-semibold uppercase text-muted-foreground">
+          {located.length}/{events.length} mapped
         </p>
       </div>
-      <div className="h-[55vh] min-h-[360px] overflow-hidden rounded-2xl border border-border/60 shadow-sm md:h-[62vh]">
+      <div className="h-[55vh] min-h-[360px] overflow-hidden border-2 border-border shadow-brutal md:h-[62vh]">
         <EventMap events={events} />
       </div>
     </motion.section>

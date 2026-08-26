@@ -10,8 +10,15 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+      },
+      boxShadow: {
+        brutal: "4px 4px 0 0 hsl(var(--shadow))",
+        "brutal-sm": "2px 2px 0 0 hsl(var(--shadow))",
+        "brutal-lg": "6px 6px 0 0 hsl(var(--shadow))",
+        "brutal-xl": "8px 8px 0 0 hsl(var(--shadow))",
       },
       colors: {
         border: "hsl(var(--border))",

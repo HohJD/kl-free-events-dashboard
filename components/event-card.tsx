@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import {
-  Calendar,
   MapPin,
   Clock,
   ArrowUpRight,
@@ -18,16 +16,16 @@ import { Event } from "@/lib/events";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { cn } from "@/lib/utils";
 
-const SOURCE_STYLES: Record<string, string> = {
-  meetup: "bg-rose-500/90 text-white",
-  eventbrite: "bg-orange-500/90 text-white",
-  luma: "bg-violet-500/90 text-white",
-  allevents: "bg-sky-500/90 text-white",
-  devpost: "bg-emerald-500/90 text-white",
+const SOURCE_COLORS: Record<string, string> = {
+  meetup: "bg-[#f65858]",
+  eventbrite: "bg-[#ff8a3d]",
+  luma: "bg-[#b78aff]",
+  allevents: "bg-[#6ecbff]",
+  devpost: "bg-[#5eead4]",
 };
 
 const FALLBACK_IMAGE = `data:image/svg+xml;utf8,${encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#6366f1"/><stop offset="100%" stop-color="#f43f5e"/></linearGradient></defs><rect width="640" height="360" fill="url(#g)"/></svg>'
+  '<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360"><rect width="640" height="360" fill="#ffd02f"/><circle cx="500" cy="80" r="120" fill="#161412" opacity="0.08"/><circle cx="140" cy="300" r="90" fill="#161412" opacity="0.08"/></svg>'
 )}`;
 
 function dayLabel(iso: string): string | null {
@@ -54,7 +52,7 @@ function formatDate(iso: string) {
 }
 
 function formatTime(time: string) {
-  if (!time) return "Time TBC";
+  if (!time) return "";
   const [h, m] = time.split(":").map((v) => Number(v));
   if (Number.isNaN(h) || Number.isNaN(m)) return time;
   const ampm = h >= 12 ? "PM" : "AM";
@@ -90,7 +88,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
   const [shared, setShared] = useState(false);
   const dateLabel = formatDate(event.date);
   const timeLabel = formatTime(event.time);
-  const description = truncate(event.description, 130);
+  const description = truncate(event.description, 120);
   const directions = mapsUrl(event);
   const calendarUrl = googleCalendarUrl(event);
   const urgency = dayLabel(event.date);
@@ -111,82 +109,79 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.45, delay: Math.min((index % 6) * 0.06, 0.3) }}
-      whileHover={{ y: -6 }}
+      transition={{ duration: 0.35, delay: Math.min((index % 6) * 0.04, 0.2) }}
       className="h-full"
     >
-      <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-300 hover:border-rose-500/30 hover:shadow-[0_8px_40px_-12px_rgba(244,63,94,0.25)] dark:hover:shadow-[0_8px_40px_-12px_rgba(244,63,94,0.35)]">
+      <div className="group flex h-full flex-col border-2 border-border bg-card shadow-brutal transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg">
         {/* Image */}
-        <div className="relative h-44 w-full overflow-hidden">
+        <div className="relative h-44 w-full overflow-hidden border-b-2 border-border">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={event.image}
             alt={event.name}
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+            className="h-full w-full object-cover"
             loading="lazy"
             onError={(e) => {
               (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
           {/* Save button */}
           <button
             onClick={() => onToggleSave(event.link)}
             aria-label={saved ? "Remove from saved" : "Save event"}
             className={cn(
-              "absolute left-3 top-3 flex size-8 items-center justify-center rounded-full backdrop-blur-md transition-all active:scale-90",
-              saved
-                ? "bg-rose-500 text-white shadow-lg shadow-rose-500/40"
-                : "bg-black/40 text-white hover:bg-black/60"
+              "absolute left-3 top-3 flex size-8 items-center justify-center border-2 border-border transition-all active:translate-y-px",
+              saved ? "bg-[#f65858] text-white" : "bg-background text-foreground"
             )}
           >
             <Heart className={cn("size-4", saved && "fill-current")} />
           </button>
 
-          <div className="absolute bottom-3 left-3 flex flex-wrap gap-1.5">
-            <Badge className="border-0 bg-white/90 text-black shadow-sm backdrop-blur-sm">
-              {event.category}
-            </Badge>
-            <Badge
-              className={`border-0 shadow-sm backdrop-blur-sm ${
-                SOURCE_STYLES[event.source] || "bg-zinc-700/90 text-white"
-              }`}
+          {/* Date chip */}
+          <div className="absolute right-0 top-0">
+            <span
+              className={cn(
+                "block border-b-2 border-l-2 border-border px-2.5 py-1 font-mono text-[11px] font-bold uppercase tracking-wide",
+                urgency ? "bg-accent text-accent-foreground" : "bg-background"
+              )}
             >
-              {event.source}
-            </Badge>
+              {urgency || dateLabel}
+            </span>
           </div>
 
-          <div className="absolute right-3 top-3">
-            {urgency ? (
-              <span className="rounded-full bg-gradient-to-r from-rose-500 to-orange-500 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-white shadow-md">
-                {urgency}
-              </span>
-            ) : (
-              <span className="rounded-full bg-black/50 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-md">
-                {dateLabel}
-              </span>
-            )}
+          {/* Source ribbon */}
+          <div className="absolute bottom-0 left-0 flex">
+            <span
+              className={cn(
+                "border-r-2 border-t-2 border-border px-2 py-0.5 font-mono text-[10px] font-bold uppercase text-black",
+                SOURCE_COLORS[event.source] || "bg-muted"
+              )}
+            >
+              {event.source}
+            </span>
+            <span className="border-r-2 border-t-2 border-border bg-background px-2 py-0.5 font-mono text-[10px] font-bold uppercase">
+              {event.category}
+            </span>
           </div>
         </div>
 
         {/* Body */}
         <div className="flex flex-1 flex-col p-4">
-          <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1">
-              <Calendar className="size-3.5" />
-              {dateLabel}
-            </span>
-            <span className="flex items-center gap-1">
-              <Clock className="size-3.5" />
-              {timeLabel}
-            </span>
-          </div>
+          <p className="font-mono text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            {dateLabel}
+            {timeLabel ? (
+              <>
+                {" · "}
+                <Clock className="mb-0.5 inline size-3" /> {timeLabel}
+              </>
+            ) : null}
+          </p>
 
-          <h3 className="mt-2 line-clamp-2 text-base font-semibold leading-snug transition-colors group-hover:text-rose-500 dark:group-hover:text-rose-400 md:text-lg">
+          <h3 className="mt-1.5 line-clamp-2 text-base font-bold leading-snug md:text-lg">
             {event.name}
           </h3>
 
@@ -208,11 +203,11 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
               href={event.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-full bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground transition-all hover:gap-1.5 hover:opacity-90"
+              className="inline-flex items-center gap-1 border-2 border-border bg-primary px-3 py-1.5 font-mono text-xs font-bold uppercase text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
             >
-              View event <ArrowUpRight className="size-3.5" />
+              View <ArrowUpRight className="size-3.5" />
             </a>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-1.5">
               {calendarUrl ? (
                 <a
                   href={calendarUrl}
@@ -220,7 +215,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                   rel="noopener noreferrer"
                   aria-label="Add to Google Calendar"
                   title="Add to calendar"
-                  className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  className="flex size-8 items-center justify-center border-2 border-border bg-background transition-all hover:-translate-y-px hover:shadow-brutal-sm active:translate-y-0 active:shadow-none"
                 >
                   <CalendarPlus className="size-4" />
                 </a>
@@ -232,7 +227,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                   rel="noopener noreferrer"
                   aria-label="Get directions"
                   title="Directions"
-                  className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  className="flex size-8 items-center justify-center border-2 border-border bg-background transition-all hover:-translate-y-px hover:shadow-brutal-sm active:translate-y-0 active:shadow-none"
                 >
                   <Navigation className="size-4" />
                 </a>
@@ -241,10 +236,10 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                 onClick={handleShare}
                 aria-label="Share event"
                 title="Share"
-                className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="flex size-8 items-center justify-center border-2 border-border bg-background transition-all hover:-translate-y-px hover:shadow-brutal-sm active:translate-y-0 active:shadow-none"
               >
                 {shared ? (
-                  <Check className="size-4 text-emerald-500" />
+                  <Check className="size-4 text-green-600" />
                 ) : (
                   <Share2 className="size-4" />
                 )}
@@ -252,8 +247,6 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
             </div>
           </div>
         </div>
-
-        <div className="absolute inset-x-0 bottom-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-rose-500 via-orange-400 to-indigo-500 transition-transform duration-500 group-hover:scale-x-100" />
       </div>
     </motion.div>
   );

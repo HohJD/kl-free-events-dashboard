@@ -1,32 +1,38 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
+import { Archivo_Black, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const display = Archivo_Black({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-display",
 });
 
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const body = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-body",
+});
+
+const mono = IBM_Plex_Mono({
+  weight: ["400", "500", "600"],
+  subsets: ["latin"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
-  title: "KL Free Events",
-  description: "A modern dashboard for free events in Kuala Lumpur.",
+  title: "KL Free Events — Free things to do in Kuala Lumpur",
+  description:
+    "Every free, public event in Kuala Lumpur. Meetups, gigs, workshops, hackathons — scraped daily, always free.",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#faf6ec" },
+    { media: "(prefers-color-scheme: dark)", color: "#161412" },
   ],
 };
 
@@ -40,8 +46,9 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          geistSans.variable,
-          geistMono.variable
+          display.variable,
+          body.variable,
+          mono.variable
         )}
       >
         <Providers>{children}</Providers>

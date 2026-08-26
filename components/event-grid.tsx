@@ -17,12 +17,12 @@ export function EventGrid({ events, favorites, onToggleSave }: EventGridProps) {
       <motion.div
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="container mx-auto flex max-w-6xl flex-col items-center justify-center rounded-2xl border border-dashed border-border bg-muted/30 px-6 py-20 text-center"
+        className="container mx-auto flex max-w-6xl flex-col items-center justify-center border-2 border-dashed border-border bg-muted/30 px-6 py-20 text-center"
       >
-        <div className="flex size-14 items-center justify-center rounded-full bg-muted">
-          <CalendarX className="size-7 text-muted-foreground" />
+        <div className="flex size-14 items-center justify-center border-2 border-border bg-accent shadow-brutal-sm">
+          <CalendarX className="size-7 text-accent-foreground" />
         </div>
-        <h3 className="mt-4 text-lg font-semibold">No events found</h3>
+        <h3 className="mt-4 font-display text-lg uppercase">No events found</h3>
         <p className="mt-1 max-w-sm text-sm text-muted-foreground">
           Try clearing your filters or searching for a different venue,
           category, or date.
@@ -37,12 +37,12 @@ export function EventGrid({ events, favorites, onToggleSave }: EventGridProps) {
       animate={{ opacity: 1 }}
       className="container mx-auto max-w-6xl px-4 pb-16"
     >
-      <p className="mb-4 text-sm text-muted-foreground">
+      <p className="mb-4 font-mono text-xs font-semibold uppercase tracking-wide text-muted-foreground">
         Showing{" "}
-        <span className="font-medium text-foreground">{events.length}</span>{" "}
+        <span className="text-foreground">{events.length}</span>{" "}
         event{events.length === 1 ? "" : "s"}
       </p>
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {events.map((event, i) => (
           <EventCard
             key={event.link || `${event.name}-${i}`}
