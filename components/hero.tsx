@@ -58,7 +58,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
           </h1>
 
           <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
-            Every free, public event in the city — one simple view.
+            Every free, public event in the city in one simple view.
           </p>
 
           <motion.div

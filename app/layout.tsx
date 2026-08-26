@@ -24,7 +24,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "KL Free Events — Free things to do in Kuala Lumpur",
   description:
-    "Every free, public event in Kuala Lumpur. Meetups, gigs, workshops, hackathons — scraped daily, always free.",
+    "Every free, public event in Kuala Lumpur in one simple view. Meetups, gigs, workshops, hackathons — updated daily, always free.",
 };
 
 export const viewport: Viewport = {
