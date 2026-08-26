@@ -31,11 +31,12 @@ const CATEGORY_GRADIENTS: Record<string, { from: string; to: string }> = {
   Hackathon: { from: '#f43f5e', to: '#f97316' },
   Tech: { from: '#6366f1', to: '#a855f7' },
   Business: { from: '#0ea5e9', to: '#06b6d4' },
+  'Expo & Fair': { from: '#f59e0b', to: '#f97316' },
+  Learning: { from: '#3b82f6', to: '#6366f1' },
+  Sports: { from: '#22c55e', to: '#14b8a6' },
+  Wellness: { from: '#10b981', to: '#84cc16' },
+  'Arts & Culture': { from: '#ec4899', to: '#8b5cf6' },
   Social: { from: '#f43f5e', to: '#fbbf24' },
-  Lifestyle: { from: '#22c55e', to: '#14b8a6' },
-  Arts: { from: '#ec4899', to: '#8b5cf6' },
-  Health: { from: '#10b981', to: '#84cc16' },
-  Education: { from: '#3b82f6', to: '#6366f1' },
   Other: { from: '#64748b', to: '#94a3b8' },
 };
 
@@ -67,23 +68,135 @@ export function categoryImage(category: string, name: string): string {
   return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 }
 
+/**
+ * MECE taxonomy. Every event lands in exactly one category, chosen by a
+ * weighted keyword score (name matches count double). Matching is
+ * word-boundary based so e.g. "ai" never matches inside "fair" or "nail".
+ *
+ * - Hackathon      build-a-thing competitions (always wins if matched)
+ * - Tech           developer/IT/AI talks, meetups, summits
+ * - Business       startup, entrepreneurship, finance, career, ESG forums
+ * - Expo & Fair    trade shows, exhibitions, industry expos, award shows
+ * - Learning       workshops, classes, seminars, academic conferences
+ * - Sports         runs, workouts, active sports clubs
+ * - Wellness       yoga, meditation, mental health, spirituality, self-development
+ * - Arts & Culture music, performances, heritage walks, festivals, faith events
+ * - Social         mixers, drinks, language exchange, parties, nightlife
+ * - Other          nothing matched
+ */
+const CATEGORY_RULES: { category: string; weight: number; patterns: RegExp[] }[] = [
+  {
+    category: 'Hackathon',
+    weight: 10,
+    patterns: [
+      /hackathon|hackfest|datathon|ideathon|codefest|hack\s?(day|night)/,
+    ],
+  },
+  {
+    category: 'Tech',
+    weight: 2,
+    patterns: [
+      /\btech\b|technology|\bit\b(?=\s(summit|conference|architecture))|\bict\b/,
+      /\bai\b|artificial intelligence|machine learning|blockchain|crypto|web3/,
+      /developer|coding|programming|software|cloud native|kubernetes|devops|kafka|cyber ?security|data (science|engineering)|\bapi\b|\bsaas\b/,
+      /claude|chatgpt|openai|\baws\b|google cloud|azure/,
+    ],
+  },
+  {
+    category: 'Business',
+    weight: 2,
+    patterns: [
+      /startup|entrepreneur|founder|investor|venture|pitch/,
+      /\bbusiness\b|\bsme\b|\bb2b\b|marketing|e ?commerce|finance|investment|property|real estate/,
+      /\besg\b|sustainability|career|hiring|job fair|\bhr\b|human resources/,
+      /green (development|engineering|building)|net ?zero|energy efficien|building solutions|construction|engineering/,
+    ],
+  },
+  {
+    category: 'Expo & Fair',
+    weight: 3,
+    patterns: [
+      /\bexpo\b|exhibition|trade show|travel fair|\bfair\b|showcase|\bshow\b(?!er)/,
+      /award|gala/,
+    ],
+  },
+  {
+    category: 'Learning',
+    weight: 1,
+    patterns: [
+      /workshop|masterclass|seminar|symposium|conference|\bcourse\b|\bclass(es)?\b|training|bootcamp/,
+      /\btalk\b|lecture|research|academic|university|info(rmation)? (day|evening|session)|open house/,
+    ],
+  },
+  {
+    category: 'Sports',
+    weight: 3,
+    patterns: [
+      /\brun\b|running|marathon|jog|hike|hiking|cycling|climb/,
+      /workout|gym|football|badminton|basketball|swim|sports?\b/,
+    ],
+  },
+  {
+    category: 'Wellness',
+    weight: 3,
+    patterns: [
+      /yoga|meditation|mindful|breathwork|wellbeing|well-being|wellness/,
+      /mental health|self-?(love|care|sabotage|development|esteem)|healing|manifest|spiritual|men'?s circle|women'?s circle/,
+      /loving relationship|personal growth|life meaningful|living with purpose|philosophy|gratitude|易经|冥想|静心|灵性|智慧/,
+    ],
+  },
+  {
+    category: 'Arts & Culture',
+    weight: 2,
+    patterns: [
+      /music|concert|gig|open mic|\bband\b|\bdj\b|karaoke|ballet|theatre|theater|comedy|stand-?up/,
+      /\bart\b|gallery|museum|paint|craft|poetry|film|movie|screening/,
+      /cultural|heritage|walk in kuala lumpur|festival|celebration|merdeka|deepavali|raya|cny|mid-autumn/,
+      /church|worship|prophetic|revival|temple|mosque/,
+    ],
+  },
+  {
+    category: 'Social',
+    weight: 2,
+    patterns: [
+      /\bsocial\b|mixer|networking (drinks|night)|nomad|expat|make (new )?friends/,
+      /language exchange|drinks?\b|\bbar\b|party|parties|nightlife|singles|dating|\bsip\b/,
+      /meetup|gathering|hangout|chill|lepak|potluck|brunch|supper club/,
+      /聚会|fan (meet|gathering|club)|argument club|board ?games?|trivia|quiz night|matcha|coffee (meet|morning|chat)/,
+    ],
+  },
+];
+
+/** Strip styled unicode (𝗕𝗢𝗟𝗗 etc.) down to plain ASCII so keywords match. */
+function normalizeText(text: string): string {
+  return text
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
 function categorize(name: string, description: string, source: string): string {
-  const text = `${name} ${description}`.toLowerCase();
-  const keywords: Record<string, string[]> = {
-    Hackathon: ['hackathon', 'hackfest', 'datathon', 'ideathon', 'codefest', 'hack day', 'hack night', 'devpost'],
-    Tech: ['tech', 'cloud', 'kafka', 'developer', 'coding', 'software', 'data', 'ai', 'machine learning', 'web', 'app', 'api', 'database', 'devops'],
-    Business: ['business', 'startup', 'entrepreneur', 'networking', 'career', 'investor'],
-    Social: ['social', 'drink', 'party', 'meetup', 'friends', 'lounge', 'nomad', 'language exchange', 'chill', 'networking'],
-    Lifestyle: ['lifestyle', 'food', 'travel', 'wellness', 'yoga', 'fitness', 'fashion', 'hobby'],
-    Arts: ['art', 'music', 'paint', 'concert', 'exhibition', 'theatre', 'dance', 'design', 'festival'],
-    Health: ['health', 'yoga', 'run', 'fitness', 'wellness', 'meditation', 'sports'],
-    Education: ['learn', 'workshop', 'course', 'class', 'education', 'training', 'seminar'],
-  };
   if (source === 'devpost' || source === 'devfolio') return 'Hackathon';
-  for (const [category, words] of Object.entries(keywords)) {
-    if (words.some((w) => text.includes(w))) return category;
+
+  const nameText = normalizeText(name);
+  const descText = normalizeText(description).slice(0, 600);
+
+  let best = 'Other';
+  let bestScore = 0;
+  for (const rule of CATEGORY_RULES) {
+    let score = 0;
+    for (const pattern of rule.patterns) {
+      if (pattern.test(nameText)) score += rule.weight * 2; // name is authoritative
+      else if (pattern.test(descText)) score += rule.weight;
+    }
+    if (score > bestScore) {
+      bestScore = score;
+      best = rule.category;
+    }
   }
-  return source === 'meetup' ? 'Social' : 'Other';
+
+  if (best === 'Other' && source === 'meetup') return 'Social';
+  return best;
 }
 
 function safeUrl(url: unknown): string {

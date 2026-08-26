@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-26T09:53:54.569069+00:00",
-  "count": 99,
+  "generated_at": "2026-08-26T10:02:01.825275+00:00",
+  "count": 97,
   "events": [
     {
       "source": "allevents",
@@ -193,18 +193,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1173690746%2F2558867482461%2F1%2Foriginal.20251230-030028?crop=focalpoint&fit=crop&w=400&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=29ef06ab5d5542469304cb8bf40208b5",
       "lat": 3.1790514,
       "lon": 101.6682474
-    },
-    {
-      "source": "allevents",
-      "name": "2026827 (KL Eco City Mall)",
-      "date": "2026-08-27",
-      "time": "19:30",
-      "venue": "Infinity Hub",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/易经智慧-2026年8月27日-星期四-kl-eco-city-mall/100001997427153385",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czMvYmFubmVycy8wYjg4NjVmZDk3ZmQ1YWM2ZjkwNjg1MGE2MzE3NjBmNzJjZGUwNDkxNmQ5ZDkxNTRmY2QzNzdhOWE4ZDlhYjQ4LXJpbWctdzEyMDAtaDY3NS1kY2Y4ZjhkOC1nbWlyLmpwZz92PTE3ODYzNDI2MzM.avif",
-      "lat": null,
-      "lon": null
     },
     {
       "source": "eventbrite",
@@ -435,6 +423,18 @@
       "lon": 101.6969491
     },
     {
+      "source": "eventbrite",
+      "name": "Sunday Sunset Sessions at Marini’s On 57",
+      "date": "2026-08-30",
+      "time": "",
+      "venue": "Marini’s on 57",
+      "description": "Join us every Sunday for Marini’s On 57’s Sunset Sessions from 5 PM onwards. Unbeatable views, Live DJs and percussion and a wonderful vibe",
+      "link": "https://www.eventbrite.sg/e/sunday-sunset-sessions-at-marinis-on-57-tickets-1989774155061",
+      "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1176980120%2F127795787045%2F1%2Foriginal.20260208-042755?crop=focalpoint&fit=crop&w=512&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=dd33678911245410a20d08698bf1dcb2",
+      "lat": 3.1566072,
+      "lon": 101.7115967
+    },
+    {
       "source": "luma",
       "name": "MOODROOM's MATCHA HOURS 🍵😄",
       "date": "2026-08-31",
@@ -493,18 +493,6 @@
       "image": "/images/fallbacks/redesign/group-cover-5-square.webp",
       "lat": null,
       "lon": null
-    },
-    {
-      "source": "allevents",
-      "name": "202693 (Bukit Jalil)",
-      "date": "2026-09-03",
-      "time": "19:30",
-      "venue": "Hyatt Place Kuala Lumpur Bukit Jalil",
-      "description": "",
-      "link": "https://allevents.in/kuala-lumpur/易经智慧-2026年9月3日-星期四-bukit-jalil/100001998730077466",
-      "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czQvYmFubmVycy9hNjI3YThlYTA5YWEzZjM4YTIyNGM4Njg1ODhmOGUwNmRhYWVhYjY3NTIzMjdjZWQwOWFjNjBlYzkwY2ZmMzViLXJpbWctdzEyMDAtaDY3NS1kY2Y4ZjhkOC1nbWlyLmpwZz92PTE3ODc1NjAzMjk.avif",
-      "lat": 3.0537794,
-      "lon": 101.6709084
     },
     {
       "source": "eventbrite",
@@ -625,18 +613,6 @@
       "image": "https://cdn.evbstatic.com/s3-build/perm_001/6ce389/django/images/logos/eb_orange_on_white_1200x630.png",
       "lat": 3.1664256,
       "lon": 101.6924194
-    },
-    {
-      "source": "luma",
-      "name": "𝗦𝗧𝗔𝗥𝗧𝗨𝗣 𝗕𝗨𝗜𝗟𝗗𝗘𝗥𝗦 𝟮𝟬𝟮𝟲 𝗙𝗥𝗢𝗠 𝗔𝗜 𝗜𝗗𝗘𝗔 𝗧𝗢 𝗣𝗥𝗢𝗗𝗨𝗖𝗧𝗜𝗢𝗡 𝗪𝗜𝗧𝗛 𝗔𝗪𝗦",
-      "date": "2026-09-08",
-      "time": "09:00",
-      "venue": "Amazon Web Services (AWS-KUL15) Malaysia",
-      "description": "Kuala Lumpur, Malaysia",
-      "link": "https://lu.ma/u1ulpi5h",
-      "image": "https://images.lumacdn.com/uploads/d4/c568eb59-0e8b-46d0-82e5-fdcfe1b61084.png",
-      "lat": 3.1197321000000002,
-      "lon": 101.67654669999999
     },
     {
       "source": "allevents",
