@@ -79,7 +79,7 @@ function categorize(name: string, description: string, source: string): string {
     Health: ['health', 'yoga', 'run', 'fitness', 'wellness', 'meditation', 'sports'],
     Education: ['learn', 'workshop', 'course', 'class', 'education', 'training', 'seminar'],
   };
-  if (source === 'devpost') return 'Hackathon';
+  if (source === 'devpost' || source === 'devfolio') return 'Hackathon';
   for (const [category, words] of Object.entries(keywords)) {
     if (words.some((w) => text.includes(w))) return category;
   }

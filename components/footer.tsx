@@ -11,8 +11,9 @@ export function Footer() {
           in Kuala Lumpur
         </p>
         <p className="text-xs text-muted-foreground/70">
-          Events sourced from Meetup, Eventbrite, Luma, AllEvents & Devpost —
-          refreshed daily at 7 AM MYT. Always confirm details on the event page.
+          Events sourced from Meetup, Eventbrite, Luma, AllEvents, Devpost &
+          Devfolio — refreshed daily at 7 AM MYT. Always confirm details on the
+          event page.
         </p>
       </div>
     </footer>

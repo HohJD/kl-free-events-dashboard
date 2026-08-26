@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26T06:47:31.636589+00:00",
+  "generated_at": "2026-08-26T07:38:38.755311+00:00",
   "count": 175,
   "events": [
     {
@@ -301,6 +301,18 @@
       "image": "https://images.lumacdn.com/uploads/au/3624770b-57a1-4f9c-8e35-a04aaba4bce1.png",
       "lat": 3.0907146502931115,
       "lon": 101.738968592989
+    },
+    {
+      "source": "devfolio",
+      "name": "MUBA Blockchain Hackathon",
+      "date": "2026-08-26",
+      "time": "20:00",
+      "venue": "Online",
+      "description": "Malaysian Student-Led Premier Blockchain Hackathon",
+      "link": "https://muba-hackathon.devfolio.co/",
+      "image": "https://assets.devfolio.co/hackathons/c9616c07274742db8c57310b5d61adc7/assets/cover/127.png",
+      "lat": null,
+      "lon": null
     },
     {
       "source": "meetup",
@@ -742,7 +754,7 @@
       "venue": "Asia School of Business (ASB) Academic",
       "description": "This is a hybrid research seminar at the Asia School of Business, featuring Professor Sam Yam from National University of Singapore",
       "link": "https://www.eventbrite.com/e/research-seminar-series-prof-sam-yam-tickets-1998521089377",
-      "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1191571099%2F2670826689041%2F1%2Foriginal.20260821-044451?crop=focalpoint&fit=crop&w=450&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=52272f36417bd433801a6229f241aa95",
+      "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1191571099%2F2670826689041%2F1%2Foriginal.20260821-044451?crop=focalpoint&fit=crop&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=e27408dc1a56c75d8a3d421187f80a21",
       "lat": 3.1554656,
       "lon": 101.6924639
     },
@@ -1203,18 +1215,6 @@
       "lon": 101.6678236
     },
     {
-      "source": "eventbrite",
-      "name": "Townhall Session on Establishment of TVET Commission",
-      "date": "2026-09-10",
-      "time": "",
-      "venue": "AICB Centre of Excellence",
-      "description": "Be part of the conversation on Malaysia's future TVET landscape.",
-      "link": "https://www.eventbrite.com/e/townhall-session-on-establishment-of-tvet-commission-tickets-1997427801323",
-      "image": "https://cdn.evbstatic.com/s3-build/perm_001/6ce389/django/images/logos/eb_orange_on_white_1200x630.png",
-      "lat": 3.155697,
-      "lon": 101.6932244
-    },
-    {
       "source": "allevents",
       "name": "139",
       "date": "2026-09-11",
@@ -1607,8 +1607,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/pilot-test-symposium/100001997955434488",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czYvYmFubmVycy81NTQ4MzQyZTk3YWZmZTU5Mzk1M2Q2ODg3ZTFkOWQ5YzgxMDhhNWZjZTc4ZmJiYjc5YmRlYmM3ZTc2M2RjOWNlLXJpbWctdzk0MC1oNDcwLWRjMTgxODE4LWdtaXIuanBnP3Y9MTc4Njg2MTQ4MQ.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.1178809,
+      "lon": 101.6783238
     },
     {
       "source": "eventbrite",
@@ -1654,7 +1654,7 @@
       "venue": "Kuala Lumpur & Selangor Chinese Assembly Hall (KLSCAH)",
       "description": "Prophetic Healing & Revival Meeting celebrating The Ark Apostolic Hub's 3rd Anniversary.",
       "link": "https://www.eventbrite.com/e/unleash-2026-prophetic-healing-revival-meeting-tickets-1996085898656",
-      "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1189948495%2F3004757639822%2F1%2Foriginal.20260730-105345?crop=focalpoint&fit=crop&w=200&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=d56f53096e610808ba78436e6c046c34",
+      "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1189948495%2F3004757639822%2F1%2Foriginal.20260730-105345?crop=focalpoint&fit=crop&w=512&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=535f9b11f8db9bab91fef3b443e45dec",
       "lat": 3.1390664,
       "lon": 101.6978452
     },
@@ -1715,8 +1715,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/allstar-legends-football-match/200030582139552",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czIvYmFubmVycy8yYWE1NjhiZjQ1MTg5YzU1YTRlZGJiNzc2MWQ5ZjZmMTRmZDU3ZGU1ODk3YTUwYWFiYjA2ZTViMTQxZGI3NGI4LXJpbWctdzEyMDAtaDYwMC1kYzA4MDgwOC1nbWlyP3Y9MTc4NzExNDg3MQ.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.0546755,
+      "lon": 101.691369
     },
     {
       "source": "allevents",
@@ -1763,8 +1763,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/nature-walk-for-world-mental-health-month-2026/200030582139449",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy9hNTY0MWJkNDIwZDM4ZWJkYmNjMmE3ODgxMTBjYjdmYzNiMmZmZmNmNTYyMDQ4NjZiYjdmM2Q4N2QxM2M4N2M5LXJpbWctdzEwMDEtaDQ5OS1kY2Y4ZjhmOC1nbWlyP3Y9MTc4NzExNDg2OA.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.1404447,
+      "lon": 101.644898
     },
     {
       "source": "allevents",
@@ -1787,8 +1787,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/art-kl/200030533865146",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEvYmFubmVycy9kYjJkYzc0NWM4MmMyNjkxYzJjYzhhY2Y4ZmI3MTc2NWJkZDBkODkwOTMzMTg1Y2YxOTNlNmEwYzBhYTM0YjBhLXJpbWctdzExNzAtaDg3OC1kY2Y4ZjhmOC1nbWlyP3Y9MTc4NzExNDkzOQ.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.1233391,
+      "lon": 101.6744098
     },
     {
       "source": "allevents",
@@ -1823,8 +1823,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/kasa-sound-therapy-training-malaysia/200030557216236",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEwL2Jhbm5lcnMvMGVkMGQ5NDdiZWIwNmEyZDY1NGU0MzI1OGMwMTYxNTE2MjhlNWM1MGQyMzQ4ZjhjODU3ZmQ1YzA0MTgzODUwNy1yaW1nLXcxMDgwLWgxMDgwLWRjZDg4ODY4LWdtaXI_dj0xNzg3NDY1NzU3.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.1221897,
+      "lon": 101.6706563
     },
     {
       "source": "eventbrite",
@@ -1847,8 +1847,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/锡安团契-少年组/200029792714237",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czUvYmFubmVycy9mZDVmNjM1ZDIzZDExYTRkZjY1ZWRlMzdjOWU0ZjBlMmMxNjFiMDE4MmVmNzFhODk1MzFjOWE3NDQ5ZjQ5M2QxLXJpbWctdzcyMC1oMTI4MC1kY2Y4ZjhmOC1nbWlyP3Y9MTc4NzE3ODAxMg.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.0813054,
+      "lon": 101.7112631
     },
     {
       "source": "eventbrite",
@@ -1883,8 +1883,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/global7z-summit-conference-2026/100001994111847215",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czMvYmFubmVycy8xNmM4NTE0ODgzZDVmZGFjZWM0OTc5YjkyZWIwYmQ5NDg3ZWEyMjU3YzdlNDFlMGM3ZjBlMzlmNzM3YTFkYmQwLXJpbWctdzk0MC1oNDcwLWRjMDYxMzE5LWdtaXIuanBnP3Y9MTc4NDIwMDUxNw.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.1573751,
+      "lon": 101.7123797
     },
     {
       "source": "allevents",
@@ -1919,8 +1919,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/babymonster-in-kuala-lumpur/3300030433301953",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4tYXouYWxsZXZlbnRzLmluL2V2ZW50czEwL2Jhbm5lcnMvODk2YjkzNDAtODRlMi0xMWYxLWEwZjAtYjNmYzA1OTMwZTE2LXJpbWctdzEyMDAtaDY3NS1kY2Q3ZDVkYS1nbWlyLndlYnA_dj0xNzg0NjI0Mzky.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.0537311,
+      "lon": 101.6934618
     },
     {
       "source": "allevents",
@@ -1943,8 +1943,8 @@
       "description": "",
       "link": "https://allevents.in/kuala-lumpur/9th-international-conference-on-dentistry-and-oral-health-icdoh-2026-tickets/80002442395556",
       "image": "https://cdn-ip.allevents.in/s/rs:fill:500:250/g:sm/sh:100/aHR0cHM6Ly9jZG4yLmFsbGV2ZW50cy5pbi90aHVtYnMvdGh1bWI2YTQyNGZlMGRjYTRkLmpwZw.avif",
-      "lat": null,
-      "lon": null
+      "lat": 3.1557056,
+      "lon": 101.7059577
     },
     {
       "source": "eventbrite",

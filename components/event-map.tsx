@@ -15,6 +15,8 @@ const SOURCE_COLORS: Record<string, string> = {
   eventbrite: "#f97316",
   luma: "#8b5cf6",
   allevents: "#0ea5e9",
+  devpost: "#10b981",
+  devfolio: "#22c55e",
 };
 
 function markerIcon(color: string) {

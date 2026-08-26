@@ -21,6 +21,7 @@ const SOURCE_COLORS: Record<string, string> = {
   luma: "bg-[#cdb0ff]",
   allevents: "bg-[#93d8ff]",
   devpost: "bg-[#8ceedd]",
+  devfolio: "bg-[#a5e8a2]",
 };
 
 const FALLBACK_IMAGE = `data:image/svg+xml;utf8,${encodeURIComponent(
