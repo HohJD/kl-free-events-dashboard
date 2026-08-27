@@ -1,5 +1,6 @@
 import { Dashboard } from "@/components/dashboard";
 import { getEvents } from "@/lib/events";
+import { getItems } from "@/lib/items";
 import { HeroStats } from "@/components/hero";
 
 function toLocalDate(d: Date) {
@@ -48,5 +49,5 @@ export default function Home() {
     generatedAt,
   };
 
-  return <Dashboard events={events} stats={stats} />;
+  return <Dashboard events={events} stats={stats} items={getItems()} />;
 }

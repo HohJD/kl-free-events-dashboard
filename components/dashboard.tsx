@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Event } from "@/lib/events";
+import { FreeItem } from "@/lib/items";
 import { filterEvents, DateRange } from "@/lib/filter-events";
 import { useFavorites } from "@/lib/use-favorites";
 import { Hero, HeroStats } from "./hero";
@@ -9,15 +10,19 @@ import { Navbar } from "./navbar";
 import { Filters, ViewMode } from "./filters";
 import { EventGrid } from "./event-grid";
 import { MapSection } from "./map-section";
+import { CollectSection } from "./collect-section";
+import { SectionTabs, Section } from "./section-tabs";
 import { Footer } from "./footer";
 import { BackToTop } from "./back-to-top";
 
 interface DashboardProps {
   events: Event[];
   stats: HeroStats;
+  items: FreeItem[];
 }
 
-export function Dashboard({ events, stats }: DashboardProps) {
+export function Dashboard({ events, stats, items }: DashboardProps) {
+  const [section, setSection] = useState<Section>("collect");
   const [query, setQuery] = useState("");
   const [source, setSource] = useState("all");
   const [category, setCategory] = useState("all");
@@ -66,11 +71,25 @@ export function Dashboard({ events, stats }: DashboardProps) {
     window.location.reload();
   };
 
+  // Sync section with URL hash so tabs are shareable (#events / #collect)
+  useEffect(() => {
+    if (window.location.hash === "#events") setSection("events");
+  }, []);
+  const switchSection = (s: Section) => {
+    setSection(s);
+    window.history.replaceState(null, "", s === "events" ? "#events" : "#collect");
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar onRefresh={handleRefresh} refreshing={refreshing} />
-      <Hero stats={stats} />
-      <Filters
+      <SectionTabs section={section} setSection={switchSection} />
+      {section === "collect" ? (
+        <CollectSection items={items} />
+      ) : (
+        <>
+          <Hero stats={stats} />
+          <Filters
         query={query}
         setQuery={setQuery}
         source={source}
@@ -88,18 +107,20 @@ export function Dashboard({ events, stats }: DashboardProps) {
         setShowSaved={setShowSaved}
         savedCount={favorites.size}
         onClear={handleClear}
-      />
-      <div className="pt-6">
-        {view === "map" ? (
-          <MapSection events={filtered} />
-        ) : (
-          <EventGrid
-            events={filtered}
-            favorites={favorites}
-            onToggleSave={toggle}
           />
-        )}
-      </div>
+          <div className="pt-6">
+            {view === "map" ? (
+              <MapSection events={filtered} />
+            ) : (
+              <EventGrid
+                events={filtered}
+                favorites={favorites}
+                onToggleSave={toggle}
+              />
+            )}
+          </div>
+        </>
+      )}
       <Footer />
       <BackToTop />
     </div>

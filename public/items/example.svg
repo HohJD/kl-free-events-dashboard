@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#ffd02f"/>
+  <circle cx="510" cy="90" r="130" fill="#161412" opacity="0.06"/>
+  <circle cx="120" cy="400" r="100" fill="#161412" opacity="0.06"/>
+  <g transform="translate(320 215)" fill="none" stroke="#161412" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="-70" y="-45" width="140" height="110" rx="8"/>
+    <path d="M-70 -45 L0 -95 L70 -45"/>
+    <rect x="-18" y="10" width="36" height="55" rx="4"/>
+  </g>
+  <text x="320" y="420" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#161412" text-anchor="middle">Your item photo here</text>
+</svg>
