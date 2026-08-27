@@ -201,7 +201,7 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
                 href={
                   item.contact.startsWith("https://wa.me/")
                     ? `${item.contact}?text=${encodeURIComponent(
-                        `Hi! I'm interested in "${item.name}" you listed on Free Things. Is it still available?`
+                        `Hi! I'm interested in "${item.name}" you listed on Free Things. Is it still available? Where and when could I collect it?`
                       )}`
                     : item.contact
                 }
