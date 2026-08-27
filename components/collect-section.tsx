@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { MapPin, MessageCircle, Package, Clock } from "lucide-react";
 import { FreeItem } from "@/lib/items";
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/lib/supabase";
+import { UploadItem } from "./upload-item";
 import { cn } from "@/lib/utils";
 
 interface SupabaseItemRow {
@@ -183,6 +184,7 @@ export function CollectSection({ items: initialItems }: { items: FreeItem[] }) {
       </section>
 
       <div className="container mx-auto max-w-6xl px-4 py-8 pb-16">
+        <UploadItem onListed={(item) => setItems((prev) => [item, ...prev])} />
         {items.length === 0 && !loaded ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[0, 1, 2].map((i) => (

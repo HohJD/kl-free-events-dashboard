@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-27T05:09:58.606676+00:00",
-  "count": 98,
+  "generated_at": "2026-08-27T05:13:05.195083+00:00",
+  "count": 97,
   "events": [
     {
       "source": "allevents",
@@ -349,18 +349,6 @@
       "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1189217249%2F2904993210291%2F1%2Foriginal.20260720-143035?crop=focalpoint&fit=crop&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.5&fp-y=0.5&s=3299663f725b57628d6f549e8e4bbab2",
       "lat": 3.1573056,
       "lon": 101.7053793
-    },
-    {
-      "source": "eventbrite",
-      "name": "Yoga Classes Every Saturday at Bangsar 8AM",
-      "date": "2026-08-29",
-      "time": "",
-      "venue": "Gujarati Association Wilayah Persekutuan & Selangor",
-      "description": "A must join Yoga Class to pump-up the start of your weekend!",
-      "link": "https://www.eventbrite.com/e/yoga-classes-every-saturday-at-bangsar-8am-tickets-1986755991653",
-      "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1181453061%2F2993655892797%2F1%2Foriginal.20260405-042020?crop=focalpoint&fit=crop&auto=format%2Ccompress&q=75&sharp=10&fp-x=0.505&fp-y=0.049&s=71698d96fc16a10c9cf3f1cfbe44c584",
-      "lat": 3.1301152,
-      "lon": 101.6734493
     },
     {
       "source": "eventbrite",
