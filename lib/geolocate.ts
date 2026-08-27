@@ -22,34 +22,32 @@ export async function getApproxLocation(): Promise<ApproxLocation | null> {
     navigator.geolocation.getCurrentPosition(
       (pos) => resolve(pos),
       () => resolve(null),
-      { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 }
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
     );
   });
   if (!position) return null;
 
-  const lat = Math.round(position.coords.latitude * 1000) / 1000;
-  const lon = Math.round(position.coords.longitude * 1000) / 1000;
+  // ~11 m precision — enough for a street-level pin, not an exact unit
+  const lat = Math.round(position.coords.latitude * 10000) / 10000;
+  const lon = Math.round(position.coords.longitude * 10000) / 10000;
 
   try {
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=14&accept-language=en`,
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=17&accept-language=en`,
       { headers: { Accept: "application/json" } }
     );
     if (!res.ok) throw new Error(`reverse ${res.status}`);
     const data = await res.json();
     const a = data.address || {};
-    const area: string =
-      a.suburb ||
-      a.neighbourhood ||
-      a.quarter ||
-      a.city_district ||
-      a.town ||
-      a.village ||
-      a.city ||
-      "";
-    if (!area) return null;
-    const city = a.city && a.city !== area ? `, ${a.city}` : "";
-    return { lat, lon, area: `${area}${city}` };
+    const road: string = a.road || a.pedestrian || "";
+    const suburb: string =
+      a.suburb || a.neighbourhood || a.quarter || a.city_district || "";
+    const city: string = a.city || a.town || a.village || "";
+    const parts = [road, suburb, city].filter(
+      (p, i, arr) => p && arr.indexOf(p) === i
+    );
+    if (!parts.length) return null;
+    return { lat, lon, area: parts.slice(0, 3).join(", ") };
   } catch {
     return null;
   }

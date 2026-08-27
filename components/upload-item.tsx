@@ -58,17 +58,26 @@ async function uploadPhoto(blob: Blob): Promise<string> {
   return supabase.storage.from("item-pics").getPublicUrl(key).data.publicUrl;
 }
 
-/** Normalize a Malaysian phone number into a wa.me link. */
+/** Normalize a Malaysian phone number OR WhatsApp username into a wa.me link. */
 export function toWhatsAppLink(raw: string): string {
-  const digits = raw.replace(/\D/g, "");
-  if (!digits) return "";
-  const msisdn = digits.startsWith("0")
-    ? `60${digits.slice(1)}`
-    : digits.startsWith("60")
-      ? digits
-      : `60${digits}`;
-  if (msisdn.length < 10 || msisdn.length > 13) return "";
-  return `https://wa.me/${msisdn}`;
+  const trimmed = raw.trim().replace(/^@/, "");
+  if (!trimmed) return "";
+  const digits = trimmed.replace(/\D/g, "");
+  // Phone number path (9+ digits)
+  if (digits.length >= 9) {
+    const msisdn = digits.startsWith("0")
+      ? `60${digits.slice(1)}`
+      : digits.startsWith("60")
+        ? digits
+        : `60${digits}`;
+    if (msisdn.length < 10 || msisdn.length > 13) return "";
+    return `https://wa.me/${msisdn}`;
+  }
+  // Username path (letters, digits, dot/underscore, 3-30 chars)
+  if (/^[a-zA-Z][a-zA-Z0-9._]{2,29}$/.test(trimmed)) {
+    return `https://wa.me/${trimmed}`;
+  }
+  return "";
 }
 
 async function insertItem(
@@ -219,11 +228,15 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
     setState("idle");
   };
 
+  const contactLink = toWhatsAppLink(whatsapp);
+  const canSubmit =
+    !!photo && oneLiner.trim().length >= 3 && !!contactLink && state !== "busy";
+
   const submit = async () => {
-    if (!photo || oneLiner.trim().length < 3 || state === "busy") return;
+    if (!canSubmit) return;
     setState("busy");
     try {
-      const contact = toWhatsAppLink(whatsapp);
+      const contact = contactLink;
       const blob = await compressImage(photo);
       const url = await uploadPhoto(blob);
       const item = await insertItem(
@@ -339,15 +352,29 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
                 className="h-11 w-full rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
               />
               <input
-                type="tel"
+                type="text"
+                inputMode="tel"
                 value={whatsapp}
-                onChange={(e) => setWhatsapp(e.target.value.slice(0, 20))}
-                placeholder="WhatsApp number for claims, e.g. 0123456789 (optional)"
-                className="h-11 w-full rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
+                onChange={(e) => setWhatsapp(e.target.value.slice(0, 30))}
+                placeholder="Your WhatsApp number or username — required"
+                className={cn(
+                  "h-11 w-full rounded-xl border bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm",
+                  whatsapp && !contactLink
+                    ? "border-destructive"
+                    : "border-input"
+                )}
               />
-              <p className="text-xs text-muted-foreground">
-                Interested people tap &ldquo;Claim it&rdquo; and land straight
-                in your WhatsApp. Saved for next time.
+              <p
+                className={cn(
+                  "text-xs",
+                  whatsapp && !contactLink
+                    ? "font-medium text-destructive"
+                    : "text-muted-foreground"
+                )}
+              >
+                {whatsapp && !contactLink
+                  ? "That doesn't look right — try 0123456789, +6012…, or your WhatsApp username."
+                  : "Interested people tap \u201cClaim on WhatsApp\u201d and land straight in your chat to arrange pickup. Saved for next time."}
               </p>
 
               {/* Auto-detected chips: category + pickup area */}
@@ -389,7 +416,8 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
               ) : null}
               <button
                 onClick={submit}
-                disabled={!photo || oneLiner.trim().length < 3 || state === "busy"}
+                disabled={!canSubmit}
+                title={!contactLink ? "Add your WhatsApp so people can claim" : undefined}
                 className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-border bg-primary font-mono text-xs font-bold uppercase text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-y-0.5 active:shadow-none disabled:opacity-40 sm:w-40"
               >
                 {state === "busy" ? (
