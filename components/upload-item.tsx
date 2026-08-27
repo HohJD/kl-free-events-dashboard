@@ -2,9 +2,10 @@
 
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, Loader2, Check, X, Plus, Sparkles, LogOut, UserRound } from "lucide-react";
+import { Camera, Loader2, Check, X, Plus, Sparkles, LogOut, UserRound, MapPin } from "lucide-react";
 import { getSupabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/use-auth";
+import { getApproxLocation, ApproxLocation } from "@/lib/geolocate";
 import { FreeItem } from "@/lib/items";
 import {
   classifyItemPhoto,
@@ -60,11 +61,20 @@ async function uploadPhoto(blob: Blob): Promise<string> {
 async function insertItem(
   name: string,
   imageUrl: string,
-  category: string
+  category: string,
+  location: ApproxLocation | null
 ): Promise<FreeItem> {
   const { data, error } = await getSupabase()
     .from("free_items")
-    .insert({ name, images: [imageUrl], condition: "Good", category })
+    .insert({
+      name,
+      images: [imageUrl],
+      condition: "Good",
+      category,
+      pickup: location?.area ?? "",
+      pickup_lat: location?.lat ?? null,
+      pickup_lon: location?.lon ?? null,
+    })
     .select()
     .single();
   if (error) throw error;
@@ -80,6 +90,8 @@ async function insertItem(
     category: data.category || "Other",
     added: (data.created_at || "").slice(0, 10),
     owner: data.owner ?? null,
+    pickupLat: data.pickup_lat ?? null,
+    pickupLon: data.pickup_lon ?? null,
   };
 }
 
@@ -146,6 +158,8 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
   const [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle");
   const [category, setCategory] = useState<string | null>(null);
   const [detecting, setDetecting] = useState(false);
+  const [location, setLocation] = useState<ApproxLocation | null>(null);
+  const [locating, setLocating] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const pickPhoto = (file: File | null) => {
@@ -159,6 +173,13 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
       classifyItemPhoto(file)
         .then((c) => setCategory(c))
         .finally(() => setDetecting(false));
+      // Auto-detect pickup area (browser asks permission once)
+      if (!location && !locating) {
+        setLocating(true);
+        getApproxLocation()
+          .then((loc) => setLocation(loc))
+          .finally(() => setLocating(false));
+      }
     }
   };
 
@@ -172,6 +193,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
     setOpen(false);
     pickPhoto(null);
     setOneLiner("");
+    setLocation(null);
     setState("idle");
   };
 
@@ -181,7 +203,12 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
     try {
       const blob = await compressImage(photo);
       const url = await uploadPhoto(blob);
-      const item = await insertItem(oneLiner.trim(), url, category ?? "Other");
+      const item = await insertItem(
+        oneLiner.trim(),
+        url,
+        category ?? "Other",
+        location
+      );
       onListed(item);
       setState("done");
       setTimeout(reset, 1600);
@@ -285,20 +312,42 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
                 Tip: include pickup area + how to reach you in the line.
               </p>
 
-              {/* AI-detected category (tap to correct) */}
+              {/* Auto-detected chips: category + pickup area */}
               {photo ? (
-                <button
-                  onClick={cycleCategory}
-                  disabled={detecting}
-                  title="Tap to change category"
-                  className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-70"
-                >
-                  <Sparkles className="size-3.5 text-rose-500" />
-                  {detecting ? "Detecting category…" : category ?? "Other"}
-                  {!detecting ? (
-                    <span className="text-muted-foreground">· tap to change</span>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    onClick={cycleCategory}
+                    disabled={detecting}
+                    title="Tap to change category"
+                    className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-70"
+                  >
+                    <Sparkles className="size-3.5 text-rose-500" />
+                    {detecting ? "Detecting category…" : category ?? "Other"}
+                    {!detecting ? (
+                      <span className="text-muted-foreground">· tap to change</span>
+                    ) : null}
+                  </button>
+
+                  {locating ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold opacity-70">
+                      <MapPin className="size-3.5 text-sky-500" />
+                      Detecting area…
+                    </span>
+                  ) : location ? (
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold shadow-brutal-sm">
+                      <MapPin className="size-3.5 text-sky-500" />
+                      {location.area}
+                      <button
+                        onClick={() => setLocation(null)}
+                        aria-label="Remove location"
+                        title="Remove location"
+                        className="text-muted-foreground hover:text-foreground"
+                      >
+                        <X className="size-3" />
+                      </button>
+                    </span>
                   ) : null}
-                </button>
+                </div>
               ) : null}
               <button
                 onClick={submit}

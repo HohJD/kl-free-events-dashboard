@@ -20,6 +20,8 @@ interface SupabaseItemRow {
   status: FreeItem["status"];
   category: string | null;
   owner: string | null;
+  pickup_lat: number | null;
+  pickup_lon: number | null;
   created_at: string;
 }
 
@@ -41,6 +43,8 @@ async function fetchItems(): Promise<FreeItem[]> {
     status: r.status,
     category: r.category || "Other",
     owner: r.owner,
+    pickupLat: r.pickup_lat,
+    pickupLon: r.pickup_lon,
     added: (r.created_at || "").slice(0, 10),
   }));
 }
@@ -148,10 +152,22 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
           </h3>
 
           {item.pickup ? (
-            <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-              <MapPin className="size-3.5 shrink-0" />
-              <span className="line-clamp-1">Pickup: {item.pickup}</span>
-            </p>
+            item.pickupLat != null && item.pickupLon != null ? (
+              <a
+                href={`https://www.google.com/maps/search/?api=1&query=${item.pickupLat},${item.pickupLon}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-1 flex items-center gap-1 text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+              >
+                <MapPin className="size-3.5 shrink-0" />
+                <span className="line-clamp-1">Pickup: {item.pickup}</span>
+              </a>
+            ) : (
+              <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+                <MapPin className="size-3.5 shrink-0" />
+                <span className="line-clamp-1">Pickup: {item.pickup}</span>
+              </p>
+            )
           ) : null}
 
           {item.description ? (

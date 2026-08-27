@@ -13,6 +13,8 @@ export interface FreeItem {
   category: string;
   added: string;
   owner?: string | null;
+  pickupLat?: number | null;
+  pickupLon?: number | null;
 }
 
 interface ItemsFile {
