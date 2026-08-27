@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, MessageCircle, Package, Clock } from "lucide-react";
+import { MapPin, MessageCircle, Package, Clock, CheckCircle2, Trash2 } from "lucide-react";
 import { FreeItem } from "@/lib/items";
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/lib/supabase";
+import { SUPABASE_URL, SUPABASE_ANON_KEY, getSupabase } from "@/lib/supabase";
+import { useAuth } from "@/lib/use-auth";
 import { UploadItem } from "./upload-item";
 import { cn } from "@/lib/utils";
 
@@ -18,6 +19,7 @@ interface SupabaseItemRow {
   contact: string;
   status: FreeItem["status"];
   category: string | null;
+  owner: string | null;
   created_at: string;
 }
 
@@ -38,13 +40,43 @@ async function fetchItems(): Promise<FreeItem[]> {
     contact: r.contact,
     status: r.status,
     category: r.category || "Other",
+    owner: r.owner,
     added: (r.created_at || "").slice(0, 10),
   }));
 }
 
-function ItemCard({ item, index }: { item: FreeItem; index: number }) {
+interface ItemCardProps {
+  item: FreeItem;
+  index: number;
+  isOwner: boolean;
+  onChanged: (id: string, status: FreeItem["status"] | "deleted") => void;
+}
+
+function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
   const [activeImage, setActiveImage] = useState(0);
+  const [busy, setBusy] = useState(false);
   const images = item.images.length ? item.images : [];
+
+  const markClaimed = async () => {
+    setBusy(true);
+    const { error } = await getSupabase()
+      .from("free_items")
+      .update({ status: "claimed" })
+      .eq("id", item.id);
+    if (!error) onChanged(item.id, "deleted"); // claimed items disappear
+    setBusy(false);
+  };
+
+  const remove = async () => {
+    if (!confirm("Delete this listing?")) return;
+    setBusy(true);
+    const { error } = await getSupabase()
+      .from("free_items")
+      .delete()
+      .eq("id", item.id);
+    if (!error) onChanged(item.id, "deleted");
+    setBusy(false);
+  };
 
   return (
     <motion.div
@@ -128,6 +160,25 @@ function ItemCard({ item, index }: { item: FreeItem; index: number }) {
             </p>
           ) : null}
 
+          {isOwner ? (
+            <div className="mt-3 flex items-center gap-2">
+              <button
+                onClick={markClaimed}
+                disabled={busy}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-[#86efac] px-2.5 py-1 font-mono text-[11px] font-bold text-black shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-50"
+              >
+                <CheckCircle2 className="size-3.5" /> Mark claimed
+              </button>
+              <button
+                onClick={remove}
+                disabled={busy}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-2.5 py-1 font-mono text-[11px] font-bold text-destructive shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-50"
+              >
+                <Trash2 className="size-3.5" /> Delete
+              </button>
+            </div>
+          ) : null}
+
           <div className="mt-auto pt-4">
             {item.contact ? (
               <a
@@ -151,8 +202,17 @@ function ItemCard({ item, index }: { item: FreeItem; index: number }) {
 }
 
 export function CollectSection({ items: initialItems }: { items: FreeItem[] }) {
+  const { user } = useAuth();
   const [items, setItems] = useState<FreeItem[]>(initialItems);
   const [loaded, setLoaded] = useState(false);
+
+  const handleChanged = (id: string, status: FreeItem["status"] | "deleted") => {
+    setItems((prev) =>
+      status === "deleted"
+        ? prev.filter((i) => i.id !== id)
+        : prev.map((i) => (i.id === id ? { ...i, status } : i))
+    );
+  };
 
   // Live data from Supabase; falls back to build-time items on failure
   useEffect(() => {
@@ -214,7 +274,13 @@ export function CollectSection({ items: initialItems }: { items: FreeItem[] }) {
         ) : (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((item, i) => (
-              <ItemCard key={item.id} item={item} index={i} />
+              <ItemCard
+                key={item.id}
+                item={item}
+                index={i}
+                isOwner={!!user && item.owner === user.id}
+                onChanged={handleChanged}
+              />
             ))}
           </div>
         )}

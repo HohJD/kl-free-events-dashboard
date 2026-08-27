@@ -12,6 +12,7 @@ export interface FreeItem {
   status: 'available' | 'pending' | 'claimed';
   category: string;
   added: string;
+  owner?: string | null;
 }
 
 interface ItemsFile {

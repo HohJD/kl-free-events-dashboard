@@ -2,8 +2,9 @@
 
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, Loader2, Check, X, Plus, Sparkles } from "lucide-react";
-import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/lib/supabase";
+import { Camera, Loader2, Check, X, Plus, Sparkles, LogOut, UserRound } from "lucide-react";
+import { getSupabase } from "@/lib/supabase";
+import { useAuth } from "@/lib/use-auth";
 import { FreeItem } from "@/lib/items";
 import {
   classifyItemPhoto,
@@ -48,20 +49,12 @@ async function compressImage(file: File, maxDim = 1400): Promise<Blob> {
 
 async function uploadPhoto(blob: Blob): Promise<string> {
   const key = `${crypto.randomUUID()}.jpg`;
-  const res = await fetch(
-    `${SUPABASE_URL}/storage/v1/object/item-pics/${key}`,
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-        apikey: SUPABASE_ANON_KEY,
-        "Content-Type": "image/jpeg",
-      },
-      body: blob,
-    }
-  );
-  if (!res.ok) throw new Error(`upload ${res.status}`);
-  return `${SUPABASE_URL}/storage/v1/object/public/item-pics/${key}`;
+  const supabase = getSupabase();
+  const { error } = await supabase.storage
+    .from("item-pics")
+    .upload(key, blob, { contentType: "image/jpeg" });
+  if (error) throw error;
+  return supabase.storage.from("item-pics").getPublicUrl(key).data.publicUrl;
 }
 
 async function insertItem(
@@ -69,38 +62,83 @@ async function insertItem(
   imageUrl: string,
   category: string
 ): Promise<FreeItem> {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/free_items`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-      apikey: SUPABASE_ANON_KEY,
-      "Content-Type": "application/json",
-      Prefer: "return=representation",
-    },
-    body: JSON.stringify({
-      name,
-      images: [imageUrl],
-      condition: "Good",
-      category,
-    }),
-  });
-  if (!res.ok) throw new Error(`insert ${res.status}`);
-  const [row] = await res.json();
+  const { data, error } = await getSupabase()
+    .from("free_items")
+    .insert({ name, images: [imageUrl], condition: "Good", category })
+    .select()
+    .single();
+  if (error) throw error;
   return {
-    id: row.id,
-    name: row.name,
-    description: row.description,
-    images: row.images,
-    condition: row.condition,
-    pickup: row.pickup,
-    contact: row.contact,
-    status: row.status,
-    category: row.category || "Other",
-    added: (row.created_at || "").slice(0, 10),
+    id: data.id,
+    name: data.name,
+    description: data.description,
+    images: data.images,
+    condition: data.condition,
+    pickup: data.pickup,
+    contact: data.contact,
+    status: data.status,
+    category: data.category || "Other",
+    added: (data.created_at || "").slice(0, 10),
+    owner: data.owner ?? null,
   };
 }
 
+function AuthGate() {
+  const { signInOrUp } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const submit = async () => {
+    if (!email.includes("@") || password.length < 6 || busy) return;
+    setBusy(true);
+    setError(null);
+    const { error: err } = await signInOrUp(email, password);
+    if (err) setError(err);
+    setBusy(false);
+  };
+
+  return (
+    <div className="mt-3">
+      <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <UserRound className="size-4" />
+        Quick account so you can manage your listings — no email verification
+        needed.
+      </p>
+      <div className="mt-2.5 flex flex-col gap-2 sm:flex-row">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="you@email.com"
+          className="h-11 flex-1 rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && submit()}
+          placeholder="Password (6+ chars)"
+          className="h-11 flex-1 rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
+        />
+        <button
+          onClick={submit}
+          disabled={!email.includes("@") || password.length < 6 || busy}
+          className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-border bg-primary px-4 font-mono text-xs font-bold uppercase text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-y-0.5 active:shadow-none disabled:opacity-40"
+        >
+          {busy ? <Loader2 className="size-4 animate-spin" /> : "Sign in / up"}
+        </button>
+      </div>
+      {error ? (
+        <p className="mt-2 text-sm font-medium text-destructive">{error}</p>
+      ) : null}
+    </div>
+  );
+}
+
 export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void }) {
+  const { user, ready, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -177,15 +215,31 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
             <h3 className="font-display text-base font-bold">
               Give something away
             </h3>
-            <button
-              onClick={reset}
-              aria-label="Close"
-              className="flex size-7 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
-            >
-              <X className="size-4" />
-            </button>
+            <div className="flex items-center gap-2">
+              {user ? (
+                <button
+                  onClick={() => signOut()}
+                  title="Sign out"
+                  className="flex items-center gap-1 rounded-full px-2 py-1 font-mono text-[11px] text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <UserRound className="size-3.5" />
+                  {user.email?.split("@")[0]}
+                  <LogOut className="size-3" />
+                </button>
+              ) : null}
+              <button
+                onClick={reset}
+                aria-label="Close"
+                className="flex size-7 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+              >
+                <X className="size-4" />
+              </button>
+            </div>
           </div>
 
+          {ready && !user ? (
+            <AuthGate />
+          ) : (
           <div className="mt-3 flex flex-col gap-3 sm:flex-row">
             {/* Photo picker */}
             <input
@@ -261,6 +315,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
               </button>
             </div>
           </div>
+          )}
 
           <AnimatePresence>
             {state === "done" && (
