@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kl-free-events-dashboard.vercel.app/sitemap.xml

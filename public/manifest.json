@@ -1,0 +1,22 @@
+{
+  "name": "Free Things — free things to do & collect",
+  "short_name": "Free Things",
+  "description": "Every free, public event and giveaway in one simple view.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f3e9",
+  "theme_color": "#ffd02f",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/apple-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

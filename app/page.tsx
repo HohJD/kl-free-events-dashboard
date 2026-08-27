@@ -49,5 +49,42 @@ export default function Home() {
     generatedAt,
   };
 
-  return <Dashboard events={events} stats={stats} items={getItems()} />;
+  // JSON-LD Event structured data for Google rich results (top 25 upcoming)
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: events
+      .filter((e) => e.date && e.date >= today.toISOString().slice(0, 10))
+      .slice(0, 25)
+      .map((e, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        item: {
+          "@type": "Event",
+          name: e.name,
+          startDate: e.time ? `${e.date}T${e.time}:00+08:00` : e.date,
+          url: e.link,
+          isAccessibleForFree: true,
+          eventStatus: "https://schema.org/EventScheduled",
+          location: {
+            "@type": "Place",
+            name: e.venue || "Kuala Lumpur",
+            address: { "@type": "PostalAddress", addressLocality: "Kuala Lumpur", addressCountry: "MY" },
+          },
+          ...(e.image.startsWith("https://") ? { image: e.image } : {}),
+        },
+      })),
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(structuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <Dashboard events={events} stats={stats} items={getItems()} />
+    </>
+  );
 }

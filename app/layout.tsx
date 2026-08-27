@@ -21,10 +21,30 @@ const mono = IBM_Plex_Mono({
   variable: "--font-mono",
 });
 
+const SITE_URL = "https://kl-free-events-dashboard.vercel.app";
+const DESCRIPTION =
+  "Every free, public event and giveaway in one simple view. Meetups, gigs, workshops, hackathons, free stuff — updated daily, always free.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Free Things — free things to do & collect",
-  description:
-    "Every free, public event and giveaway in one simple view. Meetups, gigs, workshops, hackathons, free stuff — updated daily, always free.",
+  description: DESCRIPTION,
+  manifest: "/manifest.json",
+  openGraph: {
+    title: "Free Things — free things to do & collect",
+    description: DESCRIPTION,
+    url: SITE_URL,
+    siteName: "Free Things",
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    locale: "en_MY",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Things — free things to do & collect",
+    description: DESCRIPTION,
+    images: ["/og.png"],
+  },
 };
 
 export const viewport: Viewport = {
