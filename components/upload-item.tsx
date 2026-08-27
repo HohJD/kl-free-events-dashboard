@@ -12,21 +12,38 @@ import {
 } from "@/lib/classify";
 import { cn } from "@/lib/utils";
 
-/** Downscale + compress a photo in the browser before upload. */
+/**
+ * Downscale + compress a photo in the browser before upload.
+ * Uses an <img> element (not createImageBitmap) so EXIF orientation from
+ * phone cameras is applied correctly — otherwise iPhone photos upload
+ * sideways on some Safari versions.
+ */
 async function compressImage(file: File, maxDim = 1400): Promise<Blob> {
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, maxDim / Math.max(bitmap.width, bitmap.height));
-  const canvas = document.createElement("canvas");
-  canvas.width = Math.round(bitmap.width * scale);
-  canvas.height = Math.round(bitmap.height * scale);
-  canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  return new Promise((resolve, reject) =>
-    canvas.toBlob(
-      (b) => (b ? resolve(b) : reject(new Error("compress failed"))),
-      "image/jpeg",
-      0.82
-    )
-  );
+  const url = URL.createObjectURL(file);
+  try {
+    const img = new Image();
+    img.src = url;
+    await img.decode();
+    const scale = Math.min(
+      1,
+      maxDim / Math.max(img.naturalWidth, img.naturalHeight)
+    );
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(img.naturalWidth * scale);
+    canvas.height = Math.round(img.naturalHeight * scale);
+    canvas
+      .getContext("2d")!
+      .drawImage(img, 0, 0, canvas.width, canvas.height);
+    return await new Promise((resolve, reject) =>
+      canvas.toBlob(
+        (b) => (b ? resolve(b) : reject(new Error("compress failed"))),
+        "image/jpeg",
+        0.82
+      )
+    );
+  } finally {
+    URL.revokeObjectURL(url);
+  }
 }
 
 async function uploadPhoto(blob: Blob): Promise<string> {
