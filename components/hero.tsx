@@ -51,14 +51,12 @@ export function Hero({ stats }: { stats: HeroStats }) {
           </p>
 
           <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl">
-            Free things to do in{" "}
-            <span className="marker-highlight whitespace-nowrap">
-              Kuala Lumpur
-            </span>
+            Free things to{" "}
+            <span className="marker-highlight whitespace-nowrap">do</span>
           </h1>
 
           <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
-            Every free, public event in the city in one simple view.
+            Every free, public event in one simple view.
           </p>
 
           <motion.div
