@@ -2,9 +2,14 @@
 
 import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, Loader2, Check, X, Plus } from "lucide-react";
+import { Camera, Loader2, Check, X, Plus, Sparkles } from "lucide-react";
 import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/lib/supabase";
 import { FreeItem } from "@/lib/items";
+import {
+  classifyItemPhoto,
+  preloadClassifier,
+  ITEM_CATEGORIES,
+} from "@/lib/classify";
 import { cn } from "@/lib/utils";
 
 /** Downscale + compress a photo in the browser before upload. */
@@ -42,7 +47,11 @@ async function uploadPhoto(blob: Blob): Promise<string> {
   return `${SUPABASE_URL}/storage/v1/object/public/item-pics/${key}`;
 }
 
-async function insertItem(name: string, imageUrl: string): Promise<FreeItem> {
+async function insertItem(
+  name: string,
+  imageUrl: string,
+  category: string
+): Promise<FreeItem> {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/free_items`, {
     method: "POST",
     headers: {
@@ -51,7 +60,12 @@ async function insertItem(name: string, imageUrl: string): Promise<FreeItem> {
       "Content-Type": "application/json",
       Prefer: "return=representation",
     },
-    body: JSON.stringify({ name, images: [imageUrl], condition: "Good" }),
+    body: JSON.stringify({
+      name,
+      images: [imageUrl],
+      condition: "Good",
+      category,
+    }),
   });
   if (!res.ok) throw new Error(`insert ${res.status}`);
   const [row] = await res.json();
@@ -64,6 +78,7 @@ async function insertItem(name: string, imageUrl: string): Promise<FreeItem> {
     pickup: row.pickup,
     contact: row.contact,
     status: row.status,
+    category: row.category || "Other",
     added: (row.created_at || "").slice(0, 10),
   };
 }
@@ -74,12 +89,28 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
   const [preview, setPreview] = useState<string | null>(null);
   const [oneLiner, setOneLiner] = useState("");
   const [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle");
+  const [category, setCategory] = useState<string | null>(null);
+  const [detecting, setDetecting] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
 
   const pickPhoto = (file: File | null) => {
     setPhoto(file);
     if (preview) URL.revokeObjectURL(preview);
     setPreview(file ? URL.createObjectURL(file) : null);
+    setCategory(null);
+    if (file) {
+      // HF Transformers.js zero-shot classification, in-browser & free
+      setDetecting(true);
+      classifyItemPhoto(file)
+        .then((c) => setCategory(c))
+        .finally(() => setDetecting(false));
+    }
+  };
+
+  const cycleCategory = () => {
+    const labels = ITEM_CATEGORIES.map((c) => c.label);
+    const idx = labels.indexOf(category ?? "Other");
+    setCategory(labels[(idx + 1) % labels.length]);
   };
 
   const reset = () => {
@@ -95,7 +126,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
     try {
       const blob = await compressImage(photo);
       const url = await uploadPhoto(blob);
-      const item = await insertItem(oneLiner.trim(), url);
+      const item = await insertItem(oneLiner.trim(), url, category ?? "Other");
       onListed(item);
       setState("done");
       setTimeout(reset, 1600);
@@ -108,7 +139,10 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
     <div className="mb-6">
       {!open ? (
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            setOpen(true);
+            preloadClassifier();
+          }}
           className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border bg-card/60 px-4 py-5 font-semibold text-muted-foreground transition-all hover:-translate-y-0.5 hover:text-foreground hover:shadow-brutal"
         >
           <span className="flex size-8 items-center justify-center rounded-full border border-border bg-accent text-accent-foreground shadow-brutal-sm">
@@ -179,6 +213,22 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
               <p className="text-xs text-muted-foreground">
                 Tip: include pickup area + how to reach you in the line.
               </p>
+
+              {/* AI-detected category (tap to correct) */}
+              {photo ? (
+                <button
+                  onClick={cycleCategory}
+                  disabled={detecting}
+                  title="Tap to change category"
+                  className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-70"
+                >
+                  <Sparkles className="size-3.5 text-rose-500" />
+                  {detecting ? "Detecting category…" : category ?? "Other"}
+                  {!detecting ? (
+                    <span className="text-muted-foreground">· tap to change</span>
+                  ) : null}
+                </button>
+              ) : null}
               <button
                 onClick={submit}
                 disabled={!photo || oneLiner.trim().length < 3 || state === "busy"}

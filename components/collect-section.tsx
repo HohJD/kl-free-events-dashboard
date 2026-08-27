@@ -17,6 +17,7 @@ interface SupabaseItemRow {
   pickup: string;
   contact: string;
   status: FreeItem["status"];
+  category: string | null;
   created_at: string;
 }
 
@@ -36,6 +37,7 @@ async function fetchItems(): Promise<FreeItem[]> {
     pickup: r.pickup,
     contact: r.contact,
     status: r.status,
+    category: r.category || "Other",
     added: (r.created_at || "").slice(0, 10),
   }));
 }
@@ -98,6 +100,8 @@ function ItemCard({ item, index }: { item: FreeItem; index: number }) {
 
         <div className="flex flex-1 flex-col p-4">
           <p className="font-mono text-xs text-muted-foreground">
+            {item.category}
+            <span className="mx-1.5 opacity-40">/</span>
             {item.condition}
             {item.added ? (
               <>

@@ -10,6 +10,7 @@ export interface FreeItem {
   pickup: string;
   contact: string;
   status: 'available' | 'pending' | 'claimed';
+  category: string;
   added: string;
 }
 
@@ -26,6 +27,7 @@ export function getItems(): FreeItem[] {
       .filter((i) => i.name && i.status !== 'claimed')
       .map((i) => ({
         ...i,
+        category: i.category || 'Other',
         images: (i.images || []).filter(
           (src) => src.startsWith('/items/') || src.startsWith('https://')
         ),
