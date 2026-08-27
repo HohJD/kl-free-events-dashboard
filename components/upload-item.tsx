@@ -9,6 +9,7 @@ import { getApproxLocation, ApproxLocation } from "@/lib/geolocate";
 import { FreeItem } from "@/lib/items";
 import {
   classifyItemPhoto,
+  classifyText,
   preloadClassifier,
   ITEM_CATEGORIES,
 } from "@/lib/classify";
@@ -181,7 +182,9 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
   const [preview, setPreview] = useState<string | null>(null);
   const [oneLiner, setOneLiner] = useState("");
   const [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle");
-  const [category, setCategory] = useState<string | null>(null);
+  // Category priority: manual pick > text match > image AI
+  const [manualCat, setManualCat] = useState<string | null>(null);
+  const [imageCat, setImageCat] = useState<string | null>(null);
   const [detecting, setDetecting] = useState(false);
   const [location, setLocation] = useState<ApproxLocation | null>(null);
   const [locating, setLocating] = useState(false);
@@ -197,12 +200,13 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
     setPhoto(file);
     if (preview) URL.revokeObjectURL(preview);
     setPreview(file ? URL.createObjectURL(file) : null);
-    setCategory(null);
+    setManualCat(null);
+    setImageCat(null);
     if (file) {
       // HF Transformers.js zero-shot classification, in-browser & free
       setDetecting(true);
       classifyItemPhoto(file)
-        .then((c) => setCategory(c))
+        .then((c) => setImageCat(c))
         .finally(() => setDetecting(false));
       // Auto-detect pickup area (browser asks permission once)
       if (!location && !locating) {
@@ -214,10 +218,14 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
     }
   };
 
+  // Live text detection from the one-liner beats the image guess
+  const textCat = classifyText(oneLiner);
+  const category = manualCat ?? textCat ?? imageCat;
+
   const cycleCategory = () => {
     const labels = ITEM_CATEGORIES.map((c) => c.label);
     const idx = labels.indexOf(category ?? "Other");
-    setCategory(labels[(idx + 1) % labels.length]);
+    setManualCat(labels[(idx + 1) % labels.length]);
   };
 
   const reset = () => {
@@ -382,15 +390,12 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
                 <div className="flex flex-wrap items-center gap-2">
                   <button
                     onClick={cycleCategory}
-                    disabled={detecting}
                     title="Tap to change category"
-                    className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-70"
+                    className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold shadow-brutal-sm transition-all hover:-translate-y-px"
                   >
                     <Sparkles className="size-3.5 text-rose-500" />
-                    {detecting ? "Detecting category…" : category ?? "Other"}
-                    {!detecting ? (
-                      <span className="text-muted-foreground">· tap to change</span>
-                    ) : null}
+                    {category ?? (detecting ? "Detecting category…" : "Other")}
+                    <span className="text-muted-foreground">· tap to change</span>
                   </button>
 
                   {locating ? (

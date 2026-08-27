@@ -33,21 +33,31 @@ export async function getApproxLocation(): Promise<ApproxLocation | null> {
 
   try {
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=17&accept-language=en`,
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=18&accept-language=en`,
       { headers: { Accept: "application/json" } }
     );
     if (!res.ok) throw new Error(`reverse ${res.status}`);
     const data = await res.json();
     const a = data.address || {};
-    const road: string = a.road || a.pedestrian || "";
-    const suburb: string =
-      a.suburb || a.neighbourhood || a.quarter || a.city_district || "";
-    const city: string = a.city || a.town || a.village || "";
-    const parts = [road, suburb, city].filter(
+    // Most-specific first: named place, road, locality, city
+    const place: string =
+      a.amenity || a.building || a.shop || a.leisure || a.office || "";
+    const road: string = a.road || a.pedestrian || a.residential || "";
+    const locality: string =
+      a.suburb ||
+      a.neighbourhood ||
+      a.hamlet ||
+      a.village ||
+      a.quarter ||
+      a.city_district ||
+      a.town ||
+      "";
+    const city: string = a.city || a.town || a.state || "";
+    const parts = [place, road, locality, city].filter(
       (p, i, arr) => p && arr.indexOf(p) === i
     );
     if (!parts.length) return null;
-    return { lat, lon, area: parts.slice(0, 3).join(", ") };
+    return { lat, lon, area: parts.slice(0, 4).join(", ") };
   } catch {
     return null;
   }
