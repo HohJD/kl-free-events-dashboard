@@ -26,8 +26,10 @@ interface SupabaseItemRow {
 }
 
 async function fetchItems(): Promise<FreeItem[]> {
+  // Listings live for 7 days, then disappear (and are hard-deleted daily)
+  const cutoff = new Date(Date.now() - 7 * 86400000).toISOString();
   const res = await fetch(
-    `${SUPABASE_URL}/rest/v1/free_items?select=*&status=neq.claimed&order=created_at.desc`,
+    `${SUPABASE_URL}/rest/v1/free_items?select=*&status=neq.claimed&created_at=gte.${encodeURIComponent(cutoff)}&order=created_at.desc`,
     { headers: { apikey: SUPABASE_ANON_KEY } }
   );
   if (!res.ok) throw new Error(`Supabase ${res.status}`);
@@ -47,6 +49,16 @@ async function fetchItems(): Promise<FreeItem[]> {
     pickupLon: r.pickup_lon,
     added: (r.created_at || "").slice(0, 10),
   }));
+}
+
+function daysLeft(added: string): string {
+  const listed = new Date(added).getTime();
+  if (Number.isNaN(listed)) return "";
+  const left = Math.max(
+    0,
+    Math.ceil((listed + 7 * 86400000 - Date.now()) / 86400000)
+  );
+  return left <= 1 ? "last day!" : `${left}d left`;
 }
 
 interface ItemCardProps {
@@ -142,7 +154,7 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
             {item.added ? (
               <>
                 <span className="mx-1.5 opacity-40">/</span>
-                <Clock className="mb-0.5 inline size-3" /> listed {item.added}
+                <Clock className="mb-0.5 inline size-3" /> {daysLeft(item.added)}
               </>
             ) : null}
           </p>
@@ -255,7 +267,7 @@ export function CollectSection({ items: initialItems }: { items: FreeItem[] }) {
           >
             <p className="font-mono text-xs text-muted-foreground">
               {items.length} item{items.length === 1 ? "" : "s"} up for grabs ·
-              all free · first come, first served
+              all free · listings vanish after 7 days
             </p>
             <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl">
               Free things to{" "}

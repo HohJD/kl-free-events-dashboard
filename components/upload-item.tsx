@@ -374,7 +374,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
               >
                 {whatsapp && !contactLink
                   ? "That doesn't look right — try 0123456789, +6012…, or your WhatsApp username."
-                  : "Interested people tap \u201cClaim on WhatsApp\u201d and land straight in your chat to arrange pickup. Saved for next time."}
+                  : "Interested people tap \u201cClaim on WhatsApp\u201d and land straight in your chat to arrange pickup. Saved for next time. Listings auto-delete after 7 days."}
               </p>
 
               {/* Auto-detected chips: category + pickup area */}
