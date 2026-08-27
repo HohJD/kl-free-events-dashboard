@@ -1,16 +1,4 @@
 {
-  "_help": "Free items to give away. To add an item: 1) drop photos into public/items/ (e.g. public/items/lamp-1.jpg), 2) add an entry below with images like \"/items/lamp-1.jpg\", 3) redeploy (vercel --prod) or just ask Devin/Hermes. Set status to 'pending' when someone claims it, 'claimed' to hide it. Contact can be a WhatsApp link like https://wa.me/60123456789",
-  "items": [
-    {
-      "id": "example-1",
-      "name": "Example item — replace me",
-      "description": "This is a sample listing so you can see how the Collect tab looks. Drop photos in public/items/ and edit items.json to list real things you're giving away.",
-      "images": ["/items/example.svg"],
-      "condition": "Like new",
-      "pickup": "Bangsar, KL",
-      "contact": "",
-      "status": "available",
-      "added": "2026-08-27"
-    }
-  ]
+  "_help": "Build-time fallback for the Collect tab. Live items come from Supabase (project rdqfibpnlizxgkqzcnee, table free_items) and update WITHOUT redeploying. To add an item: node scripts/add-item.mjs --name \"...\" --desc \"...\" --pickup \"...\" --contact \"https://wa.me/60...\" photo1.jpg — or just ask Devin/Hermes. This file is only shown if the Supabase fetch fails.",
+  "items": []
 }

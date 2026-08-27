@@ -1,10 +1,43 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { MapPin, MessageCircle, Package, Clock } from "lucide-react";
 import { FreeItem } from "@/lib/items";
+import { SUPABASE_URL, SUPABASE_ANON_KEY } from "@/lib/supabase";
 import { cn } from "@/lib/utils";
+
+interface SupabaseItemRow {
+  id: string;
+  name: string;
+  description: string;
+  images: string[];
+  condition: string;
+  pickup: string;
+  contact: string;
+  status: FreeItem["status"];
+  created_at: string;
+}
+
+async function fetchItems(): Promise<FreeItem[]> {
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/free_items?select=*&status=neq.claimed&order=created_at.desc`,
+    { headers: { apikey: SUPABASE_ANON_KEY } }
+  );
+  if (!res.ok) throw new Error(`Supabase ${res.status}`);
+  const rows: SupabaseItemRow[] = await res.json();
+  return rows.map((r) => ({
+    id: r.id,
+    name: r.name,
+    description: r.description,
+    images: (r.images || []).filter((s) => s.startsWith("https://")),
+    condition: r.condition,
+    pickup: r.pickup,
+    contact: r.contact,
+    status: r.status,
+    added: (r.created_at || "").slice(0, 10),
+  }));
+}
 
 function ItemCard({ item, index }: { item: FreeItem; index: number }) {
   const [activeImage, setActiveImage] = useState(0);
@@ -112,7 +145,18 @@ function ItemCard({ item, index }: { item: FreeItem; index: number }) {
   );
 }
 
-export function CollectSection({ items }: { items: FreeItem[] }) {
+export function CollectSection({ items: initialItems }: { items: FreeItem[] }) {
+  const [items, setItems] = useState<FreeItem[]>(initialItems);
+  const [loaded, setLoaded] = useState(false);
+
+  // Live data from Supabase; falls back to build-time items on failure
+  useEffect(() => {
+    fetchItems()
+      .then(setItems)
+      .catch(() => {})
+      .finally(() => setLoaded(true));
+  }, []);
+
   return (
     <div>
       <section className="border-b border-border/50 px-4 pb-8 pt-12 md:pt-16">
@@ -139,7 +183,16 @@ export function CollectSection({ items }: { items: FreeItem[] }) {
       </section>
 
       <div className="container mx-auto max-w-6xl px-4 py-8 pb-16">
-        {items.length === 0 ? (
+        {items.length === 0 && !loaded ? (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[0, 1, 2].map((i) => (
+              <div
+                key={i}
+                className="h-80 animate-pulse rounded-2xl border border-border bg-muted/50"
+              />
+            ))}
+          </div>
+        ) : items.length === 0 ? (
           <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-input bg-muted/30 px-6 py-20 text-center">
             <div className="flex size-14 items-center justify-center rounded-full bg-accent">
               <Package className="size-7 text-accent-foreground" />
