@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Camera, Loader2, Check, X, Plus, Sparkles, LogOut, UserRound, MapPin } from "lucide-react";
 import { getSupabase } from "@/lib/supabase";
@@ -58,11 +58,25 @@ async function uploadPhoto(blob: Blob): Promise<string> {
   return supabase.storage.from("item-pics").getPublicUrl(key).data.publicUrl;
 }
 
+/** Normalize a Malaysian phone number into a wa.me link. */
+export function toWhatsAppLink(raw: string): string {
+  const digits = raw.replace(/\D/g, "");
+  if (!digits) return "";
+  const msisdn = digits.startsWith("0")
+    ? `60${digits.slice(1)}`
+    : digits.startsWith("60")
+      ? digits
+      : `60${digits}`;
+  if (msisdn.length < 10 || msisdn.length > 13) return "";
+  return `https://wa.me/${msisdn}`;
+}
+
 async function insertItem(
   name: string,
   imageUrl: string,
   category: string,
-  location: ApproxLocation | null
+  location: ApproxLocation | null,
+  contact: string
 ): Promise<FreeItem> {
   const { data, error } = await getSupabase()
     .from("free_items")
@@ -74,6 +88,7 @@ async function insertItem(
       pickup: location?.area ?? "",
       pickup_lat: location?.lat ?? null,
       pickup_lon: location?.lon ?? null,
+      contact,
     })
     .select()
     .single();
@@ -151,6 +166,7 @@ function AuthGate() {
 
 export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void }) {
   const { user, ready, signOut } = useAuth();
+  const [whatsapp, setWhatsapp] = useState("");
   const [open, setOpen] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -161,6 +177,12 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
   const [location, setLocation] = useState<ApproxLocation | null>(null);
   const [locating, setLocating] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+
+  // Prefill WhatsApp from the account (asked once, remembered forever)
+  useEffect(() => {
+    const saved = user?.user_metadata?.whatsapp;
+    if (typeof saved === "string" && saved) setWhatsapp(saved);
+  }, [user]);
 
   const pickPhoto = (file: File | null) => {
     setPhoto(file);
@@ -201,14 +223,22 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
     if (!photo || oneLiner.trim().length < 3 || state === "busy") return;
     setState("busy");
     try {
+      const contact = toWhatsAppLink(whatsapp);
       const blob = await compressImage(photo);
       const url = await uploadPhoto(blob);
       const item = await insertItem(
         oneLiner.trim(),
         url,
         category ?? "Other",
-        location
+        location,
+        contact
       );
+      // Remember the number on the account for next time
+      if (whatsapp && whatsapp !== user?.user_metadata?.whatsapp) {
+        getSupabase()
+          .auth.updateUser({ data: { whatsapp } })
+          .then(() => {}, () => {});
+      }
       onListed(item);
       setState("done");
       setTimeout(reset, 1600);
@@ -308,8 +338,16 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
                 placeholder='One line, e.g. "IKEA lamp, works great — pickup Bangsar, DM @jd"'
                 className="h-11 w-full rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
               />
+              <input
+                type="tel"
+                value={whatsapp}
+                onChange={(e) => setWhatsapp(e.target.value.slice(0, 20))}
+                placeholder="WhatsApp number for claims, e.g. 0123456789 (optional)"
+                className="h-11 w-full rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
+              />
               <p className="text-xs text-muted-foreground">
-                Tip: include pickup area + how to reach you in the line.
+                Interested people tap &ldquo;Claim it&rdquo; and land straight
+                in your WhatsApp. Saved for next time.
               </p>
 
               {/* Auto-detected chips: category + pickup area */}

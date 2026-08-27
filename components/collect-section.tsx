@@ -198,16 +198,22 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
           <div className="mt-auto pt-4">
             {item.contact ? (
               <a
-                href={item.contact}
+                href={
+                  item.contact.startsWith("https://wa.me/")
+                    ? `${item.contact}?text=${encodeURIComponent(
+                        `Hi! I'm interested in "${item.name}" you listed on Free Things. Is it still available?`
+                      )}`
+                    : item.contact
+                }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#25D366] px-3.5 py-1.5 text-xs font-bold text-black shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
               >
-                <MessageCircle className="size-3.5" /> Claim it
+                <MessageCircle className="size-3.5" /> Claim on WhatsApp
               </a>
             ) : (
               <span className="font-mono text-xs text-muted-foreground">
-                First come, first served
+                First come, first served — no contact given
               </span>
             )}
           </div>
