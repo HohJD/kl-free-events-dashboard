@@ -38,7 +38,9 @@ async function fetchItems(): Promise<FreeItem[]> {
     id: r.id,
     name: r.name,
     description: r.description,
-    images: (r.images || []).filter((s) => s.startsWith("https://")),
+    images: (r.images || []).filter((s) =>
+      s.startsWith(`${SUPABASE_URL}/storage/v1/object/public/item-pics/`)
+    ),
     condition: r.condition,
     pickup: r.pickup,
     contact: r.contact,
@@ -208,15 +210,11 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
           ) : null}
 
           <div className="mt-auto pt-4">
-            {item.contact ? (
+            {/^https:\/\/wa\.me\/[A-Za-z0-9._]{3,30}$/.test(item.contact) ? (
               <a
-                href={
-                  item.contact.startsWith("https://wa.me/")
-                    ? `${item.contact}?text=${encodeURIComponent(
-                        `Hi! I'm interested in "${item.name}" you listed on Free Things. Is it still available? Where and when could I collect it?`
-                      )}`
-                    : item.contact
-                }
+                href={`${item.contact}?text=${encodeURIComponent(
+                  `Hi! I'm interested in "${item.name}" you listed on Free Things. Is it still available? Where and when could I collect it?`
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#25D366] px-3.5 py-1.5 text-xs font-bold text-black shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
