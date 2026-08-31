@@ -182,6 +182,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
   const [preview, setPreview] = useState<string | null>(null);
   const [oneLiner, setOneLiner] = useState("");
   const [state, setState] = useState<"idle" | "busy" | "done" | "error">("idle");
+  const [errorDetail, setErrorDetail] = useState("");
   // Category priority: manual pick > text match > image AI
   const [manualCat, setManualCat] = useState<string | null>(null);
   const [imageCat, setImageCat] = useState<string | null>(null);
@@ -263,7 +264,13 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
       onListed(item);
       setState("done");
       setTimeout(reset, 1600);
-    } catch {
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setErrorDetail(
+        /policy|row-level|403/i.test(msg)
+          ? "Listing was rejected (max 10 active listings per account, and links/photos must come from this site)."
+          : msg
+      );
       setState("error");
     }
   };
@@ -454,7 +461,8 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
                 animate={{ opacity: 1 }}
                 className="mt-3 text-sm font-medium text-destructive"
               >
-                Something went wrong — try again in a moment.
+                Couldn&apos;t list it: {errorDetail || "unknown error"} — try
+                again in a moment.
               </motion.p>
             )}
           </AnimatePresence>
