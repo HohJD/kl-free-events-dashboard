@@ -102,16 +102,16 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.35, delay: Math.min((index % 6) * 0.04, 0.2) }}
-      className="h-full"
+      className="h-full min-w-0"
     >
-      <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-brutal transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg">
-        <div className="relative h-52 w-full overflow-hidden bg-muted">
+      <div className="listing-card group flex-col overflow-hidden">
+        <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-muted">
           {images.length > 0 ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={images[activeImage]}
               alt={item.name}
-              className="h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
             />
           ) : (
@@ -132,36 +132,42 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
           </span>
 
           {images.length > 1 ? (
-            <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5">
+            <div className="absolute inset-x-2 bottom-1 flex flex-wrap justify-center">
               {images.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setActiveImage(i)}
                   aria-label={`Photo ${i + 1}`}
-                  className={cn(
-                    "size-2.5 rounded-full border border-border transition-colors",
-                    i === activeImage ? "bg-accent" : "bg-white/80"
-                  )}
-                />
+                  className="flex size-11 shrink-0 items-center justify-center rounded-full"
+                >
+                  <span
+                    className={cn(
+                      "size-2.5 rounded-full border border-border transition-colors",
+                      i === activeImage ? "bg-accent" : "bg-white/80"
+                    )}
+                  />
+                </button>
               ))}
             </div>
           ) : null}
         </div>
 
-        <div className="flex flex-1 flex-col p-4">
-          <p className="font-mono text-xs text-muted-foreground">
-            {item.category}
-            <span className="mx-1.5 opacity-40">/</span>
-            {item.condition}
+        <div className="listing-body gap-3">
+          <p className="flex flex-wrap items-start gap-x-2 gap-y-1 font-mono text-xs leading-5 text-muted-foreground sm:min-h-11">
+            <span className="min-w-0 break-words">{item.category}</span>
+            <span className="min-w-0 break-words">
+              <span className="mr-2 opacity-40">/</span>
+              {item.condition}
+            </span>
             {item.added ? (
-              <>
-                <span className="mx-1.5 opacity-40">/</span>
-                <Clock className="mb-0.5 inline size-3" /> {daysLeft(item.added)}
-              </>
+              <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                <span className="mr-1 opacity-40">/</span>
+                <Clock className="size-3 shrink-0" /> {daysLeft(item.added)}
+              </span>
             ) : null}
           </p>
 
-          <h3 className="mt-1.5 line-clamp-2 font-display text-base font-bold leading-snug md:text-lg">
+          <h3 className="listing-title">
             {item.name}
           </h3>
 
@@ -171,45 +177,45 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
                 href={`https://www.google.com/maps/search/?api=1&query=${item.pickupLat},${item.pickupLon}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-1 flex items-center gap-1 text-xs text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+                className="flex min-w-0 items-start gap-1.5 text-xs leading-5 text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
               >
-                <MapPin className="size-3.5 shrink-0" />
-                <span className="line-clamp-1">Pickup: {item.pickup}</span>
+                <MapPin className="mt-0.5 size-3.5 shrink-0" />
+                <span className="min-w-0 break-words">Pickup: {item.pickup}</span>
               </a>
             ) : (
-              <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-                <MapPin className="size-3.5 shrink-0" />
-                <span className="line-clamp-1">Pickup: {item.pickup}</span>
+              <p className="flex min-w-0 items-start gap-1.5 text-xs leading-5 text-muted-foreground">
+                <MapPin className="mt-0.5 size-3.5 shrink-0" />
+                <span className="min-w-0 break-words">Pickup: {item.pickup}</span>
               </p>
             )
           ) : null}
 
           {item.description ? (
-            <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+            <p className="line-clamp-3 break-words text-sm leading-relaxed text-muted-foreground">
               {item.description}
             </p>
           ) : null}
 
           {isOwner ? (
-            <div className="mt-3 flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <button
                 onClick={markClaimed}
                 disabled={busy}
-                className="inline-flex items-center gap-1 rounded-full border border-border bg-[#86efac] px-2.5 py-1 font-mono text-[11px] font-bold text-black shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-50"
+                className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-border bg-[#86efac] px-2.5 py-1 font-mono text-[11px] font-bold text-black shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-50"
               >
                 <CheckCircle2 className="size-3.5" /> Mark claimed
               </button>
               <button
                 onClick={remove}
                 disabled={busy}
-                className="inline-flex items-center gap-1 rounded-full border border-border bg-card px-2.5 py-1 font-mono text-[11px] font-bold text-destructive shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-50"
+                className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-border bg-card px-2.5 py-1 font-mono text-[11px] font-bold text-destructive shadow-brutal-sm transition-all hover:-translate-y-px disabled:opacity-50"
               >
                 <Trash2 className="size-3.5" /> Delete
               </button>
             </div>
           ) : null}
 
-          <div className="mt-auto pt-4">
+          <div className="listing-actions">
             {/^https:\/\/wa\.me\/[A-Za-z0-9._]{3,30}$/.test(item.contact) ? (
               <a
                 href={`${item.contact}?text=${encodeURIComponent(
@@ -217,12 +223,12 @@ function ItemCard({ item, index, isOwner, onChanged }: ItemCardProps) {
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full border border-border bg-[#25D366] px-3.5 py-1.5 text-xs font-bold text-black shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+                className="inline-flex min-h-11 max-w-full items-center justify-center gap-1.5 rounded-full border border-border bg-[#25D366] px-3.5 py-1.5 text-xs font-bold text-black shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
               >
                 <MessageCircle className="size-3.5" /> Claim on WhatsApp
               </a>
             ) : (
-              <span className="font-mono text-xs text-muted-foreground">
+              <span className="flex min-h-11 items-center font-mono text-xs leading-5 text-muted-foreground">
                 First come, first served — no contact given
               </span>
             )}
@@ -256,22 +262,22 @@ export function CollectSection({ items: initialItems }: { items: FreeItem[] }) {
 
   return (
     <div>
-      <section className="border-b border-border/50 px-4 pb-8 pt-12 md:pt-16">
-        <div className="container mx-auto max-w-6xl">
+      <section className="pb-8 pt-8 sm:py-12">
+        <div className="page-shell">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <p className="font-mono text-xs text-muted-foreground">
+            <p className="max-w-xl font-mono text-xs leading-5 text-muted-foreground">
               {items.length} item{items.length === 1 ? "" : "s"} up for grabs ·
               all free · listings vanish after 7 days
             </p>
-            <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl">
+            <h1 className="section-heading mt-4 max-w-3xl">
               Free things to{" "}
               <span className="marker-highlight whitespace-nowrap">collect</span>
             </h1>
-            <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
               Good stuff looking for a new home. Grab it before someone else
               does.
             </p>
@@ -279,7 +285,7 @@ export function CollectSection({ items: initialItems }: { items: FreeItem[] }) {
         </div>
       </section>
 
-      <div className="container mx-auto max-w-6xl px-4 py-8 pb-16">
+      <div className="page-shell pb-16">
         <UploadItem onListed={(item) => setItems((prev) => [item, ...prev])} />
         {items.length === 0 && !loaded ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -291,7 +297,7 @@ export function CollectSection({ items: initialItems }: { items: FreeItem[] }) {
             ))}
           </div>
         ) : items.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-input bg-muted/30 px-6 py-20 text-center">
+          <div className="flex flex-col items-center justify-center rounded-2xl border border-dashed border-input bg-muted/30 px-5 py-12 text-center sm:px-6 sm:py-16">
             <div className="flex size-14 items-center justify-center rounded-full bg-accent">
               <Package className="size-7 text-accent-foreground" />
             </div>

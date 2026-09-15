@@ -14,6 +14,8 @@ import { motion } from "framer-motion";
 import { Event } from "@/lib/events";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { cn } from "@/lib/utils";
+import { eventRegion, REGIONS } from "@/lib/regions";
+import { malaysiaDay } from "@/lib/filter-events";
 
 const SOURCE_COLORS: Record<string, string> = {
   meetup: "bg-[#ff9d9d]",
@@ -31,11 +33,7 @@ const FALLBACK_IMAGE = `data:image/svg+xml;utf8,${encodeURIComponent(
 
 function dayLabel(iso: string): string | null {
   if (!iso) return null;
-  const [y, m, d] = iso.split("-").map(Number);
-  const date = new Date(y, (m || 1) - 1, d || 1);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  const diff = Math.round((date.getTime() - today.getTime()) / 86400000);
+  const diff = Math.round((Date.parse(`${iso}T00:00:00Z`) - Date.parse(`${malaysiaDay()}T00:00:00Z`)) / 86400000);
   if (diff === 0) return "Today";
   if (diff === 1) return "Tomorrow";
   return null;
@@ -49,6 +47,7 @@ function formatDate(iso: string) {
     weekday: "short",
     day: "numeric",
     month: "short",
+    timeZone: "Asia/Kuala_Lumpur",
   });
 }
 
@@ -67,12 +66,13 @@ function truncate(text: string, len: number) {
 }
 
 function mapsUrl(event: Event) {
+  if (eventRegion(event) === 'online' || eventRegion(event) === 'unknown') return null;
   if (event.lat !== null && event.lon !== null) {
     return `https://www.google.com/maps/search/?api=1&query=${event.lat},${event.lon}`;
   }
   if (event.venue) {
     return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      `${event.venue} Kuala Lumpur`
+      `${event.venue}, ${REGIONS[eventRegion(event)]}, Malaysia`
     )}`;
   }
   return null;
@@ -114,11 +114,11 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
       transition={{ duration: 0.35, delay: Math.min((index % 6) * 0.04, 0.2) }}
-      className="h-full"
+      className="h-full min-w-0"
     >
-      <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-brutal transition-all duration-200 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-brutal-lg">
+      <article className="listing-card group">
         {/* Image */}
-        <div className="relative h-44 w-full overflow-hidden">
+        <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-muted">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={event.image}
@@ -134,8 +134,9 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
           <button
             onClick={() => onToggleSave(event.link)}
             aria-label={saved ? "Remove from saved" : "Save event"}
+            aria-pressed={saved}
             className={cn(
-              "absolute left-3 top-3 flex size-8 items-center justify-center rounded-full shadow-sm transition-all active:scale-90",
+              "absolute left-3 top-3 flex size-11 items-center justify-center rounded-full shadow-sm transition-transform active:scale-95",
               saved
                 ? "bg-foreground text-background"
                 : "bg-white/90 text-black hover:bg-white"
@@ -168,37 +169,40 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
         </div>
 
         {/* Body */}
-        <div className="flex flex-1 flex-col p-4">
-          <p className="font-mono text-xs text-muted-foreground">
+        <div className="listing-body">
+          <p className="min-h-10 break-words text-xs leading-5 text-muted-foreground sm:min-h-10">
             {dateLabel}
             {timeLabel ? ` · ${timeLabel}` : ""}
             <span className="mx-1.5 opacity-40">/</span>
             {event.category}
           </p>
 
-          <h3 className="mt-1.5 line-clamp-2 font-display text-base font-bold leading-snug md:text-lg">
+          {event.stale && (
+            <p className="mt-2 text-xs font-medium text-muted-foreground">Source unavailable during the latest check — confirm details before going.</p>
+          )}
+          <h3 className="listing-title mt-1">
             {event.name}
           </h3>
 
           {event.venue ? (
-            <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-              <MapPin className="size-3.5 shrink-0" />
-              <span className="line-clamp-1">{event.venue}</span>
+            <p className="mt-2 flex min-h-10 items-start gap-1.5 text-xs leading-5 text-muted-foreground">
+              <MapPin className="mt-0.5 size-3.5 shrink-0" />
+              <span className="line-clamp-2 break-words">{event.venue} · {REGIONS[eventRegion(event)]}</span>
             </p>
           ) : null}
 
           {description ? (
-            <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+            <p className="mb-4 mt-2 line-clamp-2 break-words text-sm leading-relaxed text-muted-foreground">
               {description}
             </p>
           ) : null}
 
-          <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-4">
+          <div className="listing-actions">
             <a
               href={event.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 rounded-full border border-border bg-primary px-3.5 py-1.5 text-xs font-semibold text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-x-0.5 active:translate-y-0.5 active:shadow-none"
+              className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-border/70 bg-primary px-3 text-xs font-semibold text-primary-foreground shadow-brutal-sm transition-opacity hover:opacity-90"
             >
               View event <ArrowUpRight className="size-3.5" />
             </a>
@@ -210,7 +214,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                   rel="noopener noreferrer"
                   aria-label="Add to Google Calendar"
                   title="Add to calendar"
-                  className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  className="flex size-11 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
                   <CalendarPlus className="size-4" />
                 </a>
@@ -222,7 +226,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                   rel="noopener noreferrer"
                   aria-label="Get directions"
                   title="Directions"
-                  className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  className="flex size-11 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
                   <Navigation className="size-4" />
                 </a>
@@ -231,7 +235,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                 onClick={handleShare}
                 aria-label="Share event"
                 title="Share"
-                className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                className="flex size-11 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
               >
                 {shared ? (
                   <Check className="size-4 text-green-600" />
@@ -242,7 +246,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
             </div>
           </div>
         </div>
-      </div>
+      </article>
     </motion.div>
   );
 }

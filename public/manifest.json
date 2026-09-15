@@ -1,7 +1,7 @@
 {
-  "name": "Free Things — free things to do & collect",
-  "short_name": "Free Things",
-  "description": "Every free, public event and giveaway in one simple view.",
+  "name": "Free Events Malaysia — tech, startups & careers",
+  "short_name": "Free Events",
+  "description": "Free events across Malaysia for students, fresh graduates and the wider community.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f7f3e9",

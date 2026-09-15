@@ -23,9 +23,9 @@ export function MapSection({ events }: { events: Event[] }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5 }}
-      className="container mx-auto max-w-6xl px-4 pb-4"
+      className="page-shell pb-12 sm:pb-16"
     >
-      <div className="mb-3 flex items-center justify-between">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
           <span className="flex size-7 items-center justify-center rounded-lg border border-border bg-accent text-accent-foreground shadow-brutal-sm">
             <MapPin className="size-4" />

@@ -12,6 +12,11 @@ export interface RawEvent {
   image?: string;
   lat?: number | null;
   lon?: number | null;
+  state?: string;
+  checked_at?: string;
+  stale?: boolean;
+  quality_version?: number;
+  free_evidence?: string;
 }
 
 export interface EventData {
@@ -31,6 +36,7 @@ const CATEGORY_GRADIENTS: Record<string, { from: string; to: string }> = {
   Hackathon: { from: '#f43f5e', to: '#f97316' },
   Tech: { from: '#6366f1', to: '#a855f7' },
   Business: { from: '#0ea5e9', to: '#06b6d4' },
+  Careers: { from: '#15803d', to: '#65a30d' },
   'Expo & Fair': { from: '#f59e0b', to: '#f97316' },
   Learning: { from: '#3b82f6', to: '#6366f1' },
   Sports: { from: '#22c55e', to: '#14b8a6' },
@@ -175,11 +181,13 @@ function normalizeText(text: string): string {
     .toLowerCase();
 }
 
-function categorize(name: string, description: string, source: string): string {
+export function categorize(name: string, description: string, source: string): string {
   if (source === 'devpost' || source === 'devfolio') return 'Hackathon';
 
   const nameText = normalizeText(name);
   const descText = normalizeText(description).slice(0, 600);
+  if (/\b(hackathon|datathon|ideathon|hackfest|codefest)\b/.test(nameText)) return 'Hackathon';
+  if (/\b(careers?|resume|cv|internships?|graduate (programmes?|programs?|fair)|job fair|hiring|kerjaya|temuduga|fresh grad(?:uate)?s?)\b/.test(nameText)) return 'Careers';
 
   let best = 'Other';
   let bestScore = 0;
@@ -215,7 +223,7 @@ export function getEvents(): { events: Event[]; generatedAt: Date; count: number
   try {
     const raw = fs.readFileSync(filePath, 'utf8');
     const data: EventData = JSON.parse(raw);
-    const events = data.events.map((e) => {
+    const events = data.events.filter((e) => e.quality_version === 2 && !!e.free_evidence && !!safeUrl(e.link)).map((e) => {
       e.link = safeUrl(e.link);
       e.image = safeUrl(e.image);
       const category = categorize(e.name, e.description, e.source);
@@ -229,7 +237,7 @@ export function getEvents(): { events: Event[]; generatedAt: Date; count: number
       };
     });
     const sources = Array.from(new Set(events.map((e) => e.source)));
-    return { events, generatedAt: new Date(data.generated_at), count: data.count, sources };
+    return { events, generatedAt: new Date(data.generated_at), count: events.length, sources };
   } catch (err) {
     console.error('Error reading events.json:', err);
     return { events: [], generatedAt: new Date(), count: 0, sources: [] };

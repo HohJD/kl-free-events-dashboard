@@ -137,19 +137,19 @@ function AuthGate() {
   };
 
   return (
-    <div className="mt-3">
-      <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
-        <UserRound className="size-4" />
+    <div className="mt-4 min-w-0">
+      <p className="flex items-start gap-2 text-sm leading-relaxed text-muted-foreground">
+        <UserRound className="mt-0.5 size-4 shrink-0" />
         Quick account so you can manage your listings — no email verification
         needed.
       </p>
-      <div className="mt-2.5 flex flex-col gap-2 sm:flex-row">
+      <div className="mt-3 grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="you@email.com"
-          className="h-11 flex-1 rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
+          className="h-11 w-full min-w-0 rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
         />
         <input
           type="password"
@@ -157,18 +157,18 @@ function AuthGate() {
           onChange={(e) => setPassword(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && submit()}
           placeholder="Password (6+ chars)"
-          className="h-11 flex-1 rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
+          className="h-11 w-full min-w-0 rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
         />
         <button
           onClick={submit}
           disabled={!email.includes("@") || password.length < 6 || busy}
-          className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-border bg-primary px-4 font-mono text-xs font-bold uppercase text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-y-0.5 active:shadow-none disabled:opacity-40"
+          className="inline-flex h-11 min-w-0 items-center justify-center gap-2 rounded-xl sm:col-span-2 lg:col-span-1 border border-border bg-primary px-4 font-mono text-xs font-bold uppercase text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-y-0.5 active:shadow-none disabled:opacity-40"
         >
           {busy ? <Loader2 className="size-4 animate-spin" /> : "Sign in / up"}
         </button>
       </div>
       {error ? (
-        <p className="mt-2 text-sm font-medium text-destructive">{error}</p>
+        <p className="mt-3 break-words text-sm font-medium leading-relaxed text-destructive">{error}</p>
       ) : null}
     </div>
   );
@@ -276,16 +276,16 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
   };
 
   return (
-    <div className="mb-6">
+    <div className="mb-6 min-w-0 sm:mb-8">
       {!open ? (
         <button
           onClick={() => {
             setOpen(true);
             preloadClassifier();
           }}
-          className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border bg-card/60 px-4 py-5 font-semibold text-muted-foreground transition-all hover:-translate-y-0.5 hover:text-foreground hover:shadow-brutal"
+          className="flex min-h-11 w-full min-w-0 items-center justify-center gap-3 rounded-2xl border border-dashed border-border bg-card/60 px-4 py-5 text-left text-sm font-semibold leading-relaxed text-muted-foreground transition-colors hover:bg-card hover:text-foreground sm:text-base"
         >
-          <span className="flex size-8 items-center justify-center rounded-full border border-border bg-accent text-accent-foreground shadow-brutal-sm">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-border bg-accent text-accent-foreground shadow-brutal-sm">
             <Plus className="size-4" />
           </span>
           Give something away — snap a photo, one line, done
@@ -294,28 +294,28 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl border border-border bg-card p-4 shadow-brutal"
+          className="min-w-0 rounded-2xl border border-border bg-card p-4 shadow-brutal sm:p-5"
         >
-          <div className="flex items-center justify-between">
-            <h3 className="font-display text-base font-bold">
+          <div className="flex min-w-0 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border/50 pb-3">
+            <h3 className="min-w-0 font-display text-lg font-bold leading-6">
               Give something away
             </h3>
-            <div className="flex items-center gap-2">
+            <div className="ml-auto flex min-w-0 max-w-full items-center gap-2">
               {user ? (
                 <button
                   onClick={() => signOut()}
                   title="Sign out"
-                  className="flex items-center gap-1 rounded-full px-2 py-1 font-mono text-[11px] text-muted-foreground hover:bg-muted hover:text-foreground"
+                  className="flex h-11 min-w-0 items-center gap-2 rounded-full px-3 font-mono text-xs text-muted-foreground hover:bg-muted hover:text-foreground"
                 >
-                  <UserRound className="size-3.5" />
-                  {user.email?.split("@")[0]}
-                  <LogOut className="size-3" />
+                  <UserRound className="size-3.5 shrink-0" />
+                  <span className="truncate">{user.email?.split("@")[0]}</span>
+                  <LogOut className="size-3.5 shrink-0" />
                 </button>
               ) : null}
               <button
                 onClick={reset}
                 aria-label="Close"
-                className="flex size-7 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+                className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
               >
                 <X className="size-4" />
               </button>
@@ -325,7 +325,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
           {ready && !user ? (
             <AuthGate />
           ) : (
-          <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-4 flex min-w-0 flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
             {/* Photo picker */}
             <input
               ref={fileRef}
@@ -338,7 +338,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
             <button
               onClick={() => fileRef.current?.click()}
               className={cn(
-                "relative flex h-36 w-full shrink-0 items-center justify-center overflow-hidden rounded-xl border-2 border-dashed border-border transition-colors hover:border-ring sm:w-44",
+                "relative flex aspect-[16/10] w-full min-w-0 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-dashed border-border transition-colors hover:border-ring sm:w-44",
                 preview ? "border-solid" : "bg-muted/40"
               )}
             >
@@ -347,7 +347,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
                 <img
                   src={preview}
                   alt="Item preview"
-                  className="h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               ) : (
                 <span className="flex flex-col items-center gap-1.5 text-xs font-medium text-muted-foreground">
@@ -358,13 +358,13 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
             </button>
 
             {/* One-liner + submit */}
-            <div className="flex flex-1 flex-col gap-2.5">
+            <div className="flex w-full min-w-0 flex-1 flex-col gap-3">
               <input
                 value={oneLiner}
                 onChange={(e) => setOneLiner(e.target.value.slice(0, 80))}
                 onKeyDown={(e) => e.key === "Enter" && submit()}
                 placeholder='One line, e.g. "IKEA lamp, works great — pickup Bangsar, DM @jd"'
-                className="h-11 w-full rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
+                className="h-11 w-full min-w-0 rounded-xl border border-input bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm"
               />
               <input
                 type="text"
@@ -373,7 +373,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
                 onChange={(e) => setWhatsapp(e.target.value.slice(0, 30))}
                 placeholder="Your WhatsApp number or username — required"
                 className={cn(
-                  "h-11 w-full rounded-xl border bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm",
+                  "h-11 w-full min-w-0 rounded-xl border bg-background px-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm",
                   whatsapp && !contactLink
                     ? "border-destructive"
                     : "border-input"
@@ -381,7 +381,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
               />
               <p
                 className={cn(
-                  "text-xs",
+                  "break-words text-xs leading-5",
                   whatsapp && !contactLink
                     ? "font-medium text-destructive"
                     : "text-muted-foreground"
@@ -394,31 +394,31 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
 
               {/* Auto-detected chips: category + pickup area */}
               {photo ? (
-                <div className="flex flex-wrap items-center gap-2">
+                <div className="flex min-w-0 flex-wrap items-center gap-2">
                   <button
                     onClick={cycleCategory}
                     title="Tap to change category"
-                    className="inline-flex w-fit items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold shadow-brutal-sm transition-all hover:-translate-y-px"
+                    className="inline-flex min-h-11 max-w-full flex-wrap items-center gap-x-1.5 gap-y-0.5 rounded-2xl border border-border bg-card px-3 py-2 text-left font-mono text-xs font-semibold leading-5 shadow-brutal-sm transition-colors hover:bg-muted"
                   >
-                    <Sparkles className="size-3.5 text-rose-500" />
-                    {category ?? (detecting ? "Detecting category…" : "Other")}
+                    <Sparkles className="size-3.5 shrink-0 text-rose-500" />
+                    <span className="min-w-0 break-words">{category ?? (detecting ? "Detecting category…" : "Other")}</span>
                     <span className="text-muted-foreground">· tap to change</span>
                   </button>
 
                   {locating ? (
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold opacity-70">
-                      <MapPin className="size-3.5 text-sky-500" />
+                    <span className="inline-flex min-h-11 max-w-full items-center gap-1.5 rounded-2xl border border-border bg-card px-3 py-2 font-mono text-xs font-semibold leading-5 opacity-70">
+                      <MapPin className="size-3.5 shrink-0 text-sky-500" />
                       Detecting area…
                     </span>
                   ) : location ? (
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-semibold shadow-brutal-sm">
-                      <MapPin className="size-3.5 text-sky-500" />
-                      {location.area}
+                    <span className="inline-flex min-h-11 min-w-0 max-w-full items-center gap-1.5 rounded-2xl border border-border bg-card pl-3 pr-1 font-mono text-xs font-semibold leading-5 shadow-brutal-sm">
+                      <MapPin className="size-3.5 shrink-0 text-sky-500" />
+                      <span className="min-w-0 break-words py-2">{location.area}</span>
                       <button
                         onClick={() => setLocation(null)}
                         aria-label="Remove location"
                         title="Remove location"
-                        className="text-muted-foreground hover:text-foreground"
+                        className="flex size-11 shrink-0 items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
                       >
                         <X className="size-3" />
                       </button>
@@ -430,7 +430,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
                 onClick={submit}
                 disabled={!canSubmit}
                 title={!contactLink ? "Add your WhatsApp so people can claim" : undefined}
-                className="mt-auto inline-flex h-10 w-full items-center justify-center gap-2 rounded-xl border border-border bg-primary font-mono text-xs font-bold uppercase text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-y-0.5 active:shadow-none disabled:opacity-40 sm:w-40"
+                className="mt-1 inline-flex h-11 w-full min-w-0 shrink-0 items-center justify-center gap-2 rounded-xl border border-border bg-primary font-mono text-xs font-bold uppercase text-primary-foreground shadow-brutal-sm transition-all hover:-translate-y-px active:translate-y-0.5 active:shadow-none disabled:opacity-40 sm:w-40"
               >
                 {state === "busy" ? (
                   <>
@@ -459,7 +459,7 @@ export function UploadItem({ onListed }: { onListed: (item: FreeItem) => void })
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="mt-3 text-sm font-medium text-destructive"
+                className="mt-4 break-words text-sm font-medium leading-relaxed text-destructive"
               >
                 Couldn&apos;t list it: {errorDetail || "unknown error"} — try
                 again in a moment.

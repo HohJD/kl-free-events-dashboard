@@ -1,0 +1,20 @@
+# Development checks
+
+## Current product scope (September 15)
+
+- Events only. Do not reintroduce Collect, item uploads, auth, location capture or product-classification models into the active app. Existing modules/records are retained, not deleted. Legacy `#collect` URLs must show events.
+- Default focus is Tech, Business, Careers and Hackathon, with All events preserving other community categories. Eligibility must be confirmed on the source, not inferred from the audience focus.
+- Publish only quality-version-2 event records with explicit free-admission evidence. The scraper now searches all 13 states and 3 federal territories with bounded requests. State coverage is a search target, not a guarantee of complete listings.
+- The Hermes retired giveaway cleanup is disabled unless explicitly opted in with `ENABLE_RETIRED_GIVEAWAY_CLEANUP=1`.
+- Browser layout checks are now events-only, focused/all modes across both themes and five widths, and assert no Supabase/Hugging Face calls. They perform no database writes.
+- Scraper regression command now includes `test_event_quality` as well as `test_kl_events_scraper`.
+
+- Run `npm run lint`, `npx tsc --noEmit`, `npx tsx scripts/test-filter-events.ts`, and `npm run build` for changes to the dashboard. `tsx` is pinned as a dev dependency.
+- Static export uses `dist/`. Do not run a development server and production build concurrently against that directory.
+- UI browser checks: build, serve `dist/` on localhost:3100, then run `node scripts/test-layout.mjs` (uses installed Google Chrome through pinned Playwright). It tests 320/375/390/768/1440px in light/dark, mocks Supabase/image responses with synthetic fixtures, checks overflow/alignment/action rows and navigation, and writes screenshots to the OS temp directory. Override `TEST_URL` or `SCREENSHOT_DIR` as needed. It performs no real uploads or database writes.
+- Layout conventions: `.page-shell` is the shared horizontal gutter/container; `.section-heading`, `.listing-card`, `.listing-body`, `.listing-title`, and `.listing-actions` live in `app/globals.css`. Keep the soft poster visual style, and 44px primary touch controls.
+- The scraper is maintained separately at `/Users/hohjiada/kl-free-events-scraper`. Its offline regression suite is `PYTHONDONTWRITEBYTECODE=1 python3 -m unittest -v test_kl_events_scraper`.
+- Event state slugs are serialized in `events.json`. Missing state is `unknown`, never assume Kuala Lumpur. The navbar state selector affects events only, not user-uploaded items.
+- Date filtering uses Asia/Kuala_Lumpur irrespective of visitor/server timezone. Undated entries must not match Today or Upcoming. Stale carried-forward source results expire after 48 hours.
+- Hermes uses `~/.hermes/scripts/kl_events_update.sh` at 10:00–14:00 MYT, once per hour until success. `--force` explicitly bypasses today's success marker. Preserve live data on failed scrapes. Latest operational logs and source health are in the scraper directory, not the public site.
+- Do not equate a source's successful HTTP response or a free search-page label with independently verified free public admission.

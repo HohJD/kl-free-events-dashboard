@@ -21,8 +21,8 @@
     --accent-foreground: 30 8% 10%;
     --destructive: 4 84% 55%;
     --destructive-foreground: 42 38% 97%;
-    --border: 30 8% 28%;
-    --input: 30 8% 28%;
+    --border: 30 8% 64%;
+    --input: 30 8% 60%;
     --ring: 30 8% 10%;
     --shadow: 30 8% 15%;
     --radius: 1rem;
@@ -45,8 +45,8 @@
     --accent-foreground: 30 8% 10%;
     --destructive: 4 84% 55%;
     --destructive-foreground: 42 38% 97%;
-    --border: 42 12% 72%;
-    --input: 42 12% 72%;
+    --border: 42 8% 36%;
+    --input: 42 8% 44%;
     --ring: 42 25% 92%;
     --shadow: 42 15% 65%;
   }
@@ -57,6 +57,56 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-heading {
+    @apply font-display text-4xl font-extrabold leading-[1.15] tracking-tight sm:text-5xl md:text-6xl;
+    text-wrap: balance;
+  }
+
+  .listing-card {
+    @apply flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-brutal;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+  }
+
+  .listing-body {
+    @apply flex min-w-0 flex-1 flex-col p-5;
+  }
+
+  .listing-title {
+    @apply line-clamp-2 break-words font-display text-lg font-bold leading-6 sm:min-h-12;
+    overflow-wrap: anywhere;
+  }
+
+  .listing-actions {
+    @apply mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-border/50 pt-4;
+  }
+}
+
+:where(button, a, input, select):focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .listing-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 hsl(var(--shadow) / 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -87,7 +137,7 @@ a,
   border-radius: 0.18em;
   display: inline-block;
   transform: rotate(-1deg);
-  box-shadow: 0.1em 0.1em 0 0 hsl(var(--shadow) / 0.85);
+  box-shadow: 0.07em 0.07em 0 0 hsl(var(--shadow) / 0.35);
 }
 
 /* Map marker pulse */

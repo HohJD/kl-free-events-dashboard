@@ -23,27 +23,27 @@ const mono = IBM_Plex_Mono({
 
 const SITE_URL = "https://kl-free-events-dashboard.vercel.app";
 const DESCRIPTION =
-  "Every free, public event and giveaway in one simple view. Meetups, gigs, workshops, hackathons, free stuff — updated daily, always free.";
+  "Find free tech meetups, hackathons, startup events and career opportunities across Malaysia. Built for students and fresh graduates, with other community events too.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Free Things — free things to do & collect",
+  title: "Free Events Malaysia — tech, startups & careers",
   description: DESCRIPTION,
   manifest: "/manifest.json",
   openGraph: {
-    title: "Free Things — free things to do & collect",
+    title: "Free Events Malaysia — tech, startups & careers",
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "Free Things",
-    images: [{ url: "/og.png", width: 1200, height: 630 }],
+    siteName: "Free Events Malaysia",
+    images: [{ url: "/icon.png", width: 512, height: 512 }],
     locale: "en_MY",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Things — free things to do & collect",
+    title: "Free Events Malaysia — tech, startups & careers",
     description: DESCRIPTION,
-    images: ["/og.png"],
+    images: ["/icon.png"],
   },
 };
 

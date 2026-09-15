@@ -1,4 +1,5 @@
-import { Event } from "./events";
+import type { Event } from "./events";
+import { eventRegion, REGIONS } from "./regions";
 
 function pad(n: number) {
   return n.toString().padStart(2, "0");
@@ -31,7 +32,7 @@ export function googleCalendarUrl(event: Event): string | null {
     text: event.name,
     dates,
     details: `${event.description?.slice(0, 500) || ""}\n\n${event.link}`,
-    location: event.venue ? `${event.venue}, Kuala Lumpur` : "Kuala Lumpur",
+    location: eventRegion(event) === 'online' ? 'Online' : [event.venue, eventRegion(event) !== 'unknown' ? REGIONS[eventRegion(event)] : ''].filter(Boolean).join(', '),
     ctz: "Asia/Kuala_Lumpur",
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;

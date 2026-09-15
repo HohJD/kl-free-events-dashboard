@@ -48,8 +48,9 @@ function Pill({
   return (
     <button
       onClick={onClick}
+      aria-pressed={active}
       className={cn(
-        "shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-all",
+        "inline-flex min-h-11 shrink-0 items-center rounded-full border px-3.5 py-2 text-sm font-medium transition-colors",
         active
           ? "border-border bg-accent text-accent-foreground shadow-brutal-sm"
           : "border-transparent text-muted-foreground hover:border-border hover:text-foreground"
@@ -106,19 +107,20 @@ export function Filters({
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: 0.1 }}
-      className="z-30 border-y border-border bg-background/90 backdrop-blur-sm md:sticky md:top-16"
+      className="z-30 border-y border-border/40 bg-background/95 backdrop-blur-sm md:sticky md:top-16"
     >
-      <div className="container mx-auto max-w-6xl space-y-2 px-4 py-3 md:py-4">
+      <div className="page-shell space-y-1 py-4 sm:py-5">
         {/* Search + saved + view switcher */}
-        <div className="flex items-center gap-2">
-          <div className="relative flex-1">
+        <div className="flex flex-wrap items-center gap-2.5 pb-2">
+          <div className="relative min-w-0 basis-full sm:flex-1 sm:basis-0">
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <input
               ref={searchRef}
+              aria-label="Search events"
               placeholder="Search events, venues…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="h-10 w-full rounded-xl border border-input bg-card pl-9 pr-10 text-base outline-none transition-colors placeholder:text-muted-foreground focus:border-ring md:text-sm"
+              className="h-11 w-full min-w-0 rounded-xl border border-input/70 bg-card pl-10 pr-10 text-base transition-colors placeholder:text-muted-foreground focus:border-ring md:text-sm"
             />
             <kbd className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground sm:block">
               /
@@ -127,23 +129,25 @@ export function Filters({
           <button
             onClick={() => setShowSaved(!showSaved)}
             aria-label="Show saved events"
+            aria-pressed={showSaved}
             className={cn(
-              "flex h-10 shrink-0 items-center gap-1.5 rounded-xl px-3 text-sm font-medium transition-colors",
+              "ml-auto flex h-11 shrink-0 items-center gap-2 rounded-xl px-3 text-sm font-medium transition-colors sm:ml-0",
               showSaved
                 ? "bg-primary text-primary-foreground"
                 : "border border-input text-muted-foreground hover:text-foreground"
             )}
           >
             <Heart className={cn("size-4", showSaved && "fill-current")} />
-            <span className="hidden sm:inline">Saved</span>
+            <span>Saved</span>
             {savedCount > 0 ? (
               <span className="tabular-nums">{savedCount}</span>
             ) : null}
           </button>
-          <div className="flex h-10 shrink-0 items-center gap-0.5 rounded-xl border border-input p-1">
+          <div className="flex h-11 shrink-0 items-center rounded-xl border border-input/70 bg-card p-0.5">
             <button
               onClick={() => setView("list")}
               aria-label="List view"
+              aria-pressed={view === "list"}
               className={cn(
                 "flex h-full items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium transition-colors",
                 view === "list"
@@ -152,11 +156,12 @@ export function Filters({
               )}
             >
               <LayoutGrid className="size-4" />
-              <span className="hidden sm:inline">List</span>
+              <span>List</span>
             </button>
             <button
               onClick={() => setView("map")}
               aria-label="Map view"
+              aria-pressed={view === "map"}
               className={cn(
                 "flex h-full items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium transition-colors",
                 view === "map"
@@ -165,13 +170,13 @@ export function Filters({
               )}
             >
               <Map className="size-4" />
-              <span className="hidden sm:inline">Map</span>
+              <span>Map</span>
             </button>
           </div>
         </div>
 
         {/* Date tabs */}
-        <div className="no-scrollbar -mx-1 flex gap-1 overflow-x-auto px-1">
+        <div aria-label="Filter by date" className="no-scrollbar -mx-1 flex gap-1 overflow-x-auto px-1 py-1.5">
           {dateTabs.map((t) => (
             <Pill
               key={t.value}
@@ -184,7 +189,7 @@ export function Filters({
         </div>
 
         {/* Category + source tabs */}
-        <div className="no-scrollbar -mx-1 flex items-center gap-1 overflow-x-auto px-1">
+        <div aria-label="Filter by category or source" className="no-scrollbar -mx-1 flex items-center gap-1 overflow-x-auto px-1 py-1.5">
           <Pill active={category === "all"} onClick={() => setCategory("all")}>
             All
           </Pill>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, animate } from "framer-motion";
+import { motion, animate, useReducedMotion } from "framer-motion";
 
 export interface HeroStats {
   total: number;
@@ -12,16 +12,18 @@ export interface HeroStats {
 }
 
 function CountUp({ value }: { value: number }) {
-  const [display, setDisplay] = useState(0);
+  const [display, setDisplay] = useState(value);
+  const reduceMotion = useReducedMotion();
   useEffect(() => {
+    if (reduceMotion) return;
     const controls = animate(0, value, {
       duration: 1,
       ease: "easeOut",
       onUpdate: (v) => setDisplay(Math.round(v)),
     });
     return () => controls.stop();
-  }, [value]);
-  return <>{display}</>;
+  }, [value, reduceMotion]);
+  return <>{reduceMotion ? value : display}</>;
 }
 
 export function Hero({ stats }: { stats: HeroStats }) {
@@ -30,6 +32,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
     day: "numeric",
     hour: "2-digit",
     minute: "2-digit",
+    timeZone: "Asia/Kuala_Lumpur",
   });
 
   const chips = [
@@ -39,41 +42,41 @@ export function Hero({ stats }: { stats: HeroStats }) {
   ];
 
   return (
-    <section className="border-b border-border/50 px-4 pb-10 pt-12 md:pt-16">
-      <div className="container mx-auto max-w-6xl">
+    <section className="pb-8 pt-8 sm:py-12">
+      <div className="page-shell">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <p className="font-mono text-xs text-muted-foreground">
-            Updated {updated} · {stats.sources} sources · always free
+          <p className="font-mono text-xs leading-relaxed text-muted-foreground">
+            Malaysia-wide discovery · checked {updated} · {stats.sources} sources
           </p>
 
-          <h1 className="mt-4 max-w-3xl font-display text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-5xl md:text-6xl">
-            Free things to{" "}
-            <span className="marker-highlight whitespace-nowrap">do</span>
+          <h1 className="section-heading mt-4 max-w-3xl">
+            Your next{" "}
+            <span className="marker-highlight whitespace-nowrap">opportunity</span>
           </h1>
 
           <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
-            Every free, public event in one simple view.
+            Free tech meetups, startup communities, hackathons and career events across Malaysia — built for students and fresh graduates.
           </p>
 
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15 }}
-            className="mt-7 flex flex-wrap gap-3"
+            className="mt-6 grid max-w-lg grid-cols-3 gap-3 sm:mt-8 sm:gap-4"
           >
             {chips.map((chip) => (
               <div
                 key={chip.label}
-                className={`flex items-baseline gap-2 rounded-xl border border-border px-4 py-2.5 shadow-brutal ${chip.bg} text-black`}
+                className={`flex min-w-0 flex-col gap-1 rounded-xl border border-border/60 px-3 py-3 shadow-brutal-sm sm:px-4 ${chip.bg} text-black`}
               >
-                <span className="font-display text-2xl font-bold tabular-nums md:text-3xl">
+                <span className="font-display text-2xl font-bold leading-none tabular-nums sm:text-3xl">
                   <CountUp value={chip.value} />
                 </span>
-                <span className="font-mono text-[11px] font-medium">
+                <span className="whitespace-nowrap text-xs font-medium">
                   {chip.label}
                 </span>
               </div>
