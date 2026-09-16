@@ -38,13 +38,16 @@ export function filterEvents(
       if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return dateRange === 'all';
       const timestamp = Date.parse(`${date}T00:00:00Z`);
       if (!Number.isFinite(timestamp) || new Date(timestamp).toISOString().slice(0, 10) !== date) return false;
+      const end = e.end_date || date;
+      const endStamp = Date.parse(`${end}T00:00:00Z`);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(end) || !Number.isFinite(endStamp) || new Date(endStamp).toISOString().slice(0, 10) !== end || end < date) return false;
       switch (dateRange) {
-        case "today": return date === today;
-        case "tomorrow": return date === tomorrow;
-        case "week": return date >= today && date < weekEnd;
-        case "month": return date >= today && date.slice(0, 7) === today.slice(0, 7);
-        case "upcoming": return date >= today;
-        case "past": return date < today;
+        case "today": return date <= today && end >= today;
+        case "tomorrow": return date <= tomorrow && end >= tomorrow;
+        case "week": return end >= today && date < weekEnd;
+        case "month": return end >= today && date.slice(0, 7) <= today.slice(0, 7);
+        case "upcoming": return end >= today;
+        case "past": return end < today;
         default: return true;
       }
     })

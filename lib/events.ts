@@ -17,6 +17,13 @@ export interface RawEvent {
   stale?: boolean;
   quality_version?: number;
   free_evidence?: string;
+  end_date?: string;
+  end_time?: string;
+  registration_status?: 'open' | 'closed' | 'not_open' | 'check_source';
+  eligibility?: string;
+  event_format?: string;
+  date_kind?: string;
+  also_listed_on?: { source: string; link: string }[];
 }
 
 export interface EventData {
@@ -183,6 +190,7 @@ function normalizeText(text: string): string {
 
 export function categorize(name: string, description: string, source: string): string {
   if (source === 'devpost' || source === 'devfolio') return 'Hackathon';
+  if (source === 'mlh') return 'Tech';
 
   const nameText = normalizeText(name);
   const descText = normalizeText(description).slice(0, 600);

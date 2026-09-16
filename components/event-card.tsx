@@ -25,6 +25,9 @@ const SOURCE_COLORS: Record<string, string> = {
   devpost: "bg-[#8ceedd]",
   devfolio: "bg-[#a5e8a2]",
   manual: "bg-[#ffd02f]",
+  'french-tech-my': "bg-[#cdb0ff]",
+  'gdg-malaysia': "bg-[#93d8ff]",
+  mlh: "bg-[#a5e8a2]",
 };
 
 const FALLBACK_IMAGE = `data:image/svg+xml;utf8,${encodeURIComponent(
@@ -92,7 +95,11 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
   const description = truncate(event.description, 120);
   const directions = mapsUrl(event);
   const calendarUrl = googleCalendarUrl(event);
-  const urgency = dayLabel(event.date);
+  const urgency = event.end_date && event.date < malaysiaDay() && event.end_date >= malaysiaDay() ? 'In progress' : dayLabel(event.date);
+  const registrationLabel =
+    event.registration_status === 'open' ? 'Registration open' :
+    event.registration_status === 'closed' ? 'Registration closed / full' :
+    event.registration_status === 'not_open' ? 'Registration not open yet' : null;
 
   const handleShare = async () => {
     try {
@@ -171,11 +178,16 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
         {/* Body */}
         <div className="listing-body">
           <p className="min-h-10 break-words text-xs leading-5 text-muted-foreground sm:min-h-10">
-            {dateLabel}
+            {dateLabel}{event.end_date && event.end_date !== event.date ? ` – ${formatDate(event.end_date)}` : ''}
             {timeLabel ? ` · ${timeLabel}` : ""}
             <span className="mx-1.5 opacity-40">/</span>
             {event.category}
           </p>
+          {registrationLabel ? (
+            <p className="-mt-1 mb-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
+              {registrationLabel}
+            </p>
+          ) : null}
 
           {event.stale && (
             <p className="mt-2 text-xs font-medium text-muted-foreground">Source unavailable during the latest check — confirm details before going.</p>
