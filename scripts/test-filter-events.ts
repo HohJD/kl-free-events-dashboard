@@ -5,7 +5,7 @@ import { googleCalendarUrl } from '../lib/calendar';
 import { categorize, type Event } from '../lib/events';
 import { focusEvents } from '../lib/event-discovery';
 import { filterResources, type Resource } from '../lib/resources';
-import { scalePosition, tripLabel, money, median, bookingOutlook, shortMoney, type FareRow } from '../lib/flights';
+import { addDays, bookingOutlook, daysBetween, median, money, nearbyCheaper, priceStep, stayLabel, toDays, type Calendar } from '../lib/flights';
 
 const now = new Date('2026-09-07T16:30:00Z');
 const event = (name: string, date: string, state?: string): Event => ({
@@ -58,16 +58,24 @@ assert.deepEqual(filterResources(resources, 'internship', true, '', '2026-09-08'
 assert.deepEqual(filterResources(resources, 'all', false, 'rolling', '2026-09-08').map(r => r.title), ['Rolling fund']);
 assert.equal(median([3, 1, 2]), 2);
 assert.equal(median([4, 1, 2, 3]), 2.5);
-assert.equal(shortMoney(1091), '1.1k');
-const fare = (advice: FareRow['advice']) => ({ advice } as FareRow);
-assert.equal(bookingOutlook([fare('Buy'), fare('Buy'), fare('Typical')]).advice, 'Buy');
-assert.equal(bookingOutlook([fare('Wait'), fare('Wait'), fare('Typical')]).advice, 'Wait');
-assert.equal(bookingOutlook([fare('Typical'), fare('Typical'), fare('Buy'), fare('Typical')]).advice, 'Typical');
-assert.equal(bookingOutlook([]).headline, 'No fares yet');
-assert.equal(scalePosition(2000, [2000, 3000, 4000]), 0);
-assert.equal(scalePosition(4000, [2000, 3000, 4000]), 1);
-assert.equal(scalePosition(3000, [3000]), 0);
-assert.equal(tripLabel('return-14'), 'Return · 2 weeks');
-assert.equal(money(2450.4), 'RM 2,450');
-assert.equal(money(null), '');
+assert.equal(addDays('2026-12-25', 14), '2027-01-08');
+assert.equal(daysBetween('2026-10-28', '2026-11-11'), 14);
+assert.equal(stayLabel(14), '2 weeks');
+assert.equal(stayLabel(10), '10 days');
+assert.equal(stayLabel(null), 'One-way');
+assert.equal(money(2230.4), 'RM 2,230');
+assert.equal(priceStep(2230, [2230, 3000, 4115]), 0);
+assert.equal(priceStep(4115, [2230, 3000, 4115]), 6);
+const cal: Calendar = { id: 'kul-lon|return-14', route: 'kul-lon', stay: 14, fresh: true, index: [],
+  days: [['2026-10-26', 2600, null, 2600, 1, 'T'], ['2026-10-27', 2400, null, 2400, 1, 'T'], ['2026-10-28', 2230, null, 2230, 1, 'B'], ['2026-10-29', 2500, null, 2500, 1, 'T'], ['2026-11-05', 2000, null, 2000, 1, 'B']] };
+const calDays = toDays(cal);
+assert.equal(calDays[2].returnDate, '2026-11-11');
+assert.equal(nearbyCheaper(calDays, '2026-10-26')?.date, '2026-10-28');
+assert.equal(nearbyCheaper(calDays, '2026-10-28'), null);
+assert.equal(bookingOutlook(calDays, []).advice, 'B');
+const rising: [string, number, number][] = Array.from({ length: 7 }, (_, i) => [`2026-09-${20 + i}`, 3000 + i * 40, 2200]);
+assert.equal(bookingOutlook(calDays, rising).headline, 'Fares are rising');
+const falling: [string, number, number][] = Array.from({ length: 7 }, (_, i) => [`2026-09-${20 + i}`, 3000 - i * 40, 2200]);
+assert.equal(bookingOutlook(calDays, falling).advice, 'W');
+assert.equal(bookingOutlook([], []).headline, 'No fares yet');
 console.log('Focus/category, state, calendar, stale expiry and Malaysia-date regression tests passed.');

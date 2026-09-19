@@ -2,282 +2,331 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, Check, Clock, Minus, Plane, TrendingDown, TrendingUp } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock, Minus, Plane, PlaneLanding, PlaneTakeoff, TrendingDown } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
 import {
-  type Advice, type FareRow, type FlightData, bookingOutlook, dayLabel, duration, median, money, monthLabel,
-  scalePosition, selectRows, shortMoney, tripLabel,
+  ADVICE_TEXT, type AdviceCode, type Calendar, type Day, type FlightData, type LegDetail, addDays, bookingOutlook, dayLabel, daysBetween,
+  duration, googleFlightsLink, median, money, monthLabel, nearbyCheaper, plain, priceStep, stayLabel, toDays,
 } from "@/lib/flights";
 
 const STEPS = 7;
-const stepOf = (price: number, prices: number[]) => Math.min(STEPS - 1, Math.floor(scalePosition(price, prices) * STEPS));
 
-function AdviceBadge({ advice, large = false }: { advice: Advice; large?: boolean }) {
-  const Icon = advice === "Buy" ? Check : advice === "Wait" ? Clock : Minus;
-  const label = advice === "Buy" ? "Good to book" : advice === "Wait" ? "Wait" : "Typical";
+function AdviceBadge({ advice, large = false }: { advice: AdviceCode; large?: boolean }) {
+  const Icon = advice === "B" ? Check : advice === "W" ? Clock : Minus;
   return (
-    <span className={cn("fx-badge", `fx-badge-${advice.toLowerCase()}`, large && "fx-badge-lg")}>
-      <Icon className={large ? "size-4" : "size-3.5"} strokeWidth={2.5} aria-hidden /> {label}
+    <span className={cn("fx-badge", `fx-badge-${advice}`, large && "fx-badge-lg")}>
+      <Icon className={large ? "size-4" : "size-3.5"} strokeWidth={2.5} aria-hidden /> {ADVICE_TEXT[advice]}
     </span>
   );
 }
 
-function useWidth<T extends HTMLElement>(): [React.RefObject<T>, number] {
-  const ref = useRef<T>(null);
-  const [width, setWidth] = useState(720);
-  useEffect(() => {
-    if (!ref.current) return;
-    const observer = new ResizeObserver(([entry]) => setWidth(Math.max(280, Math.round(entry.contentRect.width))));
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return [ref, width];
-}
-
-function niceTicks(min: number, max: number, count = 4): number[] {
-  const span = max - min || 1;
-  const raw = span / count;
-  const magnitude = 10 ** Math.floor(Math.log10(raw));
-  const step = [1, 2, 2.5, 5, 10].map((m) => m * magnitude).find((s) => s >= raw) ?? raw;
-  const ticks = [];
-  for (let value = Math.ceil(min / step) * step; value <= max; value += step) ticks.push(value);
-  return ticks;
-}
-
-/** Fare by departure date: one line, crosshair + tooltip, typical reference, cheapest labelled. */
-function FareChart({ rows, selected, onSelect }: { rows: FareRow[]; selected: string; onSelect: (date: string) => void }) {
-  const [wrap, width] = useWidth<HTMLDivElement>();
-  const [hover, setHover] = useState<number | null>(null);
-  const height = 260;
-  const pad = { top: 28, right: 16, bottom: 30, left: 56 };
-  const prices = rows.map((row) => row.price);
-  const low = Math.min(...prices);
-  const high = Math.max(...prices);
-  const ticks = niceTicks(low * 0.95, high * 1.02);
-  const yMin = Math.min(ticks[0] ?? low, low * 0.95);
-  const yMax = Math.max(ticks[ticks.length - 1] ?? high, high);
-  const t0 = Date.parse(rows[0]?.depart_date ?? "");
-  const t1 = Date.parse(rows[rows.length - 1]?.depart_date ?? "");
-  const x = (date: string) => pad.left + ((Date.parse(date) - t0) / (t1 - t0 || 1)) * (width - pad.left - pad.right);
-  const y = (price: number) => pad.top + (1 - (price - yMin) / (yMax - yMin || 1)) * (height - pad.top - pad.bottom);
-  const typical = median(prices);
-  const cheapest = rows.reduce((best, row) => (row.price < best.price ? row : best), rows[0]);
-  const months = Array.from(new Set(rows.map((row) => row.depart_date.slice(0, 7))));
-  const active = hover !== null ? rows[hover] : null;
-
-  const nearest = (clientX: number, element: SVGSVGElement) => {
-    const px = clientX - element.getBoundingClientRect().left;
-    let best = 0;
-    rows.forEach((row, i) => { if (Math.abs(x(row.depart_date) - px) < Math.abs(x(rows[best].depart_date) - px)) best = i; });
-    return best;
-  };
-
-  if (rows.length < 2) return <p className="py-10 text-center text-sm text-muted-foreground">More dates appear as daily checks come in.</p>;
-
+function Chip({ active, onClick, children, label }: { active: boolean; onClick: () => void; children: React.ReactNode; label?: string }) {
   return (
-    <div ref={wrap} className="relative">
-      <svg
-        width={width} height={height} role="img" tabIndex={0} className="block touch-pan-y outline-none focus-visible:ring-2 focus-visible:ring-ring"
-        aria-label={`Fares by departure date from ${money(low)} to ${money(high)}; typical ${money(typical)}. Use arrow keys to move between dates.`}
-        onPointerMove={(event) => setHover(nearest(event.clientX, event.currentTarget))}
-        onPointerLeave={() => setHover(null)}
-        onClick={(event) => onSelect(rows[nearest(event.clientX, event.currentTarget)].depart_date)}
-        onKeyDown={(event) => {
-          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-          event.preventDefault();
-          const current = hover ?? Math.max(0, rows.findIndex((row) => row.depart_date === selected));
-          const next = Math.min(rows.length - 1, Math.max(0, current + (event.key === "ArrowRight" ? 1 : -1)));
-          setHover(next);
-          onSelect(rows[next].depart_date);
-        }}
-        onBlur={() => setHover(null)}
-      >
-        {ticks.map((tick) => (
-          <g key={tick}>
-            <line x1={pad.left} x2={width - pad.right} y1={y(tick)} y2={y(tick)} className="fx-grid" />
-            <text x={pad.left - 8} y={y(tick)} dy="0.32em" textAnchor="end" className="fx-axis">{shortMoney(tick)}</text>
-          </g>
-        ))}
-        {months.map((month, i) => {
-          const first = rows.find((row) => row.depart_date.startsWith(month))!;
-          const mx = x(first.depart_date);
-          const previous = i ? x(rows.find((row) => row.depart_date.startsWith(months[i - 1]))!.depart_date) : -Infinity;
-          return mx < width - 40 && mx - previous >= 32 ? (
-            <text key={month} x={mx} y={height - 8} className="fx-axis">{monthLabel(month).split(" ")[0].slice(0, 3)}</text>
-          ) : null;
-        })}
-        <line x1={pad.left} x2={width - pad.right} y1={y(typical)} y2={y(typical)} className="fx-typical" />
-        <text x={width - pad.right} y={y(typical) - 6} textAnchor="end" className="fx-axis">typical {money(typical)}</text>
-        <polyline points={rows.map((row) => `${x(row.depart_date)},${y(row.price)}`).join(" ")} className="fx-line" />
-        {rows.map((row, i) => (
-          <circle key={row.depart_date} cx={x(row.depart_date)} cy={y(row.price)}
-            r={row.depart_date === selected ? 6 : hover === i ? 5 : 4}
-            className={cn("fx-dot", row.depart_date === selected && "fx-dot-on")} />
-        ))}
-        <g>
-          <text x={Math.min(Math.max(x(cheapest.depart_date), pad.left + 40), width - pad.right - 40)} y={y(cheapest.price) - 12} textAnchor="middle" className="fx-callout">
-            {money(cheapest.price)} · {dayLabel(cheapest.depart_date).replace(/^\w+ /, "")}
-          </text>
-        </g>
-        {active ? <line x1={x(active.depart_date)} x2={x(active.depart_date)} y1={pad.top - 8} y2={height - pad.bottom} className="fx-crosshair" /> : null}
-      </svg>
-      {active ? (
-        <div className="fx-tooltip" style={{ left: Math.min(Math.max(x(active.depart_date) - 90, 0), width - 180), top: 0 }} role="status">
-          <strong className="block text-base tabular-nums">{money(active.price)}</strong>
-          <span className="block">{dayLabel(active.depart_date, true)}</span>
-          <span className="block text-muted-foreground">{active.airline}{active.stops !== null ? ` · ${active.stops === 0 ? "direct" : `${active.stops} stop${active.stops > 1 ? "s" : ""}`}` : ""}</span>
-        </div>
-      ) : null}
-    </div>
+    <button type="button" onClick={onClick} aria-pressed={active} aria-label={label}
+      className={cn("fx-chip", active && "fx-chip-on")}>
+      {children}
+    </button>
   );
 }
 
-/** Month calendars; checked dates are shaded cheap (light) to pricey (dark). */
-function PriceCalendar({ rows, selected, onSelect }: { rows: FareRow[]; selected: string; onSelect: (date: string) => void }) {
-  const prices = rows.map((row) => row.price);
-  const byDate = new Map(rows.map((row) => [row.depart_date, row]));
-  const cheapest = Math.min(...prices);
-  const months = Array.from(new Set(rows.map((row) => row.depart_date.slice(0, 7))));
+/* ---------- Calendar ---------- */
+
+function MonthGrid({ month, today, byDate, prices, monthMin, selected, hovered, stay, onSelect, onHover }: {
+  month: string; today: string; byDate: Map<string, Day>; prices: number[]; monthMin: number | null; selected: string; hovered: string;
+  stay: number | null; onSelect: (date: string) => void; onHover: (date: string) => void;
+}) {
+  const [year, mon] = month.split("-").map(Number);
+  const count = new Date(Date.UTC(year, mon, 0)).getUTCDate();
+  const lead = (new Date(Date.UTC(year, mon - 1, 1)).getUTCDay() + 6) % 7;
+  // Leading blanks then day indexes; whole weeks already past are skipped.
+  const cells: (number | null)[] = [...Array.from({ length: lead }, () => null), ...Array.from({ length: count }, (_, i) => i)];
+  let pastWeeks = 0;
+  while (cells.slice(pastWeeks * 7, pastWeeks * 7 + 7).every((i) => i === null || `${month}-${String(i + 1).padStart(2, "0")}` < today)
+    && (pastWeeks + 1) * 7 < cells.length) pastWeeks += 1;
+  const anchor = hovered || selected;
+  const tripEnd = anchor && stay ? addDays(anchor, stay) : "";
   return (
-    <div>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {months.map((month) => {
-          const [year, mon] = month.split("-").map(Number);
-          const days = new Date(Date.UTC(year, mon, 0)).getUTCDate();
-          const lead = (new Date(Date.UTC(year, mon - 1, 1)).getUTCDay() + 6) % 7;
+    <section aria-label={monthLabel(month)} className="min-w-0">
+      <h3 className="mb-2 text-base font-bold">{monthLabel(month)}</h3>
+      <div className="grid grid-cols-7 gap-1" role="grid" onMouseLeave={() => onHover("")}>
+        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+          <span key={day} className="pb-1 text-center text-[11px] font-medium text-muted-foreground" aria-hidden>{day.slice(0, 2)}</span>
+        ))}
+        {cells.slice(pastWeeks * 7).map((i, slot) => {
+          if (i === null) return <span key={`lead-${slot}`} aria-hidden />;
+          const date = `${month}-${String(i + 1).padStart(2, "0")}`;
+          const day = byDate.get(date);
+          const inTrip = !!tripEnd && date > anchor && date <= tripEnd;
+          if (!day) {
+            return (
+              <span key={date} className={cn("fx-cell", date <= today ? "fx-cell-past" : "fx-cell-empty", inTrip && "fx-cell-trip", date === tripEnd && "fx-cell-return")} aria-hidden>
+                <span className="fx-cell-num">{i + 1}</span>
+              </span>
+            );
+          }
+          const lowest = day.price === monthMin;
           return (
-            <section key={month} aria-label={monthLabel(month)}>
-              <h4 className="mb-2 text-sm font-semibold">{monthLabel(month)}</h4>
-              <div className="grid grid-cols-7 gap-1 text-center" role="grid">
-                {["M", "T", "W", "T", "F", "S", "S"].map((day, i) => <span key={i} className="fx-axis pb-1" aria-hidden>{day}</span>)}
-                {Array.from({ length: lead }, (_, i) => <span key={`lead-${i}`} aria-hidden />)}
-                {Array.from({ length: days }, (_, i) => {
-                  const date = `${month}-${String(i + 1).padStart(2, "0")}`;
-                  const row = byDate.get(date);
-                  if (!row) return <span key={date} className="fx-day-empty" aria-hidden>{i + 1}</span>;
-                  const step = stepOf(row.price, prices);
-                  return (
-                    <button key={date} type="button" onClick={() => onSelect(date)} aria-pressed={selected === date}
-                      aria-label={`${dayLabel(date, true)}: ${money(row.price)}, ${row.advice === "Buy" ? "good to book" : row.advice.toLowerCase()}`}
-                      title={`${dayLabel(date)} · ${money(row.price)} · ${row.airline}`}
-                      className={cn("fx-day", `fx-seq-${step}`, selected === date && "fx-day-on")}>
-                      <span className="fx-day-num">{i + 1}</span>
-                      <span className="fx-day-price">{shortMoney(row.price)}</span>
-                      {row.price === cheapest ? <span className="fx-day-star" aria-hidden>★</span> : null}
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
+            <button key={date} type="button"
+              onClick={() => onSelect(date)} onMouseEnter={() => onHover(date)} onFocus={() => onHover(date)}
+              aria-pressed={selected === date}
+              aria-label={`${dayLabel(date, { year: true })}: ${money(day.price)}${stay ? ` return, back ${dayLabel(addDays(date, stay))}` : ""}${lowest ? ", lowest this month" : ""}`}
+              className={cn("fx-cell", `fx-seq-${priceStep(day.price, prices, STEPS)}`, selected === date && "fx-cell-on",
+                inTrip && "fx-cell-trip", date === tripEnd && "fx-cell-return")}>
+              <span className="fx-cell-num">{i + 1}</span>
+              <span className="fx-cell-price">{plain(day.price)}</span>
+              {lowest ? <span className="fx-cell-low">Lowest</span> : null}
+            </button>
           );
         })}
       </div>
-      <div className="mt-5 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
-        <span>Cheaper</span>
-        <span className="flex overflow-hidden rounded" aria-hidden>
-          {Array.from({ length: STEPS }, (_, i) => <span key={i} className={cn("h-3 w-6", `fx-seq-${i}`)} />)}
-        </span>
-        <span>Pricier</span>
-        <span className="ml-2">★ cheapest date · blank dates are not checked yet</span>
-      </div>
-    </div>
+    </section>
   );
 }
 
-function Detail({ row, typical }: { row: FareRow; typical: number }) {
-  const diff = row.price - typical;
-  return (
-    <div className="fx-card">
-      <div className="flex flex-wrap items-start justify-between gap-3">
-        <div>
-          <p className="text-sm text-muted-foreground">
-            {dayLabel(row.depart_date, true)}{row.return_date ? ` → ${dayLabel(row.return_date, true)}` : ""}
-          </p>
-          <p className="mt-1 font-display text-4xl font-bold tabular-nums">{money(row.price)}</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {Math.abs(diff) < 1 ? "Same as the typical fare" : `${money(Math.abs(diff))} ${diff < 0 ? "below" : "above"} typical`}
-          </p>
-        </div>
-        <AdviceBadge advice={row.advice} large />
-      </div>
-      <p className="mt-3 text-sm">{row.reason}.</p>
-      <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm sm:grid-cols-4">
-        <div><dt className="text-xs text-muted-foreground">Airline</dt><dd className="font-medium">{row.airline || "Various"}</dd></div>
-        <div><dt className="text-xs text-muted-foreground">Stops</dt><dd className="font-medium">{row.stops === 0 ? "Direct" : row.stops === null ? "n/a" : `${row.stops}${row.via ? ` via ${row.via}` : ""}`}</dd></div>
-        <div><dt className="text-xs text-muted-foreground">Travel time</dt><dd className="font-medium">{duration(row.duration_minutes) || "n/a"}</dd></div>
-        <div>
-          <dt className="text-xs text-muted-foreground">Last 7 days</dt>
-          <dd className="flex items-center gap-1 font-medium">
-            {row.change_7d === null ? "Tracking" : row.change_7d === 0 ? "No change" : (
-              <>{row.change_7d < 0 ? <TrendingDown className="size-4 text-[var(--fx-good)]" aria-hidden /> : <TrendingUp className="size-4 text-[var(--fx-critical)]" aria-hidden />}
-                {row.change_7d < 0 ? "Down" : "Up"} {money(Math.abs(row.change_7d))}</>
-            )}
-          </dd>
-        </div>
-      </dl>
-      <p className="mt-4 text-xs text-muted-foreground">
-        Checked {row.checks > 1 ? `${row.checks} times` : "once"}, lowest seen {money(row.lowest_seen)}{row.checked_on ? `, last on ${dayLabel(row.checked_on)}` : ""}.
-        {row.options ? ` Cheapest of ${row.options} itineraries.` : ""}
+/* ---------- Trend ---------- */
+
+function TrendChart({ index }: { index: [string, number, number][] }) {
+  const wrap = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(640);
+  const [hover, setHover] = useState<number | null>(null);
+  useEffect(() => {
+    if (!wrap.current) return;
+    const observer = new ResizeObserver(([entry]) => setWidth(Math.max(260, Math.round(entry.contentRect.width))));
+    observer.observe(wrap.current);
+    return () => observer.disconnect();
+  }, []);
+  if (index.length < 2) {
+    return (
+      <p className="text-sm text-muted-foreground" ref={wrap}>
+        Tracking started {dayLabel(index[0]?.[0] ?? "", { year: true })}. After a few daily checks this shows whether fares are rising or falling, which is the clearest sign of when to buy.
       </p>
-      {row.link ? (
-        <a href={row.link} target="_blank" rel="noopener noreferrer"
-          className="mt-4 inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-border/70 bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-brutal-sm hover:opacity-90">
-          Check live price on Google Flights <ArrowUpRight className="size-4" />
-        </a>
+    );
+  }
+  const height = 180;
+  const pad = { top: 16, right: 12, bottom: 26, left: 52 };
+  const values = index.flatMap(([, typical, low]) => [typical, low]);
+  const min = Math.min(...values) * 0.97;
+  const max = Math.max(...values) * 1.02;
+  const x = (i: number) => pad.left + (i / (index.length - 1)) * (width - pad.left - pad.right);
+  const y = (value: number) => pad.top + (1 - (value - min) / (max - min || 1)) * (height - pad.top - pad.bottom);
+  const line = (column: 1 | 2) => index.map((point, i) => `${x(i)},${y(point[column])}`).join(" ");
+  const active = hover !== null ? index[hover] : null;
+  return (
+    <div ref={wrap} className="relative">
+      <svg width={width} height={height} role="img" className="block"
+        aria-label={`Typical fare moved from ${money(index[0][1])} to ${money(index[index.length - 1][1])} since ${dayLabel(index[0][0])}.`}
+        onPointerMove={(event) => {
+          const px = event.clientX - event.currentTarget.getBoundingClientRect().left;
+          setHover(Math.max(0, Math.min(index.length - 1, Math.round(((px - pad.left) / (width - pad.left - pad.right)) * (index.length - 1)))));
+        }}
+        onPointerLeave={() => setHover(null)}>
+        {[min, (min + max) / 2, max].map((tick) => (
+          <g key={tick}>
+            <line x1={pad.left} x2={width - pad.right} y1={y(tick)} y2={y(tick)} className="fx-grid" />
+            <text x={pad.left - 8} y={y(tick)} dy="0.32em" textAnchor="end" className="fx-axis">{plain(tick)}</text>
+          </g>
+        ))}
+        <text x={pad.left} y={height - 6} className="fx-axis">{dayLabel(index[0][0], { weekday: false })}</text>
+        <text x={width - pad.right} y={height - 6} textAnchor="end" className="fx-axis">{dayLabel(index[index.length - 1][0], { weekday: false })}</text>
+        <polyline points={line(1)} className="fx-line" />
+        <polyline points={line(2)} className="fx-line fx-line-2" />
+        {active ? <line x1={x(hover!)} x2={x(hover!)} y1={pad.top} y2={height - pad.bottom} className="fx-crosshair" /> : null}
+      </svg>
+      <div className="mt-2 flex flex-wrap gap-4 text-xs text-muted-foreground">
+        <span className="inline-flex items-center gap-1.5"><span className="fx-key" aria-hidden /> Typical fare across all dates</span>
+        <span className="inline-flex items-center gap-1.5"><span className="fx-key fx-key-2" aria-hidden /> Cheapest date</span>
+      </div>
+      {active ? (
+        <div className="fx-tooltip" style={{ left: Math.min(Math.max(x(hover!) - 90, 0), width - 180), top: 0 }} role="status">
+          <span className="block text-muted-foreground">Checked {dayLabel(active[0])}</span>
+          <strong className="block tabular-nums">{money(active[1])} typical</strong>
+          <span className="block tabular-nums">{money(active[2])} cheapest</span>
+        </div>
       ) : null}
     </div>
   );
 }
 
-function Segmented<T extends string>({ label, value, options, onChange }: { label: string; value: T; options: { value: T; label: string }[]; onChange: (value: T) => void }) {
+/* ---------- Selected trip ---------- */
+
+function LegLine({ icon: Icon, label, date, leg }: { icon: typeof PlaneTakeoff; label: string; date: string; leg: LegDetail }) {
   return (
-    <div role="group" aria-label={label} className="inline-flex flex-wrap gap-1 rounded-2xl border border-border/50 bg-muted/40 p-1">
-      {options.map((option) => (
-        <button key={option.value} type="button" onClick={() => onChange(option.value)} aria-pressed={value === option.value}
-          className={cn("min-h-11 rounded-xl px-4 text-sm font-semibold transition-colors",
-            value === option.value ? "border border-border/60 bg-accent text-accent-foreground shadow-brutal-sm" : "text-muted-foreground hover:bg-card hover:text-foreground")}>
-          {option.label}
-        </button>
-      ))}
+    <div className="flex gap-3">
+      <Icon className="mt-0.5 size-4 shrink-0 text-muted-foreground" aria-hidden />
+      <div className="min-w-0 text-sm">
+        <p className="font-semibold">{label} · {dayLabel(date)}</p>
+        <p className="tabular-nums">{leg.depart_time} → {leg.arrive_time}{leg.arrive_day_offset ? <sup className="ml-0.5 text-[10px]">+{leg.arrive_day_offset}</sup> : null} · {duration(leg.duration_minutes)}</p>
+        <p className="text-muted-foreground">{leg.airline} · {leg.stops === 0 ? "direct" : `${leg.stops} stop${leg.stops && leg.stops > 1 ? "s" : ""}${leg.via ? ` via ${leg.via}` : ""}`} · arrives {leg.airport}</p>
+      </div>
     </div>
   );
 }
 
-export function FlightView({ data }: { data: FlightData | null }) {
-  const [route, setRoute] = useState(data?.routes[0]?.id ?? "kul-lon");
-  const [trip, setTrip] = useState("one-way");
-  const [selected, setSelected] = useState("");
+function TripPanel({ day, days, calendar, stays, staysByDate, detail, route, typical, onPick, onStay }: {
+  day: Day; days: Day[]; calendar: Calendar; stays: Calendar[]; staysByDate: Map<number | null, Map<string, number>>;
+  detail: FlightData["details"][string] | undefined; route: FlightData["routes"][number]; typical: number;
+  onPick: (date: string) => void; onStay: (stay: number | null) => void;
+}) {
+  const diff = day.price - typical;
+  const cheaper = nearbyCheaper(days, day.date);
+  const options = stays.map((item) => ({ stay: item.stay, price: staysByDate.get(item.stay)?.get(day.date) }))
+    .filter((item): item is { stay: number | null; price: number } => typeof item.price === "number");
+  const cheapestOption = Math.min(...options.map((item) => item.price));
+  const link = googleFlightsLink(route.origin, route.destination, day.date, day.returnDate);
+  return (
+    <div className="fx-card" id="trip">
+      <p className="text-sm font-medium text-muted-foreground">
+        {day.returnDate ? <>Leave {dayLabel(day.date)} · Return {dayLabel(day.returnDate)} · {calendar.stay} nights</> : <>One-way · {dayLabel(day.date, { year: true })}</>}
+      </p>
+      <div className="mt-1 flex flex-wrap items-end justify-between gap-3">
+        <p className="font-display text-4xl font-bold tabular-nums">{money(day.price)}</p>
+        <AdviceBadge advice={day.advice} large />
+      </div>
+      <p className="mt-1 text-sm text-muted-foreground">
+        {day.returnDate ? "Return fare, economy, 1 adult. " : ""}
+        {Math.abs(diff) < 1 ? "About the usual fare." : `${money(Math.abs(diff))} ${diff < 0 ? "below" : "above"} the usual ${money(typical)}.`}
+      </p>
 
+      {cheaper ? (
+        <button type="button" onClick={() => onPick(cheaper.date)} className="fx-tip mt-4 w-full text-left">
+          <TrendingDown className="size-4 shrink-0 text-[var(--fx-good)]" aria-hidden />
+          <span>Leave {Math.abs(daysBetween(day.date, cheaper.date))} day{Math.abs(daysBetween(day.date, cheaper.date)) > 1 ? "s" : ""} {cheaper.date < day.date ? "earlier" : "later"} ({dayLabel(cheaper.date)}) and save <strong>{money(day.price - cheaper.price)}</strong></span>
+          <ArrowRight className="ml-auto size-4 shrink-0" aria-hidden />
+        </button>
+      ) : null}
+
+      {calendar.stay && options.length > 1 ? (
+        <div className="mt-5">
+          <h3 className="text-sm font-semibold">Same departure, different stay</h3>
+          <ul className="mt-2 space-y-1.5">
+            {options.map((item) => (
+              <li key={String(item.stay)}>
+                <button type="button" onClick={() => onStay(item.stay)} aria-pressed={item.stay === calendar.stay}
+                  className={cn("fx-stay-row", item.stay === calendar.stay && "fx-stay-row-on")}>
+                  <span className="w-16 shrink-0 text-left text-sm">{stayLabel(item.stay)}</span>
+                  <span className="relative h-2 flex-1 overflow-hidden rounded-full bg-muted" aria-hidden>
+                    <span className="fx-bar absolute inset-y-0 left-0 rounded-full" style={{ width: `${Math.max(8, (item.price / Math.max(...options.map((o) => o.price))) * 100)}%` }} />
+                  </span>
+                  <span className={cn("w-20 shrink-0 text-right text-sm tabular-nums", item.price === cheapestOption && "font-bold")}>{money(item.price)}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      <div className="mt-5 space-y-3 border-t border-border/40 pt-4">
+        {detail ? (
+          <>
+            <LegLine icon={PlaneTakeoff} label="Outbound" date={day.date} leg={detail.out} />
+            {detail.back && day.returnDate ? <LegLine icon={PlaneLanding} label="Return" date={day.returnDate} leg={detail.back} /> : null}
+            <p className="text-xs text-muted-foreground">Cheapest itinerary when checked on {dayLabel(detail.checked_on)}{detail.price !== day.price ? ` (then ${money(detail.price)})` : ""}.</p>
+          </>
+        ) : (
+          <p className="text-sm text-muted-foreground">Flight times are checked for the cheapest dates each month. Open Google Flights for this date&apos;s airlines and times.</p>
+        )}
+      </div>
+
+      <a href={link} target="_blank" rel="noopener noreferrer"
+        className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border border-border/70 bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-brutal-sm hover:opacity-90">
+        See this trip on Google Flights <ArrowUpRight className="size-4" />
+      </a>
+      <p className="mt-3 text-xs text-muted-foreground">
+        {day.checks > 1 ? `Checked ${day.checks} times; lowest seen ${money(day.lowestSeen)}.` : "First check for this date."}
+        {day.change7d ? ` ${day.change7d < 0 ? "Down" : "Up"} ${money(Math.abs(day.change7d))} in 7 days.` : ""}
+      </p>
+    </div>
+  );
+}
+
+/* ---------- Page ---------- */
+
+type View = { route: string; stay: number | null };
+
+export function FlightView({ data }: { data: FlightData | null }) {
+  const focus = data?.calendars.find((item) => item.id === data.focus) ?? data?.calendars[0];
+  const [view, setView] = useState<View>({ route: focus?.route ?? "kul-lon", stay: focus?.stay ?? 14 });
+  const [selected, setSelected] = useState("");
+  const [hovered, setHovered] = useState("");
+  const [page, setPage] = useState(0);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const [panelVisible, setPanelVisible] = useState(false);
+
+  const calendar = data?.calendars.find((item) => item.route === view.route && item.stay === view.stay) ?? focus;
+  const days = useMemo(() => toDays(calendar), [calendar]);
+  const byDate = useMemo(() => new Map(days.map((day) => [day.date, day])), [days]);
+  const prices = days.map((day) => day.price);
+  const typical = median(prices);
+  const cheapest = days.length ? days.reduce((best, day) => (day.price < best.price ? day : best), days[0]) : null;
+  const months = useMemo(() => Array.from(new Set(days.map((day) => day.date.slice(0, 7)))), [days]);
+  const monthMin = useMemo(() => {
+    const result = new Map<string, Day>();
+    for (const day of days) {
+      const current = result.get(day.date.slice(0, 7));
+      if (!current || day.price < current.price) result.set(day.date.slice(0, 7), day);
+    }
+    return result;
+  }, [days]);
+  const stays = data?.calendars.filter((item) => item.route === view.route && item.stay !== null) ?? [];
+  const staysByDate = useMemo(() => new Map(
+    (data?.calendars ?? []).filter((item) => item.route === view.route).map((item) => [item.stay, new Map(item.days.map((row) => [row[0], row[1]]))]),
+  ), [data, view.route]);
+  const route = data?.routes.find((item) => item.id === view.route) ?? data?.routes[0];
+  const outlook = bookingOutlook(days, calendar?.index ?? []);
+  const current = byDate.get(selected) ?? cheapest;
+  const top = [...days].sort((a, b) => a.price - b.price || a.date.localeCompare(b.date)).slice(0, 10);
+
+  // Read ?route=&stay= once, so a shared link opens the same view.
   useEffect(() => {
+    if (!data) return;
     const params = new URL(window.location.href).searchParams;
-    if (params.get("route") && data?.routes.some((item) => item.id === params.get("route"))) setRoute(params.get("route")!);
-    if (params.get("trip") && data?.trips.includes(params.get("trip")!)) setTrip(params.get("trip")!);
+    const stayParam = params.get("stay");
+    const next = { route: params.get("route") ?? view.route, stay: stayParam === "one-way" ? null : stayParam ? Number(stayParam) : view.stay };
+    if (data.calendars.some((item) => item.route === next.route && item.stay === next.stay)) setView(next);
+    if (params.get("date")) setSelected(params.get("date")!);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
-  const rows = useMemo(() => (data ? selectRows(data, route, trip) : []), [data, route, trip]);
-  const prices = rows.map((row) => row.price);
-  const typical = median(prices);
-  const cheapest = rows.length ? rows.reduce((best, row) => (row.price < best.price ? row : best), rows[0]) : null;
-  const months = data?.summary.filter((item) => item.route === route && item.trip === trip) ?? [];
-  const bestMonth = months.length ? months.reduce((best, item) => (item.price < best.price ? item : best), months[0]) : null;
-  const outlook = bookingOutlook(rows);
-  const current = rows.find((row) => row.depart_date === selected) ?? cheapest;
+  // Open on the selected date's month (first of the two shown on desktop).
+  useEffect(() => {
+    const index = months.indexOf((current?.date ?? "").slice(0, 7));
+    if (index >= 0) setPage(index);
+  }, [current?.date, months]);
 
-  useEffect(() => { setSelected(""); }, [route, trip]);
+  // The phone dock repeats the panel, so hide it while the panel is on screen.
+  useEffect(() => {
+    if (!panelRef.current) return;
+    const observer = new IntersectionObserver(([entry]) => setPanelVisible(entry.isIntersecting), { threshold: 0.15 });
+    observer.observe(panelRef.current);
+    return () => observer.disconnect();
+  }, [data]);
 
-  const choose = (key: "route" | "trip", value: string) => {
-    if (key === "route") setRoute(value); else setTrip(value);
+  const updateUrl = (next: View, date: string) => {
     const url = new URL(window.location.href);
-    url.searchParams.set(key, value);
+    url.searchParams.set("route", next.route);
+    url.searchParams.set("stay", next.stay === null ? "one-way" : String(next.stay));
+    if (date) url.searchParams.set("date", date); else url.searchParams.delete("date");
     window.history.replaceState(null, "", url);
   };
+  const choose = (next: View) => {
+    const keep = data?.calendars.find((item) => item.route === next.route && item.stay === next.stay)?.days.some((row) => row[0] === current?.date);
+    setView(next);
+    if (!keep) setSelected("");
+    updateUrl(next, keep ? current?.date ?? "" : "");
+  };
+  const pick = (date: string) => {
+    setSelected(date);
+    updateUrl(view, date);
+    if (window.matchMedia("(max-width: 1023px)").matches) panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
-  const routeLabel = data?.routes.find((item) => item.id === route)?.label ?? "";
   const updated = data ? new Date(data.generated_at).toLocaleString("en-MY", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur" }) : "";
+  const visible = months.slice(page, page + 2);
+  const isReturn = view.stay !== null;
 
   return (
-    <div className="fx-root min-h-screen bg-background">
+    <div className="fx-root min-h-screen bg-background pb-24 lg:pb-0">
       <header className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-sm">
         <div className="page-shell flex h-16 items-center justify-between gap-2">
           <Link href="/" className="inline-flex min-h-11 items-center gap-2 rounded-xl px-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
@@ -287,126 +336,149 @@ export function FlightView({ data }: { data: FlightData | null }) {
         </div>
       </header>
 
-      <main className="page-shell py-8 sm:py-10">
-        <p className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground"><Plane className="size-4" /> Flight fares</p>
-        <h1 className="mt-1 font-display text-3xl font-bold tracking-tight sm:text-5xl">KL ⇄ London</h1>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          The cheapest economy fare for each departure date over the next 6 months, checked daily on Google Flights,
-          with a simple signal on whether to book now.
-        </p>
+      <main className="page-shell py-6 sm:py-8">
+        <p className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground"><Plane className="size-4" /> Flight fares · updated daily</p>
+        <h1 className="mt-1 font-display text-3xl font-bold tracking-tight sm:text-5xl">
+          {route?.id === "lon-kul" ? "London → KL" : "KL → London"}{isReturn ? " return" : " one-way"}
+        </h1>
 
-        {!data ? (
-          <div className="fx-card mt-8 text-sm text-muted-foreground">No fares yet. The first check runs with the next daily update.</div>
+        {!data || !calendar ? (
+          <div className="fx-card mt-6 text-sm text-muted-foreground">No fares yet. The first check runs with the next daily update.</div>
         ) : (
           <>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Segmented label="Direction" value={route} onChange={(value) => choose("route", value)}
-                options={data.routes.map((item) => ({ value: item.id, label: item.id === "kul-lon" ? "KL → London" : "London → KL" }))} />
-              <Segmented label="Trip type" value={trip} onChange={(value) => choose("trip", value)}
-                options={data.trips.map((item) => ({ value: item, label: tripLabel(item).replace("Return · ", "Return ") }))} />
+            <div className="mt-5 space-y-3">
+              <div className="no-scrollbar -mx-4 flex items-center gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Trip">
+                <span className="mr-1 shrink-0 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Trip</span>
+                <Chip active={view.route === "kul-lon" && isReturn} onClick={() => choose({ route: "kul-lon", stay: view.route === "kul-lon" && isReturn ? view.stay : 14 })}>KL → London return</Chip>
+                <Chip active={view.route === "kul-lon" && !isReturn} onClick={() => choose({ route: "kul-lon", stay: null })}>KL → London one-way</Chip>
+                <Chip active={view.route === "lon-kul" && isReturn} onClick={() => choose({ route: "lon-kul", stay: 14 })}>London → KL return</Chip>
+                <Chip active={view.route === "lon-kul" && !isReturn} onClick={() => choose({ route: "lon-kul", stay: null })}>London → KL one-way</Chip>
+              </div>
+              {isReturn ? (
+                <div className="no-scrollbar -mx-4 flex items-center gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Length of stay">
+                  <span className="mr-1 shrink-0 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Stay</span>
+                  {stays.map((item) => (
+                    <Chip key={String(item.stay)} active={item.stay === view.stay} onClick={() => choose({ route: view.route, stay: item.stay })}>
+                      {stayLabel(item.stay)}
+                    </Chip>
+                  ))}
+                </div>
+              ) : null}
             </div>
 
-            {rows.length ? (
-              <>
-                <section aria-label="Summary" className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                  <div className="fx-tile">
-                    <p className="fx-tile-label">Cheapest date</p>
-                    <p className="fx-tile-value">{money(cheapest?.price)}</p>
-                    <p className="fx-tile-note">{cheapest ? `${dayLabel(cheapest.depart_date)} · ${cheapest.airline}` : ""}</p>
-                  </div>
-                  <div className="fx-tile">
-                    <p className="fx-tile-label">Cheapest month</p>
-                    <p className="fx-tile-value">{bestMonth ? monthLabel(bestMonth.month).split(" ")[0] : ""}</p>
-                    <p className="fx-tile-note">{bestMonth ? `from ${money(bestMonth.price)}` : ""}</p>
-                  </div>
-                  <div className="fx-tile">
-                    <p className="fx-tile-label">Typical fare</p>
-                    <p className="fx-tile-value">{money(typical)}</p>
-                    <p className="fx-tile-note">middle of {rows.length} dates checked</p>
-                  </div>
-                  <div className="fx-tile">
-                    <p className="fx-tile-label">Book now?</p>
-                    <p className="mt-2"><AdviceBadge advice={outlook.advice} large /></p>
-                    <p className="fx-tile-note">{outlook.detail}</p>
-                  </div>
-                </section>
+            <section aria-label="At a glance" className="mt-5 grid grid-cols-3 gap-2 sm:gap-3">
+              <button type="button" className="fx-tile text-left transition-transform hover:-translate-y-0.5" onClick={() => cheapest && pick(cheapest.date)}>
+                <p className="fx-tile-label">Cheapest {isReturn ? "trip" : "date"}</p>
+                <p className="fx-tile-value">{money(cheapest?.price)}</p>
+                <p className="fx-tile-note">{cheapest ? `${dayLabel(cheapest.date)}${cheapest.returnDate ? ` → ${dayLabel(cheapest.returnDate)}` : ""}` : ""} · <span className="underline underline-offset-2">show</span></p>
+              </button>
+              <div className="fx-tile">
+                <p className="fx-tile-label">Usual fare</p>
+                <p className="fx-tile-value">{money(typical)}</p>
+                <p className="fx-tile-note">middle of {days.length} dates<span className="hidden sm:inline"> · range {money(Math.min(...prices))} to {money(Math.max(...prices))}</span></p>
+              </div>
+              <div className="fx-tile">
+                <p className="fx-tile-label">Book now?</p>
+                <p className="mt-2"><AdviceBadge advice={outlook.advice} large /></p>
+                <p className="fx-tile-note hidden sm:block">{outlook.detail}</p>
+              </div>
+            </section>
 
-                <section className="fx-card mt-6" aria-labelledby="chart-heading">
-                  <h2 id="chart-heading" className="text-lg font-bold">Fare by departure date</h2>
-                  <p className="mb-3 text-sm text-muted-foreground">{routeLabel} · {tripLabel(trip)}. Hover or tap a point; click to see details below.</p>
-                  <FareChart rows={rows} selected={current?.depart_date ?? ""} onSelect={setSelected} />
-                </section>
-
-                <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_380px]">
-                  <section className="fx-card order-2 lg:order-none" aria-labelledby="calendar-heading">
-                    <h2 id="calendar-heading" className="mb-4 text-lg font-bold">Price calendar</h2>
-                    <PriceCalendar rows={rows} selected={current?.depart_date ?? ""} onSelect={setSelected} />
-                  </section>
-                  <section aria-labelledby="detail-heading" className="order-1 lg:order-none lg:sticky lg:top-20 lg:self-start">
-                    <h2 id="detail-heading" className="sr-only">Selected date</h2>
-                    {current ? <Detail row={current} typical={typical} /> : null}
-                  </section>
+            <div className="mt-5 grid gap-5 lg:grid-cols-[minmax(0,1fr)_380px]">
+              <section className="fx-card min-w-0" aria-labelledby="calendar-heading">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <h2 id="calendar-heading" className="text-lg font-bold">Pick your departure date</h2>
+                  <div className="flex items-center gap-1">
+                    <button type="button" className="fx-nav" onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0} aria-label="Earlier months"><ChevronLeft className="size-5" /></button>
+                    <button type="button" className="fx-nav" onClick={() => setPage(Math.min(months.length - 1, page + 1))} disabled={page >= months.length - 1} aria-label="Later months"><ChevronRight className="size-5" /></button>
+                  </div>
                 </div>
-
-                <section className="fx-card mt-6" aria-labelledby="month-heading">
-                  <h2 id="month-heading" className="mb-3 text-lg font-bold">Best date each month</h2>
-                  <div className="overflow-x-auto">
-                    <table className="w-full min-w-[520px] text-sm">
-                      <thead><tr className="border-b border-border/50 text-left text-xs text-muted-foreground">
-                        <th className="py-2 pr-3 font-medium">Month</th><th className="py-2 pr-3 text-right font-medium">From</th>
-                        <th className="py-2 pr-3 font-medium">Best date</th><th className="py-2 pr-3 font-medium">Airline</th><th className="py-2 font-medium">Signal</th>
-                      </tr></thead>
-                      <tbody>
-                        {months.map((item) => (
-                          <tr key={item.month} className="cursor-pointer border-b border-border/30 hover:bg-muted/40" onClick={() => setSelected(item.depart_date)}>
-                            <td className="py-2.5 pr-3 font-medium">{monthLabel(item.month)}</td>
-                            <td className="py-2.5 pr-3 text-right font-semibold tabular-nums">{money(item.price)}</td>
-                            <td className="py-2.5 pr-3">{dayLabel(item.depart_date)}</td>
-                            <td className="py-2.5 pr-3 text-muted-foreground">{item.airline}</td>
-                            <td className="py-2.5"><AdviceBadge advice={item.advice} /></td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                  <details className="mt-4 text-sm">
-                    <summary className="cursor-pointer font-semibold">All {rows.length} dates as a table</summary>
-                    <div className="mt-3 overflow-x-auto">
-                      <table className="w-full min-w-[560px]">
-                        <thead><tr className="border-b border-border/50 text-left text-xs text-muted-foreground">
-                          <th className="py-2 pr-3 font-medium">Depart</th>{trip !== "one-way" ? <th className="py-2 pr-3 font-medium">Return</th> : null}
-                          <th className="py-2 pr-3 text-right font-medium">Fare</th><th className="py-2 pr-3 font-medium">Airline</th><th className="py-2 font-medium">Signal</th>
-                        </tr></thead>
-                        <tbody>
-                          {rows.map((row) => (
-                            <tr key={row.depart_date} className="border-b border-border/30">
-                              <td className="py-2 pr-3">{dayLabel(row.depart_date)}</td>{trip !== "one-way" ? <td className="py-2 pr-3">{dayLabel(row.return_date)}</td> : null}
-                              <td className="py-2 pr-3 text-right tabular-nums">{money(row.price)}</td>
-                              <td className="py-2 pr-3 text-muted-foreground">{row.airline}</td>
-                              <td className="py-2"><AdviceBadge advice={row.advice} /></td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Each day shows the cheapest {isReturn ? `return fare for a ${stayLabel(view.stay)} stay` : "one-way fare"} in RM. {isReturn ? "Hover or tap to see the trip on the calendar." : ""}
+                </p>
+                <div className="no-scrollbar -mx-1 mt-3 flex gap-1.5 overflow-x-auto px-1 pb-1" role="group" aria-label="Jump to month">
+                  {months.map((month, i) => (
+                    <button key={month} type="button" onClick={() => setPage(i)} aria-pressed={i === page}
+                      className={cn("fx-month", i === page && "fx-month-on", i === page + 1 && "md:fx-month-on")}>
+                      <span className="block text-xs font-semibold">{monthLabel(month, true)}</span>
+                      <span className="block text-[11px] tabular-nums text-muted-foreground">from {plain(monthMin.get(month)?.price ?? 0)}</span>
+                    </button>
+                  ))}
+                </div>
+                <div className="mt-4 grid gap-6 md:grid-cols-2">
+                  {visible.map((month, i) => (
+                    <div key={month} className={cn(i === 1 && "hidden md:block")}>
+                      <MonthGrid month={month} today={data.today} byDate={byDate} prices={prices} monthMin={monthMin.get(month)?.price ?? null}
+                        selected={current?.date ?? ""} hovered={hovered} stay={view.stay} onSelect={pick} onHover={setHovered} />
                     </div>
-                  </details>
-                </section>
-              </>
-            ) : (
-              <div className="fx-card mt-6 text-sm text-muted-foreground">No fares for this trip yet. Dates are checked in rotation, so they fill in over a few days.</div>
-            )}
+                  ))}
+                </div>
+                <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted-foreground">
+                  <span>Cheaper</span>
+                  <span className="flex overflow-hidden rounded" aria-hidden>
+                    {Array.from({ length: STEPS }, (_, i) => <span key={i} className={cn("h-3 w-5", `fx-seq-${i}`)} />)}
+                  </span>
+                  <span>Pricier</span>
+                  {isReturn ? <span className="inline-flex items-center gap-1.5"><span className="fx-trip-key" aria-hidden /> your trip</span> : null}
+                  <span>Blank days: no fare listed</span>
+                </div>
+              </section>
 
-            <section className="mt-8 grid gap-4 text-sm sm:grid-cols-3" aria-label="How to use this">
-              <div><h3 className="font-semibold">When to book</h3><p className="mt-1 text-muted-foreground">KL–London fares are usually lowest 2 to 5 months ahead and tend to rise in the last 6 weeks, especially around school holidays, Hari Raya and Christmas.</p></div>
-              <div><h3 className="font-semibold">What the signal means</h3><p className="mt-1 text-muted-foreground">Good to book: cheapest seen for that date, Google says prices are low, or departure is close. Wait: clearly above its usual fare with time to spare.</p></div>
-              <div><h3 className="font-semibold">Before you pay</h3><p className="mt-1 text-muted-foreground">Prices change during the day. Always confirm the fare, baggage and airport on Google Flights or the airline before booking.</p></div>
+              <div ref={panelRef} className="scroll-mt-20 lg:sticky lg:top-20 lg:self-start">
+                {current && route ? (
+                  <TripPanel day={current} days={days} calendar={calendar} stays={stays} staysByDate={staysByDate}
+                    detail={data.details[`${calendar.id}|${current.date}`]} route={route} typical={typical}
+                    onPick={pick} onStay={(stay) => choose({ route: view.route, stay })} />
+                ) : null}
+              </div>
+            </div>
+
+            <div className="mt-5 grid gap-5 lg:grid-cols-2">
+              <section className="fx-card" aria-labelledby="top-heading">
+                <h2 id="top-heading" className="text-lg font-bold">10 cheapest {isReturn ? "trips" : "dates"}</h2>
+                <ol className="mt-3 divide-y divide-border/40">
+                  {top.map((day, i) => (
+                    <li key={day.date}>
+                      <button type="button" onClick={() => pick(day.date)} className={cn("fx-row", current?.date === day.date && "fx-row-on")}>
+                        <span className="w-5 shrink-0 text-xs text-muted-foreground">{i + 1}</span>
+                        <span className="min-w-0 flex-1 truncate text-left text-sm">
+                          {dayLabel(day.date)}{day.returnDate ? ` → ${dayLabel(day.returnDate)}` : ""}
+                        </span>
+                        <span className="text-sm font-semibold tabular-nums">{money(day.price)}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+              <section className="fx-card" aria-labelledby="trend-heading">
+                <h2 id="trend-heading" className="text-lg font-bold">Are fares rising?</h2>
+                <p className="mb-3 mt-1 text-sm text-muted-foreground">The usual and cheapest fare across all dates, on each day we checked. Rising lines mean book soon.</p>
+                <TrendChart index={calendar.index} />
+              </section>
+            </div>
+
+            <section className="mt-8 grid gap-4 text-sm sm:grid-cols-3" aria-label="Tips">
+              <div><h3 className="font-semibold">When to book</h3><p className="mt-1 text-muted-foreground">KL–London fares are usually lowest 2 to 5 months ahead and climb in the last 6 weeks, especially around school holidays, Hari Raya and Christmas.</p></div>
+              <div><h3 className="font-semibold">Save on a return</h3><p className="mt-1 text-muted-foreground">Try a different stay length and the days either side: the panel shows both. Midweek departures are often cheaper.</p></div>
+              <div><h3 className="font-semibold">Before you pay</h3><p className="mt-1 text-muted-foreground">Fares change during the day. Open the trip on Google Flights to confirm the price, baggage and airport before booking.</p></div>
             </section>
             <p className="mt-6 text-xs text-muted-foreground">
-              Source: Google Flights, economy, 1 adult, all London airports. Updated {updated} MYT. {data.coverage.known} of {data.coverage.slots} tracked dates have a fare so far; tracking since {dayLabel(data.tracking_since, true)}.
+              Source: Google Flights, economy, 1 adult, all London airports. Updated {updated} MYT{calendar.fresh ? "" : " (this calendar was not refreshed today)"}. Tracking since {dayLabel(data.tracking_since, { year: true })}.
             </p>
           </>
         )}
       </main>
+
+      {current && data && calendar && !panelVisible ? (
+        <a href="#trip" onClick={(event) => { event.preventDefault(); panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }}
+          className="fx-dock lg:hidden">
+          <span className="min-w-0">
+            <span className="block truncate text-xs text-muted-foreground">{dayLabel(current.date)}{current.returnDate ? ` → ${dayLabel(current.returnDate)}` : ""}</span>
+            <span className="block text-lg font-bold tabular-nums">{money(current.price)}</span>
+          </span>
+          <span className="ml-auto inline-flex items-center gap-1 text-sm font-semibold">Details <ArrowRight className="size-4" /></span>
+        </a>
+      ) : null}
     </div>
   );
 }
