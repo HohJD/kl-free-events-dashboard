@@ -74,11 +74,11 @@ function ResourceCard({ row, today }: { row: Resource; today: string }) {
         ) : null}
         <dl className="mt-2 space-y-1 text-xs leading-5 text-muted-foreground">
           {row.amount ? <div className="line-clamp-2 break-words"><dt className="inline font-semibold text-foreground">{row.kind === "internship" ? "Allowance: " : row.kind === "graduate" ? "Salary: " : "Value: "}</dt><dd className="inline">{row.amount}</dd></div> : null}
-          {row.kind !== "tool" && row.location ? <div><dt className="inline font-semibold text-foreground">Where: </dt><dd className="inline">{row.location}</dd></div> : null}
+          {row.kind !== "tool" && row.location && !(row.kind === "scholarship" && row.location === "Malaysia") ? <div><dt className="inline font-semibold text-foreground">Where: </dt><dd className="inline">{row.location}</dd></div> : null}
           {row.eligibility && row.kind !== "internship" && row.kind !== "graduate" ? <div className="break-words"><dt className="inline font-semibold text-foreground">Who: </dt><dd className="inline">{row.eligibility}</dd></div> : null}
           {row.fields ? <div className="line-clamp-2 break-words"><dt className="inline font-semibold text-foreground">Fields: </dt><dd className="inline">{row.fields}</dd></div> : null}
         </dl>
-        {row.summary ? <p className="mb-4 mt-2 line-clamp-3 break-words text-sm leading-relaxed text-muted-foreground">{row.summary}</p> : <div className="mb-4" />}
+        {row.summary ? <p className="mb-4 mt-2 line-clamp-2 break-words text-sm leading-relaxed text-muted-foreground sm:line-clamp-3">{row.summary}</p> : <div className="mb-4" />}
 
         <div className="listing-actions">
           <a href={row.link} target="_blank" rel="noopener noreferrer"
@@ -179,14 +179,14 @@ export function ResourcesView({ resources, generatedAt }: { resources: Resource[
                   <section key={option.value} aria-labelledby={`heading-${option.value}`}>
                     <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2">
                       <h2 id={`heading-${option.value}`} className="font-display text-xl font-bold tracking-tight">{SECTION_TITLE[option.value]}</h2>
-                      {rows.length > PREVIEW ? (
+                      {rows.length > 3 ? (
                         <button onClick={() => { chooseKind(option.value); window.scrollTo({ top: 0 }); }}
                           className="inline-flex min-h-11 items-center gap-1 rounded-xl px-3 text-sm font-semibold text-muted-foreground hover:bg-muted hover:text-foreground">
                           See all {rows.length} <ArrowRight className="size-4" />
                         </button>
                       ) : null}
                     </div>
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="resource-preview grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                       {rows.slice(0, PREVIEW).map((row) => <ResourceCard key={`${row.kind}:${row.link}`} row={row} today={today} />)}
                     </div>
                   </section>

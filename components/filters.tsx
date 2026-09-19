@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Search, X, LayoutGrid, Map, Heart } from "lucide-react";
+import { Search, X, LayoutGrid, Map, Heart, SlidersHorizontal } from "lucide-react";
 import { motion } from "framer-motion";
 import { DateRange, SortMode } from "@/lib/filter-events";
 import { cn } from "@/lib/utils";
@@ -36,6 +36,9 @@ interface FiltersProps {
   setShowSaved: (s: boolean) => void;
   savedCount: number;
   onClear: () => void;
+  /** Phones: open the filter panel; `sheetCount` badges the active filters inside it. */
+  onOpenSheet: () => void;
+  sheetCount: number;
 }
 
 function Pill({
@@ -83,6 +86,8 @@ export function Filters({
   setShowSaved,
   savedCount,
   onClear,
+  onOpenSheet,
+  sheetCount,
 }: FiltersProps) {
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -116,12 +121,12 @@ export function Filters({
       <div className="page-shell space-y-1 py-4 sm:py-5">
         {/* Search + saved + view switcher */}
         <div className="flex flex-wrap items-center gap-2.5 pb-2">
-          <div className="relative min-w-0 basis-full sm:flex-1 sm:basis-0">
+          <div className="relative min-w-0 flex-1">
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <input
               ref={searchRef}
               aria-label="Search events"
-              placeholder="Search events, venues…"
+              placeholder="Search events"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="h-11 w-full min-w-0 rounded-xl border border-input/70 bg-card pl-10 pr-10 text-base transition-colors placeholder:text-muted-foreground focus:border-ring md:text-sm"
@@ -135,7 +140,7 @@ export function Filters({
             aria-label="Show saved events"
             aria-pressed={showSaved}
             className={cn(
-              "ml-auto flex h-11 shrink-0 items-center gap-2 rounded-xl px-3 text-sm font-medium transition-colors sm:ml-0",
+              "hidden h-11 shrink-0 items-center gap-2 rounded-xl px-3 text-sm font-medium transition-colors md:flex",
               showSaved
                 ? "bg-primary text-primary-foreground"
                 : "border border-input text-muted-foreground hover:text-foreground"
@@ -146,6 +151,11 @@ export function Filters({
             {savedCount > 0 ? (
               <span className="tabular-nums">{savedCount}</span>
             ) : null}
+          </button>
+          <button type="button" onClick={onOpenSheet} aria-label={`Filters${sheetCount ? `, ${sheetCount} active` : ""}`}
+            className="relative flex h-11 shrink-0 items-center gap-1.5 rounded-xl border border-input/70 bg-card px-3 text-sm font-semibold md:hidden">
+            <SlidersHorizontal className="size-4" aria-hidden /> Filters
+            {sheetCount ? <span className="flex size-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">{sheetCount}</span> : null}
           </button>
           <div className="flex h-11 shrink-0 items-center rounded-xl border border-input/70 bg-card p-0.5">
             <button
@@ -160,7 +170,7 @@ export function Filters({
               )}
             >
               <LayoutGrid className="size-4" />
-              <span>List</span>
+              <span className="hidden sm:inline">List</span>
             </button>
             <button
               onClick={() => setView("map")}
@@ -174,7 +184,7 @@ export function Filters({
               )}
             >
               <Map className="size-4" />
-              <span>Map</span>
+              <span className="hidden sm:inline">Map</span>
             </button>
           </div>
         </div>
@@ -190,8 +200,8 @@ export function Filters({
               {t.label}
             </Pill>
           ))}
-          <span className="mx-1.5 h-4 w-px shrink-0 self-center bg-border" />
-          <div role="group" aria-label="Sort events" className="flex shrink-0 gap-1">
+          <span className="mx-1.5 hidden h-4 w-px shrink-0 self-center bg-border md:block" />
+          <div role="group" aria-label="Sort events" className="hidden shrink-0 gap-1 md:flex">
             <Pill active={sort === "recommended"} onClick={() => setSort("recommended")}>
               Top picks
             </Pill>
@@ -202,7 +212,7 @@ export function Filters({
         </div>
 
         {/* Category + source tabs */}
-        <div aria-label="Filter by category or source" className="no-scrollbar -mx-1 flex items-center gap-1 overflow-x-auto px-1 py-1.5">
+        <div aria-label="Filter by category or source" className="no-scrollbar -mx-1 hidden items-center gap-1 overflow-x-auto px-1 py-1.5 md:flex">
           <Pill active={category === "all"} onClick={() => setCategory("all")}>
             All
           </Pill>

@@ -9,9 +9,10 @@ interface EventGridProps {
   events: Event[];
   favorites: Set<string>;
   onToggleSave: (link: string) => void;
+  onClear: () => void;
 }
 
-export function EventGrid({ events, favorites, onToggleSave }: EventGridProps) {
+export function EventGrid({ events, favorites, onToggleSave, onClear }: EventGridProps) {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="page-shell pb-16 sm:pb-20">
       <p className="mb-5 font-mono text-xs text-muted-foreground" aria-live="polite">
@@ -38,6 +39,10 @@ export function EventGrid({ events, favorites, onToggleSave }: EventGridProps) {
           <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
             Try All events, another state, or clearing your filters. Only listings that pass our admission, date and location checks appear here.
           </p>
+          <button type="button" onClick={onClear}
+            className="mt-5 inline-flex min-h-11 items-center rounded-xl border border-border bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-brutal-sm">
+            Clear search and filters
+          </button>
         </div>
       )}
     </motion.div>

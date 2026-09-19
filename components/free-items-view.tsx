@@ -154,7 +154,7 @@ export function FreeItemsView({ fallback }: { fallback: FreeItem[] }) {
 
       <div className="mt-6"><GiveItem open={giving} onClose={() => setGiving(false)} onListed={(item) => { setItems((prev) => [item, ...prev]); setCategory("all"); setMine(false); }} /></div>
 
-      <div className="mt-6 space-y-3">
+      <div className={cn("mt-6 space-y-3", !items.length && "hidden")}>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
           <input aria-label="Search free items" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search items or areas…"

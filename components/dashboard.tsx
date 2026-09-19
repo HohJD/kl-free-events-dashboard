@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { BackToTop } from "./back-to-top";
 import { eventRegion, filterRegion, REGIONS } from "@/lib/regions";
 import { ExploreStrip, type ExploreTeasers } from "./explore-strip";
+import { FilterSheet } from "./filter-sheet";
 
 interface DashboardProps {
   events: Event[];
@@ -30,6 +31,7 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
   const [sort, setSort] = useState<SortMode>("recommended");
   const [view, setView] = useState<ViewMode>("list");
   const [showSaved, setShowSaved] = useState(false);
+  const [sheetOpen, setSheetOpen] = useState(false);
   const { favorites, toggle } = useFavorites();
   const [region, setRegion] = useState("all");
   const [now, setNow] = useState(() => new Date(stats.generatedAt));
@@ -102,7 +104,11 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
     window.history.replaceState(null, "", url);
   };
 
-  // Sync section with URL hash so tabs are shareable (#events / #collect)
+  // Old shared links pointed at the giveaway tab (#collect); it is now /free-items.
+  useEffect(() => {
+    if (window.location.hash === "#collect") window.location.replace("/free-items");
+  }, []);
+
   useEffect(() => {
     const sync = () => {
       setFocused(new URL(window.location.href).searchParams.get("browse") !== "all");
@@ -144,7 +150,7 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
                 {option.label}
               </button>
             ))}
-            <label className="relative ml-auto min-w-[180px] flex-1 sm:flex-none">
+            <label className="relative ml-auto hidden min-w-[180px] flex-1 sm:flex-none md:block">
               <span className="sr-only">Location</span>
               <MapPin className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
               <select value={region} onChange={(event) => switchRegion(event.target.value)} aria-label="Filter events by state"
@@ -157,7 +163,7 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
               <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
             </label>
           </nav>
-          <p className="page-shell pb-5 text-xs leading-relaxed text-muted-foreground sm:text-sm" role="status">
+          <p className="page-shell hidden pb-5 text-xs leading-relaxed text-muted-foreground sm:block sm:text-sm" role="status">
             {region === "all" ? "All locations" : REGIONS[region]} · {regionalEvents.length} upcoming listings.
             {regionalEvents.length === 0 ? " No dated listings found here yet. Try another location." : " Confirm admission and eligibility with the organizer."}
             {now.getTime() - new Date(stats.generatedAt).getTime() > 48 * 3600000 && " Updates are delayed; some details may have changed."}
@@ -182,7 +188,13 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
             setShowSaved={setShowSaved}
             savedCount={favorites.size}
             onClear={handleClear}
+            onOpenSheet={() => setSheetOpen(true)}
+            sheetCount={[region !== "all", category !== "all", source !== "all", showSaved, sort !== "recommended"].filter(Boolean).length}
           />
+          <FilterSheet open={sheetOpen} onClose={() => setSheetOpen(false)} region={region} setRegion={switchRegion} regionCounts={regionCounts}
+            sort={sort} setSort={setSort} category={category} setCategory={chooseCategory} categories={categories} categoryCounts={categoryCounts}
+            source={source} setSource={setSource} sources={sources} showSaved={showSaved} setShowSaved={setShowSaved}
+            savedCount={favorites.size} resultCount={filtered.length} onClear={() => { handleClear(); switchRegion("all"); setSort("recommended"); }} />
           <div className="pt-6">
             {view === "map" ? (
               <MapSection events={filtered} />
@@ -191,6 +203,7 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
                 events={filtered}
                 favorites={favorites}
                 onToggleSave={toggle}
+                onClear={() => { handleClear(); switchRegion("all"); }}
               />
             )}
           </div>

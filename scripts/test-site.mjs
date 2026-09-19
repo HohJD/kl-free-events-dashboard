@@ -64,5 +64,8 @@ assert.match(page.url(), /date=\d{4}-\d{2}-\d{2}/);
 await page.goto(BASE + '/', { waitUntil: 'networkidle' });
 await page.locator('nav.site-tabs a', { hasText: 'Free items' }).click();
 await page.waitForURL(/free-items/);
+// Old shared links to the giveaway tab land on the free-items page.
+await page.goto(BASE + '/#collect');
+await page.waitForURL(/\/free-items/);
 await browser.close();
 console.log(`Passed ${checks} page/theme/width checks and the free-items, flights and navigation flows.`);

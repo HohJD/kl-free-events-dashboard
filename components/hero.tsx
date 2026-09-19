@@ -42,7 +42,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
   ];
 
   return (
-    <section className="pb-8 pt-8 sm:py-12">
+    <section className="pb-5 pt-6 sm:py-12">
       <div className="page-shell">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -50,7 +50,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
           transition={{ duration: 0.4 }}
         >
           <p className="font-mono text-xs leading-relaxed text-muted-foreground">
-            Updated daily · events checked {updated} · {stats.sources} sources
+            Updated daily<span className="hidden sm:inline"> · events checked {updated}</span> · {stats.sources} sources
           </p>
 
           <h1 className="section-heading mt-4 max-w-3xl">
@@ -58,7 +58,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
             <span className="marker-highlight whitespace-nowrap">opportunity</span>
           </h1>
 
-          <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
+          <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:mt-4 sm:text-base md:text-lg">
             Free tech meetups, hackathons, startup and career events across Malaysia, plus student resources, free items and flight deals. Built for students and fresh graduates.
           </p>
 
@@ -66,14 +66,14 @@ export function Hero({ stats }: { stats: HeroStats }) {
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.15 }}
-            className="mt-6 grid max-w-lg grid-cols-3 gap-3 sm:mt-8 sm:gap-4"
+            className="mt-4 grid max-w-lg grid-cols-3 gap-2 sm:mt-8 sm:gap-4"
           >
             {chips.map((chip) => (
               <div
                 key={chip.label}
-                className={`flex min-w-0 flex-col gap-1 rounded-xl border border-border/60 px-3 py-3 shadow-brutal-sm sm:px-4 ${chip.bg} text-black`}
+                className={`flex min-w-0 flex-col gap-1 rounded-xl border border-border/60 px-3 py-2 shadow-brutal-sm sm:px-4 sm:py-3 ${chip.bg} text-black`}
               >
-                <span className="font-display text-2xl font-bold leading-none tabular-nums sm:text-3xl">
+                <span className="font-display text-xl font-bold leading-none tabular-nums sm:text-3xl">
                   <CountUp value={chip.value} />
                 </span>
                 <span className="whitespace-nowrap text-xs font-medium">

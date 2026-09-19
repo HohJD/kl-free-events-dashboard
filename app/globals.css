@@ -179,6 +179,21 @@ a,
 .back-to-top { bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
 @media (min-width: 768px) { .back-to-top { bottom: calc(1.25rem + env(safe-area-inset-bottom)); } }
 
+/* Phones: events as a compact list (thumbnail left), filter panel slides up. */
+@media (max-width: 767px) {
+  .event-card { flex-direction: row; }
+  .event-card .event-thumb { width: 7.25rem; aspect-ratio: auto; align-self: stretch; min-height: 9rem; }
+  .event-card .event-date-chip, .event-card .event-source-chip, .event-card .event-desc, .event-card [data-extra] { display: none; }
+  .event-card .listing-body { padding: 0.875rem; }
+  .event-card .listing-title { font-size: 1rem; line-height: 1.35rem; min-height: 0; }
+  .event-card .listing-actions { padding-top: 0.625rem; }
+}
+.sheet { animation: sheet-up 200ms ease-out; }
+@keyframes sheet-up { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
+
+@media (max-width: 639px) { .resource-preview > :nth-child(n + 4) { display: none; } }
+
 /* /flights: chart roles, light and dark steps chosen separately. */
 @layer components {
   .fx-root {

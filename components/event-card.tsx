@@ -123,9 +123,9 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
       transition={{ duration: 0.35, delay: Math.min((index % 6) * 0.04, 0.2) }}
       className="h-full min-w-0"
     >
-      <article className="listing-card group">
+      <article className="listing-card event-card group">
         {/* Image */}
-        <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-muted">
+        <div className="event-thumb relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-muted">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={event.image}
@@ -155,7 +155,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
           {/* Date chip */}
           <span
             className={cn(
-              "absolute right-3 top-3 rounded-full border border-border px-2.5 py-1 font-mono text-[11px] font-semibold",
+              "event-date-chip absolute right-3 top-3 rounded-full border border-border px-2.5 py-1 font-mono text-[11px] font-semibold",
               urgency
                 ? "bg-accent text-accent-foreground"
                 : "bg-white/95 text-black"
@@ -167,7 +167,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
           {/* Source chip */}
           <span
             className={cn(
-              "absolute bottom-3 left-3 rounded-full border border-border px-2.5 py-0.5 font-mono text-[10px] font-semibold text-black",
+              "event-source-chip absolute bottom-3 left-3 rounded-full border border-border px-2.5 py-0.5 font-mono text-[10px] font-semibold text-black",
               SOURCE_COLORS[event.source] || "bg-white/95"
             )}
           >
@@ -220,7 +220,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
           ) : null}
 
           {description ? (
-            <p className="mb-4 mt-2 line-clamp-2 break-words text-sm leading-relaxed text-muted-foreground">
+            <p className="event-desc mb-4 mt-2 line-clamp-2 break-words text-sm leading-relaxed text-muted-foreground">
               {description}
             </p>
           ) : null}
@@ -240,7 +240,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                   href={calendarUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Add to Google Calendar"
+                  aria-label="Add to Google Calendar" data-extra
                   title="Add to calendar"
                   className="flex size-11 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >
@@ -252,7 +252,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
                   href={directions}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Get directions"
+                  aria-label="Get directions" data-extra
                   title="Directions"
                   className="flex size-11 items-center justify-center rounded-xl text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                 >

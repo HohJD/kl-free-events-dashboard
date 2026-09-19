@@ -27,8 +27,8 @@ try {
       const page = await context.newPage();
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
-      await page.goto(`${base}/#collect`);
-      await page.getByRole('combobox', { name: 'Filter events by state' }).waitFor();
+      await page.goto(`${base}/`);
+      await page.getByRole('textbox', { name: 'Search events' }).waitFor();
       await page.evaluate(() => document.fonts.ready);
       assert.equal(await page.getByRole('button', { name: /give something away|sign in|upload|collect/i }).count(), 0);
       assert.equal(await page.locator('input[type=file]').count(), 0);
@@ -61,10 +61,13 @@ try {
       const search = page.getByRole('textbox', { name: 'Search events' });
       await search.fill('no-result-layout-test-12345');
       await page.getByRole('heading', { name: 'No events found' }).waitFor();
-      await page.getByRole('button', { name: 'Clear', exact: true }).click();
-      const state = page.getByRole('combobox', { name: 'Filter events by state' });
+      await page.getByRole('button', { name: 'Clear search and filters' }).click();
+      // Phones pick the state inside the Filters panel; wider screens use the inline picker.
+      if (width < 768) await page.getByRole('button', { name: /^Filters/ }).click();
+      const state = width < 768 ? page.getByRole('dialog').getByRole('combobox', { name: 'Location' }) : page.getByRole('combobox', { name: 'Filter events by state' });
       assert.equal(await state.locator('option').count(), 18);
       await state.selectOption('perlis');
+      if (width < 768) await page.getByRole('dialog').getByRole('button', { name: /^Show/ }).click();
       await page.waitForTimeout(100);
       await page.getByRole('button', { name: 'Map view', exact: true }).click();
       await page.locator('.leaflet-container').waitFor();
