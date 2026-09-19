@@ -11,8 +11,8 @@ export function Footer() {
           for Malaysia’s next generation
         </p>
         <p className="max-w-2xl text-xs leading-relaxed text-muted-foreground">
-          Events sourced from Meetup, Eventbrite, Luma, AllEvents, Devpost &
-          Devfolio — updates start daily at 10 AM MYT. Always confirm details on the
+          Events sourced from Eventbrite, Luma, AllEvents, Devpost, Google Developer
+          Groups and MLH, updated daily. Always confirm details on the
           event page, including student eligibility and registration requirements.
         </p>
       </div>

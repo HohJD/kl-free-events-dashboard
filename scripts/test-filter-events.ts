@@ -5,6 +5,7 @@ import { googleCalendarUrl } from '../lib/calendar';
 import { categorize, type Event } from '../lib/events';
 import { focusEvents } from '../lib/event-discovery';
 import { filterResources, type Resource } from '../lib/resources';
+import { columnLetter, scalePosition, tripLabel, money } from '../lib/flights';
 
 const now = new Date('2026-09-07T16:30:00Z');
 const event = (name: string, date: string, state?: string): Event => ({
@@ -55,4 +56,11 @@ const resources = [resource('Closed scholarship', 'scholarship', '2026-09-07'), 
 assert.deepEqual(filterResources(resources, 'all', false, '', '2026-09-08').map(r => r.title), ['Tech scholarship', 'Rolling fund', 'Data intern', 'Spa intern']);
 assert.deepEqual(filterResources(resources, 'internship', true, '', '2026-09-08').map(r => r.title), ['Data intern']);
 assert.deepEqual(filterResources(resources, 'all', false, 'rolling', '2026-09-08').map(r => r.title), ['Rolling fund']);
+assert.deepEqual([0, 25, 26, 27, 701].map(columnLetter), ['A', 'Z', 'AA', 'AB', 'ZZ']);
+assert.equal(scalePosition(2000, [2000, 3000, 4000]), 0);
+assert.equal(scalePosition(4000, [2000, 3000, 4000]), 1);
+assert.equal(scalePosition(3000, [3000]), 0);
+assert.equal(tripLabel('return-14'), 'Return · 2 weeks');
+assert.equal(money(2450.4), 'RM 2,450');
+assert.equal(money(null), '');
 console.log('Focus/category, state, calendar, stale expiry and Malaysia-date regression tests passed.');

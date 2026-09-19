@@ -206,7 +206,7 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
           ) : null}
 
           {event.stale && (
-            <p className="mt-2 text-xs font-medium text-muted-foreground">Source unavailable during the latest check — confirm details before going.</p>
+            <p className="mt-2 text-xs font-medium text-muted-foreground">Source unavailable during the latest check. Confirm details before going.</p>
           )}
           <h3 className="listing-title mt-1">
             {event.name}

@@ -10,6 +10,7 @@
 - Scraper regression command now includes `test_event_quality` as well as `test_kl_events_scraper`.
 
 - `/resources` (September 19) lists student scholarships, internships and free tools from `resources.json`, written by the scraper and copied by the Hermes script. `lib/resources.ts` is client-safe (types, filtering); `lib/load-resources.ts` reads the file at build time. A missing file renders an empty page. The events page links to it and accepts `?category=Hackathon` deep links.
+- `/flights` (September 20) is a spreadsheet-style KL ⇄ London fare tracker read from `flights.json` (scraper `flight_prices.py`, copied by Hermes). Sheets: Summary (cheapest per month), one per direction (every departure date, one-way and 2/3-week returns, Buy/Wait/Typical signal), Google check, How to read. Missing data renders a pending state. `lib/flights.ts` is client-safe; `lib/load-flights.ts` reads the file. Do not commit `flights.json` or other scraper data files from a worktree: the live folder's copies change daily and block fast-forward merges.
 - Events carry `quality_score` and `topics` from the scraper. "Top picks" (default) ranks by score in 10-point bands, soonest first within a band; "Soonest" is plain date order.
 
 - Run `npm run lint`, `npx tsc --noEmit`, `npx tsx scripts/test-filter-events.ts`, and `npm run build` for changes to the dashboard. `tsx` is pinned as a dev dependency.
