@@ -36,4 +36,13 @@ assert.equal(categorize('Community badminton match', '', 'eventbrite'), 'Sports'
 const mixed = [{ ...events[0], category: 'Tech' }, { ...events[1], category: 'Social' }, { ...events[2], category: 'Careers' }];
 assert.equal(focusEvents(mixed, true).length, 2);
 assert.equal(focusEvents(mixed, false).length, 3);
+const scored = [
+  { ...events[0], name: 'Soon general', quality_score: 45 },
+  { ...events[2], name: 'Later hackathon', quality_score: 88 },
+  { ...events[1], name: 'Soon tech', quality_score: 82 },
+  { ...events[1], name: 'Unscored', quality_score: undefined },
+];
+assert.deepEqual(filterEvents(scored, '', 'all', 'all', 'upcoming', now, 'recommended').map(e => e.name), ['Soon tech', 'Later hackathon', 'Unscored', 'Soon general']);
+assert.deepEqual(filterEvents(scored, '', 'all', 'all', 'upcoming', now), filterEvents(scored, '', 'all', 'all', 'upcoming', now, 'soonest'));
+assert.equal(filterEvents(scored, '', 'all', 'all', 'upcoming', now, 'soonest').at(-1)!.name, 'Later hackathon');
 console.log('Focus/category, state, calendar, stale expiry and Malaysia-date regression tests passed.');

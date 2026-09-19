@@ -9,6 +9,11 @@ export type DateRange =
   | "upcoming"
   | "past";
 
+export type SortMode = "recommended" | "soonest";
+
+// Scraper quality score (0-100); rows from before scoring rank mid-table.
+const scoreOf = (e: Event) => (typeof e.quality_score === "number" ? e.quality_score : 50);
+
 export function malaysiaDay(now = new Date()): string {
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone: "Asia/Kuala_Lumpur", year: "numeric", month: "2-digit", day: "2-digit",
@@ -23,7 +28,8 @@ export function filterEvents(
   source: string,
   category: string,
   dateRange: DateRange,
-  now = new Date()
+  now = new Date(),
+  sort: SortMode = "soonest"
 ): Event[] {
   const q = query.trim().normalize('NFKC').toLowerCase();
   const today = malaysiaDay(now);
@@ -56,6 +62,11 @@ export function filterEvents(
     .filter((e) => !q || `${e.name} ${e.venue} ${e.description} ${e.category}`.normalize('NFKC').toLowerCase().includes(q))
     .sort((a, b) => {
       const dateOrder = (a.date || '9999-99-99').localeCompare(b.date || '9999-99-99');
+      if (sort === "recommended") {
+        // Rank in 10-point bands so near-equal scores still read soonest first.
+        const band = Math.floor(scoreOf(b) / 10) - Math.floor(scoreOf(a) / 10);
+        if (band) return band;
+      }
       return dateOrder || a.name.localeCompare(b.name);
     });
 }

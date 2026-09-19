@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Event } from "@/lib/events";
-import { filterEvents, DateRange } from "@/lib/filter-events";
+import { filterEvents, DateRange, SortMode } from "@/lib/filter-events";
 import { useFavorites } from "@/lib/use-favorites";
 import { Hero, HeroStats } from "./hero";
 import { Navbar } from "./navbar";
@@ -26,6 +26,7 @@ export function Dashboard({ events, stats }: DashboardProps) {
   const [source, setSource] = useState("all");
   const [category, setCategory] = useState("all");
   const [dateRange, setDateRange] = useState<DateRange>("upcoming");
+  const [sort, setSort] = useState<SortMode>("recommended");
   const [view, setView] = useState<ViewMode>("list");
   const [showSaved, setShowSaved] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -78,10 +79,10 @@ export function Dashboard({ events, stats }: DashboardProps) {
   }, [categoryCounts]);
 
   const filtered = useMemo(() => {
-    let result = filterEvents(focusEvents(regionalEvents, focused), query, source, category, dateRange, now);
+    let result = filterEvents(focusEvents(regionalEvents, focused), query, source, category, dateRange, now, sort);
     if (showSaved) result = result.filter((e) => favorites.has(e.link));
     return result;
-  }, [regionalEvents, focused, query, source, category, dateRange, showSaved, favorites, now]);
+  }, [regionalEvents, focused, query, source, category, dateRange, showSaved, favorites, now, sort]);
 
   const handleClear = () => {
     setQuery("");
@@ -168,6 +169,8 @@ export function Dashboard({ events, stats }: DashboardProps) {
             setCategory={chooseCategory}
             dateRange={dateRange}
             setDateRange={setDateRange}
+            sort={sort}
+            setSort={setSort}
             sources={sources}
             categories={categories}
             categoryCounts={categoryCounts}

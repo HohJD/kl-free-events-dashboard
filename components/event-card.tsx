@@ -189,6 +189,22 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
             </p>
           ) : null}
 
+          {event.admission_note || event.topics?.includes('student') ? (
+            <div className="mb-1 flex flex-wrap items-center gap-1.5 text-xs">
+              {event.topics?.includes('student') ? (
+                <span className="rounded-full border border-border/70 bg-muted px-2 py-0.5 font-semibold text-foreground">For students</span>
+              ) : null}
+              {event.admission_note ? (
+                <span className="text-muted-foreground">{event.admission_note}</span>
+              ) : null}
+            </div>
+          ) : null}
+          {event.eligibility ? (
+            <p className="mb-1 line-clamp-2 break-words text-xs leading-5 text-muted-foreground">
+              Eligibility: {event.eligibility}
+            </p>
+          ) : null}
+
           {event.stale && (
             <p className="mt-2 text-xs font-medium text-muted-foreground">Source unavailable during the latest check — confirm details before going.</p>
           )}

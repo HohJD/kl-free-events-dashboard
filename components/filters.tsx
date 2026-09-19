@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { Search, X, LayoutGrid, Map, Heart } from "lucide-react";
 import { motion } from "framer-motion";
-import { DateRange } from "@/lib/filter-events";
+import { DateRange, SortMode } from "@/lib/filter-events";
 import { cn } from "@/lib/utils";
 
 const dateTabs: { value: DateRange; label: string }[] = [
@@ -25,6 +25,8 @@ interface FiltersProps {
   setCategory: (c: string) => void;
   dateRange: DateRange;
   setDateRange: (d: DateRange) => void;
+  sort: SortMode;
+  setSort: (s: SortMode) => void;
   sources: string[];
   categories: string[];
   categoryCounts: Record<string, number>;
@@ -70,6 +72,8 @@ export function Filters({
   setCategory,
   dateRange,
   setDateRange,
+  sort,
+  setSort,
   sources,
   categories,
   categoryCounts,
@@ -186,6 +190,15 @@ export function Filters({
               {t.label}
             </Pill>
           ))}
+          <span className="mx-1.5 h-4 w-px shrink-0 self-center bg-border" />
+          <div role="group" aria-label="Sort events" className="flex shrink-0 gap-1">
+            <Pill active={sort === "recommended"} onClick={() => setSort("recommended")}>
+              Top picks
+            </Pill>
+            <Pill active={sort === "soonest"} onClick={() => setSort("soonest")}>
+              Soonest
+            </Pill>
+          </div>
         </div>
 
         {/* Category + source tabs */}

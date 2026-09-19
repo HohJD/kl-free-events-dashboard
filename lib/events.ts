@@ -23,6 +23,9 @@ export interface RawEvent {
   eligibility?: string;
   event_format?: string;
   date_kind?: string;
+  quality_score?: number;
+  topics?: string[];
+  admission_note?: string;
   also_listed_on?: { source: string; link: string }[];
 }
 
