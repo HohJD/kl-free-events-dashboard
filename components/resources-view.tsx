@@ -2,16 +2,16 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Search, GraduationCap, Briefcase, Wrench, Trophy } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Search, GraduationCap, Briefcase, BriefcaseBusiness, Wrench, Trophy } from "lucide-react";
 import { Resource, ResourceKind, RESOURCE_KINDS, filterResources } from "@/lib/resources";
 import { malaysiaDay } from "@/lib/filter-events";
 import { cn } from "@/lib/utils";
 import { Footer } from "./footer";
 import { ThemeToggle } from "./theme-toggle";
 
-const KIND_ICON = { scholarship: GraduationCap, internship: Briefcase, tool: Wrench };
-const KIND_LABEL: Record<ResourceKind, string> = { scholarship: "Scholarship", internship: "Internship", tool: "Free tool" };
-const SECTION_TITLE: Record<ResourceKind, string> = { scholarship: "Scholarships closing soon", internship: "Internships", tool: "Free tools & learning" };
+const KIND_ICON = { scholarship: GraduationCap, internship: Briefcase, graduate: BriefcaseBusiness, tool: Wrench };
+const KIND_LABEL: Record<ResourceKind, string> = { scholarship: "Scholarship", internship: "Internship", graduate: "Graduate role", tool: "Free tool" };
+const SECTION_TITLE: Record<ResourceKind, string> = { scholarship: "Scholarships closing soon", internship: "Internships", graduate: "Graduate programmes & fresh-grad roles", tool: "Free tools & learning" };
 const PREVIEW = 6;
 
 function Pill({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
@@ -75,9 +75,9 @@ function ResourceCard({ row, today }: { row: Resource; today: string }) {
           </p>
         ) : null}
         <dl className="mt-2 space-y-1 text-xs leading-5 text-muted-foreground">
-          {row.amount ? <div className="line-clamp-2 break-words"><dt className="inline font-semibold text-foreground">{row.kind === "internship" ? "Allowance: " : "Value: "}</dt><dd className="inline">{row.amount}</dd></div> : null}
+          {row.amount ? <div className="line-clamp-2 break-words"><dt className="inline font-semibold text-foreground">{row.kind === "internship" ? "Allowance: " : row.kind === "graduate" ? "Salary: " : "Value: "}</dt><dd className="inline">{row.amount}</dd></div> : null}
           {row.kind !== "tool" && row.location ? <div><dt className="inline font-semibold text-foreground">Where: </dt><dd className="inline">{row.location}</dd></div> : null}
-          {row.eligibility && row.kind !== "internship" ? <div className="break-words"><dt className="inline font-semibold text-foreground">Who: </dt><dd className="inline">{row.eligibility}</dd></div> : null}
+          {row.eligibility && row.kind !== "internship" && row.kind !== "graduate" ? <div className="break-words"><dt className="inline font-semibold text-foreground">Who: </dt><dd className="inline">{row.eligibility}</dd></div> : null}
           {row.fields ? <div className="line-clamp-2 break-words"><dt className="inline font-semibold text-foreground">Fields: </dt><dd className="inline">{row.fields}</dd></div> : null}
         </dl>
         {row.summary ? <p className="mb-4 mt-2 line-clamp-3 break-words text-sm leading-relaxed text-muted-foreground">{row.summary}</p> : <div className="mb-4" />}

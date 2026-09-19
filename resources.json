@@ -1,12 +1,91 @@
 {
-  "generated_at": "2026-09-19T13:37:15.793393+00:00",
-  "count": 180,
+  "generated_at": "2026-09-19T15:05:54.573513+00:00",
+  "count": 271,
   "counts": {
     "scholarship": 42,
-    "internship": 121,
+    "internship": 126,
+    "graduate": 86,
     "tool": 17
   },
   "resources": [
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Junior Operation Specialist (Cloud System)",
+      "organization": "Hiredly X",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-hiredly-x-job-junior-operation-specialist-cloud-system",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-18",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 3500 - 4000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Hardware / Network / Infrastructure (On-Premises / Cloud)",
+      "summary": "Skills: Customer Support, Operations, Amazon Web Services, Alibaba Cloud",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/750524cc-6b5d-48c8-8438-0b5b1c3f6aea/hiredly-x-1625832773.png",
+      "verified": true,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 91
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Cyber Security Engineer (Penetration Testing)",
+      "organization": "Hiredly X",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-hiredly-x-job-cyber-security-engineer-penetration-testing",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-27",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 3800 - 10000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Cybersecurity / Network Security",
+      "summary": "Skills: Cybersecurity Threat Identification, Penetration Testing, Web Application Penetration Testing, Mobile Application Penetration Testing, Vulnerability Assessments",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/750524cc-6b5d-48c8-8438-0b5b1c3f6aea/hiredly-x-1625832773.png",
+      "verified": true,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 91
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Software Engineer/Senior Software Engineer (POS+ Platform Development)",
+      "organization": "Hiredly X",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-hiredly-x-job-software-engineer-senior-software-engineer-pos-platform-development",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-21",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 3500 - 6000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Software Development & QA / Testing",
+      "summary": "Skills: Software Development, Software Development Life Cycle, Point Of Sale, Windows App Development, ASP.NET, .NET Framework, Windows Presentation Foundation, REST API Development",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/750524cc-6b5d-48c8-8438-0b5b1c3f6aea/hiredly-x-1625832773.png",
+      "verified": true,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 91
+    },
     {
       "kind": "internship",
       "source": "hiredly",
@@ -30,7 +109,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -56,7 +135,85 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 83
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Mandarin Digital Operation Assistant",
+      "organization": "Aztra Global Marketing",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-aztra-global-marketing-job-mandarin-digital-operation-assistant",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-17",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 3000 - 4000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Clerical, Administrative & Secretarial, Data Science & Analytics",
+      "summary": "Skills: Administrative Support",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/030a3b82-c01a-4ffa-8b52-a9e795f88b60/company_logo/original/09c0b237-8d64-4b70-afb1-27de93409185-Company%20Logo.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 83
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Software Support",
+      "organization": "TechDevs",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-techdevs-job-software-support",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-17",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 2500 - 3500 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "System & IT Helpdesk / Database Administrator",
+      "summary": "Skills: .NET Framework, Microsoft SQL Servers, JavaScript (Programming Language), CSS Frameworks, HyperText Markup Language (HTML), Vue.js (Javascript Library), Blazor, Mandarin Chinese",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/738ad765-7c8d-4f31-bc3a-74953f069e5c/techdevs-sdn-bhd-1640577124.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 83
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Frontend Developer",
+      "organization": "Kingdom Digital",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-kingdom-digital-job-frontend-developer-3",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-15",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 3000 - 4000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Digital Marketing, Software Development & QA / Testing",
+      "summary": "Skills: HTML, CSS, JavaScript, Frontend Development, API Integration, Marketing Automation, Pardot, Landing Page Development",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/3cf575f7-e71e-4b47-9b8c-fdd26d75c7d3/company_logo/original/b08afa0e-88a2-455f-9b73-5b488fd9211b-KD%20LOGO%20-%20WHITE%20on%20purple%20background.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -82,7 +239,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -108,7 +265,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -134,7 +291,33 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 83
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Consultant, Digital & AI Solutions",
+      "organization": "AXCELASIA GROUP",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-axcelasia-group-job-consultant-digital-ai-solutions",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-14",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 4000 - 4500 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Computer Engineering, Data Science & Analytics, General Engineering",
+      "summary": "Skills: Digital Transformation, Team Leadership, Personal Integrity, Teamwork, Professional Presentation",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/fe245723-8a68-459c-8889-7157fd39aa92/company_logo/original/e322c258-8128-4322-859f-d96d0b330cea-AX%20logo%20Fiona.jpeg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -160,7 +343,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -186,7 +369,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -212,7 +395,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -238,7 +421,59 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 83
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Risk Analyst (Night Shift - Fully Remote)",
+      "organization": "Aetherion Dataworks Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-aetherion-dataworks-sdn-bhd-job-risk-analyst-night-shift-fully-remote",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-11",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 3700 - 4000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Data Science & Analytics",
+      "summary": "Skills: Microsoft Excel, Microsoft Office, KYC Verification, Data Analysis, Transactional Data Analysis, Risk Assessment, Report Writing, Trend Monitoring",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/b1b0a7a7-4780-4d94-a66d-e92e48bbb072/company_logo/original/e4c8b26c-0ca8-465d-bfae-b1ebb5f2cdd8-AE-Profile-Photo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 83
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "ERP Helpdesk Support Engineer (Mandarin Speaker)",
+      "organization": "SIMPLEXITY TECH (MALAYSIA) SDN. BHD.",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-simplexity-tech-malaysia-sdn-bhd-job-erp-helpdesk-support-engineer-mandarin-speaker-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-10",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 2500 - 5000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Computer Engineering, Data Science & Analytics, System & IT Helpdesk / Database Administrator",
+      "summary": "Skills: ERP Systems Knowledge, Help Desk Support, RemedyForce (Ticket Management Software), Database Systems, Web Applications, Data Analysis, Information Technology, Mandarin Chinese",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/e5c7ed7a-1883-4faa-aa3d-8b55808d6726/company_logo/original/b215a8cd-e7d5-4019-9266-017e532c0f83-Screenshot%202025-10-29%20at%2010.59.32%E2%80%AFAM.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -264,7 +499,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -290,7 +525,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -316,7 +551,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -342,7 +577,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -368,7 +603,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -394,7 +629,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -420,7 +655,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -446,7 +681,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -472,7 +707,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -498,7 +733,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -524,7 +759,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -550,7 +785,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -576,7 +811,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -602,7 +837,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -628,7 +863,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -654,7 +889,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -680,7 +915,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -706,7 +941,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -732,7 +967,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -758,7 +993,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -784,7 +1019,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -810,7 +1045,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -836,7 +1071,33 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 83
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Data Center Operation Technician",
+      "organization": "SIMPLEXITY TECH (MALAYSIA) SDN. BHD.",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-simplexity-tech-malaysia-sdn-bhd-job-data-center-operation-technician",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-28",
+      "location": "Johor",
+      "state": "johor",
+      "amount": "RM 3000 - 6000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "IT Product Management, Supply Chain & Logistics, System & IT Helpdesk / Database Administrator",
+      "summary": "Skills: Hardware Support, Data Center Infrastructure Management (CIM), Change Management, Inventory Control, Structured Cabling, Asset Management, Data Center Operations, Technical Support",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/e5c7ed7a-1883-4faa-aa3d-8b55808d6726/company_logo/original/b215a8cd-e7d5-4019-9266-017e532c0f83-Screenshot%202025-10-29%20at%2010.59.32%E2%80%AFAM.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -862,7 +1123,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -888,7 +1149,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -914,7 +1175,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -940,7 +1201,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -966,7 +1227,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -992,7 +1253,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1018,7 +1279,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1044,7 +1305,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1070,7 +1331,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1096,7 +1357,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1122,7 +1383,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1148,7 +1409,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1174,7 +1435,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1200,7 +1461,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 83
     },
     {
@@ -1226,7 +1487,33 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 78
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Intel Collection Associate | Trust & Safety (Geopolitical) - Support Taiwan Market",
+      "organization": "Accenture Malaysia",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-accenture-malaysia-job-intel-collection-associate-trust-safety-geopolitical-support-taiwan-market",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-12",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Cybersecurity / Network Security, General IT, Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/5115b8cd-d506-4125-8df1-5fe8b8a23a5f/company_logo/original/011d52d4-e30c-4daa-ad1e-3a0572d29bc6-accenturelogo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 78
     },
     {
@@ -1252,7 +1539,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 78
     },
     {
@@ -1278,7 +1565,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 78
     },
     {
@@ -1304,7 +1591,33 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 78
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Technical Operations Associate",
+      "organization": "Involve Asia",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-involve-asia-job-technical-operations-associate",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-01",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Software Development & QA / Testing",
+      "summary": "Skills: Quality Assurance, User Acceptance Testing (UAT), Troubleshooting (Problem Solving), Application Programming Interface (API), JavaScript (Programming Language)",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/e5225222-b8b4-4c01-ba0e-4992f805c316/involve-asia-1561019843.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 78
     },
     {
@@ -1330,7 +1643,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 78
     },
     {
@@ -1356,7 +1669,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 78
     },
     {
@@ -1382,8 +1695,138 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 78
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Graduate Program: Technology Consultant",
+      "organization": "SmartB Solutions",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-smartb-solutions-job-graduate-program-technology-consultant-2",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-06-30",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 3800 - 4500 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "General IT, IT Project Management, Software Development & QA / Testing",
+      "summary": "Skills: Problem Solving, Technology Solutions, Communication, Analytical Skills",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b1a35941-69f1-40a6-9529-930000f4c6f6/smartb-solutions-sdn-bhd-1629121502.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 78
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Software Support",
+      "organization": "J-TECH SYSTEM SDN BHD",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-j-tech-system-sdn-bhd-job-software-support",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-19",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "System & IT Helpdesk / Database Administrator",
+      "summary": "Skills: Accounting Software, Troubleshooting (Problem Solving), Help Desk Support",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/d415ddf3-2bbc-47cf-a098-eb7edd362eaf/company_logo/original/7486577a-6673-4d8f-bc09-ed4ec180b419-9ceb45ae-2c8f-4c51-855c-4a9c2cbf242c-company-malaysia-j-tech-system-sdn-bhd-1777344744044-jpeg.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 73
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Web Application Developer",
+      "organization": "SILVERLAKE",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-silverlake-job-web-application-developer",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-12",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Software Development & QA / Testing",
+      "summary": "Skills: Software Development, Software Engineering, Spring Framework, Object-Oriented Programming (OOP), JavaScript (Programming Language), SQL (Programming Language), Spring Boot, HyperText Markup Language (HTML)",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/2957bb0d-8dcc-455e-957a-6ba5b00c22f2/company_logo/original/4b9179c9-baa3-4033-8ea6-65003c2495d2-SilverlakeAxis_logo.svg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 73
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Data Scientist",
+      "organization": "AirAsia X",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-airasia-x-job-data-scientist-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-07-23",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "HR Operations (Payroll, Admin, Office Management), HR Strategy / L&D / Performance Management, Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a1264905-f2e9-4ef5-ab36-47586e649ea4/company_logo/original/5cccd482-7c0f-4abe-b796-aa8baffcd172-airasia_logo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 73
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Equipment Engineer",
+      "organization": "EVE Energy Malaysia SDN BHD",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-eve-energy-malaysia-sdn-bhd-job-equipment-engineer",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-07-16",
+      "location": "Kedah",
+      "state": "kedah",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Electrical Engineering, Hardware / Network / Infrastructure (On-Premises / Cloud)",
+      "summary": "Skills: HVAC, Electrical Engineering, Mechanical Engineering, Civil Engineering, Equipment Maintenance, Maintenance Engineering",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/bfc04d9f-3cd6-4ac4-90bb-219987e6ad35/company_logo/original/d5f1db44-100d-4caf-9aab-0895b98e43ee-EVE_LOGO.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 73
     },
     {
       "kind": "tool",
@@ -1405,7 +1848,7 @@
         "tech",
         "career"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1427,7 +1870,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1449,7 +1892,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1471,7 +1914,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1493,7 +1936,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1515,7 +1958,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1537,7 +1980,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1559,7 +2002,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1581,7 +2024,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1603,7 +2046,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1625,7 +2068,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1647,7 +2090,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1670,7 +2113,7 @@
         "tech",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1693,7 +2136,7 @@
         "tech",
         "career"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1715,7 +2158,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1737,7 +2180,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 70
     },
     {
@@ -1763,8 +2206,84 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 68
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Solution Engineer (Cybersecurity)",
+      "organization": "Bright Nexus (M) Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-bright-nexus-m-sdn-bhd-job-solution-engineer-cybersecurity",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-04-10",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 3300 - 6000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Cybersecurity / Network Security",
+      "summary": "Skills: Cybersecurity Risk Management, Cybersecurity Compliance",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/4274537c-6678-49b8-837a-131cbb4d4372/bright-nexus-m-sdn-bhd-1562819462.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 68
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "ERP Functional Consultant",
+      "organization": "Hiredly X",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-hiredly-x-job-erp-functional-consultant-1",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-11",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 3000 - 9000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "System & IT Helpdesk / Database Administrator",
+      "summary": "Skills: QAD Cloud ERP, ERP Systems Knowledge, Warehouse Management Systems, System Implementation",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/750524cc-6b5d-48c8-8438-0b5b1c3f6aea/hiredly-x-1625832773.png",
+      "verified": true,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 66
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Junior Technical Business Analyst",
+      "organization": "Hiredly X",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-hiredly-x-job-junior-technical-business-analyst",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-07-23",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 3000 - 4500 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "Skills: Business Analysis, Software Business Analysis, Software Solutions, Technology Solutions, Software As A Service (SaaS), Enterprise Application Software, Cloud Services, Stakeholder Management",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/750524cc-6b5d-48c8-8438-0b5b1c3f6aea/hiredly-x-1625832773.png",
+      "verified": true,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 66
     },
     {
       "kind": "internship",
@@ -1788,7 +2307,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -1813,7 +2332,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -1838,7 +2357,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -1863,7 +2382,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -1888,7 +2407,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -1913,7 +2432,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -1938,7 +2457,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -1963,7 +2482,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -1988,7 +2507,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2013,7 +2532,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2038,7 +2557,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2063,7 +2582,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2088,7 +2607,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2113,7 +2632,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2138,7 +2657,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2163,7 +2682,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2188,7 +2707,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2213,7 +2732,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2238,7 +2757,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2263,7 +2782,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2288,7 +2807,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2313,7 +2832,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2338,7 +2857,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2363,7 +2882,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2388,7 +2907,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2413,7 +2932,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2438,7 +2957,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2463,7 +2982,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2488,7 +3007,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2513,7 +3032,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2538,7 +3057,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2563,7 +3082,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2588,7 +3107,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2613,7 +3132,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2638,7 +3157,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2663,7 +3182,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2688,7 +3207,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2713,7 +3232,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2738,7 +3257,32 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "IT Helpdesk (Fresh Graduate)",
+      "organization": "MyGENO.com",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-mygeno-com-job-it-helpdesk-fresh-graduate-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-11",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 2800 - 3500 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "General IT, System & IT Helpdesk / Database Administrator",
+      "summary": "Skills: IT Service Management, Help Desk Support",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/bf95c95d-199f-412b-ae63-b145cd459305/geno-management-solutions-sdn--1600666522.jpeg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2763,7 +3307,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2788,7 +3332,32 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "Internship Marketing",
+      "organization": "RoboThink",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-robothink-job-internship-marketing",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-10",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 800 - 1000 / month",
+      "eligibility": "Internship",
+      "fields": "Digital Marketing",
+      "summary": "Skills: Digital Marketing, Social Media Management, Content Creation, Copywriting, Google Analytics, Canva",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/f04b70d3-e66e-4280-b53f-aa67a8ae5ff2/company_logo/original/91c0c437-056a-48d5-ad36-9b4ec3206877-RoboThink%20Logo%20JPG.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2813,7 +3382,32 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Business Strategy & Financial Analyst",
+      "organization": "Aspial Production Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-aspial-production-sdn-bhd-job-business-strategy-financial-analyst",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-03",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 3000 - 4500 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Corporate Finance / Investment, Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "Skills: Corporate Finance, Business Development, Data Analysis, Analytical Skills, Financial Analysis, Business Strategies",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/85b53934-92d0-4256-a899-90feb30584fb/company_logo/original/ff0ed066-d7cb-48e2-a7c1-32dfd1166f45-ASPIAL%20Production%20LOGO.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2838,7 +3432,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2863,7 +3457,32 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Insurance Advisor",
+      "organization": "TRUE ADVISORS SDN BHD",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-true-advisors-sdn-bhd-job-insurance-advisor",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-28",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 4000 - 10000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Customer Service, Financial Services & Banking",
+      "summary": "Skills: Communication, Interpersonal Communications, Emotional Intelligence, Business Development, Time Management, Caregiving, Willingness To Learn, Sales",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/f82cc678-0b02-4a11-afcc-ca6481087e42/company_logo/original/0d339071-c3e8-4ef5-b4c2-3c85ffcf6539-FullLogo%202.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2888,7 +3507,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2913,7 +3532,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2938,7 +3557,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2963,7 +3582,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -2988,7 +3607,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -3013,7 +3632,345 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Security Analyst Level 1",
+      "organization": "Ensign Infosecurity (Malaysia)",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-ensign-infosecurity-malaysia-job-security-analyst-level-1",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-04",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Cybersecurity / Network Security, General IT, Hardware / Network / Infrastructure (On-Premises / Cloud)",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/802b405b-929a-471d-9f2d-51b0c4d09943/company_logo/original/bd2fb354-842c-4388-96c7-9332e1de8ff4-ensign_infosecurity_logo.jpeg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Software Engineer",
+      "organization": "Motorola Solutions Malaysia",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-motorola-solutions-malaysia-job-software-engineer-28",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-04",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "IT Project Management, Software Development & QA / Testing, Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a1915ab6-3c0e-46ee-ba2c-2db7c51d7475/company_logo/original/7af81a09-1bc1-4071-bc14-ddfbc94d5c0e-327426826_838017740635667_2186067732052708444_n.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Software Engineer Android (Fresh Graduate)",
+      "organization": "Motorola Solutions Malaysia",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-motorola-solutions-malaysia-job-software-engineer-android-fresh-graduate",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-04",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Management Trainee, Software Development & QA / Testing, Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a1915ab6-3c0e-46ee-ba2c-2db7c51d7475/company_logo/original/7af81a09-1bc1-4071-bc14-ddfbc94d5c0e-327426826_838017740635667_2186067732052708444_n.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "[Internship] - SAP Programmer Job ID: REF94912C",
+      "organization": "Continental",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-continental-job-internship-sap-programmer-job-id-ref94912c-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-04",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Internship",
+      "fields": "IT Project Management, Management Trainee, Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/40eff748-a6d3-49b4-af6f-83e0d488adf8/company_logo/original/c56dd4ca-9337-4bde-ad16-d1214111a804-nuremberg-germany-november-25-2023-600nw-2392771073.webp",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "2026 bp MY Technology Graduate Programme: Products & Projects",
+      "organization": "Bp Business Service Centre Asia Sdn. Bhd.",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-bp-business-service-centre-asia-sdn-bhd-job-2026-bp-my-technology-graduate-programme-products-projects",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-04-06",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "General Product Management, General Project Management, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/7a5d991a-6e36-447f-918e-532366de36d9/bp-business-service-centre-asi-1759907590.jpeg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Java Software Engineer",
+      "organization": "SILVERLAKE",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-silverlake-job-java-software-engineer",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-18",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Software Development & QA / Testing",
+      "summary": "Skills: Java (Programming Language), Spring Boot, Software Development, Object-Oriented Programming (OOP)",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/2957bb0d-8dcc-455e-957a-6ba5b00c22f2/company_logo/original/4b9179c9-baa3-4033-8ea6-65003c2495d2-SilverlakeAxis_logo.svg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Cybersecurity",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-cybersecurity-2",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-02-23",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Cybersecurity / Network Security, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Cybersecurity",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-cybersecurity-1",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-02-23",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Cybersecurity / Network Security, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Business Intelligence Developer",
+      "organization": "Innocel Services Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-innocel-services-sdn-bhd-job-business-intelligence-developer",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-12-30",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "IT Project Management, Pre-Sales / IT Business Analyst / Business Intelligence, System & IT Helpdesk / Database Administrator",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/bef4602e-02a0-49b8-9a01-8dd74d52e738/innocel-services-sdn-bhd-1766741448.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Software Engineer",
+      "organization": "Motorola Solutions Malaysia",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-motorola-solutions-malaysia-job-software-engineer-17",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-12-03",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "IT Project Management, Software Development & QA / Testing, Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a1915ab6-3c0e-46ee-ba2c-2db7c51d7475/company_logo/original/7af81a09-1bc1-4071-bc14-ddfbc94d5c0e-327426826_838017740635667_2186067732052708444_n.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Software Engineer",
+      "organization": "Motorola Solutions Malaysia",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-motorola-solutions-malaysia-job-software-engineer-16",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-11-27",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "IT Project Management, Software Development & QA / Testing, Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a1915ab6-3c0e-46ee-ba2c-2db7c51d7475/company_logo/original/7af81a09-1bc1-4071-bc14-ddfbc94d5c0e-327426826_838017740635667_2186067732052708444_n.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Hospitality Analytics / Hotel Revenue Management",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-hospitality-analytics-hotel-revenue-management-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-09-11",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Operations (Payroll, Admin, Office Management), HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Technical Translator (Japanese Speaking)",
+      "organization": "Tyrell Systems",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-tyrell-systems-job-technical-translator-japanese-speaking",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2024-12-18",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "General Engineering, General Work, Software Development & QA / Testing",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/c7b2acc5-47be-4681-83f1-03babfc7458e/company_logo/original/9b86ce57-9627-4a91-9ae5-ca04363cebb7-image_2025-01-17_165405643.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 63
     },
     {
@@ -3035,14 +3992,14 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
       "kind": "scholarship",
       "source": "afterschool",
       "title": "Yayasan KLK Scholarship",
-      "organization": "form.jotform.com",
+      "organization": "",
       "link": "https://afterschool.my/scholarship/yayasan-klk-scholarship",
       "apply_link": "https://form.jotform.com/yayasanklk/yayasan-klk-scholarship-application",
       "deadline": "2026-09-30",
@@ -3057,7 +4014,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3079,7 +4036,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3101,7 +4058,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3123,7 +4080,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3137,7 +4094,7 @@
       "always_open": false,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "Monthly Stipend Financial support for dependents (limited) ASPE health coverage (for the Fulbright scholarship recipient only) One-time payments issued prior to the commencement of the grant Settling-In Allowance Professional Development Allowance Baggage Allowance Transit Allowance The Fulbright Malaysian Scholar grant augments the privileges normally accorded by the home institution to its staff members on sabbatical or other leave. The program also solicits the cooperation of the U.S. host institutions which may invite grantees to conduct research/lecturing using their facilities. It will enhance the application and assist the selection process if candidates have already examined appropriate affiliation at a U.S. institution. Cost-sharing from the candidate or the home institution is encouraged as this enables MACEE to offer Fulbright grants to more candidates.",
+      "amount": "Monthly Stipend Financial support for dependents (limited) ASPE health coverage (for the Fulbright scholarship recipient only) One-time…",
       "eligibility": "Malaysian; Master",
       "fields": "",
       "summary": "The Fulbright Malaysian Scholar Program is world-renowned for promoting international collaboration through academic study and professional development, fostering mutual understanding between the United States and…",
@@ -3145,7 +4102,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3167,7 +4124,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3189,7 +4146,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3214,7 +4171,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3239,7 +4196,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 60
     },
     {
@@ -3264,7 +4221,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3289,7 +4246,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3314,7 +4271,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3339,7 +4296,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3364,7 +4321,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3389,7 +4346,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3414,7 +4371,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3439,7 +4396,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3464,7 +4421,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3489,7 +4446,32 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 58
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Business Solutions Executive",
+      "organization": "Fortesvo Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-fortesvo-sdn-bhd-job-business-solutions-executive",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-12",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Mechatronics Engineering, Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "Skills: Business Development, Customer Engagement, B2B Lead Generation, Market Research, Solution Development, Proposal Writing, CRM, IoT Systems",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/ad431692-c0dc-410a-b2c0-759e434a50b2/company_logo/original/40e146cf-5c15-44e5-bea3-248504dc229c-fortesvo%20favicon%20png%2001.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3514,7 +4496,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3539,7 +4521,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3564,7 +4546,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3589,7 +4571,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 58
     },
     {
@@ -3614,8 +4596,108 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 55
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "Internship Intern / Fresh Graduate",
+      "organization": "Doublecove Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-doublecove-sdn-bhd-job-internship-intern-fresh-graduate",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-18",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 850 - 1700 / month",
+      "eligibility": "Internship",
+      "fields": "Customer Service, Food & Beverage (on-ground)",
+      "summary": "Skills: Communication, Interpersonal Skills, Teamwork, Customer Service, Administrative Support, Project Assistance, Adaptability, Initiative",
+      "image": "",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 55
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "U Mobile Management Associate (Jan 2027 Intake)",
+      "organization": "U Mobile",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-u-mobile-job-u-mobile-management-associate-jan-2027-intake",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-17",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Management Trainee",
+      "summary": "Skills: Leadership, Communication, Analytical Skills, Problem Solving, Collaboration, Adaptability, Continuous Learning, Proactivity",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a9a02c62-a94d-4758-9035-e4ca59e8d1ca/company_logo/original/09e62627-134d-4af6-a1f6-36da043f0a23-Screenshot%202026-08-14%20at%204.04.59%E2%80%AFPM.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 53
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Executive, Booking to Cash (Contract role)",
+      "organization": "AirAsia X",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-airasia-x-job-executive-booking-to-cash-contract-role",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-07-23",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Aeronautical Engineering, HR Operations (Payroll, Admin, Office Management), Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a1264905-f2e9-4ef5-ab36-47586e649ea4/company_logo/original/5cccd482-7c0f-4abe-b796-aa8baffcd172-airasia_logo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 53
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Maxis Graduate Programme Associate 2026",
+      "organization": "Maxis Communications",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-maxis-communications-job-maxis-graduate-programme-associate-2026",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-07-03",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Management Trainee",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/95681798-f6b2-4ed8-8a0f-228f57c9a0ed/company_logo/original/7b43fa02-9f60-47db-8dc6-14ea1395a2f7-maxis_logo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 53
     },
     {
       "kind": "scholarship",
@@ -3636,7 +4718,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3658,7 +4740,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3680,7 +4762,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3702,7 +4784,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3724,7 +4806,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3746,7 +4828,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3768,7 +4850,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3790,7 +4872,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3812,7 +4894,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3834,7 +4916,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3856,7 +4938,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3878,7 +4960,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3900,7 +4982,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3922,7 +5004,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3936,7 +5018,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "The 2026 High Achievers Scholarship - South East Asia and North East Asia will provide a reduced tuition fee for the relevant Kaplan Business School undergraduate or postgraduate degree to any student who meets the eligibility criteria and is ready to enrol in one of its courses.",
+      "amount": "The 2026 High Achievers Scholarship - South East Asia and North East Asia will provide a reduced tuition fee for the relevant Kaplan…",
       "eligibility": "All Nationalities; Diploma, Degree, Master",
       "fields": "",
       "summary": "To nurture future business leaders, the Kaplan Business School is offering a limited number of High Achievers Scholarships to students who demonstrate outstanding academic merit.",
@@ -3944,7 +5026,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3966,7 +5048,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -3988,7 +5070,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4010,7 +5092,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4032,7 +5114,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4054,7 +5136,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4068,7 +5150,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "Tuition fee waiver up to RM20,000 for the whole course, subject to meeting the scholarship maintenance conditions Monash University Malaysia reserves the right to change the terms and conditions of the award as and when required without prior notice.",
+      "amount": "Tuition fee waiver up to RM20,000 for the whole course, subject to meeting the scholarship maintenance conditions Monash University…",
       "eligibility": "All Nationalities; Diploma",
       "fields": "",
       "summary": "The Monash Diploma Merit Scholarship is an award for students planning to enter the Diploma of Business course at Monash University Malaysia.",
@@ -4076,7 +5158,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4098,7 +5180,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4112,7 +5194,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "Up to RM20,000 a year in course fees or the actual cost, whichever is lower. Up to RM2,000 in allowances for learning aids including books, computer, stationeries and other materials per semester or up to RM4,000 per year. Up to a maximum of RM9,000 allowance per year or RM750 per month. There will be no bond to this scholarship and the recipients are not required to repay the amount of scholarship awarded. Mentoring and Coaching Our readily available pool of mentors, drawn from PIDM’s own workforce as well as scholars’ alumnus are available to all scholars in providing support, consistent and continuous mentoring and coaching throughout the programme. Scholars can tap and leverage on the experiences from the mentoring pool. Internship Programme As part of the strategic design of the programme, graduates may be offered paid internship opportunities in PIDM to apply what they have learned in an operational context (subject to a minimum ‘Cumulative Grade Point Average’ (CGPA) of 3.00 or a minimum of ‘Second Class Upper’ in the final examinations).",
+      "amount": "Up to RM20,000 a year in course fees or the actual cost, whichever is lower. Up to RM2,000 in allowances for learning aids including books,…",
       "eligibility": "Malaysian; Degree",
       "fields": "",
       "summary": "The scholarship is awarded to annually to up to 20 eligible Malaysian students and supports up to four years of local undergraduate study.",
@@ -4120,7 +5202,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4142,7 +5224,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4164,7 +5246,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4178,7 +5260,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "For Bachelor’s Degree Programme – UEC / STPM / A-Level Achievers: Every ‘A’ will receive a 2.5% scholarship. – Foundation / Diploma Achievers: A CGPA of 3.5 and above will receive a 10% scholarship. For Diploma and Foundation Programme – UEC / SPM / O-Level Achievers: Every ‘A’ will receive a 2.5% scholarship.",
+      "amount": "For Bachelor’s Degree Programme – UEC / STPM / A-Level Achievers: Every ‘A’ will receive a 2.5% scholarship. – Foundation / Diploma…",
       "eligibility": "Malaysian; Diploma, Degree",
       "fields": "",
       "summary": "The Raffles University Merit Scholarship is a scholarship offered to prospective students achieving A(s) in UEC / SPM / O Level / STPM / A Level / Foundation / Diploma.",
@@ -4186,7 +5268,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4200,7 +5282,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "Entry Scholarship Quantum# RM 6,000/Year RM 11,000/Year STPM ≥ CGPA 3.22 ≥ CGPA 3.55 Cambridge GCE A Level ABB/BBB/AAC/ABC AAA/AAB Australian Matriculation ≥ ATAR 80 ≥ ATAR 90 UEC 11 - 15 pts 10 pts and below IB Diploma Programme ≥ 29 ≥ 33 Foundation/Matriculation/Diploma from recognised education institutions in Malaysia ≥ CGPA 3.60 ≥ CGPA 3.80",
+      "amount": "Entry Scholarship Quantum# RM 6,000/Year RM 11,000/Year STPM ≥ CGPA 3.22 ≥ CGPA 3.55 Cambridge GCE A Level ABB/BBB/AAC/ABC AAA/AAB…",
       "eligibility": "All Nationalities; Degree",
       "fields": "",
       "summary": "The Sunway University Undergraduate Programmes Scholarship is available for both local and international students.",
@@ -4208,7 +5290,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4230,7 +5312,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4244,7 +5326,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "SPM Achievements* IGCSE O-Level Achievements* Foundation in Business Foundation in Science Scholarship Amount**(RM) 9A+/A and above (Min 8A+) 8A*/A and above (Min 6A*) 13,320 13,320 9A+/A and above (Min 6A+) 7A*/A and above (Min 4A*) 8,000 8,000 9A+/A/A- 7A*/A 7,000 7,000 8A+/A/A- 6A*/A 6,000 6,000 7A+/A/A- 5A*/A 5,000 5,000 6A+/A/A- 4A*/A 4,000 4,000 5A+/A/A- 3A*/A 3,000 3,000 3A+/A/A- - 2,000 2,000",
+      "amount": "SPM Achievements* IGCSE O-Level Achievements* Foundation in Business Foundation in Science Scholarship Amount**(RM) 9A+/A and above (Min…",
       "eligibility": "All Nationalities; Pre University",
       "fields": "",
       "summary": "This scholarship is offered to new intake Malaysian students pursuing the Foundation programme at UCSI College. It is open to those who obtained at least 5As in the SPM or 3As in the IGCSE O-Level Examination",
@@ -4252,7 +5334,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4266,7 +5348,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "All Foundation & Diploma Programmes (Conventional / Online) Grade (SPM/O-Levels and equivalent) Entitlement 7 As** and above 100% off total tuition fees* 4 – 6 As** 20% off total tuition fees* 1 – 3 As** 10% off total tuition fees*",
+      "amount": "All Foundation & Diploma Programmes (Conventional / Online) Grade (SPM/O-Levels and equivalent) Entitlement 7 As** and above 100% off total…",
       "eligibility": "Malaysian; Diploma, Pre University",
       "fields": "",
       "summary": "The UNITAR I-Future Scholarship is awarded to Foundation and Diploma students for both on-campus and online students.",
@@ -4274,7 +5356,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4288,7 +5370,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "Pre-University / Foundation Studies and Diploma programmes SPM / O-Level or equivalent Value of Scholarship ≥ 8 A+ / A / A- RM 8,000 6-7 A+ / A / A- RM 5,000 4-5 A+ / A / A- RM 3,000 Bachelor’s Degree programmes STPM A-Level (3 subjects) UEC (5 subjects) Other qualifications Value of Scholarship CGPA ≥ 3.50 ≥ 14pt / AAB ≤ 10 Foundation/ Matriculation/ Diploma CGPA ≥ 3.75, SAM/MUFY/AUSMAT & CPU >= 90%, IB ≥ 33 RM8,000 CGPA ≥ 3.20 ≥ 12pt / BBB ≤ 18 Foundation/ Matriculation/ Diploma CGPA ≥ 3.60, SAM/MUFY/AUSMAT & CPU >= 85%, IB ≥ 29 RM 5,000 CGPA ≥ 3.00 ≥ 10pt / BBC,BCC,BBD ≤ 20 Foundation/ Matriculation/ Diploma CGPA ≥ 3.35, SAM/MUFY/AUSMAT & CPU >= 80%, IB ≥ 25 RM 3,000",
+      "amount": "Pre-University / Foundation Studies and Diploma programmes SPM / O-Level or equivalent Value of Scholarship ≥ 8 A+ / A / A- RM 8,000 6-7 A+…",
       "eligibility": "Malaysian; Diploma, Degree, Pre University",
       "fields": "",
       "summary": "THE UOW Malaysia High Achiever Scholarship is awarded to high-flying, well-rounded candidates with outstanding academic results.",
@@ -4296,7 +5378,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4310,7 +5392,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "Scholarships cover full tuition fees, accommodation, uniform allowances up to RM1,500 monthly stipend. You will also receive the opportunity to work at the partner hospital that has given you the scholarship after you graduate.",
+      "amount": "Scholarships cover full tuition fees, accommodation, uniform allowances up to RM1,500 monthly stipend. You will also receive the…",
       "eligibility": "Malaysian; Degree, Pre University",
       "fields": "",
       "summary": "Malaysian students stand a chance to receive a FULL Nursing degree or diploma scholarship with a guaranteed job at one of the University of Cyberjaya's partner hospitals when they apply for its Nursing programme!",
@@ -4318,7 +5400,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4340,7 +5422,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4354,7 +5436,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "This bursary award is up to a maximum amount of RM15,000 per year . Scholarship recipients will have the opportunity to undergo YSD THRIVE – Rising Talent , a wholesome learning experience specially designed for our Bursary and TVET scholars, including tailored employability skills training, wellness support, mentoring, industry meetups, volunteerism opportunities and access to an e-learning platform. Note: Scholarship monies will be disbursed upon execution of scholarship agreement.",
+      "amount": "This bursary award is up to a maximum amount of RM15,000 per year . Scholarship recipients will have the opportunity to undergo YSD THRIVE…",
       "eligibility": "Malaysian; Diploma",
       "fields": "",
       "summary": "Yayasan Sime Darby invites promising People with Disability (PWD) undergraduate or diploma students for the September 2026 intake and first-year students to apply for a bursary to pursue tertiary education at any…",
@@ -4362,7 +5444,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
     },
     {
@@ -4376,7 +5458,7 @@
       "always_open": true,
       "location": "Malaysia",
       "state": "malaysia",
-      "amount": "Tuition fees Laptop allowance Monthly allowance (Living, subsistence, accommodation) Book allowance Scholarship recipients will have the opportunity to undergo YSD THRIVE – Future Leaders, a comprehensive learning experience for YSD scholars towards producing high-quality and well-rounded graduates. The initiative offers tailored soft skills training, access to an e-learning platform, volunteering opportunities, mentorship and internships at Sime Darby Berhad and Sime Darby Property Berhad. Note: Scholarship monies will be disbursed upon execution of the scholarship agreement.",
+      "amount": "Tuition fees Laptop allowance Monthly allowance (Living, subsistence, accommodation) Book allowance Scholarship recipients will have the…",
       "eligibility": "Malaysian; Diploma",
       "fields": "",
       "summary": "Yayasan Sime Darby invites qualified undergraduate students for the September 2026 intake and first-year undergraduate students to apply for an excellence scholarship to pursue/complete their academic dreams at a…",
@@ -4384,8 +5466,1233 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T13:37:15.793393+00:00",
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
       "quality_score": 50
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Digital Campaign Specialist",
+      "organization": "THE D GROUP",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-the-d-group-job-digital-campaign-specialist",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-19",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 3000 - 5000 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Advertising & Branding, Digital Marketing, Key Account / Relationship Management",
+      "summary": "Skills: Analytical Skills, Milestones (Project Management), Client Services, Project Administration, Digital Marketing, Marketing",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/47a5f750-11f9-473e-aaff-4ccc61d0c886/company_logo/original/d7b25155-43be-4bdf-9094-5869ae0d6534-TDG%20Full%20Logo.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 48
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "New Business Underwriting, Analyst",
+      "organization": "AIA Malaysia (Insurance)",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-aia-malaysia-insurance-job-new-business-underwriting-analyst-4",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-06",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Financial Services & Banking, Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/companies/11df7c03-8d55-4404-8f7b-0b6e8148d7ef/company_logo/original/181589dd-684b-4a65-af1f-08f8404220f5-AIA.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "New Business Underwriting, Analyst",
+      "organization": "AIA Malaysia (Insurance)",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-aia-malaysia-insurance-job-new-business-underwriting-analyst-3",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-06",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Financial Services & Banking, Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/companies/11df7c03-8d55-4404-8f7b-0b6e8148d7ef/company_logo/original/181589dd-684b-4a65-af1f-08f8404220f5-AIA.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "ADMIN ASSISTANT EXECUTIVE (MALAYSIA)",
+      "organization": "DXN Holdings Berhad",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-dxn-holdings-berhad-job-admin-assistant-executive-malaysia",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-05",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Clerical, Administrative & Secretarial, HR Operations (Payroll, Admin, Office Management), System & IT Helpdesk / Database Administrator",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/304f49dc-d357-4982-9bc7-3eea867ae37a/company_logo/original/47ce7e2d-b862-42eb-96d3-b132ea755e78-image_2024-08-08_093855448.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Counselling",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-counselling",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-05",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Doctor / Health Specialist, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Media Studies",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-media-studies-1",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-05",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Copywriting & Content Creation, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "BUSINESS DEVELOPMENT EXECUTIVE",
+      "organization": "Shopper360",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-shopper360-job-business-development-executive-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-05",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, HR Operations (Payroll, Admin, Office Management), Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/4cf9b226-d936-4396-bccb-c960dbe92f33/company_logo/original/e05db9b3-3850-49da-9dc7-ab7950ecf016-shopper360_logo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Chief Operating Officer",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-chief-operating-officer",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-05",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "General Project Management, HR Strategy / L&D / Performance Management, IT Project Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Psychology",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-psychology-1",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-05",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "New Business Underwriting, Analyst",
+      "organization": "AIA Malaysia (Insurance)",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-aia-malaysia-insurance-job-new-business-underwriting-analyst-2",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-04",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Financial Services & Banking, Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/companies/11df7c03-8d55-4404-8f7b-0b6e8148d7ef/company_logo/original/181589dd-684b-4a65-af1f-08f8404220f5-AIA.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "New Business Underwriting, Analyst",
+      "organization": "AIA Malaysia (Insurance)",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-aia-malaysia-insurance-job-new-business-underwriting-analyst-1",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-04",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Financial Services & Banking, Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/companies/11df7c03-8d55-4404-8f7b-0b6e8148d7ef/company_logo/original/181589dd-684b-4a65-af1f-08f8404220f5-AIA.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "New Business Underwriting, Analyst",
+      "organization": "AIA Malaysia (Insurance)",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-aia-malaysia-insurance-job-new-business-underwriting-analyst-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-05-04",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Financial Services & Banking, Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/companies/11df7c03-8d55-4404-8f7b-0b6e8148d7ef/company_logo/original/181589dd-684b-4a65-af1f-08f8404220f5-AIA.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate, Finance Graduate Program",
+      "organization": "Grab - Management Trainee",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-grab-management-trainee-job-associate-finance-graduate-program",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-04-29",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Financial Services & Banking, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/190f39c8-5fb6-44e2-8576-4afcdad7012d/grab-management-trainee-1777369223.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Zurich Graduates Opportunities",
+      "organization": "Zurich Services Malaysia Sdn. Bhd.",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-zurich-services-malaysia-sdn-bhd-job-zurich-graduates-opportunities",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-04-28",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Management Trainee",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/bc174369-752e-439a-a901-6c31bcf54066/company_logo/original/2ba90921-8260-4c10-b5ba-94970e5c89d5-322542974_533081048761206_6776989796843509031_n.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "The Complete Banker™ (TCB)",
+      "organization": "CIMB Group",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-cimb-group-job-the-complete-banker-tcb",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-04-13",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Financial Services & Banking, Management Trainee",
+      "summary": "Skills: Management",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/51747281-aecb-424a-a309-68bf1f7f94ad/company_logo/original/8947a1f4-d64f-4c29-b598-e42c8d72118e-cimb.jpeg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Management Associate Programme",
+      "organization": "Hong Leong Capital Berhad",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-hong-leong-capital-berhad-job-management-associate-programme",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-27",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Financial Services & Banking, Management Trainee",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/50860f2a-f746-4efe-a12d-a96862e5c577/company_logo/original/22435c3c-db9c-4708-a7ab-8e22c11acbec-image_2025-03-19_154726113.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Maxis Graduate Programme",
+      "organization": "Maxis Communications",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-maxis-communications-job-maxis-graduate-programme",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-27",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Management Trainee",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/95681798-f6b2-4ed8-8a0f-228f57c9a0ed/company_logo/original/7b43fa02-9f60-47db-8dc6-14ea1395a2f7-maxis_logo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Graduate Employability Enhancement Scheme (GEES)",
+      "organization": "PETRONAS GAS BHD",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-petronas-gas-bhd-job-graduate-employability-enhancement-scheme-gees",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-26",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/4f8790d9-889d-44ea-9b92-4ad264502ba7/petronas-gas-bhd-1749118137.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Finance",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-finance",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-18",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Corporate Finance / Investment, Education & Teaching, General Project Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Management & Marketing",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-management-marketing",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-18",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Executive, Booking to Cash",
+      "organization": "AirAsia X",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-airasia-x-job-executive-booking-to-cash-3",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-09",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Corporate Finance / Investment, Financial Services & Banking, General / Cost Accounting",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a1264905-f2e9-4ef5-ab36-47586e649ea4/company_logo/original/5cccd482-7c0f-4abe-b796-aa8baffcd172-airasia_logo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Management Associate",
+      "organization": "Air Liquide",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-air-liquide-job-management-associate-2",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-09",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "HR Strategy / L&D / Performance Management, Management Trainee, Oil & Gas Engineering",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/ceeef0cf-c6ce-4edc-b56f-c51a10e09554/company_logo/original/c46a4ffb-ab57-4ff6-8b4e-e38bae395454-image_2025-01-17_180942232.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Senior Lecturer - Construction Management",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-senior-lecturer-construction-management",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-03-06",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Civil Engineering, Education & Teaching, Quantity Surveying",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Advertising and Brand Management",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-advertising-and-brand-management",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-02-14",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Advertising & Branding, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Clinical Psychology",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-clinical-psychology-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-02-14",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Doctor / Health Specialist, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "Associate Professor - International Relations",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-international-relations-2",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-02-14",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Internship",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Lab Science",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Accounting & Governance",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-accounting-governance",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-02-14",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Audit & Taxation, Corporate Finance / Investment, Education & Teaching",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "EOI : Financial Analyst - Purchase to Pay (Japanese speaker)",
+      "organization": "CBRE",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-cbre-job-eoi-financial-analyst-purchase-to-pay-japanese-speaker",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-02-11",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "HR Operations (Payroll, Admin, Office Management), Pre-Sales / IT Business Analyst / Business Intelligence, Talent Acquisition / Recruitment",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/03f5e617-39b2-45c0-a032-c7b2bf3a25fe/company_logo/original/2079b244-053a-44df-8ae2-bd66695336de-images.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "IT Business Analyst",
+      "organization": "SILVERLAKE",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-silverlake-job-it-business-analyst",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-01-30",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "Skills: Business Analysis",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/2957bb0d-8dcc-455e-957a-6ba5b00c22f2/company_logo/original/4b9179c9-baa3-4033-8ea6-65003c2495d2-SilverlakeAxis_logo.svg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Entrepreneurship",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-entrepreneurship",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-01-14",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Supply Chain Management & Logistics",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-supply-chain-management-logistics",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-01-14",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "Professor - International Relations",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-international-relations-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-01-10",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Internship",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Lab Science",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Duopharma Protégé Programme (2026 Intake)",
+      "organization": "Duopharma Biotech Berhad",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-duopharma-biotech-berhad-job-duopharma-protege-programme-2026-intake",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-01-01",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "HR Strategy / L&D / Performance Management, Management Trainee, Pharmaceutical",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a532b4f9-c5c6-4e66-a5d7-3a0e3bd6616f/company_logo/original/bba62f67-850f-4949-95ff-1fcd6cfd5e22-image_2024-08-07_144041338.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "IT APPLICATION SUPPORT",
+      "organization": "Mynews Malaysia",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-mynews-malaysia-job-it-application-support-1",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-01-01",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "General IT, IT Project Management, System & IT Helpdesk / Database Administrator",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/95f3b177-ffb3-4eda-8a3e-80960066d204/company_logo/original/d5c2d63e-4173-4cdf-b386-cbc615ed1566-image_2024-08-20_102226556.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Political Science",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-political-science",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-12-05",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Lab Science",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Senior Lecturer - Interactive Spatial Design",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-senior-lecturer-interactive-spatial-design-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-11-21",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, Graphic Design, Multimedia Design",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "(TH) Technical Engineer",
+      "organization": "INFOMINA BERHAD",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-infomina-berhad-job-th-technical-engineer",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-10-03",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "General IT, IT Project Management, System & IT Helpdesk / Database Administrator",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/000ee300-e34e-4191-bd4a-99bb50e5309a/company_logo/original/53440faa-0de1-42c8-add9-57a39710faea-image_2024-08-16_165337428.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Hospitality Service Marketing / Technology / Service Innovation",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-hospitality-service-marketing-technology-service-innovation-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-09-12",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Hospitality Service Quality / Smart Technologies / Service Innovation",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-hospitality-service-quality-smart-technologies-service-innovation-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-09-11",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Senior Lecturer Nursing (Faculty of Health)",
+      "organization": "Cyberjaya Education Group",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-cyberjaya-education-group-job-senior-lecturer-nursing-faculty-of-health",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-07-26",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Doctor / Health Specialist, Education & Teaching, Nurse / Medical Support",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/dc2f6d4e-bc5c-4bc7-b6fc-765b727f677c/company_logo/original/1a4525d6-54cd-4514-8e68-67d094f752a6-image_2024-08-07_105335701.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Economics",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-economics",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-06-19",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Lab Science",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor, Accounting",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-accounting",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-05-31",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Audit & Taxation, Education & Teaching, General / Cost Accounting",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Family Business",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-family-business",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-05-27",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Business Development, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Media & Communication",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-media-communication-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-05-14",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Copywriting & Content Creation, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Professor - Food Studies",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-professor-food-studies",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-02-16",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, Lab Science, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Senior Lecturer - Events Management",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-senior-lecturer-events-management",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-02-16",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, Events Management, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Social Work",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-social-work",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2025-01-29",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Education & Teaching, HR Strategy / L&D / Performance Management, Management Trainee",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Associate Professor - Finance",
+      "organization": "Taylor's College",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-taylor-s-college-job-associate-professor-finance",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2024-12-05",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Corporate Finance / Investment, Education & Teaching, HR Strategy / L&D / Performance Management",
+      "summary": "",
+      "image": "https://s3.ap-southeast-1.amazonaws.com/resources.wobbjobs.com/uploads/company-logo/company_logo_image/b2ecf742-50d8-4634-a040-6ea687756d93/taylor-s-college-1775726056.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "Business Analyst",
+      "organization": "Edaran IT Services",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-edaran-it-services-job-business-analyst",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2024-08-06",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "IT Project Management, Lab Science, Pre-Sales / IT Business Analyst / Business Intelligence",
+      "summary": "",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/3742d87d-2337-4835-a06c-b97192df8e34/company_logo/original/51fcc1c1-b26c-4d9e-95a1-fad62542d224-edaranlogo.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-19T15:05:54.573513+00:00",
+      "quality_score": 43
     }
   ]
 }

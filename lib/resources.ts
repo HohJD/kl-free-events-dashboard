@@ -1,4 +1,4 @@
-export type ResourceKind = 'scholarship' | 'internship' | 'tool';
+export type ResourceKind = 'scholarship' | 'internship' | 'graduate' | 'tool';
 
 export interface Resource {
   kind: ResourceKind;
@@ -25,6 +25,7 @@ export interface Resource {
 export const RESOURCE_KINDS: { value: ResourceKind; label: string }[] = [
   { value: 'scholarship', label: 'Scholarships' },
   { value: 'internship', label: 'Internships' },
+  { value: 'graduate', label: 'Graduate roles' },
   { value: 'tool', label: 'Free tools & learning' },
 ];
 
