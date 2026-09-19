@@ -9,6 +9,9 @@
 - Browser layout checks are now events-only, focused/all modes across both themes and five widths, and assert no Supabase/Hugging Face calls. They perform no database writes.
 - Scraper regression command now includes `test_event_quality` as well as `test_kl_events_scraper`.
 
+- `/resources` (September 19) lists student scholarships, internships and free tools from `resources.json`, written by the scraper and copied by the Hermes script. `lib/resources.ts` is client-safe (types, filtering); `lib/load-resources.ts` reads the file at build time. A missing file renders an empty page. The events page links to it and accepts `?category=Hackathon` deep links.
+- Events carry `quality_score` and `topics` from the scraper. "Top picks" (default) ranks by score in 10-point bands, soonest first within a band; "Soonest" is plain date order.
+
 - Run `npm run lint`, `npx tsc --noEmit`, `npx tsx scripts/test-filter-events.ts`, and `npm run build` for changes to the dashboard. `tsx` is pinned as a dev dependency.
 - Static export uses `dist/`. Do not run a development server and production build concurrently against that directory.
 - UI browser checks: build, serve `dist/` on localhost:3100, then run `node scripts/test-layout.mjs` (uses installed Google Chrome through pinned Playwright). It tests 320/375/390/768/1440px in light/dark, mocks Supabase/image responses with synthetic fixtures, checks overflow/alignment/action rows and navigation, and writes screenshots to the OS temp directory. Override `TEST_URL` or `SCREENSHOT_DIR` as needed. It performs no real uploads or database writes.

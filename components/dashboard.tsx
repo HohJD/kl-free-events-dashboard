@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { GraduationCap } from "lucide-react";
 import { Event } from "@/lib/events";
 import { filterEvents, DateRange, SortMode } from "@/lib/filter-events";
 import { useFavorites } from "@/lib/use-favorites";
@@ -113,6 +115,8 @@ export function Dashboard({ events, stats }: DashboardProps) {
       setFocused(new URL(window.location.href).searchParams.get("browse") !== "all");
       const value = new URL(window.location.href).searchParams.get("state");
       setRegion(value && Object.hasOwn(REGIONS, value) ? value : "all");
+      const linkedCategory = new URL(window.location.href).searchParams.get("category");
+      if (linkedCategory && CATEGORY_ORDER.includes(linkedCategory)) setCategory(linkedCategory);
     };
     sync();
     window.addEventListener("hashchange", sync);
@@ -154,6 +158,9 @@ export function Dashboard({ events, stats }: DashboardProps) {
                 {option.label}
               </button>
             ))}
+            <Link href="/resources" className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-border/50 bg-card px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
+              <GraduationCap className="size-4" /> Student resources
+            </Link>
           </nav>
           <p className="page-shell pb-5 text-xs leading-relaxed text-muted-foreground sm:text-sm" role="status">
             {region === "all" ? "All locations" : REGIONS[region]} · {regionalEvents.length} upcoming listings.

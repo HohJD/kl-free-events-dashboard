@@ -4,6 +4,7 @@ import { filterRegion, eventRegion } from '../lib/regions';
 import { googleCalendarUrl } from '../lib/calendar';
 import { categorize, type Event } from '../lib/events';
 import { focusEvents } from '../lib/event-discovery';
+import { filterResources, type Resource } from '../lib/resources';
 
 const now = new Date('2026-09-07T16:30:00Z');
 const event = (name: string, date: string, state?: string): Event => ({
@@ -45,4 +46,13 @@ const scored = [
 assert.deepEqual(filterEvents(scored, '', 'all', 'all', 'upcoming', now, 'recommended').map(e => e.name), ['Soon tech', 'Later hackathon', 'Unscored', 'Soon general']);
 assert.deepEqual(filterEvents(scored, '', 'all', 'all', 'upcoming', now), filterEvents(scored, '', 'all', 'all', 'upcoming', now, 'soonest'));
 assert.equal(filterEvents(scored, '', 'all', 'all', 'upcoming', now, 'soonest').at(-1)!.name, 'Later hackathon');
+const resource = (title: string, kind: Resource['kind'], deadline: string, topics: string[] = [], always_open = false): Resource => ({
+  kind, title, deadline, always_open, topics, source: 'test', organization: 'Org', link: 'https://example.com',
+  location: 'Malaysia', amount: '', eligibility: '', summary: '', image: '',
+});
+const resources = [resource('Closed scholarship', 'scholarship', '2026-09-07'), resource('Tech scholarship', 'scholarship', '2026-09-30', ['tech']),
+  resource('Rolling fund', 'scholarship', '', [], true), resource('Data intern', 'internship', '', ['tech']), resource('Spa intern', 'internship', '')];
+assert.deepEqual(filterResources(resources, 'all', false, '', '2026-09-08').map(r => r.title), ['Tech scholarship', 'Rolling fund', 'Data intern', 'Spa intern']);
+assert.deepEqual(filterResources(resources, 'internship', true, '', '2026-09-08').map(r => r.title), ['Data intern']);
+assert.deepEqual(filterResources(resources, 'all', false, 'rolling', '2026-09-08').map(r => r.title), ['Rolling fund']);
 console.log('Focus/category, state, calendar, stale expiry and Malaysia-date regression tests passed.');
