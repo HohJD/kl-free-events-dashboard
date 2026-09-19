@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { FareSheet } from "@/components/fare-sheet";
+import { FlightView } from "@/components/flight-view";
 import { getFlights } from "@/lib/load-flights";
 
 export const metadata: Metadata = {
-  title: "KL ⇄ London fares · Free Events Malaysia",
-  description: "Daily Kuala Lumpur and London flight fares, one-way and return, with a buy-or-wait signal for each date.",
+  title: "KL ⇄ London flight fares · Free Events Malaysia",
+  description: "Cheapest Kuala Lumpur and London fares for every departure date over 6 months, one-way and return, with a book-now signal.",
 };
 
 export default function FlightsPage() {
-  return <FareSheet data={getFlights()} />;
+  return <FlightView data={getFlights()} />;
 }

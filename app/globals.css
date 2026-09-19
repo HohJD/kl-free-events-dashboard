@@ -165,76 +165,66 @@ a,
   color: hsl(43 30% 92%);
 }
 
-/* Spreadsheet look for /flights. Tokens flip with the site theme. */
+/* /flights: chart roles, light and dark steps chosen separately. */
 @layer components {
-  .xl-book {
-    --xl-bg: #ffffff; --xl-grid: #e1e1e1; --xl-head: #f3f3f3; --xl-head-on: #d2e8dc; --xl-head-text: #444;
-    --xl-text: #1f1f1f; --xl-dim: #8a8a8a; --xl-accent: #1e7145; --xl-accent-text: #ffffff; --xl-ribbon: #f7f7f7;
-    --xl-scale-alpha: 0.85; --xl-spark: #2f6db5; --xl-down: #1e7145; --xl-up: #c0392b;
-    --xl-good-bg: #c6efce; --xl-good-fg: #006100; --xl-bad-bg: #ffc7ce; --xl-bad-fg: #9c0006; --xl-neutral-bg: #ffeb9c; --xl-neutral-fg: #7a5200;
-    @apply overflow-hidden rounded-lg border shadow-brutal-sm;
-    border-color: var(--xl-grid);
-    background: var(--xl-bg);
-    color: var(--xl-text);
-    font-family: Aptos, Calibri, "Segoe UI", system-ui, sans-serif;
+  .fx-root {
+    --fx-surface: #fcfcfb; --fx-line: #2a78d6; --fx-grid: #e6e4df; --fx-axis: #6b6a66; --fx-typical: #8c8a84;
+    --fx-good: #0ca30c; --fx-warning: #c98500; --fx-neutral: #8c8a84; --fx-critical: #d03b3b;
+    --seq-0: #cde2fb; --seq-1: #9ec5f4; --seq-2: #6da7ec; --seq-3: #3987e5; --seq-4: #256abf; --seq-5: #184f95; --seq-6: #104281;
+    --seq-ink-light: #0b0b0b; --seq-ink-dark: #ffffff;
   }
-  .dark .xl-book {
-    --xl-bg: #1e1e1e; --xl-grid: #3b3b3b; --xl-head: #2a2a2a; --xl-head-on: #24483a; --xl-head-text: #c8c8c8;
-    --xl-text: #e8e8e8; --xl-dim: #8f8f8f; --xl-accent: #1e7145; --xl-ribbon: #252525;
-    --xl-scale-alpha: 0.38; --xl-spark: #7fb0f0; --xl-down: #5fd08a; --xl-up: #ff8a80;
-    --xl-good-bg: #1f4d2e; --xl-good-fg: #b6f0c6; --xl-bad-bg: #5a1f25; --xl-bad-fg: #ffc2c8; --xl-neutral-bg: #54451a; --xl-neutral-fg: #ffe39a;
+  .dark .fx-root {
+    --fx-surface: #1a1a19; --fx-line: #3987e5; --fx-grid: #33322f; --fx-axis: #a8a79f; --fx-typical: #8f8e87;
+    --fx-good: #0ca30c; --fx-warning: #fab219; --fx-neutral: #a8a79f; --fx-critical: #e66767;
+    --seq-0: #184f95; --seq-1: #1c5cab; --seq-2: #256abf; --seq-3: #2a78d6; --seq-4: #3987e5; --seq-5: #6da7ec; --seq-6: #9ec5f4;
   }
-  .xl-titlebar { @apply flex items-center gap-2 px-3 py-2 text-sm; background: var(--xl-accent); color: var(--xl-accent-text); }
-  .xl-ribbon { @apply flex flex-wrap items-stretch gap-x-4 gap-y-2 border-b px-3 py-2; background: var(--xl-ribbon); border-color: var(--xl-grid); }
-  .xl-group { @apply flex flex-col gap-1; }
-  .xl-group-label { @apply text-[10px] font-semibold uppercase tracking-wide; color: var(--xl-dim); }
-  .xl-button {
-    @apply inline-flex min-h-9 items-center gap-1.5 rounded border px-2.5 text-xs font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-40;
-    border-color: var(--xl-grid); background: var(--xl-bg); color: var(--xl-text);
+
+  .fx-card { @apply rounded-2xl border border-border/60 bg-card p-5 shadow-brutal-sm sm:p-6; }
+  .fx-tile { @apply rounded-2xl border border-border/60 bg-card p-4 shadow-brutal-sm; }
+  .fx-tile-label { @apply text-xs font-semibold uppercase tracking-wide text-muted-foreground; }
+  .fx-tile-value { @apply mt-1 font-display text-2xl font-bold tabular-nums sm:text-3xl; }
+  .fx-tile-note { @apply mt-1 text-xs leading-5 text-muted-foreground; }
+
+  .fx-badge { @apply inline-flex items-center gap-1 whitespace-nowrap rounded-full border px-2 py-0.5 text-xs font-semibold text-foreground; }
+  .fx-badge-lg { @apply px-3 py-1 text-sm; }
+
+  .fx-grid { stroke: var(--fx-grid); stroke-width: 1; }
+  .fx-axis { fill: var(--fx-axis); color: var(--fx-axis); font-size: 11px; }
+  .fx-typical { stroke: var(--fx-typical); stroke-width: 1; stroke-dasharray: 4 4; }
+  .fx-line { fill: none; stroke: var(--fx-line); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .fx-dot { fill: var(--fx-line); stroke: hsl(var(--card)); stroke-width: 2; transition: r 120ms ease; }
+  .fx-dot-on { stroke: hsl(var(--foreground)); stroke-width: 2.5; }
+  .fx-crosshair { stroke: hsl(var(--foreground)); stroke-width: 1; opacity: 0.35; pointer-events: none; }
+  .fx-callout { fill: hsl(var(--foreground)); font-size: 12px; font-weight: 600; }
+  /* A card-coloured halo keeps chart labels legible where they cross the line. */
+  svg .fx-callout, svg text.fx-axis { paint-order: stroke; stroke: hsl(var(--card)); stroke-width: 4px; stroke-linejoin: round; }
+  .fx-tooltip {
+    @apply pointer-events-none absolute z-10 w-[180px] rounded-xl border border-border/60 bg-popover px-3 py-2 text-xs leading-5 text-popover-foreground shadow-brutal-sm;
   }
-  .xl-button:not(:disabled):hover { background: var(--xl-head); }
-  .xl-button-on { background: var(--xl-head-on) !important; border-color: var(--xl-accent); }
-  .xl-formula { @apply flex items-center gap-2 border-b px-2 py-1.5 text-sm; border-color: var(--xl-grid); }
-  .xl-namebox { @apply min-w-[3.5rem] rounded-sm border px-2 py-0.5 text-center font-mono text-xs; border-color: var(--xl-grid); }
-  .xl-fx { @apply border-r pr-2 font-serif text-sm italic; border-color: var(--xl-grid); color: var(--xl-dim); }
-  .xl-grid { @apply max-h-[65vh] overflow-auto outline-none; }
-  .xl-grid:focus-visible { box-shadow: inset 0 0 0 2px var(--xl-accent); }
-  .xl-grid table { @apply border-separate text-[13px]; border-spacing: 0; table-layout: fixed; width: max-content; }
-  .xl-corner, .xl-colhead, .xl-rowhead {
-    @apply select-none text-center text-[11px] font-normal;
-    background: var(--xl-head); color: var(--xl-head-text);
-    border-right: 1px solid var(--xl-grid); border-bottom: 1px solid var(--xl-grid);
-  }
-  .xl-corner { @apply sticky left-0 top-0 z-30; }
-  .xl-colhead { @apply sticky top-0 z-20 h-6; }
-  .xl-rowhead { @apply sticky left-0 z-10 px-1; }
-  .xl-colhead-on, .xl-rowhead-on { background: var(--xl-head-on); color: var(--xl-text); font-weight: 600; }
-  .xl-cell {
-    @apply h-7 cursor-cell truncate px-2 align-middle;
-    border-right: 1px solid var(--xl-grid); border-bottom: 1px solid var(--xl-grid);
-  }
-  .xl-header { @apply sticky top-6 z-10 cursor-pointer font-bold; background: var(--xl-bg); }
-  .xl-selected { outline: 2px solid var(--xl-accent); outline-offset: -2px; }
-  .xl-dim { color: var(--xl-dim); }
-  .xl-good { background: var(--xl-good-bg); color: var(--xl-good-fg); }
-  .xl-bad { background: var(--xl-bad-bg); color: var(--xl-bad-fg); }
-  .xl-neutral { background: var(--xl-neutral-bg); color: var(--xl-neutral-fg); }
-  .xl-down-text { color: var(--xl-down); }
-  .xl-up-text { color: var(--xl-up); }
-  .xl-link { @apply underline underline-offset-2; color: var(--xl-spark); }
-  .xl-tabs { @apply flex gap-0.5 overflow-x-auto border-t px-2 pt-1; background: var(--xl-ribbon); border-color: var(--xl-grid); }
-  .xl-tab { @apply min-h-9 shrink-0 rounded-b-md px-3 text-xs font-medium; color: var(--xl-dim); }
-  .xl-tab:hover { color: var(--xl-text); }
-  .xl-tab-on { @apply font-semibold; background: var(--xl-bg); color: var(--xl-accent); box-shadow: inset 0 -2px 0 var(--xl-accent); }
-  .dark .xl-tab-on { color: #7fd4a4; box-shadow: inset 0 -2px 0 #7fd4a4; }
-  .xl-status { @apply flex items-center gap-3 px-3 py-1.5 text-[11px]; background: var(--xl-accent); color: var(--xl-accent-text); }
+
+  .fx-day, .fx-day-empty { @apply relative flex aspect-square min-h-10 flex-col items-center justify-center rounded-md text-[11px] leading-none; }
+  .fx-day { @apply font-semibold transition-transform hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2; }
+  .fx-day-empty { @apply text-muted-foreground/60; border: 1px dashed hsl(var(--border) / 0.35); }
+  .fx-day-num { @apply text-[10px] font-normal opacity-80; }
+  .fx-day-price { @apply mt-0.5 tabular-nums; }
+  .fx-day-on { outline: 2.5px solid hsl(var(--foreground)); outline-offset: 1px; }
+  .fx-day-star { @apply absolute right-0.5 top-0 text-[9px]; }
 }
-@layer components {
-  /* Freeze panes: column A stays put beside the row numbers. */
-  .xl-freeze { @apply sticky left-10 z-[5]; background: var(--xl-bg); box-shadow: 1px 0 0 var(--xl-grid); }
-  .xl-freeze-top { @apply z-[15]; }
-  .xl-freeze-head { @apply left-10 z-[25]; }
-}
-@layer components {
-  .xl-rowhead-top { @apply top-6 z-[26]; }
-}
+
+/* Built from variables in flight-view.tsx (fx-seq-${step}, fx-badge-${advice}), so they sit outside
+   @layer where Tailwind would purge them as unused. */
+.fx-seq-0 { background: var(--seq-0); color: var(--seq-ink-light); }
+.fx-seq-1 { background: var(--seq-1); color: var(--seq-ink-light); }
+.fx-seq-2 { background: var(--seq-2); color: var(--seq-ink-light); }
+.fx-seq-3 { background: var(--seq-3); color: var(--seq-ink-dark); }
+.fx-seq-4 { background: var(--seq-4); color: var(--seq-ink-dark); }
+.fx-seq-5 { background: var(--seq-5); color: var(--seq-ink-dark); }
+.fx-seq-6 { background: var(--seq-6); color: var(--seq-ink-dark); }
+.dark .fx-seq-0, .dark .fx-seq-1, .dark .fx-seq-2 { color: var(--seq-ink-dark); }
+.dark .fx-seq-5, .dark .fx-seq-6 { color: var(--seq-ink-light); }
+.fx-badge-buy { border-color: var(--fx-good); }
+.fx-badge-buy svg { color: var(--fx-good); }
+.fx-badge-wait { border-color: var(--fx-warning); }
+.fx-badge-wait svg { color: var(--fx-warning); }
+.fx-badge-typical { border-color: var(--fx-neutral); }
+.fx-badge-typical svg { color: var(--fx-neutral); }

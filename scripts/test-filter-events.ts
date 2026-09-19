@@ -5,7 +5,7 @@ import { googleCalendarUrl } from '../lib/calendar';
 import { categorize, type Event } from '../lib/events';
 import { focusEvents } from '../lib/event-discovery';
 import { filterResources, type Resource } from '../lib/resources';
-import { columnLetter, scalePosition, tripLabel, money } from '../lib/flights';
+import { scalePosition, tripLabel, money, median, bookingOutlook, shortMoney, type FareRow } from '../lib/flights';
 
 const now = new Date('2026-09-07T16:30:00Z');
 const event = (name: string, date: string, state?: string): Event => ({
@@ -56,7 +56,14 @@ const resources = [resource('Closed scholarship', 'scholarship', '2026-09-07'), 
 assert.deepEqual(filterResources(resources, 'all', false, '', '2026-09-08').map(r => r.title), ['Tech scholarship', 'Rolling fund', 'Data intern', 'Spa intern']);
 assert.deepEqual(filterResources(resources, 'internship', true, '', '2026-09-08').map(r => r.title), ['Data intern']);
 assert.deepEqual(filterResources(resources, 'all', false, 'rolling', '2026-09-08').map(r => r.title), ['Rolling fund']);
-assert.deepEqual([0, 25, 26, 27, 701].map(columnLetter), ['A', 'Z', 'AA', 'AB', 'ZZ']);
+assert.equal(median([3, 1, 2]), 2);
+assert.equal(median([4, 1, 2, 3]), 2.5);
+assert.equal(shortMoney(1091), '1.1k');
+const fare = (advice: FareRow['advice']) => ({ advice } as FareRow);
+assert.equal(bookingOutlook([fare('Buy'), fare('Buy'), fare('Typical')]).advice, 'Buy');
+assert.equal(bookingOutlook([fare('Wait'), fare('Wait'), fare('Typical')]).advice, 'Wait');
+assert.equal(bookingOutlook([fare('Typical'), fare('Typical'), fare('Buy'), fare('Typical')]).advice, 'Typical');
+assert.equal(bookingOutlook([]).headline, 'No fares yet');
 assert.equal(scalePosition(2000, [2000, 3000, 4000]), 0);
 assert.equal(scalePosition(4000, [2000, 3000, 4000]), 1);
 assert.equal(scalePosition(3000, [3000]), 0);
