@@ -27,21 +27,19 @@ export async function getApproxLocation(): Promise<ApproxLocation | null> {
   });
   if (!position) return null;
 
-  // ~11 m precision — enough for a street-level pin, not an exact unit
-  const lat = Math.round(position.coords.latitude * 10000) / 10000;
-  const lon = Math.round(position.coords.longitude * 10000) / 10000;
+  // ~110 m precision: the pickup neighbourhood, never the giver's door.
+  const lat = Math.round(position.coords.latitude * 1000) / 1000;
+  const lon = Math.round(position.coords.longitude * 1000) / 1000;
 
   try {
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=18&accept-language=en`,
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=16&accept-language=en`,
       { headers: { Accept: "application/json" } }
     );
     if (!res.ok) throw new Error(`reverse ${res.status}`);
     const data = await res.json();
     const a = data.address || {};
-    // Most-specific first: named place, road, locality, city
-    const place: string =
-      a.amenity || a.building || a.shop || a.leisure || a.office || "";
+    // Road, locality, city. No building or shop names: they can pinpoint a home.
     const road: string = a.road || a.pedestrian || a.residential || "";
     const locality: string =
       a.suburb ||
@@ -53,11 +51,11 @@ export async function getApproxLocation(): Promise<ApproxLocation | null> {
       a.town ||
       "";
     const city: string = a.city || a.town || a.state || "";
-    const parts = [place, road, locality, city].filter(
+    const parts = [road, locality, city].filter(
       (p, i, arr) => p && arr.indexOf(p) === i
     );
     if (!parts.length) return null;
-    return { lat, lon, area: parts.slice(0, 4).join(", ") };
+    return { lat, lon, area: parts.slice(0, 3).join(", ") };
   } catch {
     return null;
   }

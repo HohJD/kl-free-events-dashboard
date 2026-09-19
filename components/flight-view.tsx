@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock, Minus, Plane, PlaneLanding, PlaneTakeoff, TrendingDown } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
+import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock, Minus, Plane, PlaneLanding, PlaneTakeoff, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   ADVICE_TEXT, type AdviceCode, type Calendar, type Day, type FlightData, type LegDetail, addDays, bookingOutlook, dayLabel, daysBetween,
@@ -327,14 +325,6 @@ export function FlightView({ data }: { data: FlightData | null }) {
 
   return (
     <div className="fx-root min-h-screen bg-background pb-24 lg:pb-0">
-      <header className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-sm">
-        <div className="page-shell flex h-16 items-center justify-between gap-2">
-          <Link href="/" className="inline-flex min-h-11 items-center gap-2 rounded-xl px-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
-            <ArrowLeft className="size-4" /> Events
-          </Link>
-          <ThemeToggle />
-        </div>
-      </header>
 
       <main className="page-shell py-6 sm:py-8">
         <p className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground"><Plane className="size-4" /> Flight fares · updated daily</p>

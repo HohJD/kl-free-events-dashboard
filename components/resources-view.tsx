@@ -2,12 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Search, GraduationCap, Briefcase, BriefcaseBusiness, Wrench, Trophy } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Search, GraduationCap, Briefcase, BriefcaseBusiness, Wrench, Trophy } from "lucide-react";
 import { Resource, ResourceKind, RESOURCE_KINDS, filterResources } from "@/lib/resources";
 import { malaysiaDay } from "@/lib/filter-events";
 import { cn } from "@/lib/utils";
-import { Footer } from "./footer";
-import { ThemeToggle } from "./theme-toggle";
 
 const KIND_ICON = { scholarship: GraduationCap, internship: Briefcase, graduate: BriefcaseBusiness, tool: Wrench };
 const KIND_LABEL: Record<ResourceKind, string> = { scholarship: "Scholarship", internship: "Internship", graduate: "Graduate role", tool: "Free tool" };
@@ -134,14 +132,6 @@ export function ResourcesView({ resources, generatedAt }: { resources: Resource[
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-sm">
-        <div className="page-shell flex h-16 items-center justify-between gap-2">
-          <Link href="/" className="inline-flex min-h-11 items-center gap-2 rounded-xl px-2 text-sm font-semibold text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
-            <ArrowLeft className="size-4" /> Events
-          </Link>
-          <ThemeToggle />
-        </div>
-      </header>
 
       <main>
         <section className="page-shell pb-4 pt-8 sm:pt-10">
@@ -212,7 +202,6 @@ export function ResourcesView({ resources, generatedAt }: { resources: Resource[
           )}
         </div>
       </main>
-      <Footer />
     </div>
   );
 }

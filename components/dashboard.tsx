@@ -1,28 +1,27 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import Link from "next/link";
-import { GraduationCap, Plane } from "lucide-react";
+import { ChevronDown, MapPin } from "lucide-react";
 import { Event } from "@/lib/events";
 import { filterEvents, DateRange, SortMode } from "@/lib/filter-events";
 import { useFavorites } from "@/lib/use-favorites";
 import { Hero, HeroStats } from "./hero";
-import { Navbar } from "./navbar";
 import { Filters, ViewMode } from "./filters";
 import { EventGrid } from "./event-grid";
 import { MapSection } from "./map-section";
 import { CATEGORY_ORDER, FOCUS_CATEGORIES, focusEvents } from "@/lib/event-discovery";
 import { cn } from "@/lib/utils";
-import { Footer } from "./footer";
 import { BackToTop } from "./back-to-top";
 import { eventRegion, filterRegion, REGIONS } from "@/lib/regions";
+import { ExploreStrip, type ExploreTeasers } from "./explore-strip";
 
 interface DashboardProps {
   events: Event[];
   stats: HeroStats;
+  teasers: ExploreTeasers;
 }
 
-export function Dashboard({ events, stats }: DashboardProps) {
+export function Dashboard({ events, stats, teasers }: DashboardProps) {
   const [focused, setFocused] = useState(true);
   const [query, setQuery] = useState("");
   const [source, setSource] = useState("all");
@@ -31,7 +30,6 @@ export function Dashboard({ events, stats }: DashboardProps) {
   const [sort, setSort] = useState<SortMode>("recommended");
   const [view, setView] = useState<ViewMode>("list");
   const [showSaved, setShowSaved] = useState(false);
-  const [refreshing, setRefreshing] = useState(false);
   const { favorites, toggle } = useFavorites();
   const [region, setRegion] = useState("all");
   const [now, setNow] = useState(() => new Date(stats.generatedAt));
@@ -104,11 +102,6 @@ export function Dashboard({ events, stats }: DashboardProps) {
     window.history.replaceState(null, "", url);
   };
 
-  const handleRefresh = () => {
-    setRefreshing(true);
-    window.location.reload();
-  };
-
   // Sync section with URL hash so tabs are shareable (#events / #collect)
   useEffect(() => {
     const sync = () => {
@@ -141,16 +134,9 @@ export function Dashboard({ events, stats }: DashboardProps) {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar
-        onRefresh={handleRefresh}
-        refreshing={refreshing}
-        region={region}
-        onRegionChange={switchRegion}
-        regionCounts={regionCounts}
-        showRegions
-      />
       <main>
           <Hero stats={regionalStats} />
+          <ExploreStrip teasers={teasers} />
           <nav aria-label="Event focus" className="page-shell flex flex-wrap gap-2 pb-5">
             {[{ value: true, label: 'Tech, startups & careers' }, { value: false, label: 'All events' }].map(option => (
               <button key={option.label} onClick={() => switchFocus(option.value)} aria-pressed={focused === option.value}
@@ -158,12 +144,18 @@ export function Dashboard({ events, stats }: DashboardProps) {
                 {option.label}
               </button>
             ))}
-            <Link href="/resources" className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-border/50 bg-card px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
-              <GraduationCap className="size-4" /> Student resources
-            </Link>
-            <Link href="/flights" className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-border/50 bg-card px-4 py-2 text-sm font-semibold text-muted-foreground hover:text-foreground">
-              <Plane className="size-4" /> KL ⇄ London fares
-            </Link>
+            <label className="relative ml-auto min-w-[180px] flex-1 sm:flex-none">
+              <span className="sr-only">Location</span>
+              <MapPin className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+              <select value={region} onChange={(event) => switchRegion(event.target.value)} aria-label="Filter events by state"
+                className="h-11 w-full cursor-pointer appearance-none rounded-xl border border-input/70 bg-card pl-9 pr-8 text-base sm:w-[220px] sm:text-sm">
+                <option value="all">All of Malaysia</option>
+                {Object.entries(REGIONS).filter(([value]) => value !== "unknown").map(([value, label]) => (
+                  <option key={value} value={value}>{label} ({regionCounts[value] || 0})</option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
+            </label>
           </nav>
           <p className="page-shell pb-5 text-xs leading-relaxed text-muted-foreground sm:text-sm" role="status">
             {region === "all" ? "All locations" : REGIONS[region]} · {regionalEvents.length} upcoming listings.
@@ -203,7 +195,6 @@ export function Dashboard({ events, stats }: DashboardProps) {
             )}
           </div>
       </main>
-      <Footer />
       <BackToTop />
     </div>
   );

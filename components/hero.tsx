@@ -50,7 +50,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
           transition={{ duration: 0.4 }}
         >
           <p className="font-mono text-xs leading-relaxed text-muted-foreground">
-            Malaysia-wide discovery · checked {updated} · {stats.sources} sources
+            Updated daily · events checked {updated} · {stats.sources} sources
           </p>
 
           <h1 className="section-heading mt-4 max-w-3xl">
@@ -59,7 +59,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
           </h1>
 
           <p className="mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
-            Free tech meetups, startup communities, hackathons and career events across Malaysia — built for students and fresh graduates.
+            Free tech meetups, hackathons, startup and career events across Malaysia, plus student resources, free items and flight deals. Built for students and fresh graduates.
           </p>
 
           <motion.div

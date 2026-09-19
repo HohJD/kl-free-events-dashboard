@@ -1,10 +1,8 @@
 "use client";
 
 /**
- * In-browser item category detection using Hugging Face Transformers.js
- * (zero-shot CLIP). Free, no API key, runs entirely on the visitor's device.
- * The model (~25 MB quantized) is lazy-loaded the first time a photo is
- * picked, and cached by the browser afterwards.
+ * Item categories and instant keyword detection (English and Malay) for the
+ * free-items form. The giver can always change the suggested category.
  */
 
 export const ITEM_CATEGORIES: { label: string; prompt: string }[] = [
@@ -20,11 +18,7 @@ export const ITEM_CATEGORIES: { label: string; prompt: string }[] = [
   { label: "Other", prompt: "a photo of a miscellaneous household object" },
 ];
 
-/**
- * Instant text-based category detection from the one-liner (EN + BM).
- * This runs on every keystroke and beats the image model when it matches —
- * "IKEA lamp" is a stronger signal than any pixel.
- */
+/** Keyword match on the item name; runs on every keystroke. */
 const TEXT_RULES: { category: string; pattern: RegExp }[] = [
   { category: "Furniture", pattern: /\b(chair|table|sofa|couch|shelf|shelves|lamp|desk|cupboard|wardrobe|mattress|bed(frame)?|drawer|rack|stool|bench|cabinet|dresser|kerusi|meja|almari|katil|rak|tilam)\b/i },
   { category: "Electronics", pattern: /\b(phone|iphone|laptop|macbook|tv|television|monitor|charger|cable|keyboard|mouse|speaker|headphone|earphone|fan|aircond|kettle|iron|rice ?cooker|microwave|oven|printer|router|modem|camera|console|playstation|xbox|nintendo|radio|vacuum|kipas|cerek|peti)\b/i },
@@ -42,71 +36,4 @@ export function classifyText(text: string): string | null {
     if (rule.pattern.test(text)) return rule.category;
   }
   return null;
-}
-
-// Loaded from CDN at runtime — keeps the site bundle small and avoids
-// bundling Node-only dependencies into a static export.
-const TRANSFORMERS_CDN =
-  "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0";
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let pipePromise: Promise<any> | null = null;
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getPipeline(): Promise<any> {
-  if (!pipePromise) {
-    pipePromise = import(
-      /* webpackIgnore: true */ TRANSFORMERS_CDN
-    ).then(({ pipeline }) =>
-      pipeline("zero-shot-image-classification", "Xenova/clip-vit-base-patch32")
-    );
-  }
-  return pipePromise;
-}
-
-/**
- * Respect users on metered/slow connections — the model is ~25 MB, so skip
- * AI detection entirely when Data Saver is on or the connection is 2G.
- */
-export function aiAllowed(): boolean {
-  if (typeof navigator === "undefined") return false;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const conn = (navigator as any).connection;
-  if (conn?.saveData) return false;
-  if (typeof conn?.effectiveType === "string" && conn.effectiveType.includes("2g"))
-    return false;
-  return true;
-}
-
-/** Warm the model download in the background (call when the form opens). */
-export function preloadClassifier(): void {
-  if (!aiAllowed()) return;
-  getPipeline().catch(() => {});
-}
-
-export async function classifyItemPhoto(file: File): Promise<string> {
-  if (!aiAllowed()) return "Other";
-  const url = URL.createObjectURL(file);
-  try {
-    const run = (async () => {
-      const classify = await getPipeline();
-      const results: { label: string; score: number }[] = await classify(
-        url,
-        ITEM_CATEGORIES.map((c) => c.prompt)
-      );
-      const top = results[0];
-      if (!top || top.score < 0.2) return "Other";
-      const match = ITEM_CATEGORIES.find((c) => c.prompt === top.label);
-      return match?.label ?? "Other";
-    })();
-    // Never leave the user staring at "Detecting…" on a slow connection
-    const timeout = new Promise<string>((resolve) =>
-      setTimeout(() => resolve("Other"), 25000)
-    );
-    return await Promise.race([run, timeout]);
-  } catch {
-    return "Other";
-  } finally {
-    URL.revokeObjectURL(url);
-  }
 }

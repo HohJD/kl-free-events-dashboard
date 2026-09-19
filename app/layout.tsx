@@ -3,6 +3,8 @@ import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/g
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
+import { SiteHeader, MobileTabs } from "@/components/site-header";
+import { Footer } from "@/components/footer";
 
 const display = Bricolage_Grotesque({
   weight: ["600", "700", "800"],
@@ -23,25 +25,25 @@ const mono = IBM_Plex_Mono({
 
 const SITE_URL = "https://kl-free-events-dashboard.vercel.app";
 const DESCRIPTION =
-  "Find free tech meetups, hackathons, startup events and career opportunities across Malaysia. Built for students and fresh graduates, with other community events too.";
+  "Free events, student resources, free items and flight deals in Malaysia, updated every day. Built for students and fresh graduates.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Free Events Malaysia — tech, startups & careers",
+  title: "Free Things Malaysia: events, resources, free items",
   description: DESCRIPTION,
   manifest: "/manifest.json",
   openGraph: {
-    title: "Free Events Malaysia — tech, startups & careers",
+    title: "Free Things Malaysia: events, resources, free items",
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "Free Events Malaysia",
+    siteName: "Free Things Malaysia",
     images: [{ url: "/icon.png", width: 512, height: 512 }],
     locale: "en_MY",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Events Malaysia — tech, startups & careers",
+    title: "Free Things Malaysia: events, resources, free items",
     description: DESCRIPTION,
     images: ["/icon.png"],
   },
@@ -71,7 +73,14 @@ export default function RootLayout({
           mono.variable
         )}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          <SiteHeader />
+          <div className="pb-20 md:pb-0">
+            {children}
+            <Footer />
+          </div>
+          <MobileTabs />
+        </Providers>
       </body>
     </html>
   );
