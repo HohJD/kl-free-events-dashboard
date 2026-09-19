@@ -106,7 +106,10 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
 
   // Old shared links pointed at the giveaway tab (#collect); it is now /free-items.
   useEffect(() => {
-    if (window.location.hash === "#collect") window.location.replace("/free-items");
+    const redirect = () => { if (window.location.hash === "#collect") window.location.replace("/free-items"); };
+    redirect();
+    window.addEventListener("hashchange", redirect);
+    return () => window.removeEventListener("hashchange", redirect);
   }, []);
 
   useEffect(() => {
