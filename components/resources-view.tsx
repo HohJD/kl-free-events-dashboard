@@ -6,6 +6,8 @@ import { ArrowRight, ArrowUpRight, Search, GraduationCap, Briefcase, BriefcaseBu
 import { Resource, ResourceKind, RESOURCE_KINDS, filterResources } from "@/lib/resources";
 import { malaysiaDay } from "@/lib/filter-events";
 import { cn } from "@/lib/utils";
+import { useSaved, type SavedEntry } from "@/lib/use-saved";
+import { SaveButton } from "./save-button";
 
 const KIND_ICON = { scholarship: GraduationCap, internship: Briefcase, graduate: BriefcaseBusiness, tool: Wrench };
 const KIND_LABEL: Record<ResourceKind, string> = { scholarship: "Scholarship", internship: "Internship", graduate: "Graduate role", tool: "Free tool" };
@@ -42,7 +44,7 @@ function formatDay(value: string): string {
   return new Date(stamp).toLocaleDateString("en-MY", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
 }
 
-function ResourceCard({ row, today }: { row: Resource; today: string }) {
+function ResourceCard({ row, today, saved, onToggle }: { row: Resource; today: string; saved: boolean; onToggle: (entry: Omit<SavedEntry, "savedAt">) => void }) {
   const Icon = KIND_ICON[row.kind];
   const deadline = deadlineLabel(row, today);
   return (
@@ -65,6 +67,9 @@ function ResourceCard({ row, today }: { row: Resource; today: string }) {
             <h3 className="listing-title mt-0.5 break-words">{row.title}</h3>
             {row.organization ? <p className="mt-0.5 truncate text-sm text-muted-foreground">{row.organization}</p> : null}
           </div>
+          <SaveButton saved={saved} onToggle={onToggle} className="-mr-2 -mt-1 shrink-0"
+            entry={{ id: row.link, kind: "resource", title: row.title, href: row.link, section: `/resources?type=${row.kind}`,
+              note: [KIND_LABEL[row.kind], row.organization, row.deadline ? `closes ${formatDay(row.deadline)}` : ""].filter(Boolean).join(" · ") }} />
         </div>
 
         {deadline ? (
@@ -102,6 +107,7 @@ export function ResourcesView({ resources, generatedAt }: { resources: Resource[
   const [techOnly, setTechOnly] = useState(false);
   const [query, setQuery] = useState("");
   const [today, setToday] = useState(() => malaysiaDay(generatedAt ? new Date(generatedAt) : new Date()));
+  const { ids: savedIds, toggle: toggleSaved } = useSaved();
 
   useEffect(() => {
     setToday(malaysiaDay());
@@ -187,7 +193,7 @@ export function ResourcesView({ resources, generatedAt }: { resources: Resource[
                       ) : null}
                     </div>
                     <div className="resource-preview grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                      {rows.slice(0, PREVIEW).map((row) => <ResourceCard key={`${row.kind}:${row.link}`} row={row} today={today} />)}
+                      {rows.slice(0, PREVIEW).map((row) => <ResourceCard key={`${row.kind}:${row.link}`} row={row} today={today} saved={savedIds.has(row.link)} onToggle={toggleSaved} />)}
                     </div>
                   </section>
                 );
@@ -195,7 +201,7 @@ export function ResourcesView({ resources, generatedAt }: { resources: Resource[
             </div>
           ) : shown.length ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {shown.map((row) => <ResourceCard key={`${row.kind}:${row.link}`} row={row} today={today} />)}
+              {shown.map((row) => <ResourceCard key={`${row.kind}:${row.link}`} row={row} today={today} saved={savedIds.has(row.link)} onToggle={toggleSaved} />)}
             </div>
           ) : (
             <p className="py-16 text-center text-sm text-muted-foreground">No open listings match. Try another type or clear the search.</p>

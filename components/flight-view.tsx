@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock, Minus, Plane, PlaneLanding, PlaneTakeoff, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useSaved, type SavedEntry } from "@/lib/use-saved";
+import { SaveButton } from "./save-button";
 import {
   ADVICE_TEXT, type AdviceCode, type Calendar, type Day, type FlightData, type LegDetail, addDays, bookingOutlook, dayLabel, daysBetween,
   duration, googleFlightsLink, median, money, monthLabel, nearbyCheaper, plain, priceStep, stayLabel, toDays,
@@ -161,10 +163,11 @@ function LegLine({ icon: Icon, label, date, leg }: { icon: typeof PlaneTakeoff; 
   );
 }
 
-function TripPanel({ day, days, calendar, stays, staysByDate, detail, route, typical, onPick, onStay }: {
+function TripPanel({ day, days, calendar, stays, staysByDate, detail, route, typical, onPick, onStay, saved, onToggleSave }: {
   day: Day; days: Day[]; calendar: Calendar; stays: Calendar[]; staysByDate: Map<number | null, Map<string, number>>;
   detail: FlightData["details"][string] | undefined; route: FlightData["routes"][number]; typical: number;
   onPick: (date: string) => void; onStay: (stay: number | null) => void;
+  saved: boolean; onToggleSave: (entry: Omit<SavedEntry, "savedAt">) => void;
 }) {
   const diff = day.price - typical;
   const cheaper = nearbyCheaper(days, day.date);
@@ -179,7 +182,14 @@ function TripPanel({ day, days, calendar, stays, staysByDate, detail, route, typ
       </p>
       <div className="mt-1 flex flex-wrap items-end justify-between gap-3">
         <p className="font-display text-4xl font-bold tabular-nums">{money(day.price)}</p>
-        <AdviceBadge advice={day.advice} large />
+        <span className="flex items-center gap-1">
+          <AdviceBadge advice={day.advice} large />
+          <SaveButton saved={saved} onToggle={onToggleSave}
+            entry={{ id: `flight:${calendar.id}|${day.date}`, kind: "flight",
+              title: `${route.origin} → ${route.destination} · ${dayLabel(day.date)}${day.returnDate ? ` → ${dayLabel(day.returnDate)}` : ""}`,
+              href: `/flights?route=${calendar.route}&stay=${calendar.stay ?? "one-way"}&date=${day.date}`,
+              section: "/flights", note: `${money(day.price)} · ${stayLabel(calendar.stay)}` }} />
+        </span>
       </div>
       <p className="mt-1 text-sm text-muted-foreground">
         {day.returnDate ? "Return fare, economy, 1 adult. " : ""}
@@ -248,6 +258,7 @@ export function FlightView({ data }: { data: FlightData | null }) {
   const [selected, setSelected] = useState("");
   const [hovered, setHovered] = useState("");
   const [page, setPage] = useState(0);
+  const { ids: savedIds, toggle: toggleSaved } = useSaved();
   const panelRef = useRef<HTMLDivElement>(null);
   const [panelVisible, setPanelVisible] = useState(false);
 
@@ -417,6 +428,7 @@ export function FlightView({ data }: { data: FlightData | null }) {
               <div ref={panelRef} className="scroll-mt-20 lg:sticky lg:top-20 lg:self-start">
                 {current && route ? (
                   <TripPanel day={current} days={days} calendar={calendar} stays={stays} staysByDate={staysByDate}
+                    saved={savedIds.has(`flight:${calendar.id}|${current.date}`)} onToggleSave={toggleSaved}
                     detail={data.details[`${calendar.id}|${current.date}`]} route={route} typical={typical}
                     onPick={pick} onStay={(stay) => choose({ route: view.route, stay })} />
                 ) : null}

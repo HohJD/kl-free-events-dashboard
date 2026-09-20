@@ -1,8 +1,11 @@
 "use client";
 
 /**
- * Item categories and instant keyword detection (English and Malay) for the
- * free-items form. The giver can always change the suggested category.
+ * Item categories for the free-items form. The name is matched against
+ * keywords instantly (English and Malay); a photo can also be classified in
+ * the browser with Hugging Face Transformers.js (zero-shot CLIP, ~25 MB,
+ * cached after the first use, skipped on 2G or data saver). The giver can
+ * always pick a different category.
  */
 
 export const ITEM_CATEGORIES: { label: string; prompt: string }[] = [
@@ -36,4 +39,71 @@ export function classifyText(text: string): string | null {
     if (rule.pattern.test(text)) return rule.category;
   }
   return null;
+}
+
+// Loaded from CDN at runtime — keeps the site bundle small and avoids
+// bundling Node-only dependencies into a static export.
+const TRANSFORMERS_CDN =
+  "https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.2.0";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let pipePromise: Promise<any> | null = null;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getPipeline(): Promise<any> {
+  if (!pipePromise) {
+    pipePromise = import(
+      /* webpackIgnore: true */ TRANSFORMERS_CDN
+    ).then(({ pipeline }) =>
+      pipeline("zero-shot-image-classification", "Xenova/clip-vit-base-patch32")
+    );
+  }
+  return pipePromise;
+}
+
+/**
+ * Respect users on metered/slow connections — the model is ~25 MB, so skip
+ * AI detection entirely when Data Saver is on or the connection is 2G.
+ */
+export function aiAllowed(): boolean {
+  if (typeof navigator === "undefined") return false;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const conn = (navigator as any).connection;
+  if (conn?.saveData) return false;
+  if (typeof conn?.effectiveType === "string" && conn.effectiveType.includes("2g"))
+    return false;
+  return true;
+}
+
+/** Warm the model download in the background (call when the form opens). */
+export function preloadClassifier(): void {
+  if (!aiAllowed()) return;
+  getPipeline().catch(() => {});
+}
+
+export async function classifyItemPhoto(file: File): Promise<string> {
+  if (!aiAllowed()) return "Other";
+  const url = URL.createObjectURL(file);
+  try {
+    const run = (async () => {
+      const classify = await getPipeline();
+      const results: { label: string; score: number }[] = await classify(
+        url,
+        ITEM_CATEGORIES.map((c) => c.prompt)
+      );
+      const top = results[0];
+      if (!top || top.score < 0.2) return "Other";
+      const match = ITEM_CATEGORIES.find((c) => c.prompt === top.label);
+      return match?.label ?? "Other";
+    })();
+    // Never leave the user staring at "Detecting…" on a slow connection
+    const timeout = new Promise<string>((resolve) =>
+      setTimeout(() => resolve("Other"), 25000)
+    );
+    return await Promise.race([run, timeout]);
+  } catch {
+    return "Other";
+  } finally {
+    URL.revokeObjectURL(url);
+  }
 }

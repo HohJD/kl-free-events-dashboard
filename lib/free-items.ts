@@ -106,22 +106,28 @@ export function isWhatsAppLink(value: string): boolean {
   return /^https:\/\/wa\.me\/[A-Za-z0-9._]{3,30}$/.test(value);
 }
 
+export const CONDITIONS = ["Like new", "Good", "Used", "For parts"] as const;
+export const MAX_PHOTOS = 3;
+
 /**
- * Upload the photo and insert the listing. The row has the same fields the
+ * Upload the photos and insert the listing. The row keeps the fields the
  * database policies were written for (owner is set by the database); the
  * pickup point is only stored when it came from location detection.
  */
 export async function postItem(input: {
-  name: string; photo: File; category: string; pickup: string; location: ApproxLocation | null; contact: string;
+  name: string; photos: File[]; category: string; pickup: string; location: ApproxLocation | null; contact: string;
+  description?: string; condition?: string;
 }): Promise<FreeItem> {
-  const url = await uploadPhoto(await compressImage(input.photo));
+  const urls: string[] = [];
+  for (const photo of input.photos.slice(0, MAX_PHOTOS)) urls.push(await uploadPhoto(await compressImage(photo)));
   const useLocation = input.location && input.location.area === input.pickup;
   const { data, error } = await getSupabase()
     .from("free_items")
     .insert({
       name: input.name,
-      images: [url],
-      condition: "Good",
+      images: urls,
+      description: (input.description || "").trim().slice(0, 300),
+      condition: input.condition || "Good",
       category: input.category,
       pickup: input.pickup,
       pickup_lat: useLocation ? input.location!.lat : null,

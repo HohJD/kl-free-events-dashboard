@@ -1,6 +1,7 @@
 "use client";
 
 import { Event } from "@/lib/events";
+import type { SavedEntry } from "@/lib/use-saved";
 import { EventCard } from "./event-card";
 import { CalendarX } from "lucide-react";
 import { motion } from "framer-motion";
@@ -8,7 +9,7 @@ import { motion } from "framer-motion";
 interface EventGridProps {
   events: Event[];
   favorites: Set<string>;
-  onToggleSave: (link: string) => void;
+  onToggleSave: (entry: Omit<SavedEntry, "savedAt">) => void;
   onClear: () => void;
 }
 

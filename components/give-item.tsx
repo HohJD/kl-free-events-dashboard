@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Camera, Check, Loader2, LocateFixed, LogOut, UserRound, X } from "lucide-react";
+import { Camera, Check, ChevronDown, Loader2, LocateFixed, LogOut, Sparkles, Trash2, UserRound, X } from "lucide-react";
 import { getSupabase } from "@/lib/supabase";
 import { useAuth } from "@/lib/use-auth";
 import { getApproxLocation, type ApproxLocation } from "@/lib/geolocate";
-import { ITEM_CATEGORIES, classifyText } from "@/lib/classify";
-import { LISTING_DAYS, friendlyError, postItem, toWhatsAppLink } from "@/lib/free-items";
+import { ITEM_CATEGORIES, aiAllowed, classifyItemPhoto, classifyText, preloadClassifier } from "@/lib/classify";
+import { CONDITIONS, LISTING_DAYS, MAX_PHOTOS, friendlyError, postItem, toWhatsAppLink } from "@/lib/free-items";
 import type { FreeItem } from "@/lib/items";
 import { cn } from "@/lib/utils";
 
@@ -60,10 +60,15 @@ function SignIn() {
 /** "Give something away": sign in, then photo, name, category, pickup, WhatsApp. */
 export function GiveItem({ open, onClose, onListed }: { open: boolean; onClose: () => void; onListed: (item: FreeItem) => void }) {
   const { user, ready, signOut } = useAuth();
-  const [photo, setPhoto] = useState<File | null>(null);
-  const [preview, setPreview] = useState("");
+  const [photos, setPhotos] = useState<File[]>([]);
+  const [previews, setPreviews] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [pickedCategory, setPickedCategory] = useState<string | null>(null);
+  const [photoCategory, setPhotoCategory] = useState<string | null>(null);
+  const [detecting, setDetecting] = useState(false);
+  const [description, setDescription] = useState("");
+  const [condition, setCondition] = useState<string>("Good");
+  const [showDetails, setShowDetails] = useState(false);
   const [pickup, setPickup] = useState("");
   const [location, setLocation] = useState<ApproxLocation | null>(null);
   const [locating, setLocating] = useState(false);
@@ -78,18 +83,34 @@ export function GiveItem({ open, onClose, onListed }: { open: boolean; onClose: 
     const saved = user?.user_metadata?.whatsapp;
     if (typeof saved === "string" && saved && !whatsapp) setWhatsapp(saved);
   }, [user, whatsapp]);
-  useEffect(() => { if (open) panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }); }, [open]);
-  useEffect(() => () => { if (preview) URL.revokeObjectURL(preview); }, [preview]);
+  useEffect(() => {
+    if (!open) return;
+    panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    preloadClassifier();  // warms the ~25 MB model; skipped on 2G/data saver
+  }, [open]);
+  useEffect(() => () => { previews.forEach((url) => URL.revokeObjectURL(url)); }, [previews]);
 
   const suggested = classifyText(name);
-  const category = pickedCategory ?? suggested ?? "Other";
+  const category = pickedCategory ?? suggested ?? photoCategory ?? "Other";
   const contact = toWhatsAppLink(whatsapp);
-  const missing = [!photo && "a photo", name.trim().length < 3 && "what it is", !contact && "your WhatsApp"].filter(Boolean) as string[];
+  const missing = [!photos.length && "a photo", name.trim().length < 3 && "what it is", !contact && "your WhatsApp"].filter(Boolean) as string[];
 
-  const choosePhoto = (file: File | null) => {
-    if (preview) URL.revokeObjectURL(preview);
-    setPhoto(file);
-    setPreview(file ? URL.createObjectURL(file) : "");
+  const addPhotos = (files: File[]) => {
+    const room = MAX_PHOTOS - photos.length;
+    const next = files.slice(0, Math.max(0, room));
+    if (!next.length) return;
+    setPhotos((previous) => [...previous, ...next]);
+    setPreviews((previous) => [...previous, ...next.map((file) => URL.createObjectURL(file))]);
+    // Categorise from the first photo, in the browser, when the name hasn't said enough.
+    if (!photos.length && aiAllowed()) {
+      setDetecting(true);
+      classifyItemPhoto(next[0]).then((found) => setPhotoCategory(found)).finally(() => setDetecting(false));
+    }
+  };
+  const removePhoto = (index: number) => {
+    URL.revokeObjectURL(previews[index]);
+    setPhotos((previous) => previous.filter((_, i) => i !== index));
+    setPreviews((previous) => previous.filter((_, i) => i !== index));
   };
   const locate = async () => {
     setLocating(true);
@@ -99,17 +120,19 @@ export function GiveItem({ open, onClose, onListed }: { open: boolean; onClose: 
     if (found) { setLocation(found); setPickup(found.area); } else setLocateFailed(true);
   };
   const reset = () => {
-    choosePhoto(null);
-    setName(""); setPickedCategory(null); setPickup(""); setLocation(null); setStatus("idle"); setError("");
+    previews.forEach((url) => URL.revokeObjectURL(url));
+    setPhotos([]); setPreviews([]); setPhotoCategory(null);
+    setName(""); setPickedCategory(null); setPickup(""); setLocation(null); setDescription(""); setCondition("Good");
+    setShowDetails(false); setStatus("idle"); setError("");
     onClose();
   };
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (missing.length || !photo || status === "busy") return;
+    if (missing.length || !photos.length || status === "busy") return;
     setStatus("busy");
     setError("");
     try {
-      const item = await postItem({ name: name.trim(), photo, category, pickup: pickup.trim(), location, contact });
+      const item = await postItem({ name: name.trim(), photos, category, pickup: pickup.trim(), location, contact, description, condition });
       if (whatsapp !== user?.user_metadata?.whatsapp) getSupabase().auth.updateUser({ data: { whatsapp } }).then(() => {}, () => {});
       onListed(item);
       setStatus("done");
@@ -148,19 +171,37 @@ export function GiveItem({ open, onClose, onListed }: { open: boolean; onClose: 
         ) : (
           <form onSubmit={submit} className="grid gap-5 md:grid-cols-[220px_minmax(0,1fr)]">
             <div>
-              <input ref={fileRef} type="file" accept="image/*" capture="environment" className="hidden" onChange={(e) => choosePhoto(e.target.files?.[0] ?? null)} />
-              <button type="button" onClick={() => fileRef.current?.click()}
-                className={cn("relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl border border-dashed border-border hover:border-ring", preview ? "border-solid" : "bg-muted/40")}>
-                {preview ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={preview} alt="Your photo" className="absolute inset-0 h-full w-full object-cover" />
-                ) : (
+              <input ref={fileRef} type="file" accept="image/*" capture="environment" multiple className="hidden"
+                onChange={(e) => { addPhotos(Array.from(e.target.files ?? [])); e.target.value = ""; }} />
+              {previews.length ? (
+                <div className="grid grid-cols-3 gap-2 md:grid-cols-2">
+                  {previews.map((src, index) => (
+                    <div key={src} className={cn("relative overflow-hidden rounded-xl border border-border", index === 0 && "col-span-3 md:col-span-2")}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={src} alt={`Photo ${index + 1}`} className={cn("w-full object-cover", index === 0 ? "aspect-[4/3]" : "aspect-square")} />
+                      <button type="button" onClick={() => removePhoto(index)} aria-label={`Remove photo ${index + 1}`}
+                        className="absolute right-1 top-1 flex size-9 items-center justify-center rounded-full bg-black/60 text-white">
+                        <Trash2 className="size-4" aria-hidden />
+                      </button>
+                    </div>
+                  ))}
+                  {photos.length < MAX_PHOTOS ? (
+                    <button type="button" onClick={() => fileRef.current?.click()}
+                      className="flex aspect-square items-center justify-center rounded-xl border border-dashed border-border text-xs font-medium text-muted-foreground hover:border-ring">
+                      <Camera className="mr-1 size-4" aria-hidden /> Add
+                    </button>
+                  ) : null}
+                </div>
+              ) : (
+                <button type="button" onClick={() => fileRef.current?.click()}
+                  className="flex aspect-[4/3] w-full items-center justify-center rounded-xl border border-dashed border-border bg-muted/40 hover:border-ring">
                   <span className="flex flex-col items-center gap-1.5 text-sm font-medium text-muted-foreground"><Camera className="size-7" aria-hidden /> Add a photo</span>
-                )}
-              </button>
-              {preview ? <button type="button" onClick={() => fileRef.current?.click()} className="mt-2 text-xs font-semibold underline underline-offset-2">Change photo</button> : null}
+                </button>
+              )}
+              <p className="mt-2 text-xs text-muted-foreground">
+                {photos.length ? `${photos.length} of ${MAX_PHOTOS} photos. The first one is the cover.` : `Up to ${MAX_PHOTOS} photos. The first one is the cover.`}
+              </p>
             </div>
-
             <div className="min-w-0 space-y-4">
               <Field label="What is it?">
                 <input value={name} onChange={(e) => setName(e.target.value.slice(0, 80))} placeholder="e.g. IKEA desk lamp, works well" className={input} />
@@ -175,7 +216,13 @@ export function GiveItem({ open, onClose, onListed }: { open: boolean; onClose: 
                     </button>
                   ))}
                 </div>
-                {!pickedCategory && suggested ? <span className="mt-1 block text-xs text-muted-foreground">Suggested from the name. Tap another to change.</span> : null}
+                {detecting ? (
+                  <span className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground"><Loader2 className="size-3.5 animate-spin" aria-hidden /> Looking at your photo…</span>
+                ) : !pickedCategory && (suggested || photoCategory) ? (
+                  <span className="mt-1 flex items-center gap-1.5 text-xs text-muted-foreground">
+                    <Sparkles className="size-3.5" aria-hidden /> Suggested from {suggested ? "the name" : "your photo"}. Tap another to change.
+                  </span>
+                ) : null}
               </div>
               <Field label="Pickup area" hint={locateFailed ? "Couldn't get your location. Type the area instead." : "Neighbourhood only, e.g. SS15 Subang Jaya. Never your full address."}>
                 <span className="flex gap-2">
@@ -187,6 +234,31 @@ export function GiveItem({ open, onClose, onListed }: { open: boolean; onClose: 
                   </button>
                 </span>
               </Field>
+              <div>
+                <button type="button" onClick={() => setShowDetails(!showDetails)} aria-expanded={showDetails}
+                  className="inline-flex min-h-9 items-center gap-1 text-sm font-semibold text-muted-foreground hover:text-foreground">
+                  <ChevronDown className={cn("size-4 transition-transform", showDetails && "rotate-180")} aria-hidden /> Add details (optional)
+                </button>
+                {showDetails ? (
+                  <div className="mt-3 space-y-4">
+                    <Field label="Condition">
+                      <span className="flex flex-wrap gap-1.5">
+                        {CONDITIONS.map((value) => (
+                          <button key={value} type="button" onClick={() => setCondition(value)} aria-pressed={condition === value}
+                            className={cn("min-h-9 rounded-full border px-3 text-xs font-medium", condition === value ? "border-border bg-accent font-semibold text-accent-foreground" : "border-border/50 text-muted-foreground hover:text-foreground")}>
+                            {value}
+                          </button>
+                        ))}
+                      </span>
+                    </Field>
+                    <Field label="Anything else?" hint={`${description.length}/300 characters. Size, faults, what's included.`}>
+                      <textarea value={description} onChange={(e) => setDescription(e.target.value.slice(0, 300))} rows={3}
+                        placeholder="e.g. 120 cm wide, small scratch on the left side, bulb included"
+                        className="w-full rounded-xl border border-input bg-background p-3 text-base outline-none placeholder:text-muted-foreground focus:border-ring md:text-sm" />
+                    </Field>
+                  </div>
+                ) : null}
+              </div>
               <Field label="Your WhatsApp" hint={whatsapp && !contact ? <span className="font-medium text-destructive">Try 0123456789, +6012… or your WhatsApp username.</span> : "People tap “Claim on WhatsApp” to message you. Saved for next time."}>
                 <input type="text" inputMode="tel" autoComplete="tel" value={whatsapp} onChange={(e) => setWhatsapp(e.target.value.slice(0, 30))} placeholder="Phone number or username"
                   className={cn(input, whatsapp && !contact && "border-destructive")} />

@@ -50,14 +50,14 @@ for (const theme of ['light', 'dark']) {
 // Key flows.
 const context = await browser.newContext({ viewport: { width: 390, height: 900 } });
 await context.route('**/rest/v1/free_items**', (route) => route.fulfill({ json: FIXTURE }));
+// The category model is a big CDN download; tests never fetch it.
+await context.route('**cdn.jsdelivr.net/**', (route) => route.abort());
 const page = await context.newPage();
 await page.goto(BASE + '/free-items', { waitUntil: 'networkidle' });
 assert.equal(await page.locator('article').count(), 2);
 await page.getByRole('button', { name: /^Books & Media/ }).click();
 assert.equal(await page.locator('article').count(), 1);
 assert.match(await page.locator('a', { hasText: 'Claim on WhatsApp' }).getAttribute('href'), /^https:\/\/wa\.me\/60123456780\?text=/);
-await page.getByRole('button', { name: /Give something away/ }).first().click();
-assert.ok(await page.getByText('Step 1 of 2').isVisible(), 'Signed-out givers see the sign-in step');
 await page.goto(BASE + '/flights', { waitUntil: 'networkidle' });
 await page.locator('button.fx-cell').nth(3).click();
 assert.match(page.url(), /date=\d{4}-\d{2}-\d{2}/);
@@ -67,5 +67,24 @@ await page.waitForURL(/free-items/);
 // Old shared links to the giveaway tab land on the free-items page.
 await page.goto(BASE + '/#collect');
 await page.waitForURL(/\/free-items/);
+
+// Saving works across sections and lands on one Saved page.
+await page.goto(BASE + '/', { waitUntil: 'networkidle' });
+const firstEvent = page.locator('article.listing-card').first();
+const eventTitle = (await firstEvent.locator('h3').innerText()).trim();
+await firstEvent.getByRole('button', { name: /^Save / }).click();
+assert.match(await page.getByRole('link', { name: /^Saved/ }).innerText(), /1/, 'Header badge counts saved things');
+await page.goto(BASE + '/resources', { waitUntil: 'networkidle' });
+await page.locator('article').first().getByRole('button', { name: /^Save / }).click();
+await page.goto(BASE + '/saved', { waitUntil: 'networkidle' });
+assert.equal(await page.locator('section[aria-labelledby^="saved-"]').count(), 2, 'Saved page groups by kind');
+assert.ok((await page.locator('li').filter({ hasText: eventTitle }).count()) > 0, 'Saved event is listed');
+await page.locator('li').filter({ hasText: eventTitle }).getByRole('button', { name: /^Remove / }).click();
+assert.equal(await page.locator('li').filter({ hasText: eventTitle }).count(), 0, 'Removing from Saved works');
+
+// The give-away form keeps its optional details behind one control.
+await page.goto(BASE + '/free-items', { waitUntil: 'networkidle' });
+await page.getByRole('button', { name: /Give something away/ }).first().click();
+assert.ok(await page.getByText('Step 1 of 2').isVisible(), 'Signed-out givers see the sign-in step');
 await browser.close();
 console.log(`Passed ${checks} page/theme/width checks and the free-items, flights and navigation flows.`);

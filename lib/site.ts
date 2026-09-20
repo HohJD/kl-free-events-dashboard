@@ -18,7 +18,9 @@ export const SECTIONS: Section[] = [
   { href: "/flights", label: "Flight deals", short: "Flights", icon: Plane, blurb: "Cheapest KL ⇄ London fares for every date" },
 ];
 
+/** The section a path belongs to; "" for pages outside the four sections. */
 export function activeSection(pathname: string): string {
   const match = SECTIONS.filter((section) => section.href !== "/" && pathname.startsWith(section.href));
-  return match[0]?.href ?? "/";
+  if (match[0]) return match[0].href;
+  return pathname === "/" ? "/" : "";
 }

@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ChevronDown, MapPin } from "lucide-react";
 import { Event } from "@/lib/events";
 import { filterEvents, DateRange, SortMode } from "@/lib/filter-events";
-import { useFavorites } from "@/lib/use-favorites";
+import { useSaved } from "@/lib/use-saved";
 import { Hero, HeroStats } from "./hero";
 import { Filters, ViewMode } from "./filters";
 import { EventGrid } from "./event-grid";
@@ -32,7 +32,7 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
   const [view, setView] = useState<ViewMode>("list");
   const [showSaved, setShowSaved] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const { favorites, toggle } = useFavorites();
+  const { ids: savedIds, toggle: toggleSaved } = useSaved();
   const [region, setRegion] = useState("all");
   const [now, setNow] = useState(() => new Date(stats.generatedAt));
 
@@ -82,9 +82,9 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
 
   const filtered = useMemo(() => {
     let result = filterEvents(focusEvents(regionalEvents, focused), query, source, category, dateRange, now, sort);
-    if (showSaved) result = result.filter((e) => favorites.has(e.link));
+    if (showSaved) result = result.filter((e) => savedIds.has(e.link));
     return result;
-  }, [regionalEvents, focused, query, source, category, dateRange, showSaved, favorites, now, sort]);
+  }, [regionalEvents, focused, query, source, category, dateRange, showSaved, savedIds, now, sort]);
 
   const handleClear = () => {
     setQuery("");
@@ -189,7 +189,7 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
             setView={setView}
             showSaved={showSaved}
             setShowSaved={setShowSaved}
-            savedCount={favorites.size}
+            savedCount={savedIds.size}
             onClear={handleClear}
             onOpenSheet={() => setSheetOpen(true)}
             sheetCount={[region !== "all", category !== "all", source !== "all", showSaved, sort !== "recommended"].filter(Boolean).length}
@@ -197,15 +197,15 @@ export function Dashboard({ events, stats, teasers }: DashboardProps) {
           <FilterSheet open={sheetOpen} onClose={() => setSheetOpen(false)} region={region} setRegion={switchRegion} regionCounts={regionCounts}
             sort={sort} setSort={setSort} category={category} setCategory={chooseCategory} categories={categories} categoryCounts={categoryCounts}
             source={source} setSource={setSource} sources={sources} showSaved={showSaved} setShowSaved={setShowSaved}
-            savedCount={favorites.size} resultCount={filtered.length} onClear={() => { handleClear(); switchRegion("all"); setSort("recommended"); }} />
+            savedCount={savedIds.size} resultCount={filtered.length} onClear={() => { handleClear(); switchRegion("all"); setSort("recommended"); }} />
           <div className="pt-6">
             {view === "map" ? (
               <MapSection events={filtered} />
             ) : (
               <EventGrid
                 events={filtered}
-                favorites={favorites}
-                onToggleSave={toggle}
+                favorites={savedIds}
+                onToggleSave={toggleSaved}
                 onClear={() => { handleClear(); switchRegion("all"); }}
               />
             )}

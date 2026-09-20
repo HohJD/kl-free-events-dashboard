@@ -10,19 +10,28 @@ import type { FreeItem } from "@/lib/items";
 import { SITE_NAME } from "@/lib/site";
 import { GiveItem } from "./give-item";
 import { cn } from "@/lib/utils";
+import { useSaved, type SavedEntry } from "@/lib/use-saved";
+import { SaveButton } from "./save-button";
 
-function ItemCard({ item, isOwner, onRemoved }: { item: FreeItem; isOwner: boolean; onRemoved: (id: string) => void }) {
+function ItemCard({ item, isOwner, onRemoved, saved, onToggleSave }: { item: FreeItem; isOwner: boolean; onRemoved: (id: string) => void; saved: boolean; onToggleSave: (entry: Omit<SavedEntry, "savedAt">) => void }) {
   const [photo, setPhoto] = useState(0);
   const [busy, setBusy] = useState(false);
   const left = daysLeft(item.added);
 
-  const update = async (action: "claimed" | "delete") => {
+  const [status, setStatus] = useState(item.status);
+  const [failed, setFailed] = useState("");
+
+  const update = async (action: "claimed" | "delete" | "reserve") => {
     if (action === "delete" && !confirm(`Delete “${item.name}”?`)) return;
     setBusy(true);
+    setFailed("");
     const table = getSupabase().from("free_items");
-    const { error } = action === "delete" ? await table.delete().eq("id", item.id) : await table.update({ status: "claimed" }).eq("id", item.id);
+    const next = action === "reserve" ? (status === "pending" ? "available" : "pending") : "claimed";
+    const { error } = action === "delete" ? await table.delete().eq("id", item.id) : await table.update({ status: next }).eq("id", item.id);
     setBusy(false);
-    if (!error) onRemoved(item.id);
+    if (error) { setFailed("That didn't save. Try again."); return; }
+    if (action === "reserve") setStatus(next as FreeItem["status"]);
+    else onRemoved(item.id);
   };
 
   const message = `Hi! I'm interested in "${item.name}" you listed on ${SITE_NAME}. Is it still available? When and where could I collect it?`;
@@ -36,9 +45,12 @@ function ItemCard({ item, isOwner, onRemoved }: { item: FreeItem; isOwner: boole
           <div className="flex h-full items-center justify-center"><Package className="size-10 text-muted-foreground" aria-hidden /></div>
         )}
         <span className={cn("absolute left-3 top-3 rounded-full border border-border px-2.5 py-0.5 text-[11px] font-semibold",
-          item.status === "available" ? "bg-[#86efac] text-black" : "bg-muted text-muted-foreground")}>
-          {item.status === "available" ? "Available" : "Pickup arranged"}
+          status === "available" ? "bg-[#86efac] text-black" : "bg-muted text-muted-foreground")}>
+          {status === "available" ? "Available" : "Reserved"}
         </span>
+        <SaveButton className="absolute right-3 top-3" floating saved={saved} onToggle={onToggleSave}
+          entry={{ id: `item:${item.id}`, kind: "item", title: item.name, href: "/free-items", section: "/free-items",
+            note: [item.category, item.pickup].filter(Boolean).join(" · ") }} />
         {item.images.length > 1 ? (
           <div className="absolute inset-x-0 bottom-1 flex justify-center">
             {item.images.map((_, i) => (
@@ -50,8 +62,9 @@ function ItemCard({ item, isOwner, onRemoved }: { item: FreeItem; isOwner: boole
         ) : null}
       </div>
       <div className="listing-body gap-2">
-        <p className="flex items-center gap-2 text-xs text-muted-foreground">
+        <p className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
           <span>{item.category}</span>
+          {item.condition ? <><span aria-hidden>·</span><span>{item.condition}</span></> : null}
           <span aria-hidden>·</span>
           <span className={cn("inline-flex items-center gap-1", left <= 1 && "font-semibold text-amber-700 dark:text-amber-400")}>
             <Clock className="size-3" aria-hidden /> {left <= 1 ? "Last day" : `${left} days left`}
@@ -69,6 +82,7 @@ function ItemCard({ item, isOwner, onRemoved }: { item: FreeItem; isOwner: boole
           )
         ) : null}
         {item.description ? <p className="line-clamp-2 text-sm text-muted-foreground">{item.description}</p> : null}
+        {failed ? <p className="text-xs font-medium text-destructive" role="alert">{failed}</p> : null}
         <div className="listing-actions mt-auto">
           {isWhatsAppLink(item.contact) ? (
             <a href={`${item.contact}?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer"
@@ -78,7 +92,11 @@ function ItemCard({ item, isOwner, onRemoved }: { item: FreeItem; isOwner: boole
           ) : <span className="text-xs text-muted-foreground">No contact given</span>}
           {isOwner ? (
             <span className="flex items-center gap-1">
-              <button type="button" onClick={() => update("claimed")} disabled={busy} title="Mark as claimed"
+              <button type="button" onClick={() => update("reserve")} disabled={busy} title={status === "pending" ? "Make available again" : "Mark as reserved for someone"}
+                className="inline-flex min-h-11 items-center gap-1 rounded-xl px-2.5 text-xs font-semibold hover:bg-muted disabled:opacity-50">
+                <Clock className="size-4" aria-hidden /> {status === "pending" ? "Un-reserve" : "Reserve"}
+              </button>
+              <button type="button" onClick={() => update("claimed")} disabled={busy} title="Mark as claimed and remove"
                 className="inline-flex min-h-11 items-center gap-1 rounded-xl px-2.5 text-xs font-semibold hover:bg-muted disabled:opacity-50">
                 <CheckCircle2 className="size-4" aria-hidden /> Claimed
               </button>
@@ -108,6 +126,7 @@ export function FreeItemsView({ fallback }: { fallback: FreeItem[] }) {
   const [category, setCategory] = useState("all");
   const [query, setQuery] = useState("");
   const [mine, setMine] = useState(false);
+  const { ids: savedIds, toggle: toggleSaved } = useSaved();
 
   const load = useCallback(() => {
     setState("loading");
@@ -189,7 +208,8 @@ export function FreeItemsView({ fallback }: { fallback: FreeItem[] }) {
         ) : shown.length ? (
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {shown.map((item) => (
-              <ItemCard key={item.id} item={item} isOwner={!!user && item.owner === user.id} onRemoved={(id) => setItems((prev) => prev.filter((row) => row.id !== id))} />
+              <ItemCard key={item.id} item={item} isOwner={!!user && item.owner === user.id} saved={savedIds.has(`item:${item.id}`)} onToggleSave={toggleSaved}
+                onRemoved={(id) => setItems((prev) => prev.filter((row) => row.id !== id))} />
             ))}
           </div>
         ) : (

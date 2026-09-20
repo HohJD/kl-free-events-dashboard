@@ -5,7 +5,6 @@ import {
   MapPin,
   ArrowUpRight,
   Navigation,
-  Heart,
   Share2,
   Check,
   CalendarPlus,
@@ -14,6 +13,8 @@ import { motion } from "framer-motion";
 import { Event } from "@/lib/events";
 import { googleCalendarUrl } from "@/lib/calendar";
 import { cn } from "@/lib/utils";
+import { SaveButton } from "./save-button";
+import type { SavedEntry } from "@/lib/use-saved";
 import { eventRegion, REGIONS } from "@/lib/regions";
 import { malaysiaDay } from "@/lib/filter-events";
 
@@ -85,7 +86,7 @@ interface EventCardProps {
   event: Event;
   index: number;
   saved: boolean;
-  onToggleSave: (link: string) => void;
+  onToggleSave: (entry: Omit<SavedEntry, "savedAt">) => void;
 }
 
 export function EventCard({ event, index, saved, onToggleSave }: EventCardProps) {
@@ -137,20 +138,9 @@ export function EventCard({ event, index, saved, onToggleSave }: EventCardProps)
             }}
           />
 
-          {/* Save button */}
-          <button
-            onClick={() => onToggleSave(event.link)}
-            aria-label={saved ? "Remove from saved" : "Save event"}
-            aria-pressed={saved}
-            className={cn(
-              "absolute left-3 top-3 flex size-11 items-center justify-center rounded-full shadow-sm transition-transform active:scale-95",
-              saved
-                ? "bg-foreground text-background"
-                : "bg-white/90 text-black hover:bg-white"
-            )}
-          >
-            <Heart className={cn("size-4", saved && "fill-current")} />
-          </button>
+          <SaveButton className="absolute left-3 top-3" floating saved={saved} onToggle={onToggleSave}
+            entry={{ id: event.link, kind: "event", title: event.name, href: event.link, section: "/",
+              note: [dateLabel, event.venue].filter(Boolean).join(" · ") }} />
 
           {/* Date chip */}
           <span
