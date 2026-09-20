@@ -49,7 +49,7 @@ export function SiteHeader() {
 export function MobileTabs() {
   const active = activeSection(usePathname() ?? "/");
   return (
-    <nav aria-label="Sections" className="site-tabs md:hidden">
+    <nav aria-label="Sections" className="site-tabs md:hidden" style={{ gridTemplateColumns: `repeat(${SECTIONS.length}, minmax(0, 1fr))` }}>
       {SECTIONS.map((section) => (
         <Link key={section.href} href={section.href} aria-current={active === section.href ? "page" : undefined}
           className={cn("site-tab", active === section.href && "site-tab-on")}>

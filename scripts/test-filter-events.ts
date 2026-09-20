@@ -78,4 +78,22 @@ assert.equal(bookingOutlook(calDays, rising).headline, 'Fares are rising');
 const falling: [string, number, number][] = Array.from({ length: 7 }, (_, i) => [`2026-09-${20 + i}`, 3000 - i * 40, 2200]);
 assert.equal(bookingOutlook(calDays, falling).advice, 'W');
 assert.equal(bookingOutlook([], []).headline, 'No fares yet');
+// Merged list: events and resources filter together.
+import { filterOpportunities, fromResource, KIND_LABELS, type Opportunity } from '../lib/opportunities';
+const scholarship = fromResource({ kind: 'scholarship', source: 'afterschool', title: 'Yayasan KLK', organization: 'klk.com.my',
+  link: 'https://afterschool.my/scholarship/klk', deadline: '2026-09-30', always_open: false, location: 'Malaysia', state: 'malaysia',
+  amount: 'Tuition', eligibility: 'Malaysian', summary: '', image: '', topics: ['student'], quality_score: 60 } as never);
+const internship = fromResource({ kind: 'internship', source: 'hiredly', title: 'Data intern', organization: 'Enzee',
+  link: 'https://my.hiredly.com/jobs/data', deadline: '', always_open: false, location: 'Kuala Lumpur', state: 'kuala-lumpur',
+  amount: 'RM 1000', eligibility: 'Internship', summary: '', image: '', topics: ['tech'], quality_score: 70 } as never);
+const eventRow: Opportunity = { id: 'e1', kind: 'event', title: 'AI meetup', org: 'luma', date: '2026-09-09', isDeadline: false,
+  place: 'KL', state: 'kuala-lumpur', link: 'https://luma.com/e1', summary: '', topics: ['tech'], score: 80, source: 'luma' };
+const pool = [eventRow, scholarship, internship];
+const base = { kind: 'all' as const, query: '', region: 'all', dateRange: 'upcoming' as const, sort: 'recommended' as const, source: 'all' };
+assert.equal(filterOpportunities(pool, base, '2026-09-08').length, 3);
+assert.deepEqual(filterOpportunities(pool, { ...base, kind: 'internship' }, '2026-09-08').map(r => r.title), ['Data intern']);
+assert.equal(filterOpportunities(pool, { ...base, region: 'penang' }, '2026-09-08').length, 1, 'nationwide scholarships survive a state filter');
+assert.equal(filterOpportunities(pool, { ...base, dateRange: 'today' }, '2026-09-08').length, 1, 'rolling roles count as open');
+assert.equal(filterOpportunities(pool, { ...base, query: 'yayasan' }, '2026-09-08').length, 1);
+assert.equal(KIND_LABELS.graduate.many, 'Graduate roles');
 console.log('Focus/category, state, calendar, stale expiry and Malaysia-date regression tests passed.');

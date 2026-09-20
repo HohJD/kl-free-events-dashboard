@@ -1,4 +1,4 @@
-import { CalendarDays, Gift, GraduationCap, Plane, type LucideIcon } from "lucide-react";
+import { CalendarDays, Gift, Plane, type LucideIcon } from "lucide-react";
 
 export const SITE_NAME = "Free Things Malaysia";
 
@@ -12,8 +12,7 @@ export interface Section {
 
 /** The four sections, in navigation order. */
 export const SECTIONS: Section[] = [
-  { href: "/", label: "Events", short: "Events", icon: CalendarDays, blurb: "Free tech, startup and career events across Malaysia" },
-  { href: "/resources", label: "Student resources", short: "Resources", icon: GraduationCap, blurb: "Scholarships, internships, grad roles and free tools" },
+  { href: "/", label: "Opportunities", short: "Opportunities", icon: CalendarDays, blurb: "Events, hackathons, scholarships, internships and free tools" },
   { href: "/free-items", label: "Free items", short: "Free items", icon: Gift, blurb: "Things people are giving away near you" },
   { href: "/flights", label: "Flight deals", short: "Flights", icon: Plane, blurb: "Cheapest KL ⇄ London fares for every date" },
 ];

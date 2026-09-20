@@ -7,7 +7,7 @@ export interface HeroStats {
   total: number;
   sources: number;
   today: number;
-  thisWeek: number;
+  closingSoon: number;
   generatedAt: Date;
 }
 
@@ -36,9 +36,9 @@ export function Hero({ stats }: { stats: HeroStats }) {
   });
 
   const chips = [
-    { label: "free events", value: stats.total, bg: "bg-accent" },
-    { label: "today", value: stats.today, bg: "bg-[#7dd4fc]" },
-    { label: "this week", value: stats.thisWeek, bg: "bg-[#86efac]" },
+    { label: "free listings", value: stats.total, bg: "bg-accent" },
+    { label: "on today", value: stats.today, bg: "bg-[#7dd4fc]" },
+    { label: "closing soon", value: stats.closingSoon, bg: "bg-[#86efac]" },
   ];
 
   return (
@@ -59,7 +59,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
           </h1>
 
           <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:mt-4 sm:text-base md:text-lg">
-            Free tech meetups, hackathons, startup and career events across Malaysia, plus student resources, free items and flight deals. Built for students and fresh graduates.
+            Free events, hackathons, scholarships, internships, graduate roles and student tools across Malaysia. Updated every day, built for students and fresh graduates.
           </p>
 
           <motion.div

@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import { ResourcesView } from "@/components/resources-view";
-import { getResources } from "@/lib/load-resources";
+import { Redirect } from "@/components/redirect";
 
 export const metadata: Metadata = {
-  title: "Student resources · Free Events Malaysia",
-  description: "Open scholarships, internships in Malaysia and free tools for students, with tech picks first.",
+  title: "Student resources · Free Things Malaysia",
+  description: "Scholarships, internships, graduate roles and free tools now live with events on one page.",
 };
 
+/** Kept so older links keep working: resources moved onto the main page. */
 export default function ResourcesPage() {
-  const { resources, generatedAt } = getResources();
-  return <ResourcesView resources={resources} generatedAt={generatedAt ? generatedAt.toISOString() : null} />;
+  return <Redirect to="/?type=scholarship" label="scholarships, internships and free tools" />;
 }

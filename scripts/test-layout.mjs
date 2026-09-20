@@ -28,11 +28,12 @@ try {
       const errors = [];
       page.on('pageerror', error => errors.push(error.message));
       await page.goto(`${base}/`);
-      await page.getByRole('textbox', { name: 'Search events' }).waitFor();
+      await page.getByRole('textbox', { name: 'Search listings' }).waitFor();
       await page.evaluate(() => document.fonts.ready);
-      assert.equal(await page.getByRole('button', { name: /give something away|sign in|upload|collect/i }).count(), 0);
+      // The opportunities page never carries the giveaway upload form (that lives on /free-items).
       assert.equal(await page.locator('input[type=file]').count(), 0);
-      for (const mode of ['Tech, startups & careers', 'All events']) {
+      assert.equal(await page.getByRole('button', { name: /^Give something away$/ }).count(), 0);
+      for (const mode of ['Tech, startups & careers', 'Everything free']) {
         await page.getByRole('button', { name: mode, exact: true }).click();
         await page.waitForTimeout(600);
         const dimensions = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }));
@@ -58,9 +59,9 @@ try {
         if ([320, 1440].includes(width)) await page.screenshot({ path: join(output, `events-only-${mode.startsWith('Tech') ? 'focus' : 'all'}-${theme}-${width}.png`) });
         checked++;
       }
-      const search = page.getByRole('textbox', { name: 'Search events' });
+      const search = page.getByRole('textbox', { name: 'Search listings' });
       await search.fill('no-result-layout-test-12345');
-      await page.getByRole('heading', { name: 'No events found' }).waitFor();
+      await page.getByRole('heading', { name: 'Nothing matches yet' }).waitFor();
       await page.getByRole('button', { name: 'Clear search and filters' }).click();
       // Phones pick the state inside the Filters panel; wider screens use the inline picker.
       if (width < 768) await page.getByRole('button', { name: /^Filters/ }).click();

@@ -26,6 +26,10 @@ interface FilterSheetProps {
   savedCount: number;
   resultCount: number;
   onClear: () => void;
+  /** Heading for the category group, e.g. "Type" on the merged page. */
+  categoryLabel?: string;
+  /** Display names for category values. */
+  categoryNames?: Record<string, string>;
 }
 
 function Option({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
@@ -73,12 +77,12 @@ export function FilterSheet(props: FilterSheetProps) {
             </div>
           </section>
           <section>
-            <h3 className="mb-2 text-sm font-semibold">Category</h3>
+            <h3 className="mb-2 text-sm font-semibold">{props.categoryLabel ?? "Category"}</h3>
             <div className="flex flex-wrap gap-2">
               <Option active={props.category === "all"} onClick={() => props.setCategory("all")}>All</Option>
               {props.categories.map((item) => (
                 <Option key={item} active={props.category === item} onClick={() => props.setCategory(props.category === item ? "all" : item)}>
-                  {item}<span className="ml-1 text-xs opacity-60">{props.categoryCounts[item] ?? 0}</span>
+                  {props.categoryNames?.[item] ?? item}<span className="ml-1 text-xs opacity-60">{props.categoryCounts[item] ?? 0}</span>
                 </Option>
               ))}
             </div>
@@ -101,7 +105,7 @@ export function FilterSheet(props: FilterSheetProps) {
         <div className="flex gap-2 border-t border-border/50 px-4 py-3" style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
           <button type="button" onClick={props.onClear} className="min-h-12 rounded-xl border border-border px-4 text-sm font-semibold">Clear all</button>
           <button type="button" onClick={onClose} className="min-h-12 flex-1 rounded-xl bg-primary px-4 text-sm font-bold text-primary-foreground">
-            Show {props.resultCount} event{props.resultCount === 1 ? "" : "s"}
+            Show {props.resultCount} {props.resultCount === 1 ? "listing" : "listings"}
           </button>
         </div>
       </div>

@@ -11,8 +11,7 @@ const FIXTURE = [
   { id: '2', name: 'Python textbook', description: '', images: [PHOTO], condition: 'Good', pickup: 'Bangsar', contact: 'https://wa.me/60123456780', status: 'available', category: 'Books & Media', owner: 'y', pickup_lat: null, pickup_lon: null, created_at: new Date().toISOString() },
 ];
 const ROUTES = [
-  { path: '/', tab: 'Events', ready: 'h1' },
-  { path: '/resources', tab: 'Resources', ready: 'h1' },
+  { path: '/', tab: 'Opportunities', ready: 'article.listing-card' },
   { path: '/free-items', tab: 'Free items', ready: 'article' },
   { path: '/flights', tab: 'Flights', ready: '#calendar-heading' },
 ];
@@ -38,7 +37,7 @@ for (const theme of ['light', 'dark']) {
       assert.ok(await nav.isVisible(), `${label}: navigation hidden`);
       const current = nav.locator('a[aria-current="page"]');
       assert.equal(await current.count(), 1, `${label}: one active section`);
-      assert.match(await current.innerText(), new RegExp(tab === 'Resources' && width >= 768 ? 'Student resources' : tab === 'Flights' && width >= 768 ? 'Flight deals' : tab), `${label}: active tab`);
+      assert.match(await current.innerText(), new RegExp(tab === 'Flights' && width >= 768 ? 'Flight deals' : tab), `${label}: active tab`);
       assert.deepEqual(errors, [], `${label}: browser errors`);
       checks++;
       await page.close();
@@ -67,6 +66,10 @@ await page.waitForURL(/free-items/);
 // Old shared links to the giveaway tab land on the free-items page.
 await page.goto(BASE + '/#collect');
 await page.waitForURL(/\/free-items/);
+// The old resources page redirects onto the merged list.
+await page.goto(BASE + '/resources', { waitUntil: 'networkidle' });
+await page.waitForTimeout(1200);
+assert.match(page.url(), /type=scholarship/, 'Old /resources links land on the type filter');
 
 // Saving works across sections and lands on one Saved page.
 await page.goto(BASE + '/', { waitUntil: 'networkidle' });
@@ -74,7 +77,10 @@ const firstEvent = page.locator('article.listing-card').first();
 const eventTitle = (await firstEvent.locator('h3').innerText()).trim();
 await firstEvent.getByRole('button', { name: /^Save / }).click();
 assert.match(await page.getByRole('link', { name: /^Saved/ }).innerText(), /1/, 'Header badge counts saved things');
-await page.goto(BASE + '/resources', { waitUntil: 'networkidle' });
+// Scholarships and events now live on one page, filtered by type.
+await page.goto(BASE + '/?type=scholarship', { waitUntil: 'networkidle' });
+await page.locator('article').first().waitFor();
+assert.ok((await page.locator('article').count()) > 0, 'Scholarships show under their type filter');
 await page.locator('article').first().getByRole('button', { name: /^Save / }).click();
 await page.goto(BASE + '/saved', { waitUntil: 'networkidle' });
 assert.equal(await page.locator('section[aria-labelledby^="saved-"]').count(), 2, 'Saved page groups by kind');

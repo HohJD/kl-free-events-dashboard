@@ -39,6 +39,10 @@ interface FiltersProps {
   /** Phones: open the filter panel; `sheetCount` badges the active filters inside it. */
   onOpenSheet: () => void;
   sheetCount: number;
+  /** The merged page filters by type elsewhere, so its category row is off. */
+  showCategories?: boolean;
+  /** Map view only makes sense while events are in the list. */
+  canMap?: boolean;
 }
 
 function Pill({
@@ -88,6 +92,8 @@ export function Filters({
   onClear,
   onOpenSheet,
   sheetCount,
+  showCategories = true,
+  canMap = true,
 }: FiltersProps) {
   const searchRef = useRef<HTMLInputElement>(null);
 
@@ -125,8 +131,8 @@ export function Filters({
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
             <input
               ref={searchRef}
-              aria-label="Search events"
-              placeholder="Search events"
+              aria-label="Search listings"
+              placeholder="Search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               className="h-11 w-full min-w-0 rounded-xl border border-input/70 bg-card pl-10 pr-10 text-base transition-colors placeholder:text-muted-foreground focus:border-ring md:text-sm"
@@ -157,7 +163,7 @@ export function Filters({
             <SlidersHorizontal className="size-4" aria-hidden /> Filters
             {sheetCount ? <span className="flex size-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">{sheetCount}</span> : null}
           </button>
-          <div className="flex h-11 shrink-0 items-center rounded-xl border border-input/70 bg-card p-0.5">
+          <div className={cn("h-11 shrink-0 items-center rounded-xl border border-input/70 bg-card p-0.5", canMap ? "flex" : "hidden")}>
             <button
               onClick={() => setView("list")}
               aria-label="List view"
@@ -212,7 +218,7 @@ export function Filters({
         </div>
 
         {/* Category + source tabs */}
-        <div aria-label="Filter by category or source" className="no-scrollbar -mx-1 hidden items-center gap-1 overflow-x-auto px-1 py-1.5 md:flex">
+        <div aria-label="Filter by category or source" className={cn("no-scrollbar -mx-1 items-center gap-1 overflow-x-auto px-1 py-1.5", showCategories ? "hidden md:flex" : "hidden")}>
           <Pill active={category === "all"} onClick={() => setCategory("all")}>
             All
           </Pill>
