@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Heart, Trash2 } from "lucide-react";
+import { ArrowUpRight, Trash2 } from "lucide-react";
 import { SAVED_LABELS, useSaved, type SavedKind } from "@/lib/use-saved";
 import { SECTIONS } from "@/lib/site";
 
@@ -13,19 +13,19 @@ export function SavedView() {
 
   return (
     <main className="page-shell py-8 sm:py-10">
-      <p className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground"><Heart className="size-4" aria-hidden /> Saved on this device</p>
-      <h1 className="mt-1 font-display text-3xl font-bold tracking-tight sm:text-5xl">Your saved list</h1>
-      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-        Everything you tapped the heart on, in one place. It stays in this browser, so it is private to you and does not need an account.
+      <h1 className="page-title">Saved</h1>
+      <p className="page-sub">
+        Everything you tapped the heart on, in one place. It stays in this browser, so it is private to you and needs no account.
       </p>
+      <p className="page-meta">{saved.length} {saved.length === 1 ? "item" : "items"} saved</p>
 
       {!loaded ? null : !saved.length ? (
-        <div className="mt-8 rounded-2xl border border-dashed border-input bg-muted/30 px-5 py-12 text-center">
+        <div className="mt-8 rounded-xl border border-dashed border-input bg-muted/30 px-5 py-12 text-center">
           <h2 className="font-display text-lg font-bold">Nothing saved yet</h2>
           <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">Tap the heart on an event, scholarship, free item or flight date and it will wait for you here.</p>
           <div className="mt-5 flex flex-wrap justify-center gap-2">
             {SECTIONS.map((section) => (
-              <Link key={section.href} href={section.href} className="fx-chip"><section.icon className="mr-1.5 size-4" aria-hidden /> {section.label}</Link>
+              <Link key={section.href} href={section.href} className="chip"><section.icon className="mr-1.5 size-4" aria-hidden /> {section.label}</Link>
             ))}
           </div>
         </div>
@@ -37,7 +37,7 @@ export function SavedView() {
                 <h2 id={`saved-${kind}`} className="font-display text-lg font-bold sm:text-xl">{SAVED_LABELS[kind]}</h2>
                 <Link href={SECTION_FOR[kind]} className="text-sm font-semibold text-muted-foreground hover:text-foreground">Browse more</Link>
               </div>
-              <ul className="divide-y divide-border/40 overflow-hidden rounded-2xl border border-border/60 bg-card">
+              <ul className="card divide-y divide-border/40 overflow-hidden">
                 {saved.filter((row) => row.kind === kind).map((row) => (
                   <li key={row.id} className="flex items-center gap-3 p-3 sm:p-4">
                     <div className="min-w-0 flex-1">
@@ -49,11 +49,11 @@ export function SavedView() {
                       <Link href={row.section} className="hidden text-xs font-semibold text-muted-foreground hover:text-foreground sm:block">Open section</Link>
                     ) : null}
                     <a href={row.href} target={row.href.startsWith("http") ? "_blank" : undefined} rel="noopener noreferrer"
-                      aria-label={`Open ${row.title}`} className="flex size-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground">
+                      aria-label={`Open ${row.title}`} className="icon-btn size-11">
                       <ArrowUpRight className="size-4" aria-hidden />
                     </a>
                     <button type="button" onClick={() => remove(row.id)} aria-label={`Remove ${row.title}`}
-                      className="flex size-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-destructive">
+                      className="icon-btn size-11 hover:text-destructive">
                       <Trash2 className="size-4" aria-hidden />
                     </button>
                   </li>

@@ -91,7 +91,7 @@ export function OpportunityCard({ row, today, saved, onToggleSave }: {
 
         <div className="mt-3 flex items-center gap-1 pt-1">
           <a href={row.link} target="_blank" rel="noopener noreferrer"
-            className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-border/70 bg-primary px-3 text-xs font-semibold text-primary-foreground hover:opacity-90">
+            className="btn btn-primary">
             {row.kind === "tool" ? "Get it" : row.isDeadline ? "Details" : "View"} <ArrowUpRight className="size-3.5" aria-hidden />
           </a>
           <SaveButton className="ml-auto size-9" saved={saved} onToggle={onToggleSave}
@@ -99,12 +99,12 @@ export function OpportunityCard({ row, today, saved, onToggleSave }: {
               note: [KIND_LABELS[row.kind].one, timing.text, row.org].filter(Boolean).join(" · ") }} />
           {calendar ? (
             <a href={calendar} target="_blank" rel="noopener noreferrer" aria-label="Add to calendar" title="Add to calendar"
-              className="flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground">
+              className="icon-btn">
               <CalendarPlus className="size-4" aria-hidden />
             </a>
           ) : null}
           <button type="button" onClick={share} aria-label="Share" title="Share"
-            className="flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground">
+            className="icon-btn">
             {shared ? <Check className="size-4 text-green-600" aria-hidden /> : <Share2 className="size-4" aria-hidden />}
           </button>
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock, Minus, Plane, PlaneLanding, PlaneTakeoff, TrendingDown } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronLeft, ChevronRight, Clock, Minus, PlaneLanding, PlaneTakeoff, TrendingDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useSaved, type SavedEntry } from "@/lib/use-saved";
 import { SaveButton } from "./save-button";
@@ -24,7 +24,7 @@ function AdviceBadge({ advice, large = false }: { advice: AdviceCode; large?: bo
 function Chip({ active, onClick, children, label }: { active: boolean; onClick: () => void; children: React.ReactNode; label?: string }) {
   return (
     <button type="button" onClick={onClick} aria-pressed={active} aria-label={label}
-      className={cn("fx-chip", active && "fx-chip-on")}>
+      className={cn("chip", active && "chip-on")}>
       {children}
     </button>
   );
@@ -237,7 +237,7 @@ function TripPanel({ day, days, calendar, stays, staysByDate, detail, route, typ
       </div>
 
       <a href={link} target="_blank" rel="noopener noreferrer"
-        className="mt-5 inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border border-border/70 bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-brutal-sm hover:opacity-90">
+        className="btn btn-lg btn-primary mt-5 w-full">
         See this trip on Google Flights <ArrowUpRight className="size-4" />
       </a>
       <p className="mt-3 text-xs text-muted-foreground">
@@ -338,10 +338,13 @@ export function FlightView({ data }: { data: FlightData | null }) {
     <div className="fx-root min-h-screen bg-background pb-24 lg:pb-0">
 
       <main className="page-shell py-6 sm:py-8">
-        <p className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground"><Plane className="size-4" /> Flight fares · updated daily</p>
-        <h1 className="mt-1 font-display text-3xl font-bold tracking-tight sm:text-5xl">
+        <h1 className="page-title">
           {route?.id === "lon-kul" ? "London → KL" : "KL → London"}{isReturn ? " return" : " one-way"}
         </h1>
+        <p className="page-sub">
+          The cheapest fare for every departure date over the next 6 months, checked daily on Google Flights, with a simple signal on whether to book now.
+        </p>
+        {data ? <p className="page-meta">Updated {updated} MYT · tracking since {dayLabel(data.tracking_since, { year: true })}</p> : null}
 
         {!data || !calendar ? (
           <div className="fx-card mt-6 text-sm text-muted-foreground">No fares yet. The first check runs with the next daily update.</div>
@@ -349,7 +352,7 @@ export function FlightView({ data }: { data: FlightData | null }) {
           <>
             <div className="mt-5 space-y-3">
               <div className="no-scrollbar -mx-4 flex items-center gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Trip">
-                <span className="mr-1 shrink-0 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Trip</span>
+                <span className="field-label mr-1">Trip</span>
                 <Chip active={view.route === "kul-lon" && isReturn} onClick={() => choose({ route: "kul-lon", stay: view.route === "kul-lon" && isReturn ? view.stay : 14 })}>KL → London return</Chip>
                 <Chip active={view.route === "kul-lon" && !isReturn} onClick={() => choose({ route: "kul-lon", stay: null })}>KL → London one-way</Chip>
                 <Chip active={view.route === "lon-kul" && isReturn} onClick={() => choose({ route: "lon-kul", stay: 14 })}>London → KL return</Chip>
@@ -357,7 +360,7 @@ export function FlightView({ data }: { data: FlightData | null }) {
               </div>
               {isReturn ? (
                 <div className="no-scrollbar -mx-4 flex items-center gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0" role="group" aria-label="Length of stay">
-                  <span className="mr-1 shrink-0 text-xs font-semibold uppercase tracking-wide text-muted-foreground">Stay</span>
+                  <span className="field-label mr-1">Stay</span>
                   {stays.map((item) => (
                     <Chip key={String(item.stay)} active={item.stay === view.stay} onClick={() => choose({ route: view.route, stay: item.stay })}>
                       {stayLabel(item.stay)}

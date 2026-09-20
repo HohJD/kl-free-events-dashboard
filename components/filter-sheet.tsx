@@ -34,7 +34,7 @@ interface FilterSheetProps {
 
 function Option({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button type="button" onClick={onClick} aria-pressed={active} className={cn("fx-chip", active && "fx-chip-on")}>{children}</button>
+    <button type="button" onClick={onClick} aria-pressed={active} className={cn("chip", active && "chip-on")}>{children}</button>
   );
 }
 

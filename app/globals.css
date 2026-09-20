@@ -88,6 +88,21 @@
   .chip-on { @apply border-border bg-accent font-semibold text-accent-foreground; }
   .chip-count { @apply ml-1.5 text-xs tabular-nums opacity-60; }
 
+  /* Page header: the same three lines on every section. */
+  .page-title { @apply font-display text-3xl font-bold tracking-tight sm:text-4xl; }
+  .page-sub { @apply mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base; }
+  .page-meta { @apply mt-3 text-xs leading-5 text-muted-foreground; }
+  .field-label { @apply shrink-0 text-xs font-semibold uppercase tracking-wide text-muted-foreground; }
+
+  /* Buttons: one small size for card actions, one large for page actions. */
+  .btn { @apply inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-transparent px-3 text-xs font-semibold transition-colors; }
+  .btn-lg { @apply min-h-11 px-4 text-sm; }
+  .btn-primary { @apply border-border/70 bg-primary text-primary-foreground hover:opacity-90; }
+  .btn-accent { @apply border-border bg-accent text-accent-foreground hover:opacity-90; }
+  .btn-quiet { @apply border-input/70 bg-card text-foreground hover:bg-muted; }
+  .btn-whatsapp { @apply border-border/70 bg-[#25D366] text-black hover:opacity-90; }
+  .icon-btn { @apply flex size-9 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground; }
+
   .toolbar-select {
     @apply h-11 cursor-pointer appearance-none rounded-xl border border-input/70 bg-card pl-3 pr-8 text-sm text-foreground;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23888' stroke-width='1.6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
@@ -229,8 +244,6 @@ a,
   .fx-tile-value { @apply mt-1 font-display text-lg font-bold tabular-nums sm:text-3xl; }
   .fx-tile-note { @apply mt-1 text-[11px] leading-4 text-muted-foreground sm:text-xs sm:leading-5; }
 
-  .fx-chip { @apply inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-full border border-border/50 bg-card px-3.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground; }
-  .fx-chip-on { @apply border-border bg-accent font-semibold text-accent-foreground; }
   .fx-nav { @apply flex size-10 items-center justify-center rounded-xl border border-border/50 text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-30; }
   .fx-month { @apply min-w-[76px] shrink-0 rounded-xl border border-border/40 px-2.5 py-1.5 text-left transition-colors hover:border-border; }
   .fx-month-on { @apply border-border bg-muted; }
