@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-19T15:17:35.145551+00:00",
-  "count": 270,
+  "generated_at": "2026-09-20T08:51:33.695308+00:00",
+  "count": 267,
   "counts": {
     "scholarship": 42,
-    "internship": 126,
+    "internship": 123,
     "graduate": 85,
     "tool": 17
   },
@@ -31,7 +31,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 91
     },
     {
@@ -57,7 +57,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 91
     },
     {
@@ -83,8 +83,34 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 91
+    },
+    {
+      "kind": "graduate",
+      "source": "hiredly",
+      "title": "AI Data Annotator Associate",
+      "organization": "JOYX (MALAYSIA) SDN. BHD.",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-joyx-malaysia-sdn-bhd-job-ai-data-annotator-associate",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-20",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 3000 - 3500 / month",
+      "eligibility": "Fresh graduates / entry level",
+      "fields": "Data Science & Analytics, Software Development & QA / Testing",
+      "summary": "Skills: Data Annotations",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/49917eb4-1ff2-4bef-8f31-d6c3c2fcddfc/company_logo/original/d32f6be9-81e7-4a5b-972c-4820850d33dc-Group%202.jpg",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
+      "quality_score": 83
     },
     {
       "kind": "internship",
@@ -109,7 +135,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -135,7 +161,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -161,7 +187,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -187,7 +213,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -213,7 +239,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -239,7 +265,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -265,7 +291,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -291,7 +317,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -317,7 +343,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -343,7 +369,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -369,7 +395,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -395,7 +421,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -421,7 +447,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -447,7 +473,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -473,7 +499,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -499,7 +525,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -525,7 +551,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -551,7 +577,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -577,7 +603,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -603,7 +629,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -629,7 +655,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -655,7 +681,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -681,7 +707,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -707,7 +733,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -733,7 +759,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -759,7 +785,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -785,7 +811,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -811,7 +837,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -837,7 +863,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -863,7 +889,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -889,7 +915,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -915,7 +941,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -941,7 +967,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -967,7 +993,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -993,7 +1019,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1019,7 +1045,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1045,7 +1071,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1071,7 +1097,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1097,7 +1123,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1123,33 +1149,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 83
-    },
-    {
-      "kind": "internship",
-      "source": "hiredly",
-      "title": "Internship Facility Management Technician (Data Center)",
-      "organization": "SIMPLEXITY TECH (MALAYSIA) SDN. BHD.",
-      "link": "https://my.hiredly.com/jobs/jobs-malaysia-simplexity-tech-malaysia-sdn-bhd-job-internship-facility-management-technician-data-center",
-      "apply_link": "",
-      "deadline": "",
-      "always_open": false,
-      "posted_at": "2026-08-28",
-      "location": "Johor",
-      "state": "johor",
-      "amount": "RM 800 - 1000 / month",
-      "eligibility": "Internship",
-      "fields": "Electrical Engineering, Hardware / Network / Infrastructure (On-Premises / Cloud), Telecommunications Engineering",
-      "summary": "Skills: Data Center Networks, Electrical Engineering, Mechanical Engineering, Incident Management, Building Management System, Computerized Maintenance Management Systems, HVAC, Facility Management",
-      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/e5c7ed7a-1883-4faa-aa3d-8b55808d6726/company_logo/original/b215a8cd-e7d5-4019-9266-017e532c0f83-Screenshot%202025-10-29%20at%2010.59.32%E2%80%AFAM.png",
-      "verified": false,
-      "topics": [
-        "career",
-        "student",
-        "tech"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1175,7 +1175,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1201,7 +1201,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1227,7 +1227,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1253,7 +1253,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1279,7 +1279,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1305,7 +1305,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1331,7 +1331,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1357,7 +1357,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1383,7 +1383,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1409,59 +1409,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 83
-    },
-    {
-      "kind": "internship",
-      "source": "hiredly",
-      "title": "Internship EdTech Specialist (Intern)",
-      "organization": "Ez EdTech Solutions Sdn Bhd",
-      "link": "https://my.hiredly.com/jobs/jobs-malaysia-ez-edtech-solutions-sdn-bhd-job-internship-edtech-specialist-intern-0",
-      "apply_link": "",
-      "deadline": "",
-      "always_open": false,
-      "posted_at": "2026-08-20",
-      "location": "Kuala Lumpur",
-      "state": "kuala-lumpur",
-      "amount": "RM 1300 - 1800 / month",
-      "eligibility": "Internship",
-      "fields": "Computer Engineering, Education & Teaching, Software Development & QA / Testing",
-      "summary": "Skills: Python (Programming Language), Software Engineering, Computer Science, Figma (Design Software), UiPath (RPA Software), User Interface (UI) Design, Teaching, Web Development",
-      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/89655103-8477-4b4a-b043-1f6b7de6bd72/company_logo/original/beaeb4c1-ce23-4f97-a91c-1b7653191105-image%2036.png",
-      "verified": false,
-      "topics": [
-        "career",
-        "student",
-        "tech"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 83
-    },
-    {
-      "kind": "internship",
-      "source": "hiredly",
-      "title": "Internship Software Engineering Intern - (Deployment Engineer)",
-      "organization": "Ez EdTech Solutions Sdn Bhd",
-      "link": "https://my.hiredly.com/jobs/jobs-malaysia-ez-edtech-solutions-sdn-bhd-job-internship-software-engineering-intern-deployment-engineer",
-      "apply_link": "",
-      "deadline": "",
-      "always_open": false,
-      "posted_at": "2026-08-20",
-      "location": "Kuala Lumpur",
-      "state": "kuala-lumpur",
-      "amount": "RM 1300 - 1800 / month",
-      "eligibility": "Internship",
-      "fields": "Computer Engineering, Hardware / Network / Infrastructure (On-Premises / Cloud), Software Development & QA / Testing",
-      "summary": "Skills: Software Engineering, Software Development, Web Development, Python (Programming Language), Android (Operating System), Windows Software, Business Development",
-      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/89655103-8477-4b4a-b043-1f6b7de6bd72/company_logo/original/beaeb4c1-ce23-4f97-a91c-1b7653191105-image%2036.png",
-      "verified": false,
-      "topics": [
-        "career",
-        "student",
-        "tech"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 83
     },
     {
@@ -1487,7 +1435,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1513,7 +1461,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1539,7 +1487,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1565,7 +1513,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1591,7 +1539,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1617,7 +1565,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1643,7 +1591,59 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
+      "quality_score": 78
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "Internship EdTech Specialist (Intern)",
+      "organization": "Ez EdTech Solutions Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-ez-edtech-solutions-sdn-bhd-job-internship-edtech-specialist-intern-0",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-20",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 1300 - 1800 / month",
+      "eligibility": "Internship",
+      "fields": "Computer Engineering, Education & Teaching, Software Development & QA / Testing",
+      "summary": "Skills: Python (Programming Language), Software Engineering, Computer Science, Figma (Design Software), UiPath (RPA Software), User Interface (UI) Design, Teaching, Web Development",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/89655103-8477-4b4a-b043-1f6b7de6bd72/company_logo/original/beaeb4c1-ce23-4f97-a91c-1b7653191105-image%2036.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
+      "quality_score": 78
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "Internship Software Engineering Intern - (Deployment Engineer)",
+      "organization": "Ez EdTech Solutions Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-ez-edtech-solutions-sdn-bhd-job-internship-software-engineering-intern-deployment-engineer",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-08-20",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 1300 - 1800 / month",
+      "eligibility": "Internship",
+      "fields": "Computer Engineering, Hardware / Network / Infrastructure (On-Premises / Cloud), Software Development & QA / Testing",
+      "summary": "Skills: Software Engineering, Software Development, Web Development, Python (Programming Language), Android (Operating System), Windows Software, Business Development",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/89655103-8477-4b4a-b043-1f6b7de6bd72/company_logo/original/beaeb4c1-ce23-4f97-a91c-1b7653191105-image%2036.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student",
+        "tech"
+      ],
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1669,7 +1669,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1695,7 +1695,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1721,7 +1721,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 78
     },
     {
@@ -1747,7 +1747,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 73
     },
     {
@@ -1773,7 +1773,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 73
     },
     {
@@ -1799,7 +1799,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 73
     },
     {
@@ -1825,7 +1825,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 73
     },
     {
@@ -1848,7 +1848,7 @@
         "tech",
         "career"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -1870,7 +1870,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -1892,7 +1892,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -1914,7 +1914,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -1936,7 +1936,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -1958,7 +1958,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -1980,7 +1980,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2002,7 +2002,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2024,7 +2024,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2046,7 +2046,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2068,7 +2068,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2090,7 +2090,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2113,7 +2113,7 @@
         "tech",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2136,7 +2136,7 @@
         "tech",
         "career"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2158,7 +2158,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2180,7 +2180,7 @@
       "topics": [
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 70
     },
     {
@@ -2206,7 +2206,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 68
     },
     {
@@ -2232,7 +2232,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 68
     },
     {
@@ -2257,7 +2257,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 66
     },
     {
@@ -2282,7 +2282,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 66
     },
     {
@@ -2307,7 +2307,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2332,7 +2332,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2357,7 +2357,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2382,7 +2382,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2407,7 +2407,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2432,7 +2432,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2457,7 +2457,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2482,7 +2482,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2507,7 +2507,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2532,7 +2532,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2557,7 +2557,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2582,7 +2582,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2607,7 +2607,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2632,7 +2632,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2657,7 +2657,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2682,7 +2682,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2707,7 +2707,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2732,7 +2732,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2757,7 +2757,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2782,7 +2782,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2807,7 +2807,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2832,7 +2832,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2857,7 +2857,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2882,7 +2882,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2907,7 +2907,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2932,7 +2932,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2957,7 +2957,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -2982,7 +2982,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3007,7 +3007,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3032,7 +3032,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3057,7 +3057,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3082,7 +3082,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3107,7 +3107,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3132,7 +3132,32 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "Internship Early Childhood Teacher Intern",
+      "organization": "Megaleio Events Sdn Bhd",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-megaleio-events-sdn-bhd-job-internship-early-childhood-teacher-intern",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-15",
+      "location": "Kuala Lumpur",
+      "state": "kuala-lumpur",
+      "amount": "RM 800 / month",
+      "eligibility": "Internship",
+      "fields": "Education & Teaching",
+      "summary": "Skills: Project Management",
+      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/4251e9ca-2523-43ff-8f14-d87b444d0c7e/company_logo/original/813f11bf-70ef-4b86-810c-93212441598c-Screenshot%202024-06-26%20at%209.18.18%20AM.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3157,7 +3182,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3182,7 +3207,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3207,7 +3232,32 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
+      "quality_score": 63
+    },
+    {
+      "kind": "internship",
+      "source": "hiredly",
+      "title": "Internship Sales / Business Development Internship",
+      "organization": "Orangesoft",
+      "link": "https://my.hiredly.com/jobs/jobs-malaysia-orangesoft-job-internship-sales-business-development-internship",
+      "apply_link": "",
+      "deadline": "",
+      "always_open": false,
+      "posted_at": "2026-09-15",
+      "location": "Selangor",
+      "state": "selangor",
+      "amount": "RM 600 - 800 / month",
+      "eligibility": "Internship",
+      "fields": "Business Development, Digital Marketing, Telesales / Telemarketing",
+      "summary": "Skills: Sales Prospecting, Sales, Marketing, Lead Generation, CRM, Communication, Presentation",
+      "image": "https://resources.wobbjobs.com/companies/40a3cab1-f56d-43e0-a438-e840b5c944b0/company_logo/original/0332407c-dea0-4e02-9aee-1db0d9368de7-%28Orange%29%20Logo_02.png",
+      "verified": false,
+      "topics": [
+        "career",
+        "student"
+      ],
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3232,7 +3282,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3257,7 +3307,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3282,7 +3332,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3307,7 +3357,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3332,7 +3382,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3357,7 +3407,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3382,7 +3432,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3407,7 +3457,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3432,7 +3482,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3457,7 +3507,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3482,7 +3532,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3507,7 +3557,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3532,7 +3582,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3557,7 +3607,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3582,7 +3632,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3607,7 +3657,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3632,7 +3682,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3658,7 +3708,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3684,7 +3734,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3710,7 +3760,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3736,7 +3786,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3762,7 +3812,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3788,7 +3838,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3814,7 +3864,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3840,7 +3890,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3866,7 +3916,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3892,7 +3942,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3918,7 +3968,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3944,33 +3994,7 @@
         "student",
         "tech"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 63
-    },
-    {
-      "kind": "graduate",
-      "source": "hiredly",
-      "title": "AWS Cloud Sales Consultant",
-      "organization": "G-Asiapacific",
-      "link": "https://my.hiredly.com/jobs/jobs-malaysia-g-asiapacific-job-aws-cloud-sales-consultant",
-      "apply_link": "",
-      "deadline": "",
-      "always_open": false,
-      "posted_at": "2025-03-11",
-      "location": "Kuala Lumpur",
-      "state": "kuala-lumpur",
-      "amount": "",
-      "eligibility": "Fresh graduates / entry level",
-      "fields": "General Sales, Hardware / Network / Infrastructure (On-Premises / Cloud), Key Account / Relationship Management",
-      "summary": "",
-      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/a57ec25f-1b44-45e0-9fec-b17c92930d77/company_logo/original/49d45d70-9d51-4a98-ad2c-14dbf5a745d3-image_2025-03-12_172529255.png",
-      "verified": false,
-      "topics": [
-        "career",
-        "student",
-        "tech"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 63
     },
     {
@@ -3992,7 +4016,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4014,7 +4038,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4036,7 +4060,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4058,7 +4082,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4080,7 +4104,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4102,7 +4126,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4124,7 +4148,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4146,7 +4170,29 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
+      "quality_score": 60
+    },
+    {
+      "kind": "scholarship",
+      "source": "afterschool",
+      "title": "JAPAN-IMF Scholarship Program For Asia (JISPA)",
+      "organization": "penajaan.jpa.gov.my",
+      "link": "https://afterschool.my/scholarship/japan-imf-scholarship-program-for-asia",
+      "apply_link": "https://penajaan.jpa.gov.my/pengumuman-tawaran-terkini/pengumuman-pegawai/pelawaan-permohonan-biasiswa-japan-imf-scholarship-program-for-asia-jispa.html",
+      "deadline": "2026-10-20",
+      "always_open": false,
+      "location": "Malaysia",
+      "state": "malaysia",
+      "amount": "",
+      "eligibility": "Malaysian; Master",
+      "fields": "",
+      "summary": "Designed for young government officials from key economic agencies, including central banks, across Asia and the Pacific, JISPA provides the opportunity for scholars to pursue graduate-level degrees in economics at…",
+      "image": "https://img.afterschool.my/storage/uploads/scholarship/6aacb6b6d062f_1789703862.jpg",
+      "topics": [
+        "student"
+      ],
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4171,7 +4217,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4196,7 +4242,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 60
     },
     {
@@ -4221,82 +4267,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 58
-    },
-    {
-      "kind": "internship",
-      "source": "hiredly",
-      "title": "University Intern (Front Office)",
-      "organization": "Marriott International",
-      "link": "https://my.hiredly.com/jobs/jobs-malaysia-marriott-international-job-university-intern-front-office-21",
-      "apply_link": "",
-      "deadline": "",
-      "always_open": false,
-      "posted_at": "2026-09-19",
-      "location": "Kuala Lumpur",
-      "state": "kuala-lumpur",
-      "amount": "",
-      "eligibility": "Internship",
-      "fields": "Customer Service, Management Trainee, Talent Acquisition / Recruitment",
-      "summary": "",
-      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/d9ecc868-d22b-4591-afff-6286f1665eed/company_logo/original/07adb3fa-ea1b-4b16-bf7b-55957d248504-marriottlogo.jpg",
-      "verified": false,
-      "topics": [
-        "career",
-        "student"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 58
-    },
-    {
-      "kind": "internship",
-      "source": "hiredly",
-      "title": "W Kuala Lumpur - University Intern - Operations",
-      "organization": "Marriott International",
-      "link": "https://my.hiredly.com/jobs/jobs-malaysia-marriott-international-job-w-kuala-lumpur-university-intern-operations-0",
-      "apply_link": "",
-      "deadline": "",
-      "always_open": false,
-      "posted_at": "2026-09-19",
-      "location": "Kuala Lumpur",
-      "state": "kuala-lumpur",
-      "amount": "",
-      "eligibility": "Internship",
-      "fields": "Customer Service, HR Strategy / L&D / Performance Management, Management Trainee",
-      "summary": "",
-      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/d9ecc868-d22b-4591-afff-6286f1665eed/company_logo/original/07adb3fa-ea1b-4b16-bf7b-55957d248504-marriottlogo.jpg",
-      "verified": false,
-      "topics": [
-        "career",
-        "student"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 58
-    },
-    {
-      "kind": "internship",
-      "source": "hiredly",
-      "title": "W Kuala Lumpur -University Intern- Finance",
-      "organization": "Marriott International",
-      "link": "https://my.hiredly.com/jobs/jobs-malaysia-marriott-international-job-w-kuala-lumpur-university-intern-finance-0",
-      "apply_link": "",
-      "deadline": "",
-      "always_open": false,
-      "posted_at": "2026-09-19",
-      "location": "Kuala Lumpur",
-      "state": "kuala-lumpur",
-      "amount": "",
-      "eligibility": "Internship",
-      "fields": "Corporate Finance / Investment, HR Strategy / L&D / Performance Management, Management Trainee",
-      "summary": "",
-      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/d9ecc868-d22b-4591-afff-6286f1665eed/company_logo/original/07adb3fa-ea1b-4b16-bf7b-55957d248504-marriottlogo.jpg",
-      "verified": false,
-      "topics": [
-        "career",
-        "student"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4321,7 +4292,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4346,7 +4317,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4371,7 +4342,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4396,32 +4367,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 58
-    },
-    {
-      "kind": "internship",
-      "source": "hiredly",
-      "title": "University Intern (Finance)",
-      "organization": "Marriott International",
-      "link": "https://my.hiredly.com/jobs/jobs-malaysia-marriott-international-job-university-intern-finance-11",
-      "apply_link": "",
-      "deadline": "",
-      "always_open": false,
-      "posted_at": "2026-09-17",
-      "location": "Kuala Lumpur",
-      "state": "kuala-lumpur",
-      "amount": "",
-      "eligibility": "Internship",
-      "fields": "Corporate Finance / Investment, HR Strategy / L&D / Performance Management, Management Trainee",
-      "summary": "",
-      "image": "https://resources.wobbjobs.com/jobs-malaysia/companies/d9ecc868-d22b-4591-afff-6286f1665eed/company_logo/original/07adb3fa-ea1b-4b16-bf7b-55957d248504-marriottlogo.jpg",
-      "verified": false,
-      "topics": [
-        "career",
-        "student"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4446,7 +4392,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4471,7 +4417,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4496,7 +4442,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4521,7 +4467,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4546,7 +4492,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4571,7 +4517,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 58
     },
     {
@@ -4596,7 +4542,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 55
     },
     {
@@ -4621,7 +4567,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 55
     },
     {
@@ -4646,7 +4592,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 53
     },
     {
@@ -4671,7 +4617,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 53
     },
     {
@@ -4696,30 +4642,8 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 53
-    },
-    {
-      "kind": "scholarship",
-      "source": "afterschool",
-      "title": "JAPAN-IMF Scholarship Program For Asia (JISPA)",
-      "organization": "penajaan.jpa.gov.my",
-      "link": "https://afterschool.my/scholarship/japan-imf-scholarship-program-for-asia",
-      "apply_link": "https://penajaan.jpa.gov.my/pengumuman-tawaran-terkini/pengumuman-pegawai/pelawaan-permohonan-biasiswa-japan-imf-scholarship-program-for-asia-jispa.html",
-      "deadline": "2026-10-20",
-      "always_open": false,
-      "location": "Malaysia",
-      "state": "malaysia",
-      "amount": "",
-      "eligibility": "Malaysian; Master",
-      "fields": "",
-      "summary": "Designed for young government officials from key economic agencies, including central banks, across Asia and the Pacific, JISPA provides the opportunity for scholars to pursue graduate-level degrees in economics at…",
-      "image": "https://img.afterschool.my/storage/uploads/scholarship/6aacb6b6d062f_1789703862.jpg",
-      "topics": [
-        "student"
-      ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
-      "quality_score": 50
     },
     {
       "kind": "scholarship",
@@ -4740,7 +4664,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4762,7 +4686,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4784,7 +4708,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4806,7 +4730,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4828,7 +4752,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4850,7 +4774,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4872,7 +4796,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4894,7 +4818,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4916,7 +4840,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4938,7 +4862,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4960,7 +4884,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -4982,7 +4906,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5004,7 +4928,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5026,7 +4950,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5048,7 +4972,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5070,7 +4994,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5092,7 +5016,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5114,7 +5038,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5136,7 +5060,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5158,7 +5082,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5180,7 +5104,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5202,7 +5126,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5224,7 +5148,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5246,7 +5170,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5268,7 +5192,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5290,7 +5214,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5312,7 +5236,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5334,7 +5258,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5356,7 +5280,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5378,7 +5302,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5400,7 +5324,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5422,7 +5346,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5444,7 +5368,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5466,7 +5390,7 @@
       "topics": [
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 50
     },
     {
@@ -5491,7 +5415,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 48
     },
     {
@@ -5516,7 +5440,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5541,7 +5465,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5566,7 +5490,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5591,7 +5515,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5616,7 +5540,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5641,7 +5565,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5666,7 +5590,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5691,7 +5615,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5716,7 +5640,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5741,7 +5665,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5766,7 +5690,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5791,7 +5715,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5816,7 +5740,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5841,7 +5765,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5866,7 +5790,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5891,7 +5815,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5916,7 +5840,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5941,7 +5865,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5966,7 +5890,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -5991,7 +5915,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6016,7 +5940,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6041,7 +5965,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6066,7 +5990,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6091,7 +6015,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6116,7 +6040,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6141,7 +6065,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6166,7 +6090,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6191,7 +6115,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6216,7 +6140,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6241,7 +6165,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6266,7 +6190,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6291,7 +6215,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6316,7 +6240,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6341,7 +6265,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6366,7 +6290,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6391,7 +6315,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6416,7 +6340,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6441,7 +6365,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6466,7 +6390,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6491,7 +6415,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6516,7 +6440,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6541,7 +6465,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6566,7 +6490,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6591,7 +6515,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6616,7 +6540,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6641,7 +6565,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     },
     {
@@ -6666,7 +6590,7 @@
         "career",
         "student"
       ],
-      "checked_at": "2026-09-19T15:17:35.145551+00:00",
+      "checked_at": "2026-09-20T08:51:33.695308+00:00",
       "quality_score": 43
     }
   ]
