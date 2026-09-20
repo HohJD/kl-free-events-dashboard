@@ -1,54 +1,58 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, CalendarPlus, Check, GraduationCap, MapPin, Navigation, Share2, Trophy, Wrench } from "lucide-react";
+import { ArrowUpRight, Briefcase, CalendarDays, CalendarPlus, Check, GraduationCap, Share2, Trophy, Wrench } from "lucide-react";
 import { googleCalendarUrl } from "@/lib/calendar";
-import { KIND_LABELS, daysLeft, type Opportunity } from "@/lib/opportunities";
+import { KIND_LABELS, daysLeft, type Opportunity, type OpportunityKind } from "@/lib/opportunities";
 import { REGIONS, eventRegion } from "@/lib/regions";
 import type { SavedEntry } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 import { SaveButton } from "./save-button";
 
-const KIND_ICON = { scholarship: GraduationCap, internship: Wrench, graduate: Wrench, tool: Wrench, hackathon: Trophy, event: Trophy };
+const KIND_ICON: Record<OpportunityKind, typeof Trophy> = {
+  event: CalendarDays, hackathon: Trophy, scholarship: GraduationCap, internship: Briefcase, graduate: Briefcase, tool: Wrench,
+};
 
 function formatDate(value: string): string {
   const stamp = Date.parse(`${value}T00:00:00Z`);
-  if (!Number.isFinite(stamp)) return "";
-  return new Date(stamp).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" });
+  return Number.isFinite(stamp)
+    ? new Date(stamp).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })
+    : "";
 }
 
 function formatTime(value?: string): string {
   if (!value || !/^\d{2}:\d{2}$/.test(value)) return "";
   const [hours, minutes] = value.split(":").map(Number);
-  const suffix = hours >= 12 ? "PM" : "AM";
-  return `${((hours + 11) % 12) + 1}:${String(minutes).padStart(2, "0")} ${suffix}`;
+  return `${((hours + 11) % 12) + 1}:${String(minutes).padStart(2, "0")} ${hours >= 12 ? "pm" : "am"}`;
 }
 
-/** The one line under the type badge: when it happens, or when it closes. */
-function whenLabel(row: Opportunity, today: string): { text: string; urgent: boolean } {
+/** When it happens, or when it closes: the one line every card shows. */
+function when(row: Opportunity, today: string): { text: string; urgent: boolean } {
   if (row.isDeadline) {
-    if (row.alwaysOpen || !row.date) return { text: "Always open", urgent: false };
+    if (row.alwaysOpen || !row.date) return { text: "Open now", urgent: false };
     const left = daysLeft(row, today) ?? 0;
     if (left <= 0) return { text: "Closes today", urgent: true };
-    return { text: `Closes ${formatDate(row.date)}${left <= 14 ? ` · ${left} days left` : ""}`, urgent: left <= 14 };
+    if (left <= 14) return { text: `${left} days left`, urgent: true };
+    return { text: `Closes ${formatDate(row.date)}`, urgent: false };
   }
-  const range = row.endDate && row.endDate !== row.date ? ` – ${formatDate(row.endDate)}` : "";
+  const range = row.endDate && row.endDate !== row.date ? ` to ${formatDate(row.endDate)}` : "";
   const time = formatTime(row.time);
-  const soon = row.date === today;
-  return { text: `${formatDate(row.date)}${range}${time ? ` · ${time}` : ""}`, urgent: soon };
+  return { text: `${formatDate(row.date)}${range}${time ? `, ${time}` : ""}`, urgent: row.date === today };
 }
 
 export function OpportunityCard({ row, today, saved, onToggleSave }: {
   row: Opportunity; today: string; saved: boolean; onToggleSave: (entry: Omit<SavedEntry, "savedAt">) => void;
 }) {
   const [shared, setShared] = useState(false);
-  const when = whenLabel(row, today);
-  const Icon = KIND_ICON[row.kind] ?? Trophy;
-  const place = row.event ? `${row.place}${row.place ? " · " : ""}${REGIONS[eventRegion(row.event)] ?? ""}` : row.place;
+  const timing = when(row, today);
+  const Icon = KIND_ICON[row.kind];
+  // Events: where it is. Resources: who is offering it. Never the scraper's source name.
+  const area = row.event ? REGIONS[eventRegion(row.event)] ?? "" : "";
+  const context = row.event
+    ? Array.from(new Set([row.place, area].filter(Boolean))).join(" · ")
+    // "Malaysia" on every nationwide scholarship is noise; the state matters, the country does not.
+    : [row.org, row.place === "Malaysia" ? "" : row.place].filter(Boolean).join(" · ");
   const calendar = row.event ? googleCalendarUrl(row.event) : null;
-  const directions = row.event && row.event.lat != null && row.event.lon != null
-    ? `https://www.google.com/maps/search/?api=1&query=${row.event.lat},${row.event.lon}` : null;
-  const action = row.kind === "tool" ? "Get it" : row.isDeadline ? "View details" : "View event";
 
   const share = async () => {
     try {
@@ -60,61 +64,49 @@ export function OpportunityCard({ row, today, saved, onToggleSave }: {
   };
 
   return (
-    <article className="listing-card event-card group">
-      <div className="event-thumb relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-muted">
+    <article className="card flex h-full gap-3 p-4">
+      <span className="thumb">
         {row.image ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img src={row.image} alt="" className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]" loading="lazy" />
+          <img src={row.image} alt="" loading="lazy" className="size-full object-cover" />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted to-accent/30">
-            <Icon className="size-8 text-muted-foreground" aria-hidden />
-          </div>
+          <Icon className="size-5 text-muted-foreground" aria-hidden />
         )}
-        <SaveButton className="absolute left-3 top-3" floating saved={saved} onToggle={onToggleSave}
-          entry={{ id: row.id, kind: row.event ? "event" : "resource", title: row.title, href: row.link, section: "/",
-            note: [KIND_LABELS[row.kind].one, when.text, row.org].filter(Boolean).join(" · ") }} />
-        <span className="event-date-chip absolute right-3 top-3 rounded-full border border-border bg-white/95 px-2.5 py-1 font-mono text-[11px] font-semibold text-black">
-          {KIND_LABELS[row.kind].one}
-        </span>
-      </div>
+      </span>
 
-      <div className="listing-body gap-1.5">
-        <p className={cn("text-xs font-medium", when.urgent ? "text-amber-700 dark:text-amber-400" : "text-muted-foreground")}>
-          <span className="md:hidden">{KIND_LABELS[row.kind].one} · </span>{when.text}
+      <div className="flex min-w-0 flex-1 flex-col">
+        <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          {row.kind === "event" ? null : (
+            <><span className="font-semibold text-foreground">{KIND_LABELS[row.kind].one}</span><span aria-hidden>·</span></>
+          )}
+          <span className={cn(timing.urgent && "font-semibold text-amber-700 dark:text-amber-400")}>{timing.text}</span>
         </p>
-        <h3 className="listing-title">{row.title}</h3>
-        {row.org || place ? (
-          <p className="flex items-start gap-1.5 text-xs leading-5 text-muted-foreground">
-            <MapPin className="mt-0.5 size-3.5 shrink-0" aria-hidden />
-            <span className="line-clamp-2 break-words">{[row.org, place].filter(Boolean).join(" · ")}</span>
+        <h3 className="mt-1 line-clamp-2 break-words font-display text-base font-bold leading-snug">{row.title}</h3>
+        {context ? <p className="mt-1 line-clamp-1 break-words text-xs text-muted-foreground">{context}</p> : null}
+        {row.value || row.status === "closed" ? (
+          <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">
+            {row.status === "closed" ? "Registration closed" : row.value}
           </p>
         ) : null}
-        {row.value || row.eligibility ? (
-          <p className="line-clamp-1 text-xs text-muted-foreground">{[row.value, row.eligibility].filter(Boolean).join(" · ")}</p>
-        ) : null}
-        {row.status === "closed" ? <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">Registration closed</p> : null}
-        {row.note ? <p className="text-xs text-muted-foreground">{row.note}</p> : null}
-        {row.summary ? <p className="event-desc line-clamp-2 break-words text-sm leading-relaxed text-muted-foreground">{row.summary}</p> : null}
 
-        <div className="listing-actions">
+        <div className="mt-3 flex items-center gap-1 pt-1">
           <a href={row.link} target="_blank" rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-1 rounded-xl border border-border/70 bg-primary px-3 text-xs font-semibold text-primary-foreground shadow-brutal-sm hover:opacity-90">
-            {action} <ArrowUpRight className="size-3.5" aria-hidden />
+            className="inline-flex min-h-9 items-center gap-1 rounded-lg border border-border/70 bg-primary px-3 text-xs font-semibold text-primary-foreground hover:opacity-90">
+            {row.kind === "tool" ? "Get it" : row.isDeadline ? "Details" : "View"} <ArrowUpRight className="size-3.5" aria-hidden />
           </a>
-          <div className="flex items-center gap-0.5">
-            {calendar ? (
-              <a href={calendar} target="_blank" rel="noopener noreferrer" data-extra aria-label="Add to Google Calendar" title="Add to calendar"
-                className="flex size-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"><CalendarPlus className="size-4" /></a>
-            ) : null}
-            {directions ? (
-              <a href={directions} target="_blank" rel="noopener noreferrer" data-extra aria-label="Get directions" title="Directions"
-                className="flex size-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"><Navigation className="size-4" /></a>
-            ) : null}
-            <button type="button" onClick={share} aria-label="Share" title="Share"
-              className="flex size-11 items-center justify-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground">
-              {shared ? <Check className="size-4 text-green-600" /> : <Share2 className="size-4" />}
-            </button>
-          </div>
+          <SaveButton className="ml-auto size-9" saved={saved} onToggle={onToggleSave}
+            entry={{ id: row.id, kind: row.event ? "event" : "resource", title: row.title, href: row.link, section: "/",
+              note: [KIND_LABELS[row.kind].one, timing.text, row.org].filter(Boolean).join(" · ") }} />
+          {calendar ? (
+            <a href={calendar} target="_blank" rel="noopener noreferrer" aria-label="Add to calendar" title="Add to calendar"
+              className="flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground">
+              <CalendarPlus className="size-4" aria-hidden />
+            </a>
+          ) : null}
+          <button type="button" onClick={share} aria-label="Share" title="Share"
+            className="flex size-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground">
+            {shared ? <Check className="size-4 text-green-600" aria-hidden /> : <Share2 className="size-4" aria-hidden />}
+          </button>
         </div>
       </div>
     </article>

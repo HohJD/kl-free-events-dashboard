@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ChevronDown, MapPin } from "lucide-react";
 import type { Event } from "@/lib/events";
 import type { Resource } from "@/lib/resources";
 import { malaysiaDay, type DateRange, type SortMode } from "@/lib/filter-events";
@@ -14,8 +13,7 @@ import {
 import { useSaved } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 import { Hero, type HeroStats } from "./hero";
-import { ExploreStrip } from "./explore-strip";
-import { Filters, type ViewMode } from "./filters";
+import { Toolbar, type ViewMode } from "./toolbar";
 import { FilterSheet } from "./filter-sheet";
 import { OpportunityCard } from "./opportunity-card";
 import { MapSection } from "./map-section";
@@ -123,56 +121,31 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     <div className="min-h-screen bg-background">
       <main>
         <Hero stats={stats} />
-        <ExploreStrip />
-
-        <nav aria-label="Event focus" className="page-shell flex flex-wrap items-center gap-2 pb-4">
-          {[{ value: true, label: "Tech, startups & careers" }, { value: false, label: "Everything free" }].map((option) => (
-            <button key={option.label} type="button" onClick={() => { setFocused(option.value); setUrl("browse", option.value ? null : "all"); }}
-              aria-pressed={focused === option.value}
-              className={cn("min-h-11 rounded-xl border px-4 py-2 text-sm font-semibold",
-                focused === option.value ? "border-border bg-accent text-accent-foreground shadow-brutal-sm" : "border-border/50 bg-card text-muted-foreground")}>
-              {option.label}
-            </button>
-          ))}
-          <label className="relative ml-auto hidden min-w-[180px] flex-1 sm:flex-none md:block">
-            <span className="sr-only">Location</span>
-            <MapPin className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
-            <select value={region} onChange={(event) => chooseRegion(event.target.value)} aria-label="Filter events by state"
-              className="h-11 w-full cursor-pointer appearance-none rounded-xl border border-input/70 bg-card pl-9 pr-8 text-base sm:w-[220px] sm:text-sm">
-              <option value="all">All of Malaysia</option>
-              {Object.entries(REGIONS).filter(([value]) => value !== "unknown").map(([value, label]) => (
-                <option key={value} value={value}>{label} ({regionCounts[value] || 0})</option>
-              ))}
-            </select>
-            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" aria-hidden />
-          </label>
-        </nav>
-
-        <div className="no-scrollbar page-shell -mx-0 flex gap-1.5 overflow-x-auto pb-4" role="group" aria-label="Type">
-          <button type="button" onClick={() => chooseKind("all")} aria-pressed={kind === "all"} className={cn("fx-chip", kind === "all" && "fx-chip-on")}>
-            All<span className="ml-1 text-xs opacity-60">{Object.values(kindCounts).reduce((sum, value) => sum + value, 0)}</span>
+        <nav aria-label="Event focus" className="no-scrollbar page-shell flex items-center gap-1.5 overflow-x-auto pb-4">
+          <button type="button" onClick={() => chooseKind("all")} aria-pressed={kind === "all"} className={cn("chip", kind === "all" && "chip-on")}>
+            All<span className="chip-count">{Object.values(kindCounts).reduce((sum, value) => sum + value, 0)}</span>
           </button>
           {KIND_ORDER.filter((value) => kindCounts[value] || kind === value).map((value) => (
-            <button key={value} type="button" onClick={() => chooseKind(value)} aria-pressed={kind === value} className={cn("fx-chip", kind === value && "fx-chip-on")}>
-              {KIND_LABELS[value].many}<span className="ml-1 text-xs opacity-60">{kindCounts[value] ?? 0}</span>
+            <button key={value} type="button" onClick={() => chooseKind(value)} aria-pressed={kind === value} className={cn("chip", kind === value && "chip-on")}>
+              {KIND_LABELS[value].many}<span className="chip-count">{kindCounts[value] ?? 0}</span>
             </button>
           ))}
-        </div>
+          <span className="mx-1 h-5 w-px shrink-0 bg-border" aria-hidden />
+          <button type="button" onClick={() => { setFocused(!focused); setUrl("browse", focused ? "all" : null); }} aria-pressed={focused}
+            className={cn("chip", focused && "chip-on")}>
+            Tech &amp; careers only
+          </button>
+        </nav>
 
-        <Filters
+        <Toolbar
           query={query} setQuery={setQuery}
-          source={source} setSource={setSource}
-          category="all" setCategory={() => {}}
           dateRange={dateRange} setDateRange={setDateRange}
           sort={sort} setSort={setSort}
-          sources={sourceList} categories={[]} categoryCounts={{}}
-          view={view} setView={setView}
+          region={region} setRegion={chooseRegion} regionCounts={regionCounts}
           showSaved={showSaved} setShowSaved={setShowSaved} savedCount={savedIds.size}
-          onClear={clearAll}
+          view={view} setView={setView} canMap={canMap}
           onOpenSheet={() => setSheetOpen(true)}
           sheetCount={[region !== "all", source !== "all", showSaved, sort !== "recommended", dateRange !== "upcoming"].filter(Boolean).length}
-          showCategories={false}
-          canMap={canMap}
         />
         <FilterSheet open={sheetOpen} onClose={() => setSheetOpen(false)} region={region} setRegion={chooseRegion} regionCounts={regionCounts}
           sort={sort} setSort={setSort} category={kind} setCategory={(value) => chooseKind(value as OpportunityKind | "all")}
@@ -181,7 +154,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
           source={source} setSource={setSource} sources={sourceList} showSaved={showSaved} setShowSaved={setShowSaved}
           savedCount={savedIds.size} resultCount={shown.length} onClear={clearAll} />
 
-        <div className="page-shell pb-16 pt-6">
+        <div className="page-shell pb-16">
           <p className="mb-4 font-mono text-xs text-muted-foreground" aria-live="polite">
             Showing <span className="text-foreground">{shown.length}</span> {shown.length === 1 ? "listing" : "listings"}
             {focused ? " · tech, startups and careers" : ""}
@@ -189,7 +162,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
           {view === "map" && canMap ? (
             <MapSection events={mapEvents} />
           ) : shown.length ? (
-            <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid items-stretch gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {shown.map((row) => (
                 <OpportunityCard key={row.id} row={row} today={today} saved={savedIds.has(row.id) || savedIds.has(row.link)} onToggleSave={toggleSaved} />
               ))}

@@ -11,7 +11,7 @@ const FIXTURE = [
   { id: '2', name: 'Python textbook', description: '', images: [PHOTO], condition: 'Good', pickup: 'Bangsar', contact: 'https://wa.me/60123456780', status: 'available', category: 'Books & Media', owner: 'y', pickup_lat: null, pickup_lon: null, created_at: new Date().toISOString() },
 ];
 const ROUTES = [
-  { path: '/', tab: 'Opportunities', ready: 'article.listing-card' },
+  { path: '/', tab: 'Opportunities', ready: 'article.card' },
   { path: '/free-items', tab: 'Free items', ready: 'article' },
   { path: '/flights', tab: 'Flights', ready: '#calendar-heading' },
 ];
@@ -73,7 +73,7 @@ assert.match(page.url(), /type=scholarship/, 'Old /resources links land on the t
 
 // Saving works across sections and lands on one Saved page.
 await page.goto(BASE + '/', { waitUntil: 'networkidle' });
-const firstEvent = page.locator('article.listing-card').first();
+const firstEvent = page.locator('article.card').first();
 const eventTitle = (await firstEvent.locator('h3').innerText()).trim();
 await firstEvent.getByRole('button', { name: /^Save / }).click();
 assert.match(await page.getByRole('link', { name: /^Saved/ }).innerText(), /1/, 'Header badge counts saved things');

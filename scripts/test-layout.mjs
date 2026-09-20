@@ -33,17 +33,22 @@ try {
       // The opportunities page never carries the giveaway upload form (that lives on /free-items).
       assert.equal(await page.locator('input[type=file]').count(), 0);
       assert.equal(await page.getByRole('button', { name: /^Give something away$/ }).count(), 0);
-      for (const mode of ['Tech, startups & careers', 'Everything free']) {
-        await page.getByRole('button', { name: mode, exact: true }).click();
+      for (const mode of ['on', 'off']) {
+        // One toggle now: "Tech & careers only" on, then everything.
+        const toggle = page.getByRole('button', { name: 'Tech & careers only' });
+        if ((await toggle.getAttribute('aria-pressed') === 'true') !== (mode === 'on')) await toggle.click();
         await page.waitForTimeout(600);
         const dimensions = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }));
         assert.ok(dimensions.document <= width + 1, `${mode}/${theme}/${width}: overflow ${JSON.stringify(dimensions)}`);
-        for (const tab of await page.getByRole('navigation', { name: 'Event focus' }).getByRole('button').all()) {
-          const box = await tab.boundingBox();
-          assert.ok(box.x >= 0 && box.x + box.width <= width + 1 && box.height >= 44, 'Focus tab clipped or too small');
+        // The type row scrolls sideways by design; every chip still needs a 44px touch target.
+        const chips = page.getByRole('navigation', { name: 'Event focus' });
+        for (const chip of await chips.getByRole('button').all()) {
+          assert.ok((await chip.boundingBox()).height >= 44, 'Type chip too small to tap');
         }
+        assert.ok(await chips.evaluate((row) => row.scrollWidth <= row.clientWidth || getComputedStyle(row).overflowX === 'auto'),
+          'Type row must fit or scroll');
         const heading = await page.getByRole('heading', { level: 1 }).boundingBox();
-        const cards = page.locator('.listing-card');
+        const cards = page.locator('article.card');
         const total = await cards.count();
         assert.ok(total > 0, 'Expected current qualifying event fixtures');
         const first = await cards.first().boundingBox();
@@ -56,7 +61,7 @@ try {
             assert.ok(Math.abs(box.height - boxes[0].height) < 2, 'Card heights uneven');
           }
         }
-        if ([320, 1440].includes(width)) await page.screenshot({ path: join(output, `events-only-${mode.startsWith('Tech') ? 'focus' : 'all'}-${theme}-${width}.png`) });
+        if ([320, 1440].includes(width)) await page.screenshot({ path: join(output, `opportunities-${mode}-${theme}-${width}.png`) });
         checked++;
       }
       const search = page.getByRole('textbox', { name: 'Search listings' });
@@ -65,7 +70,7 @@ try {
       await page.getByRole('button', { name: 'Clear search and filters' }).click();
       // Phones pick the state inside the Filters panel; wider screens use the inline picker.
       if (width < 768) await page.getByRole('button', { name: /^Filters/ }).click();
-      const state = width < 768 ? page.getByRole('dialog').getByRole('combobox', { name: 'Location' }) : page.getByRole('combobox', { name: 'Filter events by state' });
+      const state = width < 768 ? page.getByRole('dialog').getByRole('combobox', { name: 'Location' }) : page.getByRole('combobox', { name: 'Location' });
       assert.equal(await state.locator('option').count(), 18);
       await state.selectOption('perlis');
       if (width < 768) await page.getByRole('dialog').getByRole('button', { name: /^Show/ }).click();

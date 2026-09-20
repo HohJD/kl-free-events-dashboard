@@ -70,9 +70,35 @@
     text-wrap: balance;
   }
 
+  /* Shared surfaces: one radius, one border, a light shadow only on lift. */
+  .card {
+    @apply min-w-0 rounded-xl border border-border/60 bg-card;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .card:hover { @apply border-border; box-shadow: 3px 3px 0 hsl(var(--shadow) / 0.18); }
+
+  .thumb {
+    @apply flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border/50 bg-muted sm:size-16;
+  }
+
+  .chip {
+    @apply inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border border-border/50 bg-card px-3.5 text-sm font-medium text-muted-foreground transition-colors;
+  }
+  .chip:hover { @apply text-foreground; }
+  .chip-on { @apply border-border bg-accent font-semibold text-accent-foreground; }
+  .chip-count { @apply ml-1.5 text-xs tabular-nums opacity-60; }
+
+  .toolbar-select {
+    @apply h-11 cursor-pointer appearance-none rounded-xl border border-input/70 bg-card pl-3 pr-8 text-sm text-foreground;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23888' stroke-width='1.6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.6rem center;
+    background-size: 1rem;
+  }
+
   .listing-card {
-    @apply flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-brutal;
-    transition: transform 180ms ease, box-shadow 180ms ease;
+    @apply flex h-full min-w-0 flex-col overflow-hidden rounded-xl border border-border/60 bg-card;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
   }
 
   .listing-body {
@@ -95,10 +121,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-  .listing-card:hover {
-    transform: translate(-2px, -2px);
-    box-shadow: 5px 5px 0 hsl(var(--shadow) / 0.35);
-  }
+  .listing-card:hover { @apply border-border; box-shadow: 3px 3px 0 hsl(var(--shadow) / 0.18); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -179,15 +202,7 @@ a,
 .back-to-top { bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
 @media (min-width: 768px) { .back-to-top { bottom: calc(1.25rem + env(safe-area-inset-bottom)); } }
 
-/* Phones: events as a compact list (thumbnail left), filter panel slides up. */
-@media (max-width: 767px) {
-  .event-card { flex-direction: row; }
-  .event-card .event-thumb { width: 7.25rem; aspect-ratio: auto; align-self: stretch; min-height: 9rem; }
-  .event-card .event-date-chip, .event-card .event-source-chip, .event-card .event-desc, .event-card [data-extra] { display: none; }
-  .event-card .listing-body { padding: 0.875rem; }
-  .event-card .listing-title { font-size: 1rem; line-height: 1.35rem; min-height: 0; }
-  .event-card .listing-actions { padding-top: 0.625rem; }
-}
+/* Phones: the filter panel slides up. */
 .sheet { animation: sheet-up 200ms ease-out; }
 @keyframes sheet-up { from { transform: translateY(24px); opacity: 0.6; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .sheet { animation: none; } }
@@ -208,14 +223,14 @@ a,
     --seq-0: #104281; --seq-1: #184f95; --seq-2: #1c5cab; --seq-3: #256abf; --seq-4: #2a78d6; --seq-5: #5598e7; --seq-6: #86b6ef;
   }
 
-  .fx-card { @apply rounded-2xl border border-border/60 bg-card p-4 shadow-brutal-sm sm:p-6; }
-  .fx-tile { @apply min-w-0 rounded-2xl border border-border/60 bg-card p-3 shadow-brutal-sm sm:p-4; }
+  .fx-card { @apply rounded-xl border border-border/60 bg-card p-4 sm:p-6; }
+  .fx-tile { @apply min-w-0 rounded-xl border border-border/60 bg-card p-3 sm:p-4; }
   .fx-tile-label { @apply truncate text-[10px] font-semibold uppercase tracking-wide text-muted-foreground sm:text-xs; }
   .fx-tile-value { @apply mt-1 font-display text-lg font-bold tabular-nums sm:text-3xl; }
   .fx-tile-note { @apply mt-1 text-[11px] leading-4 text-muted-foreground sm:text-xs sm:leading-5; }
 
   .fx-chip { @apply inline-flex min-h-10 shrink-0 items-center whitespace-nowrap rounded-full border border-border/50 bg-card px-3.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground; }
-  .fx-chip-on { @apply border-border bg-accent font-semibold text-accent-foreground shadow-brutal-sm; }
+  .fx-chip-on { @apply border-border bg-accent font-semibold text-accent-foreground; }
   .fx-nav { @apply flex size-10 items-center justify-center rounded-xl border border-border/50 text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-30; }
   .fx-month { @apply min-w-[76px] shrink-0 rounded-xl border border-border/40 px-2.5 py-1.5 text-left transition-colors hover:border-border; }
   .fx-month-on { @apply border-border bg-muted; }
