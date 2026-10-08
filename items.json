@@ -1,4 +1,0 @@
-{
-  "_help": "Build-time fallback for the Collect tab. Live items come from Supabase (project rdqfibpnlizxgkqzcnee, table free_items) and update WITHOUT redeploying. To add an item: node scripts/add-item.mjs --name \"...\" --desc \"...\" --pickup \"...\" --contact \"https://wa.me/60...\" photo1.jpg — or just ask Devin/Hermes. This file is only shown if the Supabase fetch fails.",
-  "items": []
-}

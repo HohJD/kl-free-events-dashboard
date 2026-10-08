@@ -8,10 +8,9 @@ export function Footer() {
         <div>
           <p className="font-display text-base font-bold">{SITE_NAME}</p>
           <p className="mt-2 max-w-md text-xs leading-relaxed text-muted-foreground">
-            A self-updating board of free things for students and young people in Malaysia. Events, resources and fares
-            are collected every day from Eventbrite, Luma, AllEvents, Devpost, Google Developer Groups, MLH, Afterschool.my,
-            Hiredly and Google Flights; free items are posted by people giving things away. Always confirm details with the
-            organiser or provider.
+            A self-updating board of free opportunities for students and young people in Malaysia. Events, scholarships
+            and internships are collected every day from Eventbrite, Luma, AllEvents, Devpost, Google Developer Groups,
+            MLH, Afterschool.my and Hiredly. Always confirm details with the organiser or provider.
           </p>
         </div>
         <nav aria-label="Footer" className="grid grid-cols-2 gap-2 text-sm">

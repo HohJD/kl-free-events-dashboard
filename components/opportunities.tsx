@@ -47,9 +47,9 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     return () => window.clearInterval(timer);
   }, []);
 
-  // Old shared links pointed at the giveaway tab (#collect); it is now /free-items.
+  // Old shared links pointed at the giveaway tab; they now land on the home page.
   useEffect(() => {
-    const redirect = () => { if (window.location.hash === "#collect") window.location.replace("/free-items"); };
+    const redirect = () => { if (window.location.hash === "#collect") window.location.replace("/"); };
     redirect();
     window.addEventListener("hashchange", redirect);
     return () => window.removeEventListener("hashchange", redirect);

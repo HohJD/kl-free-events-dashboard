@@ -5,8 +5,8 @@ import { ArrowUpRight, Trash2 } from "lucide-react";
 import { SAVED_LABELS, useSaved, type SavedKind } from "@/lib/use-saved";
 import { SECTIONS } from "@/lib/site";
 
-const ORDER: SavedKind[] = ["event", "resource", "item", "flight"];
-const SECTION_FOR: Record<SavedKind, string> = { event: "/", resource: "/resources", item: "/free-items", flight: "/flights" };
+const ORDER: SavedKind[] = ["event", "resource"];
+const SECTION_FOR: Record<SavedKind, string> = { event: "/", resource: "/resources" };
 
 export function SavedView() {
   const { saved, remove, loaded } = useSaved();
@@ -22,7 +22,7 @@ export function SavedView() {
       {!loaded ? null : !saved.length ? (
         <div className="mt-8 rounded-xl border border-dashed border-input bg-muted/30 px-5 py-12 text-center">
           <h2 className="font-display text-lg font-bold">Nothing saved yet</h2>
-          <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">Tap the heart on an event, scholarship, free item or flight date and it will wait for you here.</p>
+          <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">Tap the heart on an event, scholarship or internship and it will wait for you here.</p>
           <div className="mt-5 flex flex-wrap justify-center gap-2">
             {SECTIONS.map((section) => (
               <Link key={section.href} href={section.href} className="chip"><section.icon className="mr-1.5 size-4" aria-hidden /> {section.label}</Link>

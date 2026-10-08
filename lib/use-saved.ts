@@ -2,7 +2,7 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
-export type SavedKind = "event" | "resource" | "item" | "flight";
+export type SavedKind = "event" | "resource";
 
 export interface SavedEntry {
   id: string;
@@ -20,7 +20,7 @@ export interface SavedEntry {
 const KEY = "free-things-saved-v1";
 const LEGACY_EVENTS_KEY = "kl-events-favorites";
 
-// One shared list so the header count, the section pages and the Saved page
+// One shared list so the header count and the Saved page
 // always agree, in this tab and in other tabs.
 let entries: SavedEntry[] | null = null;
 const listeners = new Set<() => void>();
@@ -81,6 +81,4 @@ export function useSaved() {
 export const SAVED_LABELS: Record<SavedKind, string> = {
   event: "Events",
   resource: "Scholarships, internships & tools",
-  item: "Free items",
-  flight: "Flights",
 };

@@ -25,15 +25,15 @@ const mono = IBM_Plex_Mono({
 
 const SITE_URL = "https://kl-free-events-dashboard.vercel.app";
 const DESCRIPTION =
-  "Free events, student resources, free items and flight deals in Malaysia, updated every day. Built for students and fresh graduates.";
+  "Free events, scholarships, internships and student resources in Malaysia, updated every day. Built for students and fresh graduates.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Free Things Malaysia: events, resources, free items",
+  title: "Free Things Malaysia: events and student resources",
   description: DESCRIPTION,
   manifest: "/manifest.json",
   openGraph: {
-    title: "Free Things Malaysia: events, resources, free items",
+    title: "Free Things Malaysia: events and student resources",
     description: DESCRIPTION,
     url: SITE_URL,
     siteName: "Free Things Malaysia",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Things Malaysia: events, resources, free items",
+    title: "Free Things Malaysia: events and student resources",
     description: DESCRIPTION,
     images: ["/icon.png"],
   },

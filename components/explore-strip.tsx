@@ -4,10 +4,7 @@ import { SECTIONS } from "@/lib/site";
 
 /** Cards for the other sections of the site. */
 export function ExploreStrip() {
-  const notes: Record<string, string> = {
-    "/free-items": "Give away or pick up things for free",
-    "/flights": "Cheapest KL ⇄ London fares for every date",
-  };
+  const notes: Record<string, string> = {};
   return (
     <section aria-label="More on this site" className="page-shell pb-6">
       <div className="no-scrollbar -mx-4 flex snap-x gap-3 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0">

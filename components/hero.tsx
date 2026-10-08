@@ -25,7 +25,7 @@ export function Hero({ stats }: { stats: HeroStats }) {
         Free things worth your time
       </h1>
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-        Events, hackathons, scholarships, internships, graduate roles and student tools across Malaysia, collected every day.
+        Events, hackathons, scholarships, internships, graduate roles and student tools across Malaysia.
       </p>
       <p className="mt-3 text-xs text-muted-foreground">
         {counts.join(" · ")} · updated {updated}
