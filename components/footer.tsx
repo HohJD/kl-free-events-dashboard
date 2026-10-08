@@ -2,14 +2,10 @@ import { SITE_NAME } from "@/lib/site";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 py-8 sm:py-10">
-      <div className="page-shell">
-        <p className="font-display text-base font-bold">{SITE_NAME}</p>
-        <p className="mt-2 max-w-md text-xs leading-relaxed text-muted-foreground">
-          A self-updating board of free opportunities for students and young people in Malaysia. Events, scholarships
-          and internships are collected every day from Eventbrite, Luma, AllEvents, Devpost, Google Developer Groups,
-          MLH, Afterschool.my and Hiredly. Always confirm details with the organiser or provider.
-        </p>
+    <footer className="border-t border-border/60 py-8">
+      <div className="page-shell flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+        <p><span className="font-display font-bold text-foreground">{SITE_NAME}</span> · updated daily, always free</p>
+        <p>Confirm details with the organiser before you go.</p>
       </div>
     </footer>
   );

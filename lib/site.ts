@@ -1,21 +1,20 @@
-import { CalendarDays, type LucideIcon } from "lucide-react";
+import { Compass, ListChecks, type LucideIcon } from "lucide-react";
 
-export const SITE_NAME = "Free Things Malaysia";
+export const SITE_NAME = "Students Repo";
 
 export interface Section {
   href: string;
   label: string;
-  short: string;
   icon: LucideIcon;
-  blurb: string;
 }
 
-/** The single section, in navigation order. */
+/** Navigation order: discover things, then track them. */
 export const SECTIONS: Section[] = [
-  { href: "/", label: "Opportunities", short: "Opportunities", icon: CalendarDays, blurb: "Events, hackathons, scholarships, internships and free tools" },
+  { href: "/", label: "Discover", icon: Compass },
+  { href: "/saved", label: "My tracker", icon: ListChecks },
 ];
 
-/** The section a path belongs to; \"\" for pages outside the main section. */
+/** The section a path belongs to; "" for pages outside the main sections. */
 export function activeSection(pathname: string): string {
   if (pathname === "/") return "/";
   return pathname.startsWith("/saved") ? "/saved" : "";

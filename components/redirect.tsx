@@ -9,7 +9,7 @@ export function Redirect({ to, label }: { to: string; label: string }) {
   return (
     <main className="page-shell py-16 text-center">
       <p className="text-sm text-muted-foreground">Taking you to {label}…</p>
-      <Link href={to} className="mt-4 inline-flex min-h-11 items-center rounded-xl border border-border bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-brutal-sm">
+      <Link href={to} className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-primary px-5 text-sm font-semibold text-primary-foreground">
         Continue
       </Link>
     </main>

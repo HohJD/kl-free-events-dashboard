@@ -87,6 +87,7 @@ export function fromResource(resource: Resource): Opportunity {
     place: resource.location,
     state: resource.state || "",
     link: resource.link,
+    image: resource.image || undefined,
     summary: resource.summary,
     value: resource.amount,
     eligibility: resource.eligibility,

@@ -1,21 +1,25 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import { CalendarPlus, X } from "lucide-react";
 import type { Event } from "@/lib/events";
 import type { Resource } from "@/lib/resources";
 import { malaysiaDay, type DateRange, type SortMode } from "@/lib/filter-events";
-import { FOCUS_CATEGORIES } from "@/lib/event-discovery";
+import { forStudents } from "@/lib/event-discovery";
 import { REGIONS, eventRegion, filterRegion } from "@/lib/regions";
 import {
   KIND_LABELS, KIND_ORDER, countByKind, eventsOf, filterOpportunities, fromEvent, fromResource,
   type OpportunityKind,
 } from "@/lib/opportunities";
-import { useSaved } from "@/lib/use-saved";
+import { reminderUrl } from "@/lib/calendar";
+import { useSaved, type SavedEntry } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 import { Hero, type HeroStats } from "./hero";
 import { Toolbar, type ViewMode } from "./toolbar";
 import { FilterSheet } from "./filter-sheet";
-import { OpportunityCard } from "./opportunity-card";
+import { OpportunityCard, kindStyle } from "./opportunity-card";
 import { MapSection } from "./map-section";
 import { BackToTop } from "./back-to-top";
 
@@ -26,10 +30,11 @@ interface OpportunitiesProps {
   sources: number;
 }
 
+const PAGE = 24;
+
 /** Everything free in one list: events, hackathons, scholarships, internships, graduate roles and tools. */
 export function Opportunities({ events, resources, generatedAt, sources }: OpportunitiesProps) {
   const [kind, setKind] = useState<OpportunityKind | "all">("all");
-  const [focused, setFocused] = useState(true);
   const [query, setQuery] = useState("");
   const [region, setRegion] = useState("all");
   const [dateRange, setDateRange] = useState<DateRange>("upcoming");
@@ -38,8 +43,19 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   const [showSaved, setShowSaved] = useState(false);
   const [view, setView] = useState<ViewMode>("list");
   const [sheetOpen, setSheetOpen] = useState(false);
+  const [limit, setLimit] = useState(PAGE);
   const [today, setToday] = useState(() => malaysiaDay(new Date(generatedAt)));
-  const { ids: savedIds, toggle: toggleSaved } = useSaved();
+  const { ids: savedIds, toggle } = useSaved();
+  const [toast, setToast] = useState<{ title: string; calendar: string | null } | null>(null);
+  const toastTimer = useRef<number>();
+  const toggleSaved = useCallback((entry: Omit<SavedEntry, "savedAt">) => {
+    const adding = !savedIds.has(entry.id);
+    toggle(entry);
+    window.clearTimeout(toastTimer.current);
+    if (!adding) { setToast(null); return; }
+    setToast({ title: entry.title, calendar: entry.date ? reminderUrl({ ...entry, date: entry.date, link: entry.href }) : null });
+    toastTimer.current = window.setTimeout(() => setToast(null), 5000);
+  }, [savedIds, toggle]);
 
   useEffect(() => {
     setToday(malaysiaDay());
@@ -59,24 +75,31 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   useEffect(() => {
     const params = new URL(window.location.href).searchParams;
     const type = params.get("type");
-    if (type && (KIND_ORDER as string[]).includes(type)) { setKind(type as OpportunityKind); setFocused(false); }
+    if (type && (KIND_ORDER as string[]).includes(type)) setKind(type as OpportunityKind);
     const state = params.get("state");
     if (state && Object.hasOwn(REGIONS, state)) setRegion(state);
-    if (params.get("browse") === "all") setFocused(false);
     if (params.get("category") === "Hackathon") setKind("hackathon");
   }, []);
 
   const all = useMemo(() => [...events.map(fromEvent), ...resources.map(fromResource)], [events, resources]);
-  // "Tech & careers" keeps the focused event categories; resources always stay.
-  const inFocus = useMemo(
-    () => (focused ? all.filter((row) => !row.event || FOCUS_CATEGORIES.includes(row.event.category)) : all),
-    [all, focused],
-  );
+  // Built for uni students: events outside tech, business, careers and hackathons stay off the board.
+  const inFocus = useMemo(() => all.filter((row) => !row.event || forStudents(row.event)), [all]);
   const filters = useMemo(
     () => ({ kind, query, region, dateRange, sort, source, savedIds, onlySaved: showSaved }),
     [kind, query, region, dateRange, sort, source, savedIds, showSaved],
   );
   const shown = useMemo(() => filterOpportunities(inFocus, filters, today), [inFocus, filters, today]);
+  // A new filter starts the list from the top again.
+  useEffect(() => setLimit(PAGE), [filters]);
+  // Load the next page just before the visitor reaches the end of the list.
+  const more = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const node = more.current;
+    if (!node || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => entry.isIntersecting && setLimit((n) => n + PAGE), { rootMargin: "600px 0px" });
+    observer.observe(node);
+    return () => observer.disconnect();
+  });
   // Counts ignore the filter they label, so each chip shows what picking it would give.
   const upcoming = useMemo(() => filterOpportunities(inFocus, { ...filters, kind: "all", query: "", source: "all", onlySaved: false }, today), [inFocus, filters, today]);
   const kindCounts = useMemo(() => countByKind(filterOpportunities(inFocus, { ...filters, kind: "all", onlySaved: false }, today)), [inFocus, filters, today]);
@@ -88,7 +111,6 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     }
     return counts;
   }, [inFocus, filters, today]);
-  const sourceList = useMemo(() => Array.from(new Set(inFocus.map((row) => row.source))).sort(), [inFocus]);
 
   const stats: HeroStats = {
     total: upcoming.length,
@@ -107,7 +129,6 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   const chooseKind = (value: OpportunityKind | "all") => {
     setKind(value);
     setUrl("type", value === "all" ? null : value);
-    if (value !== "all" && value !== "event") setFocused(false);
   };
   const chooseRegion = (value: string) => { setRegion(value); setUrl("state", value === "all" ? null : value); };
   const clearAll = () => {
@@ -120,23 +141,23 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   return (
     <div className="min-h-screen bg-background">
       <main>
-        <Hero stats={stats} />
-        <nav aria-label="Event focus" className="no-scrollbar page-shell flex items-center gap-1.5 overflow-x-auto pb-4">
-          <button type="button" onClick={() => chooseKind("all")} aria-pressed={kind === "all"} className={cn("chip", kind === "all" && "chip-on")}>
-            All<span className="chip-count">{Object.values(kindCounts).reduce((sum, value) => sum + value, 0)}</span>
-          </button>
-          {KIND_ORDER.filter((value) => kindCounts[value] || kind === value).map((value) => (
-            <button key={value} type="button" onClick={() => chooseKind(value)} aria-pressed={kind === value} className={cn("chip", kind === value && "chip-on")}>
-              {KIND_LABELS[value].many}<span className="chip-count">{kindCounts[value] ?? 0}</span>
-            </button>
-          ))}
-          <span className="mx-1 h-5 w-px shrink-0 bg-border" aria-hidden />
-          <button type="button" onClick={() => { setFocused(!focused); setUrl("browse", focused ? "all" : null); }} aria-pressed={focused}
-            className={cn("chip", focused && "chip-on")}>
-            Tech &amp; careers only
-          </button>
-        </nav>
-
+        <Hero stats={stats} today={today} />
+        <div className="sticky top-16 z-30 border-b border-transparent bg-background/75 pt-2 backdrop-blur-xl">
+          <nav aria-label="Type" className="no-scrollbar page-shell flex items-center gap-1 overflow-x-auto pb-2">
+            {(["all", ...KIND_ORDER.filter((value) => kindCounts[value] || kind === value)] as const).map((value) => {
+              const on = kind === value;
+              const count = value === "all" ? Object.values(kindCounts).reduce((sum, n) => sum + n, 0) : kindCounts[value] ?? 0;
+              return (
+                <button key={value} type="button" onClick={() => chooseKind(value)} aria-pressed={on}
+                  className={cn("chip", on && "font-semibold text-background hover:text-background")} style={value === "all" ? undefined : kindStyle(value)}>
+                  {on ? <motion.span layoutId="kind-pill" className="absolute inset-0 rounded-full bg-foreground" transition={{ type: "spring", bounce: 0.18, duration: 0.45 }} /> : null}
+                  {value !== "all" ? <span className="relative mr-2 size-2 rounded-full" style={{ background: "hsl(var(--kind))" }} aria-hidden /> : null}
+                  <span className="relative">{value === "all" ? "All" : KIND_LABELS[value].many}</span>
+                  <span className="chip-count relative">{count}</span>
+                </button>
+              );
+            })}
+          </nav>
         <Toolbar
           query={query} setQuery={setQuery}
           dateRange={dateRange} setDateRange={setDateRange}
@@ -147,41 +168,64 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
           onOpenSheet={() => setSheetOpen(true)}
           sheetCount={[region !== "all", source !== "all", showSaved, sort !== "recommended", dateRange !== "upcoming"].filter(Boolean).length}
         />
+        </div>
         <FilterSheet open={sheetOpen} onClose={() => setSheetOpen(false)} region={region} setRegion={chooseRegion} regionCounts={regionCounts}
-          sort={sort} setSort={setSort} category={kind} setCategory={(value) => chooseKind(value as OpportunityKind | "all")}
-          categories={KIND_ORDER.filter((value) => kindCounts[value])} categoryCounts={kindCounts} categoryLabel="Type"
+          sort={sort} setSort={setSort} dateRange={dateRange} setDateRange={setDateRange} category={kind} setCategory={(value) => chooseKind(value as OpportunityKind | "all")}
+          categories={[]} categoryCounts={kindCounts} categoryLabel="Type"
           categoryNames={Object.fromEntries(KIND_ORDER.map((value) => [value, KIND_LABELS[value].many]))}
-          source={source} setSource={setSource} sources={sourceList} showSaved={showSaved} setShowSaved={setShowSaved}
+          source={source} setSource={setSource} sources={[]} showSaved={showSaved} setShowSaved={setShowSaved}
           savedCount={savedIds.size} resultCount={shown.length} onClear={clearAll} />
 
-        <div className="page-shell pb-16">
-          <p className="mb-4 font-mono text-xs text-muted-foreground" aria-live="polite">
-            Showing <span className="text-foreground">{shown.length}</span> {shown.length === 1 ? "listing" : "listings"}
-            {focused ? " · tech, startups and careers" : ""}
+        <div className="page-shell pb-16 pt-4">
+          <p className="mb-3 text-xs font-medium text-muted-foreground" aria-live="polite">
+            <span className="font-bold text-foreground">{shown.length}</span> {shown.length === 1 ? "result" : "results"}
           </p>
           {view === "map" && canMap ? (
             <MapSection events={mapEvents} />
           ) : shown.length ? (
-            <div className="grid items-stretch gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              {shown.map((row) => (
-                <OpportunityCard key={row.id} row={row} today={today} saved={savedIds.has(row.id) || savedIds.has(row.link)} onToggleSave={toggleSaved} />
+            <div className="grid items-stretch gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {shown.slice(0, limit).map((row, index) => (
+                <OpportunityCard key={row.id} row={row} today={today} index={index} saved={savedIds.has(row.id) || savedIds.has(row.link)} onToggleSave={toggleSaved} />
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center rounded-2xl border border-dashed border-input/60 bg-muted/20 px-6 py-16 text-center">
-              <h2 className="font-display text-lg font-bold">Nothing matches yet</h2>
+            <div className="flex flex-col items-center rounded-3xl border border-dashed border-border bg-card/50 px-6 py-16 text-center">
+              <h2 className="font-display text-xl font-bold">Nothing matches yet</h2>
               <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                Try another type, state or date, or switch to Everything free. Only listings that pass our free-admission, date and location checks appear here.
+                Try another type, place or date. Only listings that are confirmed free show up here.
               </p>
-              <button type="button" onClick={clearAll}
-                className="mt-5 inline-flex min-h-11 items-center rounded-xl border border-border bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-brutal-sm">
-                Clear search and filters
-              </button>
+              <button type="button" onClick={clearAll} className="btn btn-primary btn-lg mt-5">Clear search and filters</button>
             </div>
           )}
+          {view === "list" && shown.length > limit ? (
+            <div ref={more} className="mt-6 flex justify-center">
+              <button type="button" onClick={() => setLimit((n) => n + PAGE)} className="btn btn-quiet btn-lg">
+                Show more <span className="text-muted-foreground">({shown.length - limit} left)</span>
+              </button>
+            </div>
+          ) : null}
         </div>
       </main>
       <BackToTop />
+      <AnimatePresence>
+        {toast ? (
+          <motion.div role="status" initial={{ opacity: 0, y: 24, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.96 }}
+            transition={{ type: "spring", bounce: 0.25, duration: 0.4 }}
+            className="toast fixed inset-x-3 z-[55] mx-auto flex max-w-md items-center gap-2 rounded-2xl bg-foreground p-2 pl-4 text-background shadow-2xl">
+            <p className="min-w-0 flex-1 text-sm"><span className="font-semibold">Tracking</span> <span className="line-clamp-1 opacity-70">{toast.title}</span></p>
+            {toast.calendar ? (
+              <a href={toast.calendar} target="_blank" rel="noopener noreferrer" className="btn bg-accent text-accent-foreground">
+                <CalendarPlus className="size-4" aria-hidden /> Remind me
+              </a>
+            ) : (
+              <Link href="/saved" className="btn bg-accent text-accent-foreground">Open</Link>
+            )}
+            <button type="button" onClick={() => setToast(null)} aria-label="Dismiss" className="flex size-10 items-center justify-center rounded-xl opacity-70 hover:opacity-100">
+              <X className="size-4" aria-hidden />
+            </button>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   );
 }

@@ -33,15 +33,14 @@ try {
       // The opportunities page never carries the giveaway upload form (that lives on /free-items).
       assert.equal(await page.locator('input[type=file]').count(), 0);
       assert.equal(await page.getByRole('button', { name: /^Give something away$/ }).count(), 0);
-      for (const mode of ['on', 'off']) {
-        // One toggle now: "Tech & careers only" on, then everything.
-        const toggle = page.getByRole('button', { name: 'Tech & careers only' });
-        if ((await toggle.getAttribute('aria-pressed') === 'true') !== (mode === 'on')) await toggle.click();
+      // Student focus is fixed now; check the default list and the Scholarships type.
+      for (const mode of ['all', 'scholarship']) {
+        if (mode !== 'all') await page.getByRole('navigation', { name: 'Type' }).getByRole('button', { name: /^Scholarships/ }).click();
         await page.waitForTimeout(600);
         const dimensions = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }));
         assert.ok(dimensions.document <= width + 1, `${mode}/${theme}/${width}: overflow ${JSON.stringify(dimensions)}`);
         // The type row scrolls sideways by design; every chip still needs a 44px touch target.
-        const chips = page.getByRole('navigation', { name: 'Event focus' });
+        const chips = page.getByRole('navigation', { name: 'Type' });
         for (const chip of await chips.getByRole('button').all()) {
           assert.ok((await chip.boundingBox()).height >= 44, 'Type chip too small to tap');
         }
@@ -68,6 +67,7 @@ try {
       await search.fill('no-result-layout-test-12345');
       await page.getByRole('heading', { name: 'Nothing matches yet' }).waitFor();
       await page.getByRole('button', { name: 'Clear search and filters' }).click();
+      assert.equal(await page.getByRole('navigation', { name: 'Type' }).getByRole('button', { name: /^All/ }).getAttribute('aria-pressed'), 'true');
       // Phones pick the state inside the Filters panel; wider screens use the inline picker.
       if (width < 768) await page.getByRole('button', { name: /^Filters/ }).click();
       const state = width < 768 ? page.getByRole('dialog').getByRole('combobox', { name: 'Location' }) : page.getByRole('combobox', { name: 'Location' });
@@ -83,7 +83,7 @@ try {
       await context.close();
     }
   }
-  console.log(`Passed ${checked} events-only layouts, focus/all modes, all state options, empty states and map. No upload/auth service calls. Screenshots: ${output}`);
+  console.log(`Passed ${checked} layouts (all + scholarships), all state options, empty states and map. No upload/auth service calls. Screenshots: ${output}`);
 } finally {
   await browser.close();
 }

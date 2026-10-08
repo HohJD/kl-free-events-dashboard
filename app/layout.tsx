@@ -25,25 +25,26 @@ const mono = IBM_Plex_Mono({
 
 const SITE_URL = "https://kl-free-events-dashboard.vercel.app";
 const DESCRIPTION =
-  "Free events, scholarships, internships and student resources in Malaysia, updated every day. Built for students and fresh graduates.";
+  "Free events, hackathons, scholarships and internships for students in Malaysia, updated daily. Track what you apply to and get calendar reminders.";
+const TITLE = "Students Repo: your student life, sorted";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Free Things Malaysia: events and student resources",
+  title: TITLE,
   description: DESCRIPTION,
   manifest: "/manifest.json",
   openGraph: {
-    title: "Free Things Malaysia: events and student resources",
+    title: TITLE,
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "Free Things Malaysia",
+    siteName: "Students Repo",
     images: [{ url: "/icon.png", width: 512, height: 512 }],
     locale: "en_MY",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Free Things Malaysia: events and student resources",
+    title: TITLE,
     description: DESCRIPTION,
     images: ["/icon.png"],
   },
@@ -53,8 +54,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#faf6ec" },
-    { media: "(prefers-color-scheme: dark)", color: "#161412" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f6fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0c14" },
   ],
 };
 
@@ -74,8 +75,9 @@ export default function RootLayout({
         )}
       >
         <Providers>
+          <div className="aurora" aria-hidden />
           <SiteHeader />
-          <div className="pb-20 md:pb-0">
+          <div className="pb-24 md:pb-0">
             {children}
             <Footer />
           </div>

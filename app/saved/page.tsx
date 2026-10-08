@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { SavedView } from "@/components/saved-view";
 
 export const metadata: Metadata = {
-  title: "Saved · Free Things Malaysia",
-  description: "Everything you saved: events, scholarships and internships.",
+  title: "My tracker · Students Repo",
+  description: "Everything you are tracking: events, applications and deadlines.",
 };
 
 export default function SavedPage() {

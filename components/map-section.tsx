@@ -23,20 +23,20 @@ export function MapSection({ events }: { events: Event[] }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5 }}
-      className="page-shell pb-12 sm:pb-16"
+      className="pb-12 sm:pb-16"
     >
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 font-display text-lg font-bold tracking-tight">
-          <span className="flex size-7 items-center justify-center rounded-lg border border-border bg-accent text-accent-foreground shadow-brutal-sm">
+          <span className="flex size-7 items-center justify-center rounded-lg bg-gradient-to-br from-brand to-brand-2 text-white">
             <MapPin className="size-4" />
           </span>
           Event map
         </h2>
-        <p className="font-mono text-xs text-muted-foreground">
+        <p className="text-xs text-muted-foreground">
           {located.length}/{events.length} mapped
         </p>
       </div>
-      <div className="h-[55vh] min-h-[360px] overflow-hidden rounded-2xl border border-border shadow-brutal md:h-[62vh]">
+      <div className="h-[55vh] min-h-[360px] overflow-hidden rounded-3xl border border-border md:h-[62vh]">
         <EventMap events={events} />
       </div>
     </motion.section>

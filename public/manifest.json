@@ -1,11 +1,11 @@
 {
-  "name": "Free Events Malaysia — tech, startups & careers",
-  "short_name": "Free Events",
-  "description": "Free events across Malaysia for students, fresh graduates and the wider community.",
+  "name": "Students Repo",
+  "short_name": "Students Repo",
+  "description": "Free events, scholarships and internships for students in Malaysia, with a personal tracker.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f7f3e9",
-  "theme_color": "#ffd02f",
+  "background_color": "#0b0c14",
+  "theme_color": "#7c5cf0",
   "icons": [
     {
       "src": "/icon.png",

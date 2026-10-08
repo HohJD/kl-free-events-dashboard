@@ -1,34 +1,32 @@
 "use client";
 
-import { Heart } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { BookmarkCheck, BookmarkPlus } from "lucide-react";
 import type { SavedEntry } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 
-/** Heart toggle used by every section; `entry` is what the Saved page shows. */
-export function SaveButton({ entry, saved, onToggle, className, floating = false }: {
+/** "Track" toggle: adds the thing to the visitor's tracker. */
+export function SaveButton({ entry, saved, onToggle, className }: {
   entry: Omit<SavedEntry, "savedAt">;
   saved: boolean;
   onToggle: (entry: Omit<SavedEntry, "savedAt">) => void;
   className?: string;
-  floating?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={(event) => { event.preventDefault(); event.stopPropagation(); onToggle(entry); }}
       aria-pressed={saved}
-      aria-label={saved ? `Remove ${entry.title} from saved` : `Save ${entry.title}`}
-      title={saved ? "Saved" : "Save for later"}
-      className={cn(
-        "flex size-11 items-center justify-center rounded-full transition-transform active:scale-95",
-        floating ? "shadow-sm" : "hover:bg-muted",
-        floating && (saved ? "bg-foreground text-background" : "bg-white/90 text-black hover:bg-white"),
-        !floating && saved && "text-foreground",
-        !floating && !saved && "text-muted-foreground hover:text-foreground",
-        className,
-      )}
+      aria-label={saved ? `Stop tracking ${entry.title}` : `Track ${entry.title}`}
+      className={cn("btn relative overflow-hidden", saved ? "bg-accent text-accent-foreground" : "btn-quiet", className)}
     >
-      <Heart className={cn("size-4", saved && "fill-current")} aria-hidden />
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span key={saved ? "on" : "off"} className="flex items-center gap-1.5"
+          initial={{ y: 14, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -14, opacity: 0 }} transition={{ duration: 0.18 }}>
+          {saved ? <BookmarkCheck className="size-4" aria-hidden /> : <BookmarkPlus className="size-4" aria-hidden />}
+          <span className="max-[359px]:sr-only">{saved ? "Tracking" : "Track"}</span>
+        </motion.span>
+      </AnimatePresence>
     </button>
   );
 }

@@ -4,6 +4,9 @@ import { useCallback, useSyncExternalStore } from "react";
 
 export type SavedKind = "event" | "resource";
 
+/** Where a tracked thing is in the student's own pipeline. */
+export type TrackStatus = "interested" | "applied" | "done";
+
 export interface SavedEntry {
   id: string;
   kind: SavedKind;
@@ -15,6 +18,15 @@ export interface SavedEntry {
   /** Section page to reopen it in context, when different from href. */
   section?: string;
   savedAt: string;
+  status?: TrackStatus;
+  /** YYYY-MM-DD: the day it happens, or the day applications close. */
+  date?: string;
+  endDate?: string;
+  time?: string;
+  isDeadline?: boolean;
+  place?: string;
+  /** Opportunity kind label, e.g. "Scholarship". */
+  label?: string;
 }
 
 const KEY = "free-things-saved-v1";
@@ -75,8 +87,18 @@ export function useSaved() {
       : [{ ...entry, savedAt: new Date().toISOString() }, ...current]);
   }, []);
   const remove = useCallback((id: string) => publish(read().filter((row) => row.id !== id)), []);
-  return { saved, ids: new Set(saved.map((row) => row.id)), toggle, remove, loaded: entries !== null };
+  const setStatus = useCallback((id: string, status: TrackStatus) =>
+    publish(read().map((row) => (row.id === id ? { ...row, status } : row))), []);
+  return { saved, ids: new Set(saved.map((row) => row.id)), toggle, remove, setStatus, loaded: entries !== null };
 }
+
+export const STATUS_LABELS: Record<TrackStatus, { title: string; hint: string }> = {
+  interested: { title: "Interested", hint: "Saved for later" },
+  applied: { title: "Applied / going", hint: "Registered or applied" },
+  done: { title: "Done", hint: "Attended or wrapped up" },
+};
+
+export const statusOf = (row: SavedEntry): TrackStatus => row.status ?? "interested";
 
 export const SAVED_LABELS: Record<SavedKind, string> = {
   event: "Events",

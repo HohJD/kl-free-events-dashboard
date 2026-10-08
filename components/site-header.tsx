@@ -2,35 +2,64 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Heart, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 import { ThemeToggle } from "./theme-toggle";
-import { SITE_NAME } from "@/lib/site";
-import { useSaved } from "@/lib/use-saved";
+import { SECTIONS, SITE_NAME, activeSection } from "@/lib/site";
+import { statusOf, useSaved } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 
-/** Sticky header with home link, saved list and theme toggle. */
+function Logo() {
+  return (
+    <span className="relative flex size-8 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-brand to-brand-2 font-display text-sm font-extrabold text-white">
+      SR
+    </span>
+  );
+}
+
+/** Sticky header on every page, plus a floating tab bar on phones. */
 export function SiteHeader() {
   const pathname = usePathname() ?? "/";
+  const active = activeSection(pathname);
   const { saved } = useSaved();
+  const open = saved.filter((row) => statusOf(row) !== "done").length;
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-border/50 bg-background/95 backdrop-blur-sm">
-      <div className="page-shell flex h-16 items-center gap-3">
-        <Link href="/" className="flex min-w-0 items-center gap-2.5" aria-label={`${SITE_NAME} home`}>
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-border bg-accent text-accent-foreground shadow-brutal-sm">
-            <Sparkles className="size-4" strokeWidth={2.25} />
-          </span>
-          <span className="truncate font-display text-lg font-bold tracking-tight">{SITE_NAME}</span>
-        </Link>
-        <div className="ml-auto flex items-center gap-0.5">
-          <Link href="/saved" aria-current={pathname === "/saved" ? "page" : undefined} aria-label={`Saved${saved.length ? `, ${saved.length} item${saved.length === 1 ? "" : "s"}` : ""}`}
-            className={cn("relative flex size-11 items-center justify-center rounded-xl transition-colors",
-              pathname === "/saved" ? "bg-accent text-accent-foreground shadow-brutal-sm" : "text-muted-foreground hover:bg-muted hover:text-foreground")}>
-            <Heart className={cn("size-4", saved.length && "fill-current")} aria-hidden />
-            {saved.length ? <span className="absolute -right-0.5 -top-0.5 flex size-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">{saved.length}</span> : null}
+    <>
+      <header className="sticky top-0 z-40 w-full border-b border-border/60 bg-background/70 backdrop-blur-xl">
+        <div className="page-shell flex h-16 items-center gap-3">
+          <Link href="/" className="flex min-w-0 items-center gap-2.5" aria-label={`${SITE_NAME} home`}>
+            <Logo />
+            <span className="truncate font-display text-lg font-extrabold tracking-tight">{SITE_NAME}</span>
           </Link>
-          <ThemeToggle />
+          <nav aria-label="Sections" className="ml-auto hidden items-center gap-1 rounded-2xl border border-border/70 bg-card/60 p-1 md:flex">
+            {SECTIONS.map(({ href, label, icon: Icon }) => (
+              <Link key={href} href={href} aria-current={active === href ? "page" : undefined}
+                className={cn("relative flex h-9 items-center gap-2 rounded-xl px-3.5 text-sm font-semibold transition-colors",
+                  active === href ? "text-background" : "text-muted-foreground hover:text-foreground")}>
+                {active === href ? <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-xl bg-foreground" transition={{ type: "spring", bounce: 0.2, duration: 0.45 }} /> : null}
+                <Icon className="relative size-4" aria-hidden />
+                <span className="relative">{label}</span>
+                {href === "/saved" && open ? <span className="relative rounded-full bg-accent px-1.5 text-[11px] font-bold tabular-nums text-accent-foreground">{open}</span> : null}
+              </Link>
+            ))}
+          </nav>
+          <div className="ml-auto md:ml-0">
+            <ThemeToggle />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      <nav aria-label="Sections" className="site-tabs glass">
+        {SECTIONS.map(({ href, label, icon: Icon }) => (
+          <Link key={href} href={href} aria-current={active === href ? "page" : undefined}
+            className={cn("site-tab", active === href && "site-tab-on")}>
+            {active === href ? <motion.span layoutId="tab-pill" className="absolute inset-0 rounded-xl bg-foreground" transition={{ type: "spring", bounce: 0.2, duration: 0.45 }} /> : null}
+            <Icon className="relative size-[18px]" aria-hidden />
+            <span className="relative">{label}</span>
+            {href === "/saved" && open ? <span className="relative rounded-full bg-accent px-1.5 text-[11px] font-bold tabular-nums text-accent-foreground">{open}</span> : null}
+          </Link>
+        ))}
+      </nav>
+    </>
   );
 }
