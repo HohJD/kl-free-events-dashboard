@@ -60,7 +60,7 @@ export function SavedView() {
   const exportIcs = () => {
     const ics = buildIcs(dated.map((row) => ({ id: row.id, title: row.title, date: row.date!, endDate: row.endDate, time: row.time, place: row.place, link: row.href, isDeadline: row.isDeadline })));
     const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
-    const link = Object.assign(document.createElement("a"), { href: url, download: "students-repo-tracker.ics" });
+    const link = Object.assign(document.createElement("a"), { href: url, download: "student-repo-tracker.ics" });
     document.body.appendChild(link);
     link.click();
     link.remove();

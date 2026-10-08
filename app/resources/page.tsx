@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Redirect } from "@/components/redirect";
 
 export const metadata: Metadata = {
-  title: "Student resources · Students Repo",
+  title: "Student resources · Student Repo by ATH",
   description: "Scholarships, internships, graduate roles and free tools now live with events on one page.",
 };
 

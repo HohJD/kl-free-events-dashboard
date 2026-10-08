@@ -1,6 +1,9 @@
 import { Compass, ListChecks, type LucideIcon } from "lucide-react";
 
-export const SITE_NAME = "Students Repo";
+export const SITE_NAME = "Student Repo";
+export const SITE_BY = "ATH";
+/** Name with its maker, for titles, the footer and the installed app. */
+export const SITE_FULL_NAME = `${SITE_NAME} by ${SITE_BY}`;
 
 export interface Section {
   href: string;

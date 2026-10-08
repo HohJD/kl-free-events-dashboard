@@ -82,7 +82,7 @@ function icsText(value: string): string {
 /** One .ics file for every dated item, with alerts: 3 days before deadlines, 1 day before events. */
 export function buildIcs(items: (Reminder & { id: string })[], now = new Date()): string {
   const stamp = now.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Students Repo//Tracker//EN", "CALSCALE:GREGORIAN", "X-WR-CALNAME:My student tracker"];
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Student Repo by ATH//Tracker//EN", "CALSCALE:GREGORIAN", "X-WR-CALNAME:Student Repo tracker"];
   for (const item of items) {
     if (!validDay(item.date)) continue;
     const end = validDay(item.endDate) && item.endDate! > item.date ? item.endDate! : item.date;

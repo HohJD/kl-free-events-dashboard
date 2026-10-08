@@ -13,7 +13,7 @@ const mono = localFont({ src: "./fonts/GeistMonoVF.woff", weight: "100 900", var
 const SITE_URL = "https://kl-free-events-dashboard.vercel.app";
 const DESCRIPTION =
   "Free events, hackathons, scholarships and internships for students in Malaysia, updated daily. Track what you apply to and get calendar reminders.";
-const TITLE = "Students Repo: your student life, sorted";
+const TITLE = "Student Repo by ATH · Your student life, sorted";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     url: SITE_URL,
-    siteName: "Students Repo",
+    siteName: "Student Repo by ATH",
     images: [{ url: "/icon.png", width: 512, height: 512 }],
     locale: "en_MY",
     type: "website",

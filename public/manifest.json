@@ -1,6 +1,6 @@
 {
-  "name": "Students Repo",
-  "short_name": "Students Repo",
+  "name": "Student Repo by ATH",
+  "short_name": "Student Repo",
   "description": "Free events, scholarships and internships for students in Malaysia, with a personal tracker.",
   "start_url": "/",
   "display": "standalone",

@@ -2,7 +2,7 @@
 
 ## Current product scope (October 8)
 
-- **Students Repo**: a hub for uni students in Malaysia. Two sections, desktop header pill nav and a floating phone tab bar (`components/site-header.tsx`, `lib/site.ts`):
+- **Student Repo by ATH** (`SITE_NAME`/`SITE_BY` in `lib/site.ts`): a hub for uni students in Malaysia. Two sections, desktop header pill nav and a floating phone tab bar (`components/site-header.tsx`, `lib/site.ts`):
   - `/` **Discover**: events, hackathons, scholarships, internships, graduate roles and free tools in one list (`lib/opportunities.ts`). Events are always limited to student-relevant ones (`forStudents` in `lib/event-discovery.ts`: focus categories, minus parent/homeowner/kid listings); there is no "everything" toggle and no source filter. Sticky type tabs + toolbar (search, date, sort, location, tracked-only, list/map); phones move date/location/sort into the Filters sheet. The list renders 24 cards at a time and loads the next page 1600px before the end (one page per approach, observer re-armed only when `limit` changes) so the bottom never jumps; `overscroll-behavior-y: none` stops the iOS bounce wobbling the tab bar. Don't add `content-visibility` to cards: estimated heights made scrolling shaky.
   - `/saved` **My tracker**: tracked items with status Interested → Applied/going → Done, an "Up next" countdown strip, and "Export to calendar" (.ics with alerts, `buildIcs` in `lib/calendar.ts`).
 - Tracking: `lib/use-saved.ts` (localStorage `free-things-saved-v1`, unchanged key so old saves survive) now stores `status`, `date`, `endDate`, `time`, `isDeadline`, `place`, `label`. Tracking from a card shows a toast with "Remind me" (Google Calendar template link via `reminderUrl`, no OAuth).

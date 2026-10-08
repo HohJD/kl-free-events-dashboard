@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Students Repo: monochrome, quiet surfaces, one warm signal colour for urgency */
+    /* Student Repo by ATH: monochrome, quiet surfaces, one warm signal colour for urgency */
     --background: 0 0% 99%;
     --foreground: 240 6% 9%;
     --card: 0 0% 100%;

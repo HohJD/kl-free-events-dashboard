@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "./theme-toggle";
-import { SECTIONS, SITE_NAME, activeSection } from "@/lib/site";
+import { SECTIONS, SITE_BY, SITE_FULL_NAME, SITE_NAME, activeSection } from "@/lib/site";
 import { statusOf, useSaved } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 
@@ -27,9 +27,12 @@ export function SiteHeader() {
     <>
       <header className="z-40 w-full border-b border-border bg-background/85 backdrop-blur-lg backdrop-saturate-150 md:sticky md:top-0">
         <div className="page-shell flex h-14 items-center gap-3 md:h-16">
-          <Link href="/" className="flex min-w-0 items-center gap-2.5" aria-label={`${SITE_NAME} home`}>
+          <Link href="/" className="flex min-w-0 items-center gap-2.5" aria-label={`${SITE_FULL_NAME} home`}>
             <Logo />
-            <span className="truncate text-[15px] font-semibold tracking-tight">{SITE_NAME}</span>
+            <span className="flex min-w-0 items-baseline gap-1.5 whitespace-nowrap">
+              <span className="text-[15px] font-semibold tracking-tight">{SITE_NAME}</span>
+              <span className="text-xs text-muted-foreground">by {SITE_BY}</span>
+            </span>
           </Link>
           <nav aria-label="Sections" className="ml-auto hidden items-center gap-1 md:flex">
             {SECTIONS.map(({ href, label, icon: Icon }) => (

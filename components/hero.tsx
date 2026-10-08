@@ -33,9 +33,9 @@ export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
 
   return (
     <section className="page-shell pb-6 pt-8 sm:pb-10 sm:pt-16">
-      <motion.p {...fade(0)} className="eyebrow flex items-center gap-2">
+      <motion.p {...fade(0)} className="eyebrow flex items-center gap-2 whitespace-nowrap">
         <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />
-        {stats.total.toLocaleString("en-MY")} free opportunities · Updated {updated}
+        <span>{stats.total.toLocaleString("en-MY")} free opportunities<span className="max-[399px]:hidden"> · Updated {updated}</span></span>
       </motion.p>
       <motion.h1 {...fade(0.05)} className="mt-4 text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl md:text-7xl">
         Your student life,<br className="sm:hidden" /> <span className="text-muted-foreground">sorted.</span>
