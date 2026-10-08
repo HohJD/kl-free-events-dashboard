@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useMemo, useSyncExternalStore } from "react";
+import { malaysiaDay } from "./filter-events";
 
 export type SavedKind = "event" | "resource";
 
-/** Where a tracked thing is in the student's own pipeline. */
-export type TrackStatus = "interested" | "applied" | "done";
+/** Where a tracked thing is: saved for later, or signed up on the organiser's page. */
+export type TrackStatus = "interested" | "applied";
 
 export interface SavedEntry {
   id: string;
@@ -38,11 +39,27 @@ let entries: SavedEntry[] | null = null;
 const listeners = new Set<() => void>();
 const EMPTY: SavedEntry[] = [];
 
+/** Still worth keeping: undated things stay; anything whose day or deadline has passed goes. */
+function current(row: SavedEntry, today: string): boolean {
+  // "done" came from an older tracker with a Done column; finished things are cleared too.
+  if ((row.status as string) === "done") return false;
+  if (!row.date) return true;
+  const last = row.endDate && row.endDate > row.date ? row.endDate : row.date;
+  return last >= today;
+}
+
 function load(): SavedEntry[] {
   try {
     const raw = localStorage.getItem(KEY);
     const rows: SavedEntry[] = raw ? JSON.parse(raw) : [];
-    if (Array.isArray(rows) && rows.length) return rows.filter((row) => row && row.id && row.kind);
+    if (Array.isArray(rows) && rows.length) {
+      const today = malaysiaDay();
+      const valid = rows.filter((row) => row && row.id && row.kind);
+      const kept = valid.filter((row) => current(row, today));
+      // No database: the browser copy tidies itself, so past events don't pile up.
+      if (kept.length !== rows.length) localStorage.setItem(KEY, JSON.stringify(kept));
+      return kept;
+    }
     // One-time migration of events saved before the Saved page existed.
     const legacy = localStorage.getItem(LEGACY_EVENTS_KEY);
     const links: string[] = legacy ? JSON.parse(legacy) : [];
@@ -97,7 +114,6 @@ export function useSaved() {
 export const STATUS_LABELS: Record<TrackStatus, { title: string; hint: string }> = {
   interested: { title: "Saved", hint: "Not signed up yet" },
   applied: { title: "Signed up", hint: "Opened the registration or application" },
-  done: { title: "Done", hint: "Attended or wrapped up" },
 };
 
 export const statusOf = (row: SavedEntry): TrackStatus => row.status ?? "interested";

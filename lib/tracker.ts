@@ -1,5 +1,4 @@
 import type { SavedEntry } from "./use-saved";
-import { statusOf } from "./use-saved";
 
 /** Whole days from `today` to `date` (both YYYY-MM-DD); negative when past. */
 export function daysUntil(date: string, today: string): number {
@@ -8,10 +7,10 @@ export function daysUntil(date: string, today: string): number {
 
 const lastDay = (row: SavedEntry) => (row.endDate && row.date && row.endDate > row.date ? row.endDate : row.date!);
 
-/** The soonest dated thing still ahead (or happening today) that isn't done. */
+/** The soonest dated thing still ahead (or happening today). */
 export function nextUp(rows: SavedEntry[], today: string): SavedEntry | null {
   return rows
-    .filter((row) => row.date && statusOf(row) !== "done" && lastDay(row) >= today)
+    .filter((row) => row.date && lastDay(row) >= today)
     .sort((a, b) => a.date!.localeCompare(b.date!))[0] ?? null;
 }
 

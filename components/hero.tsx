@@ -26,7 +26,7 @@ export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
   const updated = stats.generatedAt.toLocaleString("en-MY", {
     day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur",
   });
-  const active = saved.filter((row) => statusOf(row) !== "done");
+  const active = saved;
   const applied = saved.filter((row) => statusOf(row) === "applied").length;
   const next = nextUp(saved, today);
   const nextDays = next ? daysUntil(next.date!, today) : null;

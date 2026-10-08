@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "./theme-toggle";
 import { SECTIONS, SITE_BY, SITE_FULL_NAME, SITE_NAME, activeSection } from "@/lib/site";
-import { statusOf, useSaved } from "@/lib/use-saved";
+import { useSaved } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 
 function Logo() {
@@ -21,7 +21,7 @@ export function SiteHeader() {
   const pathname = usePathname() ?? "/";
   const active = activeSection(pathname);
   const { saved } = useSaved();
-  const open = saved.filter((row) => statusOf(row) !== "done").length;
+  const open = saved.length;
 
   return (
     <>

@@ -10,8 +10,7 @@ import { countdown, daysUntil } from "@/lib/tracker";
 import { STATUS_LABELS, statusOf, useSaved, type SavedEntry, type TrackStatus } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 
-const ORDER: TrackStatus[] = ["interested", "applied", "done"];
-const CHEERS = ["Nice one.", "Done and dusted.", "One less thing.", "Look at you go."];
+const ORDER: TrackStatus[] = ["interested", "applied"];
 const spring = { type: "spring", bounce: 0, duration: 0.35 } as const;
 
 /** What signing up is called on the organiser's side. */
@@ -23,32 +22,9 @@ function signUpLabel(row: SavedEntry): string {
 const calendarFor = (row: SavedEntry) =>
   row.date ? reminderUrl({ title: row.title, date: row.date, endDate: row.endDate, time: row.time, place: row.place, link: row.href, isDeadline: row.isDeadline }) : null;
 
-function Ring({ value, total }: { value: number; total: number }) {
-  const r = 26;
-  const c = 2 * Math.PI * r;
-  const share = total ? value / total : 0;
-  return (
-    <div className="relative size-[68px] shrink-0">
-      <svg viewBox="0 0 64 64" className="size-full -rotate-90">
-        <circle cx="32" cy="32" r={r} fill="none" stroke="hsl(var(--muted))" strokeWidth="5" />
-        <motion.circle cx="32" cy="32" r={r} fill="none" stroke="hsl(var(--primary))" strokeWidth="5" strokeLinecap="round"
-          strokeDasharray={c} initial={{ strokeDashoffset: c }} animate={{ strokeDashoffset: c * (1 - share) }} transition={{ duration: 0.8, ease: "easeOut" }} />
-      </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-sm font-semibold tabular-nums">{Math.round(share * 100)}%</span>
-    </div>
-  );
-}
-
 export function SavedView() {
   const { saved, remove, setStatus, loaded } = useSaved();
   const [tab, setTab] = useState<TrackStatus>("interested");
-  const [cheer, setCheer] = useState<string | null>(null);
-  const move = (row: SavedEntry, to: TrackStatus) => {
-    setStatus(row.id, to);
-    if (to !== "done") return;
-    setCheer(CHEERS[Math.floor(Math.random() * CHEERS.length)]);
-    window.setTimeout(() => setCheer(null), 2200);
-  };
   const [today, setToday] = useState("");
   useEffect(() => setToday(malaysiaDay()), []);
 
@@ -57,11 +33,8 @@ export function SavedView() {
   const rows = saved
     .filter((row) => statusOf(row) === tab)
     .sort((a, b) => (a.date || "9999").localeCompare(b.date || "9999"));
-  const upNext = today
-    ? saved.filter((row) => row.date && statusOf(row) !== "done" && daysUntil(row.endDate && row.endDate > row.date ? row.endDate : row.date, today) >= 0)
-      .sort((a, b) => a.date!.localeCompare(b.date!)).slice(0, 6)
-    : [];
-  const dated = saved.filter((row) => row.date && statusOf(row) !== "done");
+  const dated = saved.filter((row) => row.date);
+  const upNext = today ? [...dated].sort((a, b) => a.date!.localeCompare(b.date!)).slice(0, 6) : [];
 
   const exportIcs = () => {
     const ics = buildIcs(dated.map((row) => ({ id: row.id, title: row.title, date: row.date!, endDate: row.endDate, time: row.time, place: row.place, link: row.href, isDeadline: row.isDeadline })));
@@ -75,13 +48,8 @@ export function SavedView() {
 
   return (
     <main className="page-shell pb-16 pt-8 sm:pt-12">
-      <div className="flex items-start justify-between gap-4">
-        <div className="min-w-0">
-          <h1 className="page-title">My tracker</h1>
-          <p className="page-sub">Save it, sign up on the organiser&apos;s page, tick it off. Kept on this device, no account needed.</p>
-        </div>
-        {loaded && saved.length ? <Ring value={counts.done} total={saved.length} /> : null}
-      </div>
+      <h1 className="page-title">My tracker</h1>
+      <p className="page-sub">Save it, then sign up on the organiser&apos;s page. Past events and closed deadlines clear themselves. Kept on this device, no account needed.</p>
 
       {!loaded ? null : !saved.length ? (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
@@ -96,11 +64,9 @@ export function SavedView() {
             <section aria-labelledby="up-next" className="mt-8">
               <div className="mb-3 flex items-center justify-between gap-3">
                 <h2 id="up-next" className="eyebrow">Up next</h2>
-                {dated.length ? (
-                  <button type="button" onClick={exportIcs} className="btn btn-quiet">
-                    <Download className="size-4" aria-hidden /> Export to calendar
-                  </button>
-                ) : null}
+                <button type="button" onClick={exportIcs} className="btn btn-quiet">
+                  <Download className="size-4" aria-hidden /> Export to calendar
+                </button>
               </div>
               <div className="no-scrollbar -mx-4 flex snap-x scroll-px-4 gap-2.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
                 {upNext.map((row, index) => {
@@ -109,10 +75,8 @@ export function SavedView() {
                     <motion.a key={row.id} href={row.href} target="_blank" rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}
                       className={cn("card flex w-[210px] shrink-0 snap-start flex-col p-4", index === 0 && "border-primary bg-primary text-primary-foreground")}>
-                      <p className="text-3xl font-semibold tabular-nums tracking-tight">
-                        {days <= 0 ? "Now" : `${days}d`}
-                      </p>
-                      <p className={cn("mt-1 text-[11px] font-medium uppercase tracking-[0.08em]", index === 0 ? "text-primary-foreground/80" : "text-muted-foreground")}>
+                      <p className="text-3xl font-semibold tabular-nums tracking-tight">{days <= 0 ? "Now" : `${days}d`}</p>
+                      <p className={cn("mt-1 text-[11px] font-medium uppercase tracking-[0.08em]", index === 0 ? "text-primary-foreground/70" : "text-muted-foreground")}>
                         {row.isDeadline ? "Deadline" : new Date(`${row.date}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })}
                       </p>
                       <p className="mt-3 line-clamp-2 text-sm font-medium leading-snug">{row.title}</p>
@@ -123,7 +87,7 @@ export function SavedView() {
             </section>
           ) : null}
 
-          <div role="tablist" aria-label="Status" className="mt-8 grid grid-cols-3 gap-1 rounded-full bg-muted p-1">
+          <div role="tablist" aria-label="Status" className="mt-8 grid grid-cols-2 gap-1 rounded-full bg-muted p-1 sm:max-w-sm">
             {ORDER.map((status) => (
               <button key={status} role="tab" type="button" aria-selected={tab === status} onClick={() => setTab(status)}
                 className={cn("relative flex min-h-10 items-center justify-center gap-1.5 rounded-full px-2 text-sm font-medium transition-colors",
@@ -135,15 +99,15 @@ export function SavedView() {
             ))}
           </div>
 
-          <ul className="mt-4 grid gap-2.5 lg:grid-cols-2" role="tabpanel">
+          {/* Keyed by tab: switching tabs swaps the list instantly; only a card you move or remove animates out. */}
+          <ul key={tab} className="mt-4 grid gap-2.5 lg:grid-cols-2" role="tabpanel">
             <AnimatePresence initial={false} mode="popLayout">
               {rows.map((row) => {
                 const timer = today ? countdown(row, today) : null;
-                const status = statusOf(row);
                 const calendar = calendarFor(row);
                 return (
                   <motion.li key={row.id} layout initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, x: status === "done" ? -40 : 40, transition: { duration: 0.2 } }} transition={spring}
+                    exit={{ opacity: 0, x: tab === "interested" ? 40 : -40, transition: { duration: 0.2 } }} transition={spring}
                     className="card flex flex-col p-4">
                     <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       {row.label ? <span>{row.label}</span> : null}
@@ -154,22 +118,21 @@ export function SavedView() {
                       className="mt-1 line-clamp-2 break-words text-[15px] font-semibold leading-snug tracking-tight underline-offset-4 hover:underline">{row.title}</a>
                     {row.note ? <p className="mt-0.5 line-clamp-1 text-[13px] text-muted-foreground">{row.note}</p> : null}
                     <div className="mt-auto flex items-center gap-1 pt-3">
-                      {status === "interested" ? (
+                      {tab === "interested" ? (
                         // Signing up happens on the organiser's page; opening it moves the card to "Signed up".
-                        <a href={row.href} target="_blank" rel="noopener noreferrer" onClick={() => move(row, "applied")} className="btn btn-primary">
+                        <a href={row.href} target="_blank" rel="noopener noreferrer" onClick={() => setStatus(row.id, "applied")} className="btn btn-primary">
                           {signUpLabel(row)} <ArrowUpRight className="size-4" aria-hidden />
                         </a>
-                      ) : status === "applied" ? (
-                        <>
-                          <button type="button" onClick={() => move(row, "done")} className="btn btn-primary">Done</button>
-                          <button type="button" onClick={() => move(row, "interested")} className="btn text-muted-foreground hover:text-foreground">Not yet</button>
-                        </>
                       ) : (
-                        <button type="button" onClick={() => move(row, "applied")} className="btn btn-quiet">Undo
-                        </button>
+                        <>
+                          <a href={row.href} target="_blank" rel="noopener noreferrer" className="btn btn-quiet">
+                            Open <ArrowUpRight className="size-4" aria-hidden />
+                          </a>
+                          <button type="button" onClick={() => setStatus(row.id, "interested")} className="btn text-muted-foreground hover:text-foreground">Not yet</button>
+                        </>
                       )}
                       <span className="ml-auto flex items-center">
-                        {calendar && statusOf(row) !== "done" ? (
+                        {calendar ? (
                           <a href={calendar} target="_blank" rel="noopener noreferrer" aria-label="Add to Google Calendar" title="Add to Google Calendar" className="icon-btn">
                             <CalendarPlus className="size-[18px]" aria-hidden />
                           </a>
@@ -186,27 +149,13 @@ export function SavedView() {
           </ul>
           {!rows.length ? (
             <p className="mt-6 rounded-3xl border border-dashed border-border bg-card px-4 py-10 text-center text-sm text-muted-foreground">
-              {tab === "interested" ? <>Nothing waiting. <Link href="/" className="font-medium text-foreground underline underline-offset-4">Find something new</Link></>
-                : tab === "applied" ? "Tap Register or Apply on a saved item and it moves here."
-                : "Finished things land here. You got this 💪"}
+              {tab === "interested"
+                ? <>Nothing waiting. <Link href="/" className="font-medium text-foreground underline underline-offset-4">Find something new</Link></>
+                : "Tap Register or Apply on a saved item and it moves here."}
             </p>
-          ) : null}
-          {!upNext.length && dated.length ? (
-            <div className="mt-6 flex justify-center">
-              <button type="button" onClick={exportIcs} className="btn btn-quiet btn-lg"><Download className="size-4" aria-hidden /> Export to calendar</button>
-            </div>
           ) : null}
         </>
       )}
-      <AnimatePresence>
-        {cheer ? (
-          <motion.div role="status" initial={{ opacity: 0, y: 20, scale: 0.8 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.9 }}
-            transition={{ type: "spring", bounce: 0.5, duration: 0.45 }}
-            className="toast fixed inset-x-0 z-[55] mx-auto w-fit rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-xl">
-            {cheer}
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
     </main>
   );
 }

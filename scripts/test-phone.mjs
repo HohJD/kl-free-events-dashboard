@@ -86,18 +86,34 @@ try {
       await noOverflow('scrolled');
       await page.screenshot({ path: join(output, `phone-home-${width}-${theme}.png`) });
 
-      // Tracker: tab bar navigation, status moves, tabs, then a cold reload with saved data.
-      await page.getByRole('navigation', { name: 'Sections' }).last().getByRole('link', { name: /My tracker/ }).click();
+      // Tracker: no database, so the browser copy cleans itself. Seed a past event and an old "done" item; both must vanish.
+      await page.evaluate(() => {
+        const rows = JSON.parse(localStorage.getItem('free-things-saved-v1') || '[]');
+        rows.push({ id: 'past-event', kind: 'event', title: 'Past event', href: 'https://example.com/past', savedAt: '', date: '2020-01-01', label: 'Event' });
+        rows.push({ id: 'old-done', kind: 'resource', title: 'Old done item', href: 'https://example.com/done', savedAt: '', status: 'done' });
+        localStorage.setItem('free-things-saved-v1', JSON.stringify(rows));
+      });
+      // A returning visit: open the tracker fresh, like a student coming back days later.
+      await page.goto(`${base}/saved`);
       await page.getByRole('heading', { name: 'My tracker' }).waitFor();
-      assert.equal(await page.locator('[role=tabpanel] > li').count(), 2, 'tracked items listed');
+      await page.locator('[role=tabpanel] > li').first().waitFor();
+      assert.equal(await page.getByRole('tab').count(), 2, 'Saved and Signed up tabs only');
+      assert.equal(await page.locator('[role=tabpanel] > li').count(), 2, 'tracked items listed, expired ones cleared');
+      assert.equal(await page.locator('[role=tabpanel] > li', { hasText: /Past event|Old done item/ }).count(), 0, 'expired and done items removed');
+      assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('free-things-saved-v1')).length), 2, 'storage pruned');
       // Register/Apply opens the organiser's page in a new tab and moves the card to "Signed up".
       const [popup] = await Promise.all([page.waitForEvent('popup'), page.locator('[role=tabpanel] > li').first().getByRole('link', { name: /^(Register|Apply|Get it)/ }).click()]);
       await popup.close();
       await page.getByRole('tab', { name: /Signed up/ }).click();
-      await page.locator('[role=tabpanel] > li').first().getByRole('button', { name: 'Done' }).click();
-      await page.getByRole('tab', { name: /Done/ }).click();
-      assert.equal(await page.locator('[role=tabpanel] > li').count(), 1, 'done item listed');
+      assert.equal(await page.locator('[role=tabpanel] > li').count(), 1, 'signed-up item listed');
+      await page.locator('[role=tabpanel] > li').first().getByRole('button', { name: 'Not yet' }).click();
+      await page.getByRole('tab', { name: /Saved/ }).click();
+      assert.equal(await page.locator('[role=tabpanel] > li').count(), 2, 'moved back to Saved');
       await noOverflow('tracker');
+      await page.getByRole('navigation', { name: 'Sections' }).last().getByRole('link', { name: /Discover/ }).click();
+      await page.getByRole('textbox', { name: 'Search listings' }).waitFor();
+      await page.getByRole('navigation', { name: 'Sections' }).last().getByRole('link', { name: /My tracker/ }).click();
+      await page.getByRole('heading', { name: 'My tracker' }).waitFor();
       await page.reload();
       await page.getByRole('heading', { name: 'My tracker' }).waitFor();
       await page.waitForTimeout(500);
