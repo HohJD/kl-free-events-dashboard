@@ -18,7 +18,7 @@ export function SaveButton({ entry, saved, onToggle, className }: {
       onClick={(event) => { event.preventDefault(); event.stopPropagation(); onToggle(entry); }}
       aria-pressed={saved}
       aria-label={saved ? `Stop tracking ${entry.title}` : `Track ${entry.title}`}
-      className={cn("btn relative overflow-hidden", saved ? "bg-accent text-accent-foreground" : "btn-quiet", className)}
+      className={cn("btn relative overflow-hidden", saved ? "border border-foreground bg-foreground text-background" : "btn-quiet", className)}
     >
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span key={saved ? "on" : "off"} className="flex items-center gap-1.5"

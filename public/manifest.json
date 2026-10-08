@@ -4,8 +4,8 @@
   "description": "Free events, scholarships and internships for students in Malaysia, with a personal tracker.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b0c14",
-  "theme_color": "#7c5cf0",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
   "icons": [
     {
       "src": "/icon.png",

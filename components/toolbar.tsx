@@ -69,9 +69,9 @@ export function Toolbar({
   return (
     <div className="page-shell flex items-center gap-2 pb-3 md:flex-wrap">
       <div className="relative min-w-0 flex-1 basis-0 md:basis-56">
-        <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
+        <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
         <input ref={searchRef} enterKeyHint="search" value={query} onChange={(event) => setQuery(event.target.value)} aria-label="Search listings"
-          placeholder="Search" className="field pl-11 pr-3" />
+          placeholder="Search" className="field pl-10 pr-3" />
       </div>
 
       <div className="hidden items-center gap-2 md:flex">
@@ -79,25 +79,25 @@ export function Toolbar({
         <Select label="Sort" value={sort} onChange={setSort} options={SORT_OPTIONS} />
         <Select label="Location" value={region} onChange={setRegion} options={regionOptions} counts={regionCounts} />
         <button type="button" onClick={() => setShowSaved(!showSaved)} aria-pressed={showSaved} aria-label="Tracked only"
-          className={cn("flex h-11 items-center gap-2 rounded-2xl border px-3.5 text-sm font-medium transition-colors",
-            showSaved ? "border-transparent bg-accent text-accent-foreground" : "border-border bg-card/80 text-muted-foreground hover:text-foreground")}>
+          className={cn("flex h-11 items-center gap-2 rounded-xl border px-3.5 text-sm font-medium transition-colors",
+            showSaved ? "border-foreground bg-foreground text-background" : "border-border bg-card text-muted-foreground hover:text-foreground")}>
           <BookmarkCheck className="size-4" aria-hidden /> {savedCount || ""}
         </button>
       </div>
 
       <button type="button" onClick={onOpenSheet} aria-label={`Filters${sheetCount ? `, ${sheetCount} active` : ""}`}
-        className="flex h-12 shrink-0 items-center gap-1.5 rounded-2xl border border-border bg-card/80 px-3.5 text-sm font-semibold active:scale-[.97] md:hidden">
+        className="flex h-11 shrink-0 items-center gap-1.5 rounded-xl border border-border bg-card px-3.5 text-sm font-medium active:scale-[.97] md:hidden">
         <SlidersHorizontal className="size-4" aria-hidden /> Filters
-        {sheetCount ? <span className="flex size-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-accent-foreground">{sheetCount}</span> : null}
+        {sheetCount ? <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-[11px] font-medium text-background">{sheetCount}</span> : null}
       </button>
 
       {canMap ? (
-        <div className="flex h-12 shrink-0 items-center rounded-2xl border border-border bg-card/80 p-1 md:h-11">
+        <div className="flex h-11 shrink-0 items-center rounded-xl border border-border bg-card p-1">
           {([["list", LayoutGrid, "List view"], ["map", Map, "Map view"]] as const).map(([value, Icon, label]) => (
             <button key={value} type="button" onClick={() => setView(value)} aria-pressed={view === value} aria-label={label}
-              className={cn("relative flex h-full items-center gap-1.5 rounded-xl px-2.5 text-sm font-medium transition-colors sm:px-3",
+              className={cn("relative flex h-full items-center gap-1.5 rounded-lg px-2.5 text-sm font-medium transition-colors sm:px-3",
                 view === value ? "text-background" : "text-muted-foreground hover:text-foreground")}>
-              {view === value ? <motion.span layoutId="view-pill" className="absolute inset-0 rounded-xl bg-foreground" transition={{ type: "spring", bounce: 0.2, duration: 0.4 }} /> : null}
+              {view === value ? <motion.span layoutId="view-pill" className="absolute inset-0 rounded-lg bg-foreground" transition={{ type: "spring", bounce: 0, duration: 0.3 }} /> : null}
               <Icon className="relative size-4" aria-hidden /><span className="relative hidden sm:inline">{label.split(" ")[0]}</span>
             </button>
           ))}

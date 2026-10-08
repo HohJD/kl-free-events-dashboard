@@ -36,7 +36,7 @@ interface FilterSheetProps {
 
 function Option({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button type="button" onClick={onClick} aria-pressed={active} className={cn("chip border border-border/70", active && "chip-on border-transparent")}>{children}</button>
+    <button type="button" onClick={onClick} aria-pressed={active} className={cn("chip border border-border", active && "chip-on border-foreground")}>{children}</button>
   );
 }
 
@@ -54,16 +54,16 @@ export function FilterSheet(props: FilterSheetProps) {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true" aria-labelledby="filter-title">
-      <button type="button" className="absolute inset-0 bg-black/50 backdrop-blur-sm" aria-label="Close filters" onClick={onClose} />
-      <div className="sheet absolute inset-x-0 bottom-0 flex max-h-[85vh] flex-col rounded-t-[1.75rem] border-t border-border bg-background shadow-2xl">
+      <button type="button" className="absolute inset-0 bg-black/40" aria-label="Close filters" onClick={onClose} />
+      <div className="sheet absolute inset-x-0 bottom-0 flex max-h-[85vh] flex-col rounded-t-3xl border-t border-border bg-background">
         <span className="mx-auto mt-2.5 h-1.5 w-10 shrink-0 rounded-full bg-muted-foreground/30" aria-hidden />
         <div className="flex items-center justify-between px-4 pb-2 pt-1">
-          <h2 id="filter-title" className="font-display text-xl font-bold">Filters</h2>
+          <h2 id="filter-title" className="text-lg font-semibold tracking-tight">Filters</h2>
           <button type="button" onClick={onClose} aria-label="Close" className="flex size-11 items-center justify-center rounded-xl hover:bg-muted"><X className="size-5" /></button>
         </div>
         <div className="flex-1 space-y-6 overflow-y-auto px-4 py-4">
           <section>
-            <h3 className="mb-2 text-sm font-semibold">When</h3>
+            <h3 className="eyebrow mb-2.5">When</h3>
             <div className="flex flex-wrap gap-2">
               {([["upcoming", "Any time"], ["today", "Today"], ["tomorrow", "Tomorrow"], ["week", "This week"], ["month", "This month"]] as const).map(([value, label]) => (
                 <Option key={value} active={props.dateRange === value} onClick={() => props.setDateRange(value)}>{label}</Option>
@@ -71,7 +71,7 @@ export function FilterSheet(props: FilterSheetProps) {
             </div>
           </section>
           <section>
-            <h3 className="mb-2 text-sm font-semibold">Location</h3>
+            <h3 className="eyebrow mb-2.5">Location</h3>
             <select value={props.region} onChange={(event) => props.setRegion(event.target.value)} aria-label="Location"
               className="field px-3">
               <option value="all">All of Malaysia</option>
@@ -81,14 +81,14 @@ export function FilterSheet(props: FilterSheetProps) {
             </select>
           </section>
           <section>
-            <h3 className="mb-2 text-sm font-semibold">Sort</h3>
+            <h3 className="eyebrow mb-2.5">Sort</h3>
             <div className="flex flex-wrap gap-2">
               <Option active={props.sort === "recommended"} onClick={() => props.setSort("recommended")}>Top picks</Option>
               <Option active={props.sort === "soonest"} onClick={() => props.setSort("soonest")}>Soonest first</Option>
             </div>
           </section>
           {props.categories.length ? <section>
-            <h3 className="mb-2 text-sm font-semibold">{props.categoryLabel ?? "Category"}</h3>
+            <h3 className="eyebrow mb-2.5">{props.categoryLabel ?? "Category"}</h3>
             <div className="flex flex-wrap gap-2">
               <Option active={props.category === "all"} onClick={() => props.setCategory("all")}>All</Option>
               {props.categories.map((item) => (
@@ -99,7 +99,7 @@ export function FilterSheet(props: FilterSheetProps) {
             </div>
           </section> : null}
           {props.sources.length ? <section>
-            <h3 className="mb-2 text-sm font-semibold">Source</h3>
+            <h3 className="eyebrow mb-2.5">Source</h3>
             <div className="flex flex-wrap gap-2">
               <Option active={props.source === "all"} onClick={() => props.setSource("all")}>All</Option>
               {props.sources.map((item) => (

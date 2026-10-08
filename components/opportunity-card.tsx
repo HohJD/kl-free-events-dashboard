@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useState } from "react";
 import { ArrowUpRight, Briefcase, CalendarDays, CalendarPlus, Check, GraduationCap, Rocket, Share2, Trophy, Wrench } from "lucide-react";
 import { reminderUrl } from "@/lib/calendar";
 import { KIND_LABELS, daysLeft, type Opportunity, type OpportunityKind } from "@/lib/opportunities";
@@ -12,14 +12,6 @@ import { SaveButton } from "./save-button";
 const KIND_ICON: Record<OpportunityKind, typeof Trophy> = {
   event: CalendarDays, hackathon: Trophy, scholarship: GraduationCap, internship: Briefcase, graduate: Rocket, tool: Wrench,
 };
-
-/** One hue per kind, so the grid reads at a glance. */
-export const KIND_HUE: Record<OpportunityKind, number> = {
-  event: 205, hackathon: 262, scholarship: 36, internship: 152, graduate: 330, tool: 186,
-};
-
-export const kindStyle = (kind: OpportunityKind) =>
-  ({ "--kind": `${KIND_HUE[kind]} 85% 58%`, "--kind-h": KIND_HUE[kind] }) as CSSProperties;
 
 function formatDate(value: string): string {
   const stamp = Date.parse(`${value}T00:00:00Z`);
@@ -84,28 +76,29 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
   };
 
   return (
-    <article className="card rise flex h-full flex-col p-4" style={{ ...kindStyle(row.kind), animationDelay: `${Math.min(index, 12) * 35}ms` }}>
+    <article className={cn("card flex h-full flex-col p-4", index < 12 && "rise")} style={index < 12 ? { animationDelay: `${index * 30}ms` } : undefined}>
       <div className="flex items-start gap-3">
         <span className="thumb">
           {row.image ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={row.image} alt="" loading="lazy" className="size-full bg-white object-cover" />
+            <img src={row.image} alt="" loading="lazy" decoding="async" className="size-full bg-white object-cover" />
           ) : (
-            <Icon className="size-5" aria-hidden />
+            <Icon className="size-[18px]" strokeWidth={1.75} aria-hidden />
           )}
         </span>
         <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-1.5">
-            <span className="kind-badge"><Icon className="size-3" aria-hidden />{KIND_LABELS[row.kind].one}</span>
-            <span className={cn("pill", timing.urgent && "pill-hot")}>{timing.text}</span>
-          </div>
-          <h3 className="mt-1.5 line-clamp-2 break-words font-display text-[17px] font-bold leading-snug">{row.title}</h3>
+          <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
+            <span className="shrink-0">{KIND_LABELS[row.kind].one}</span>
+            <span aria-hidden>·</span>
+            <span className={cn("pill truncate", timing.urgent && "pill-hot")}>{timing.text}</span>
+          </p>
+          <h3 className="mt-1 line-clamp-2 break-words text-[15px] font-semibold leading-snug tracking-tight">{row.title}</h3>
         </div>
       </div>
 
       {context || row.value ? (
-        <p className="mt-2 line-clamp-1 break-words text-[13px] text-muted-foreground">
-          {row.value ? <span className="font-semibold text-emerald-700 dark:text-emerald-400">{row.value}</span> : null}
+        <p className="mt-2.5 line-clamp-1 break-words text-[13px] text-muted-foreground">
+          {row.value ? <span className="font-medium text-foreground">{row.value}</span> : null}
           {row.value && context ? " · " : ""}{context}
         </p>
       ) : null}
@@ -119,11 +112,11 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
         <span className="ml-auto flex items-center">
           {calendar ? (
             <a href={calendar} target="_blank" rel="noopener noreferrer" aria-label="Add to Google Calendar" title="Add to Google Calendar" className="icon-btn">
-              <CalendarPlus className="size-[18px]" aria-hidden />
+              <CalendarPlus className="size-[18px]" strokeWidth={1.75} aria-hidden />
             </a>
           ) : null}
           <button type="button" onClick={share} aria-label="Share" title="Share" className="icon-btn">
-            {shared ? <Check className="size-[18px] text-emerald-500" aria-hidden /> : <Share2 className="size-[18px]" aria-hidden />}
+            {shared ? <Check className="size-[18px] text-foreground" aria-hidden /> : <Share2 className="size-[18px]" strokeWidth={1.75} aria-hidden />}
           </button>
         </span>
       </div>

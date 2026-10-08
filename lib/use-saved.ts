@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useSyncExternalStore } from "react";
+import { useCallback, useMemo, useSyncExternalStore } from "react";
 
 export type SavedKind = "event" | "resource";
 
@@ -89,7 +89,9 @@ export function useSaved() {
   const remove = useCallback((id: string) => publish(read().filter((row) => row.id !== id)), []);
   const setStatus = useCallback((id: string, status: TrackStatus) =>
     publish(read().map((row) => (row.id === id ? { ...row, status } : row))), []);
-  return { saved, ids: new Set(saved.map((row) => row.id)), toggle, remove, setStatus, loaded: entries !== null };
+  // Stable while the list is unchanged, so filters keyed on it don't reset on every render.
+  const ids = useMemo(() => new Set(saved.map((row) => row.id)), [saved]);
+  return { saved, ids, toggle, remove, setStatus, loaded: entries !== null };
 }
 
 export const STATUS_LABELS: Record<TrackStatus, { title: string; hint: string }> = {

@@ -6,7 +6,7 @@ import { MotionConfig } from 'framer-motion';
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange={false}>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
       <MotionConfig reducedMotion="user">{children}</MotionConfig>
     </ThemeProvider>
   );

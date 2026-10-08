@@ -19,7 +19,7 @@ import { cn } from "@/lib/utils";
 import { Hero, type HeroStats } from "./hero";
 import { Toolbar, type ViewMode } from "./toolbar";
 import { FilterSheet } from "./filter-sheet";
-import { OpportunityCard, kindStyle } from "./opportunity-card";
+import { OpportunityCard } from "./opportunity-card";
 import { MapSection } from "./map-section";
 import { BackToTop } from "./back-to-top";
 
@@ -90,16 +90,22 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   );
   const shown = useMemo(() => filterOpportunities(inFocus, filters, today), [inFocus, filters, today]);
   // A new filter starts the list from the top again.
-  useEffect(() => setLimit(PAGE), [filters]);
-  // Load the next page just before the visitor reaches the end of the list.
+  useEffect(() => setLimit(PAGE), [kind, query, region, dateRange, sort, source, showSaved]);
+  // Load the next page well before the visitor reaches the end, one page per approach,
+  // so new cards are already laid out off-screen and the bottom of the page never jumps.
   const more = useRef<HTMLDivElement>(null);
+  const hasMore = view === "list" && shown.length > limit;
   useEffect(() => {
     const node = more.current;
-    if (!node || !("IntersectionObserver" in window)) return;
-    const observer = new IntersectionObserver(([entry]) => entry.isIntersecting && setLimit((n) => n + PAGE), { rootMargin: "600px 0px" });
+    if (!hasMore || !node || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      observer.disconnect();
+      setLimit((n) => n + PAGE);
+    }, { rootMargin: "0px 0px 1600px 0px" });
     observer.observe(node);
     return () => observer.disconnect();
-  });
+  }, [hasMore, limit]);
   // Counts ignore the filter they label, so each chip shows what picking it would give.
   const upcoming = useMemo(() => filterOpportunities(inFocus, { ...filters, kind: "all", query: "", source: "all", onlySaved: false }, today), [inFocus, filters, today]);
   const kindCounts = useMemo(() => countByKind(filterOpportunities(inFocus, { ...filters, kind: "all", onlySaved: false }, today)), [inFocus, filters, today]);
@@ -142,16 +148,15 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     <div className="min-h-screen bg-background">
       <main>
         <Hero stats={stats} today={today} />
-        <div className="sticky top-16 z-30 border-b border-transparent bg-background/75 pt-2 backdrop-blur-xl">
-          <nav aria-label="Type" className="no-scrollbar page-shell flex items-center gap-1 overflow-x-auto pb-2">
+        <div className="sticky top-0 z-30 border-b border-border bg-background/85 pt-2 backdrop-blur-lg backdrop-saturate-150 md:top-16">
+          <nav aria-label="Type" className="no-scrollbar fade-x page-shell flex items-center gap-1 overflow-x-auto pb-2">
             {(["all", ...KIND_ORDER.filter((value) => kindCounts[value] || kind === value)] as const).map((value) => {
               const on = kind === value;
               const count = value === "all" ? Object.values(kindCounts).reduce((sum, n) => sum + n, 0) : kindCounts[value] ?? 0;
               return (
                 <button key={value} type="button" onClick={() => chooseKind(value)} aria-pressed={on}
-                  className={cn("chip", on && "font-semibold text-background hover:text-background")} style={value === "all" ? undefined : kindStyle(value)}>
-                  {on ? <motion.span layoutId="kind-pill" className="absolute inset-0 rounded-full bg-foreground" transition={{ type: "spring", bounce: 0.18, duration: 0.45 }} /> : null}
-                  {value !== "all" ? <span className="relative mr-2 size-2 rounded-full" style={{ background: "hsl(var(--kind))" }} aria-hidden /> : null}
+                  className={cn("chip", on && "text-background hover:text-background")}>
+                  {on ? <motion.span layoutId="kind-pill" className="absolute inset-0 rounded-full bg-foreground" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
                   <span className="relative">{value === "all" ? "All" : KIND_LABELS[value].many}</span>
                   <span className="chip-count relative">{count}</span>
                 </button>
@@ -177,8 +182,8 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
           savedCount={savedIds.size} resultCount={shown.length} onClear={clearAll} />
 
         <div className="page-shell pb-16 pt-4">
-          <p className="mb-3 text-xs font-medium text-muted-foreground" aria-live="polite">
-            <span className="font-bold text-foreground">{shown.length}</span> {shown.length === 1 ? "result" : "results"}
+          <p className="mb-3 text-xs text-muted-foreground" aria-live="polite">
+            <span className="font-medium text-foreground">{shown.length}</span> {shown.length === 1 ? "result" : "results"}
           </p>
           {view === "map" && canMap ? (
             <MapSection events={mapEvents} />
@@ -189,15 +194,15 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center rounded-3xl border border-dashed border-border bg-card/50 px-6 py-16 text-center">
-              <h2 className="font-display text-xl font-bold">Nothing matches yet</h2>
+            <div className="flex flex-col items-center rounded-2xl border border-dashed border-border px-6 py-16 text-center">
+              <h2 className="text-lg font-semibold tracking-tight">Nothing matches yet</h2>
               <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
                 Try another type, place or date. Only listings that are confirmed free show up here.
               </p>
               <button type="button" onClick={clearAll} className="btn btn-primary btn-lg mt-5">Clear search and filters</button>
             </div>
           )}
-          {view === "list" && shown.length > limit ? (
+          {hasMore ? (
             <div ref={more} className="mt-6 flex justify-center">
               <button type="button" onClick={() => setLimit((n) => n + PAGE)} className="btn btn-quiet btn-lg">
                 Show more <span className="text-muted-foreground">({shown.length - limit} left)</span>
@@ -211,14 +216,14 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
         {toast ? (
           <motion.div role="status" initial={{ opacity: 0, y: 24, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ type: "spring", bounce: 0.25, duration: 0.4 }}
-            className="toast fixed inset-x-3 z-[55] mx-auto flex max-w-md items-center gap-2 rounded-2xl bg-foreground p-2 pl-4 text-background shadow-2xl">
-            <p className="min-w-0 flex-1 text-sm"><span className="font-semibold">Tracking</span> <span className="line-clamp-1 opacity-70">{toast.title}</span></p>
+            className="toast fixed inset-x-4 z-[55] mx-auto flex max-w-sm items-center gap-2 rounded-2xl bg-foreground p-1.5 pl-4 text-background shadow-xl">
+            <p className="min-w-0 flex-1 text-sm"><span className="font-medium">Tracking</span> <span className="line-clamp-1 opacity-70">{toast.title}</span></p>
             {toast.calendar ? (
-              <a href={toast.calendar} target="_blank" rel="noopener noreferrer" className="btn bg-accent text-accent-foreground">
+              <a href={toast.calendar} target="_blank" rel="noopener noreferrer" className="btn bg-background text-foreground">
                 <CalendarPlus className="size-4" aria-hidden /> Remind me
               </a>
             ) : (
-              <Link href="/saved" className="btn bg-accent text-accent-foreground">Open</Link>
+              <Link href="/saved" className="btn bg-background text-foreground">Open</Link>
             )}
             <button type="button" onClick={() => setToast(null)} aria-label="Dismiss" className="flex size-10 items-center justify-center rounded-xl opacity-70 hover:opacity-100">
               <X className="size-4" aria-hidden />

@@ -1,27 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/footer";
 
-const display = Bricolage_Grotesque({
-  weight: ["600", "700", "800"],
-  subsets: ["latin"],
-  variable: "--font-display",
-});
-
-const body = Instrument_Sans({
-  subsets: ["latin"],
-  variable: "--font-body",
-});
-
-const mono = IBM_Plex_Mono({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
+// Geist for everything: one family, set apart by weight and tracking.
+const sans = localFont({ src: "./fonts/GeistVF.woff", weight: "100 900", variable: "--font-body", display: "swap" });
+const mono = localFont({ src: "./fonts/GeistMonoVF.woff", weight: "100 900", variable: "--font-mono", display: "swap" });
 
 const SITE_URL = "https://kl-free-events-dashboard.vercel.app";
 const DESCRIPTION =
@@ -54,8 +41,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f6fb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0c14" },
+    { media: "(prefers-color-scheme: light)", color: "#fcfcfc" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
   ],
 };
 
@@ -69,13 +56,11 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          display.variable,
-          body.variable,
+          sans.variable,
           mono.variable
         )}
       >
         <Providers>
-          <div className="aurora" aria-hidden />
           <SiteHeader />
           <div className="pb-24 md:pb-0">
             {children}

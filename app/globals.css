@@ -4,57 +4,51 @@
 
 @layer base {
   :root {
-    /* Students Repo: cool ink, electric violet, lime highlights */
-    --background: 228 33% 97%;
-    --foreground: 235 32% 10%;
+    /* Students Repo: monochrome, quiet surfaces, one warm signal colour for urgency */
+    --background: 0 0% 99%;
+    --foreground: 240 6% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 235 32% 10%;
+    --card-foreground: 240 6% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 235 32% 10%;
-    --primary: 235 32% 10%;
+    --popover-foreground: 240 6% 9%;
+    --primary: 240 6% 9%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 230 25% 93%;
-    --secondary-foreground: 235 32% 10%;
-    --muted: 230 25% 93%;
-    --muted-foreground: 232 10% 40%;
-    --accent: 78 92% 52%;
-    --accent-foreground: 235 32% 10%;
-    --brand: 256 82% 60%;
-    --brand-2: 322 85% 58%;
-    --destructive: 0 78% 52%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 9%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 44%;
+    --accent: 240 6% 9%;
+    --accent-foreground: 0 0% 100%;
+    --signal: 24 90% 46%;
+    --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 230 18% 87%;
-    --input: 230 16% 82%;
-    --ring: 256 82% 60%;
-    --shadow: 235 32% 10%;
-    --radius: 1rem;
-    --kind-l: 38%;
-    --kind-s: 72%;
+    --border: 240 6% 91%;
+    --input: 240 5% 86%;
+    --ring: 240 6% 9%;
+    --shadow: 240 6% 9%;
+    --radius: 0.875rem;
   }
 
   .dark {
-    --background: 236 30% 6%;
-    --foreground: 230 30% 96%;
-    --card: 236 24% 10%;
-    --card-foreground: 230 30% 96%;
-    --popover: 236 24% 11%;
-    --popover-foreground: 230 30% 96%;
-    --primary: 230 30% 96%;
-    --primary-foreground: 236 30% 7%;
-    --secondary: 236 20% 15%;
-    --secondary-foreground: 230 30% 96%;
-    --muted: 236 20% 14%;
-    --muted-foreground: 230 12% 66%;
-    --accent: 78 92% 58%;
-    --accent-foreground: 236 30% 7%;
-    --brand: 256 92% 72%;
-    --brand-2: 322 90% 70%;
-    --border: 236 16% 19%;
-    --input: 236 16% 25%;
-    --ring: 256 92% 72%;
-    --shadow: 256 80% 40%;
-    --kind-l: 72%;
-    --kind-s: 85%;
+    --background: 240 5% 4%;
+    --foreground: 0 0% 96%;
+    --card: 240 4% 7%;
+    --card-foreground: 0 0% 96%;
+    --popover: 240 4% 8%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 240 5% 6%;
+    --secondary: 240 4% 12%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 240 4% 11%;
+    --muted-foreground: 240 4% 62%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 240 5% 6%;
+    --signal: 28 95% 62%;
+    --border: 240 4% 14%;
+    --input: 240 4% 20%;
+    --ring: 0 0% 90%;
+    --shadow: 0 0% 0%;
   }
 
   * {
@@ -65,6 +59,9 @@
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
   }
+
+  /* No rubber-band bounce at the ends: on iOS it makes the fixed tab bar wobble. */
+  html, body { overscroll-behavior-y: none; }
 
   body {
     @apply bg-background text-foreground;
@@ -81,87 +78,58 @@
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
 
-  /* Soft aurora behind everything; fixed so it never scrolls or overflows. */
-  .aurora {
-    @apply pointer-events-none fixed inset-0 -z-10 overflow-hidden;
-    background:
-      radial-gradient(60rem 30rem at 10% -10%, hsl(var(--brand) / 0.16), transparent 60%),
-      radial-gradient(40rem 26rem at 95% 0%, hsl(var(--brand-2) / 0.12), transparent 60%),
-      radial-gradient(50rem 30rem at 50% 110%, hsl(var(--accent) / 0.08), transparent 60%);
-  }
-
-  .text-gradient {
-    background: linear-gradient(100deg, hsl(var(--brand)), hsl(var(--brand-2)) 55%, #ff9f43);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
+  /* Header/tab bar surface: the only translucent layers, so scrolling stays cheap. */
   .glass {
-    @apply border border-border/70 bg-card/75 backdrop-blur-xl;
+    @apply border border-border bg-background/85 backdrop-blur-lg backdrop-saturate-150;
   }
 
-  /* Cards: flat at rest, lift and glow in their kind colour on hover. */
+  /* Cards: flat at rest, a hairline darkens on hover. */
   .card {
-    @apply relative min-w-0 rounded-2xl border border-border/70 bg-card;
-    transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms ease, border-color 220ms ease;
+    @apply relative min-w-0 rounded-2xl border border-border bg-card;
+    transition: border-color 200ms ease, box-shadow 200ms ease;
   }
   @media (hover: hover) and (pointer: fine) {
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: hsl(var(--kind, var(--brand)) / 0.5);
-      box-shadow: 0 18px 40px -18px hsl(var(--kind, var(--brand)) / 0.55);
-    }
+    .card:hover { border-color: hsl(var(--foreground) / 0.22); box-shadow: 0 8px 24px -16px hsl(var(--shadow) / 0.25); }
   }
-
-  .rise { animation: rise 420ms cubic-bezier(.2,.8,.2,1) both; }
+  .rise { animation: rise 360ms cubic-bezier(.2,.8,.2,1) both; }
 
   .thumb {
-    @apply flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-xl;
-    background: hsl(var(--kind, var(--brand)) / 0.12);
-    color: hsl(var(--kind-h, 256) var(--kind-s) var(--kind-l));
+    @apply flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted text-muted-foreground;
   }
 
-  .kind-badge {
-    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold;
-    background: hsl(var(--kind) / 0.13);
-    color: hsl(var(--kind-h) var(--kind-s) var(--kind-l));
-  }
+  .eyebrow { @apply text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground; }
 
   .pill {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground;
+    @apply inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground;
   }
-  .pill-hot { @apply bg-orange-500/15 text-orange-700 dark:text-orange-300; }
-  .pill-hot::before {
-    content: ""; @apply size-1.5 rounded-full bg-orange-500;
-    animation: blink 1.6s ease-in-out infinite;
-  }
+  .pill-hot { color: hsl(var(--signal)); }
+  .pill-hot::before { content: ""; @apply size-1.5 rounded-full; background: hsl(var(--signal)); }
 
   .chip {
     @apply relative inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors;
   }
   .chip:hover { @apply text-foreground; }
-  .chip-on { @apply bg-accent font-semibold text-accent-foreground; }
+  .chip-on { @apply bg-foreground font-medium text-background hover:text-background; }
   .chip-count { @apply ml-1.5 text-xs tabular-nums opacity-60; }
 
-  .page-title { @apply font-display text-4xl font-extrabold tracking-tight sm:text-5xl; text-wrap: balance; }
+  .page-title { @apply font-display text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl; text-wrap: balance; }
   .page-sub { @apply mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-base; }
 
-  .btn { @apply inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl px-3.5 text-sm font-semibold transition active:scale-[.97]; }
+  .btn { @apply inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl px-3.5 text-sm font-medium transition active:scale-[.97]; }
   .btn-lg { @apply min-h-12 px-5; }
   .btn-primary { @apply bg-primary text-primary-foreground hover:opacity-90; }
-  .btn-accent { @apply bg-accent text-accent-foreground hover:brightness-105; }
+  
   .btn-quiet { @apply border border-border bg-card text-foreground hover:bg-muted; }
   .icon-btn { @apply flex size-10 shrink-0 items-center justify-center rounded-xl text-muted-foreground transition hover:bg-muted hover:text-foreground active:scale-90; }
 
   .field {
-    @apply h-12 w-full min-w-0 rounded-2xl border border-border bg-card/80 text-base text-foreground backdrop-blur placeholder:text-muted-foreground focus:border-ring focus:outline-none md:h-11 md:text-sm;
+    @apply h-11 w-full min-w-0 rounded-xl border border-border bg-card text-base text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none md:text-sm;
     transition: border-color 150ms ease, box-shadow 150ms ease;
   }
-  .field:focus { box-shadow: 0 0 0 4px hsl(var(--ring) / 0.15); }
+  .field:focus { box-shadow: 0 0 0 3px hsl(var(--ring) / 0.08); }
 
   .toolbar-select {
-    @apply h-11 cursor-pointer appearance-none rounded-2xl border border-border bg-card/80 pl-3.5 pr-9 text-sm text-foreground backdrop-blur;
+    @apply h-11 cursor-pointer appearance-none rounded-xl border border-border bg-card pl-3.5 pr-9 text-sm text-foreground;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23888' stroke-width='1.6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.7rem center;
@@ -169,17 +137,18 @@
   }
 
   .stat {
-    @apply min-w-0 rounded-2xl border border-border/70 bg-card/70 p-3.5 backdrop-blur sm:p-4;
+    @apply min-w-0 rounded-2xl border border-border bg-card p-3.5 transition-colors hover:border-foreground/20 sm:p-4;
   }
-  .stat-value { @apply font-display text-2xl font-extrabold tabular-nums leading-none sm:text-3xl; }
+  .stat-value { @apply font-display text-2xl font-semibold tabular-nums leading-none tracking-tight sm:text-3xl; }
   .stat-label { @apply mt-1.5 truncate text-xs font-medium text-muted-foreground; }
 
   /* Phone tab bar */
   .site-tabs {
-    @apply fixed inset-x-3 z-50 grid grid-cols-2 gap-1 rounded-2xl p-1 shadow-2xl md:hidden;
+    @apply fixed inset-x-4 z-50 mx-auto grid max-w-sm grid-cols-2 gap-1 rounded-2xl p-1 md:hidden;
+    box-shadow: 0 10px 30px -12px hsl(0 0% 0% / 0.35);
     bottom: calc(0.75rem + env(safe-area-inset-bottom));
   }
-  .site-tab { @apply relative flex min-h-12 items-center justify-center gap-2 rounded-xl text-sm font-semibold text-muted-foreground; }
+  .site-tab { @apply relative flex min-h-12 items-center justify-center gap-2 rounded-xl text-sm font-medium text-muted-foreground; }
   .site-tab-on { @apply text-background; }
 }
 
@@ -188,8 +157,7 @@
   outline-offset: 3px;
 }
 
-@keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-@keyframes blink { 50% { opacity: 0.3; } }
+@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -226,6 +194,10 @@
 
 .back-to-top { bottom: calc(5.5rem + env(safe-area-inset-bottom)); }
 @media (min-width: 768px) { .back-to-top { bottom: calc(1.25rem + env(safe-area-inset-bottom)); } }
+
+/* Sideways-scrolling rows fade at the edge so it reads as "more this way". */
+.fade-x { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+@media (min-width: 1024px) { .fade-x { -webkit-mask-image: none; mask-image: none; } }
 
 /* Phones: panels slide up. */
 .sheet { animation: sheet-up 260ms cubic-bezier(.2,.8,.2,1); }
