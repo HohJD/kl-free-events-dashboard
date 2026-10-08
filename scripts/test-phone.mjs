@@ -95,8 +95,10 @@ try {
       await page.getByRole('navigation', { name: 'Sections' }).last().getByRole('link', { name: /My tracker/ }).click();
       await page.getByRole('heading', { name: 'My tracker' }).waitFor();
       assert.equal(await page.locator('[role=tabpanel] > li').count(), 2, 'tracked items listed');
-      await page.locator('[role=tabpanel] > li').first().getByRole('button', { name: /Applied|going/ }).click();
-      await page.getByRole('tab', { name: /Applied/ }).click();
+      // Register/Apply opens the organiser's page in a new tab and moves the card to "Signed up".
+      const [popup] = await Promise.all([page.waitForEvent('popup'), page.locator('[role=tabpanel] > li').first().getByRole('link', { name: /^(Register|Apply|Get it)/ }).click()]);
+      await popup.close();
+      await page.getByRole('tab', { name: /Signed up/ }).click();
       await page.locator('[role=tabpanel] > li').first().getByRole('button', { name: 'Done' }).click();
       await page.getByRole('tab', { name: /Done/ }).click();
       assert.equal(await page.locator('[role=tabpanel] > li').count(), 1, 'done item listed');

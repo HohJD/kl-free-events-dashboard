@@ -95,8 +95,8 @@ export function useSaved() {
 }
 
 export const STATUS_LABELS: Record<TrackStatus, { title: string; hint: string }> = {
-  interested: { title: "Interested", hint: "Saved for later" },
-  applied: { title: "Applied / going", hint: "Registered or applied" },
+  interested: { title: "Saved", hint: "Not signed up yet" },
+  applied: { title: "Signed up", hint: "Opened the registration or application" },
   done: { title: "Done", hint: "Attended or wrapped up" },
 };
 

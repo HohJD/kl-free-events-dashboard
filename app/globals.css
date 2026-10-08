@@ -4,52 +4,52 @@
 
 @layer base {
   :root {
-    /* Student Repo by ATH: warm paper, ink, one friendly orange */
-    --background: 60 20% 96%;
-    --foreground: 30 10% 11%;
+    /* Student Repo by ATH: black and white; emoji bring the colour */
+    --background: 0 0% 99%;
+    --foreground: 240 6% 9%;
     --card: 0 0% 100%;
-    --card-foreground: 30 10% 11%;
+    --card-foreground: 240 6% 9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 30 10% 11%;
-    --primary: 20 100% 45%;
+    --popover-foreground: 240 6% 9%;
+    --primary: 240 6% 9%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 48 22% 91%;
-    --secondary-foreground: 30 10% 11%;
-    --muted: 48 22% 91%;
-    --muted-foreground: 30 6% 42%;
-    --accent: 20 100% 45%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 9%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 44%;
+    --accent: 240 6% 9%;
     --accent-foreground: 0 0% 100%;
-    --signal: 18 95% 45%;
-    --tint: 26 100% 94%;
+    --signal: 240 6% 9%;
+    --tint: 240 5% 95%;
     --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 45 14% 86%;
-    --input: 45 12% 80%;
-    --ring: 20 100% 45%;
-    --shadow: 30 20% 20%;
+    --border: 240 6% 90%;
+    --input: 240 5% 84%;
+    --ring: 240 6% 9%;
+    --shadow: 240 6% 9%;
     --radius: 1.25rem;
   }
 
   .dark {
-    --background: 30 8% 6%;
-    --foreground: 45 25% 94%;
-    --card: 30 6% 9%;
-    --card-foreground: 45 25% 94%;
-    --popover: 30 6% 10%;
-    --popover-foreground: 45 25% 94%;
-    --primary: 22 100% 52%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 30 6% 14%;
-    --secondary-foreground: 45 25% 94%;
-    --muted: 30 6% 13%;
-    --muted-foreground: 40 8% 62%;
-    --accent: 22 100% 55%;
-    --accent-foreground: 0 0% 100%;
-    --signal: 24 100% 62%;
-    --tint: 22 60% 14%;
-    --border: 30 6% 16%;
-    --input: 30 6% 22%;
-    --ring: 22 100% 60%;
+    --background: 240 5% 4%;
+    --foreground: 0 0% 96%;
+    --card: 240 4% 7%;
+    --card-foreground: 0 0% 96%;
+    --popover: 240 4% 8%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;
+    --primary-foreground: 240 5% 6%;
+    --secondary: 240 4% 12%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 240 4% 11%;
+    --muted-foreground: 240 4% 62%;
+    --accent: 0 0% 96%;
+    --accent-foreground: 240 5% 6%;
+    --signal: 0 0% 96%;
+    --tint: 240 4% 13%;
+    --border: 240 4% 15%;
+    --input: 240 4% 21%;
+    --ring: 0 0% 90%;
     --shadow: 0 0% 0%;
   }
 
@@ -91,7 +91,7 @@
     transition: transform 220ms cubic-bezier(.3,1.4,.5,1), border-color 200ms ease, box-shadow 200ms ease;
   }
   @media (hover: hover) and (pointer: fine) {
-    .card:hover { transform: translateY(-2px); border-color: hsl(var(--primary) / 0.45); box-shadow: 0 12px 28px -18px hsl(var(--primary) / 0.55); }
+    .card:hover { transform: translateY(-2px); border-color: hsl(var(--foreground) / 0.25); box-shadow: 0 12px 28px -18px hsl(var(--shadow) / 0.35); }
   }
   .rise { animation: rise 420ms cubic-bezier(.3,1.3,.5,1) both; }
 
@@ -124,17 +124,17 @@
 
   .btn { @apply inline-flex min-h-11 md:min-h-10 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-semibold transition active:scale-95; }
   .btn-lg { @apply min-h-12 px-5; }
-  .btn-primary { @apply bg-primary text-primary-foreground hover:brightness-105; box-shadow: 0 2px 0 hsl(var(--primary) / 0.35); }
+  .btn-primary { @apply bg-primary text-primary-foreground hover:brightness-105; }
   .btn-ink { @apply bg-foreground text-background hover:opacity-90; }
   
-  .btn-quiet { @apply border border-border bg-card text-foreground hover:border-primary/40 hover:bg-[hsl(var(--tint))]; }
-  .icon-btn { @apply flex size-11 md:size-10 shrink-0 items-center justify-center rounded-full text-muted-foreground transition hover:bg-[hsl(var(--tint))] hover:text-primary active:scale-90; }
+  .btn-quiet { @apply border border-border bg-card text-foreground hover:border-foreground/25 hover:bg-[hsl(var(--tint))]; }
+  .icon-btn { @apply flex size-11 md:size-10 shrink-0 items-center justify-center rounded-full text-muted-foreground transition hover:bg-[hsl(var(--tint))] hover:text-foreground active:scale-90; }
 
   .field {
     @apply h-11 w-full min-w-0 rounded-full border border-border bg-card text-base text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none md:text-sm;
     transition: border-color 150ms ease, box-shadow 150ms ease;
   }
-  .field:focus { box-shadow: 0 0 0 4px hsl(var(--ring) / 0.15); }
+  .field:focus { box-shadow: 0 0 0 4px hsl(var(--ring) / 0.08); }
 
   .toolbar-select {
     @apply h-11 cursor-pointer appearance-none rounded-full border border-border bg-card pl-4 pr-9 text-sm text-foreground;
@@ -145,7 +145,7 @@
   }
 
   .stat {
-    @apply min-w-0 rounded-3xl border border-border bg-card p-3.5 transition-colors hover:border-primary/40 sm:p-4;
+    @apply min-w-0 rounded-3xl border border-border bg-card p-3.5 transition-colors hover:border-foreground/25 sm:p-4;
   }
   .stat-value { @apply font-display text-2xl font-semibold tabular-nums leading-none tracking-tight sm:text-3xl; }
   .stat-label { @apply mt-1.5 truncate text-xs font-medium text-muted-foreground; }

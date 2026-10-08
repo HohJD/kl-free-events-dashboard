@@ -17,12 +17,10 @@ const emojiFor = (row: SavedEntry) => (row.label && EMOJI_FOR_LABEL[row.label]) 
 const CHEERS = ["Nice one! 🎉", "Another one done ✨", "Look at you go 🚀", "Crushing it 💪", "Big W 🏆"];
 const spring = { type: "spring", bounce: 0, duration: 0.35 } as const;
 
-/** The next step for a tracked item, worded for what it is. */
-function nextStep(row: SavedEntry): { to: TrackStatus; label: string } {
-  const status = statusOf(row);
-  if (status === "interested") return { to: "applied", label: row.kind === "event" ? "I'm going" : "Applied" };
-  if (status === "applied") return { to: "done", label: "Done" };
-  return { to: "interested", label: "Undo" };
+/** What signing up is called on the organiser's side. */
+function signUpLabel(row: SavedEntry): string {
+  if (row.label === "Free tool") return "Get it";
+  return row.kind === "event" ? "Register" : "Apply";
 }
 
 const calendarFor = (row: SavedEntry) =>
@@ -83,14 +81,14 @@ export function SavedView() {
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
           <h1 className="page-title">My tracker</h1>
-          <p className="page-sub">What you&apos;re into, what you applied for, and what&apos;s done. Saved on this device, no account needed.</p>
+          <p className="page-sub">Save it, sign up on the organiser&apos;s page, tick it off. Kept on this device, no account needed.</p>
         </div>
         {loaded && saved.length ? <Ring value={counts.done} total={saved.length} /> : null}
       </div>
 
       {!loaded ? null : !saved.length ? (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          className="mt-8 rounded-3xl border border-dashed border-primary/40 bg-[hsl(var(--tint))] px-6 py-14 text-center">
+          className="mt-8 rounded-3xl border border-dashed border-input bg-card px-6 py-14 text-center">
           <p className="text-4xl" aria-hidden>📌</p>
           <h2 className="mt-2 text-lg font-semibold tracking-tight">Nothing tracked yet</h2>
           <p className="mx-auto mt-1.5 max-w-sm text-sm text-muted-foreground">Tap <span className="font-medium text-foreground">Track</span> on any event, scholarship or internship. It shows up here with a countdown and a one-tap calendar reminder.</p>
@@ -135,7 +133,7 @@ export function SavedView() {
                 className={cn("relative flex min-h-10 items-center justify-center gap-1.5 rounded-full px-2 text-sm font-medium transition-colors",
                   tab === status ? "text-foreground" : "text-muted-foreground hover:text-foreground")}>
                 {tab === status ? <motion.span layoutId="status-pill" className="absolute inset-0 rounded-full bg-card shadow-sm dark:bg-input" transition={spring} /> : null}
-                <span className="relative truncate">{status === "applied" ? "Applied" : STATUS_LABELS[status].title}</span>
+                <span className="relative truncate">{STATUS_LABELS[status].title}</span>
                 <span className="relative text-xs tabular-nums opacity-60">{counts[status]}</span>
               </button>
             ))}
@@ -145,11 +143,11 @@ export function SavedView() {
             <AnimatePresence initial={false} mode="popLayout">
               {rows.map((row) => {
                 const timer = today ? countdown(row, today) : null;
-                const step = nextStep(row);
+                const status = statusOf(row);
                 const calendar = calendarFor(row);
                 return (
                   <motion.li key={row.id} layout initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, x: step.to === "interested" ? -40 : 40, transition: { duration: 0.2 } }} transition={spring}
+                    exit={{ opacity: 0, x: status === "done" ? -40 : 40, transition: { duration: 0.2 } }} transition={spring}
                     className="card flex flex-col p-4">
                     <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
                       {row.label ? <span>{emojiFor(row)} {row.label}</span> : null}
@@ -160,13 +158,28 @@ export function SavedView() {
                       className="mt-1 line-clamp-2 break-words text-[15px] font-semibold leading-snug tracking-tight underline-offset-4 hover:underline">{row.title}</a>
                     {row.note ? <p className="mt-0.5 line-clamp-1 text-[13px] text-muted-foreground">{row.note}</p> : null}
                     <div className="mt-auto flex items-center gap-1 pt-3">
-                      <button type="button" onClick={() => move(row, step.to)}
-                        className="btn btn-quiet">
-                        {step.to === "interested" ? <RotateCcw className="size-4" aria-hidden /> : <Check className="size-4 text-primary" strokeWidth={2.5} aria-hidden />} {step.label}
-                      </button>
-                      <a href={row.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${row.title}`} className="icon-btn">
-                        <ArrowUpRight className="size-[18px]" aria-hidden />
-                      </a>
+                      {status === "interested" ? (
+                        // Signing up happens on the organiser's page; opening it moves the card to "Signed up".
+                        <a href={row.href} target="_blank" rel="noopener noreferrer" onClick={() => move(row, "applied")} className="btn btn-primary">
+                          {signUpLabel(row)} <ArrowUpRight className="size-4" aria-hidden />
+                        </a>
+                      ) : status === "applied" ? (
+                        <>
+                          <button type="button" onClick={() => move(row, "done")} className="btn btn-primary">
+                            <Check className="size-4" strokeWidth={2.5} aria-hidden /> Done
+                          </button>
+                          <a href={row.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${row.title}`} title="Open page" className="icon-btn">
+                            <ArrowUpRight className="size-[18px]" aria-hidden />
+                          </a>
+                          <button type="button" onClick={() => move(row, "interested")} aria-label="Move back to Saved" title="Didn't sign up? Move back" className="icon-btn">
+                            <RotateCcw className="size-[18px]" aria-hidden />
+                          </button>
+                        </>
+                      ) : (
+                        <button type="button" onClick={() => move(row, "applied")} className="btn btn-quiet">
+                          <RotateCcw className="size-4" aria-hidden /> Undo
+                        </button>
+                      )}
                       <span className="ml-auto flex items-center">
                         {calendar && statusOf(row) !== "done" ? (
                           <a href={calendar} target="_blank" rel="noopener noreferrer" aria-label="Add to Google Calendar" title="Add to Google Calendar" className="icon-btn">
@@ -186,7 +199,7 @@ export function SavedView() {
           {!rows.length ? (
             <p className="mt-6 rounded-3xl border border-dashed border-border bg-card px-4 py-10 text-center text-sm text-muted-foreground">
               {tab === "interested" ? <>Nothing waiting. <Link href="/" className="font-medium text-foreground underline underline-offset-4">Find something new</Link></>
-                : tab === "applied" ? "Mark things you applied for or registered to and they'll move here."
+                : tab === "applied" ? "Tap Register or Apply on a saved item and it moves here."
                 : "Finished things land here. You got this 💪"}
             </p>
           ) : null}

@@ -54,16 +54,16 @@ export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
             </Link>
             <Link href="/saved" className="stat">
               <p className="stat-value">{applied}</p>
-              <p className="stat-label">Applied</p>
+              <p className="stat-label">Signed up</p>
             </Link>
             <Link href="/saved" className="stat">
-              <p className="stat-value text-primary">{nextDays === null ? "–" : nextDays <= 0 ? "Today" : `${nextDays}d`}</p>
+              <p className="stat-value">{nextDays === null ? "–" : nextDays <= 0 ? "Today" : `${nextDays}d`}</p>
               <p className="stat-label">{next ? next.title : "Nothing dated"}</p>
             </Link>
           </div>
         ) : (
-          <div className="flex max-w-xl items-center gap-3 rounded-3xl border border-dashed border-primary/40 bg-[hsl(var(--tint))] p-3.5 sm:p-4">
-            <span className="flex size-11 shrink-0 -rotate-6 items-center justify-center rounded-2xl bg-card text-2xl shadow-sm" aria-hidden>📌</span>
+          <div className="flex max-w-xl items-center gap-3 rounded-3xl border border-dashed border-input bg-card p-3.5 sm:p-4">
+            <span className="flex size-11 shrink-0 -rotate-6 items-center justify-center rounded-2xl bg-muted text-2xl" aria-hidden>📌</span>
             <p className="min-w-0 text-sm leading-snug text-muted-foreground">
               <span className="font-medium text-foreground">Start your tracker.</span> Tap <span className="font-medium text-foreground">Track</span> on anything below to get countdowns and calendar reminders.
             </p>

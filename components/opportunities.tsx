@@ -221,11 +221,11 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
             className="toast fixed inset-x-4 z-[55] mx-auto flex max-w-sm items-center gap-2 rounded-full bg-foreground p-1.5 pl-5 text-background shadow-xl">
             <p className="min-w-0 flex-1 text-sm"><span className="font-semibold">Tracked ✨</span> <span className="line-clamp-1 opacity-70">{toast.title}</span></p>
             {toast.calendar ? (
-              <a href={toast.calendar} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+              <a href={toast.calendar} target="_blank" rel="noopener noreferrer" className="btn bg-background text-foreground">
                 <CalendarPlus className="size-4" aria-hidden /> Remind me
               </a>
             ) : (
-              <Link href="/saved" className="btn btn-primary">Open</Link>
+              <Link href="/saved" className="btn bg-background text-foreground">Open</Link>
             )}
             <button type="button" onClick={() => setToast(null)} aria-label="Dismiss" className="flex size-10 items-center justify-center rounded-full opacity-70 hover:opacity-100">
               <X className="size-4" aria-hidden />

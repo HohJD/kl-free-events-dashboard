@@ -10,9 +10,9 @@ import { cn } from "@/lib/utils";
 
 function Logo() {
   return (
-    <span className="flex size-8 shrink-0 -rotate-6 items-center justify-center rounded-xl bg-primary text-xs font-bold tracking-tight text-primary-foreground transition-transform group-hover:rotate-0">
-      SR
-    </span>
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/logo.png" alt="" width={32} height={32}
+      className="size-8 shrink-0 rounded-lg border border-border object-cover transition-transform group-hover:-rotate-6" />
   );
 }
 
@@ -39,7 +39,7 @@ export function SiteHeader() {
               <Link key={href} href={href} aria-current={active === href ? "page" : undefined}
                 className={cn("relative flex h-9 items-center gap-2 rounded-full px-3.5 text-sm font-semibold transition-colors",
                   active === href ? "text-foreground" : "text-muted-foreground hover:text-foreground")}>
-                {active === href ? <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-[hsl(var(--tint))]" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
+                {active === href ? <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-muted" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
                 <Icon className="relative size-4" aria-hidden />
                 <span className="relative">{label}</span>
                 {href === "/saved" && open ? <span className="relative text-xs tabular-nums text-muted-foreground">{open}</span> : null}
