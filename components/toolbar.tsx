@@ -67,8 +67,8 @@ export function Toolbar({
     ...Object.entries(REGIONS).filter(([value]) => value !== "unknown").map(([value, label]) => ({ value, label }))];
 
   return (
-    <div className="page-shell flex flex-wrap items-center gap-2 pb-3">
-      <div className="relative min-w-0 flex-1 basis-40 sm:basis-56">
+    <div className="page-shell flex items-center gap-2 pb-3 md:flex-wrap">
+      <div className="relative min-w-0 flex-1 basis-0 md:basis-56">
         <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
         <input ref={searchRef} enterKeyHint="search" value={query} onChange={(event) => setQuery(event.target.value)} aria-label="Search listings"
           placeholder="Search" className="field pl-11 pr-3" />
@@ -95,7 +95,7 @@ export function Toolbar({
         <div className="flex h-12 shrink-0 items-center rounded-2xl border border-border bg-card/80 p-1 md:h-11">
           {([["list", LayoutGrid, "List view"], ["map", Map, "Map view"]] as const).map(([value, Icon, label]) => (
             <button key={value} type="button" onClick={() => setView(value)} aria-pressed={view === value} aria-label={label}
-              className={cn("relative flex h-full items-center gap-1.5 rounded-xl px-3 text-sm font-medium transition-colors",
+              className={cn("relative flex h-full items-center gap-1.5 rounded-xl px-2.5 text-sm font-medium transition-colors sm:px-3",
                 view === value ? "text-background" : "text-muted-foreground hover:text-foreground")}>
               {view === value ? <motion.span layoutId="view-pill" className="absolute inset-0 rounded-xl bg-foreground" transition={{ type: "spring", bounce: 0.2, duration: 0.4 }} /> : null}
               <Icon className="relative size-4" aria-hidden /><span className="relative hidden sm:inline">{label.split(" ")[0]}</span>
