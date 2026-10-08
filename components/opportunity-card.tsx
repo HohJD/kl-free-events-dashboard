@@ -1,17 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, Briefcase, CalendarDays, CalendarPlus, Check, GraduationCap, Rocket, Share2, Trophy, Wrench } from "lucide-react";
+import { ArrowUpRight, CalendarPlus, Check, Share2 } from "lucide-react";
 import { reminderUrl } from "@/lib/calendar";
-import { KIND_LABELS, daysLeft, type Opportunity, type OpportunityKind } from "@/lib/opportunities";
+import { KIND_EMOJI, KIND_LABELS, daysLeft, type Opportunity } from "@/lib/opportunities";
 import { REGIONS, eventRegion } from "@/lib/regions";
 import type { SavedEntry } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 import { SaveButton } from "./save-button";
-
-const KIND_ICON: Record<OpportunityKind, typeof Trophy> = {
-  event: CalendarDays, hackathon: Trophy, scholarship: GraduationCap, internship: Briefcase, graduate: Rocket, tool: Wrench,
-};
 
 function formatDate(value: string): string {
   const stamp = Date.parse(`${value}T00:00:00Z`);
@@ -58,7 +54,6 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
 }) {
   const [shared, setShared] = useState(false);
   const timing = when(row, today);
-  const Icon = KIND_ICON[row.kind];
   const area = row.event ? REGIONS[eventRegion(row.event)] ?? "" : "";
   const context = row.event
     ? Array.from(new Set([row.place, area].filter((value) => value && value !== "Location unconfirmed"))).join(" · ")
@@ -83,14 +78,14 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
             // eslint-disable-next-line @next/next/no-img-element
             <img src={row.image} alt="" loading="lazy" decoding="async" className="size-full bg-white object-cover" />
           ) : (
-            <Icon className="size-[18px]" strokeWidth={1.75} aria-hidden />
+            <span aria-hidden>{KIND_EMOJI[row.kind]}</span>
           )}
         </span>
         <div className="min-w-0 flex-1">
           <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
-            <span className="shrink-0">{KIND_LABELS[row.kind].one}</span>
+            <span className="shrink-0">{KIND_EMOJI[row.kind]} {KIND_LABELS[row.kind].one}</span>
             <span aria-hidden>·</span>
-            <span className={cn("pill truncate", timing.urgent && "pill-hot")}>{timing.text}</span>
+            <span className={cn("pill truncate", timing.urgent && "pill-hot")}>{timing.urgent ? "🔥 " : ""}{timing.text}</span>
           </p>
           <h3 className="mt-1 line-clamp-2 break-words text-[15px] font-semibold leading-snug tracking-tight">{row.title}</h3>
         </div>

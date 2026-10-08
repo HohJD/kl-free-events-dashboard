@@ -48,6 +48,11 @@ export const KIND_LABELS: Record<OpportunityKind, { one: string; many: string }>
   tool: { one: "Free tool", many: "Free tools" },
 };
 
+/** A friendly face for each kind: chips, card thumbnails and the tracker. */
+export const KIND_EMOJI: Record<OpportunityKind, string> = {
+  event: "🎉", hackathon: "🏆", scholarship: "🎓", internship: "💼", graduate: "🚀", tool: "🧰",
+};
+
 export function fromEvent(event: Event): Opportunity {
   return {
     id: event.link,

@@ -18,11 +18,11 @@ export function SaveButton({ entry, saved, onToggle, className }: {
       onClick={(event) => { event.preventDefault(); event.stopPropagation(); onToggle(entry); }}
       aria-pressed={saved}
       aria-label={saved ? `Stop tracking ${entry.title}` : `Track ${entry.title}`}
-      className={cn("btn relative overflow-hidden", saved ? "border border-foreground bg-foreground text-background" : "btn-quiet", className)}
+      className={cn("btn relative overflow-hidden", saved ? "border border-primary bg-[hsl(var(--tint))] text-primary" : "btn-quiet", className)}
     >
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span key={saved ? "on" : "off"} className="flex items-center gap-1.5"
-          initial={{ y: 14, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -14, opacity: 0 }} transition={{ duration: 0.18 }}>
+          initial={{ y: 14, opacity: 0, scale: 0.6 }} animate={{ y: 0, opacity: 1, scale: 1 }} exit={{ y: -14, opacity: 0 }} transition={{ type: "spring", bounce: 0.55, duration: 0.4 }}>
           {saved ? <BookmarkCheck className="size-4" aria-hidden /> : <BookmarkPlus className="size-4" aria-hidden />}
           <span className="max-[359px]:sr-only">{saved ? "Tracking" : "Track"}</span>
         </motion.span>

@@ -10,7 +10,7 @@ import { malaysiaDay, type DateRange, type SortMode } from "@/lib/filter-events"
 import { forStudents } from "@/lib/event-discovery";
 import { REGIONS, eventRegion, filterRegion } from "@/lib/regions";
 import {
-  KIND_LABELS, KIND_ORDER, countByKind, eventsOf, filterOpportunities, fromEvent, fromResource,
+  KIND_EMOJI, KIND_LABELS, KIND_ORDER, countByKind, eventsOf, filterOpportunities, fromEvent, fromResource,
   type OpportunityKind,
 } from "@/lib/opportunities";
 import { reminderUrl } from "@/lib/calendar";
@@ -155,8 +155,9 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
               const count = value === "all" ? Object.values(kindCounts).reduce((sum, n) => sum + n, 0) : kindCounts[value] ?? 0;
               return (
                 <button key={value} type="button" onClick={() => chooseKind(value)} aria-pressed={on}
-                  className={cn("chip", on && "text-background hover:text-background")}>
-                  {on ? <motion.span layoutId="kind-pill" className="absolute inset-0 rounded-full bg-foreground" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
+                  className={cn("chip", on && "font-semibold text-primary-foreground hover:text-primary-foreground")}>
+                  {on ? <motion.span layoutId="kind-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", bounce: 0.25, duration: 0.4 }} /> : null}
+                  {value !== "all" ? <span className="relative mr-1.5" aria-hidden>{KIND_EMOJI[value]}</span> : null}
                   <span className="relative">{value === "all" ? "All" : KIND_LABELS[value].many}</span>
                   <span className="chip-count relative">{count}</span>
                 </button>
@@ -194,8 +195,9 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
               ))}
             </div>
           ) : (
-            <div className="flex flex-col items-center rounded-2xl border border-dashed border-border px-6 py-16 text-center">
-              <h2 className="text-lg font-semibold tracking-tight">Nothing matches yet</h2>
+            <div className="flex flex-col items-center rounded-3xl border border-dashed border-border bg-card px-6 py-16 text-center">
+              <p className="text-4xl" aria-hidden>🔍</p>
+              <h2 className="mt-2 text-lg font-semibold tracking-tight">Nothing matches yet</h2>
               <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
                 Try another type, place or date. Only listings that are confirmed free show up here.
               </p>
@@ -216,16 +218,16 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
         {toast ? (
           <motion.div role="status" initial={{ opacity: 0, y: 24, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ type: "spring", bounce: 0.25, duration: 0.4 }}
-            className="toast fixed inset-x-4 z-[55] mx-auto flex max-w-sm items-center gap-2 rounded-2xl bg-foreground p-1.5 pl-4 text-background shadow-xl">
-            <p className="min-w-0 flex-1 text-sm"><span className="font-medium">Tracking</span> <span className="line-clamp-1 opacity-70">{toast.title}</span></p>
+            className="toast fixed inset-x-4 z-[55] mx-auto flex max-w-sm items-center gap-2 rounded-full bg-foreground p-1.5 pl-5 text-background shadow-xl">
+            <p className="min-w-0 flex-1 text-sm"><span className="font-semibold">Tracked ✨</span> <span className="line-clamp-1 opacity-70">{toast.title}</span></p>
             {toast.calendar ? (
-              <a href={toast.calendar} target="_blank" rel="noopener noreferrer" className="btn bg-background text-foreground">
+              <a href={toast.calendar} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 <CalendarPlus className="size-4" aria-hidden /> Remind me
               </a>
             ) : (
-              <Link href="/saved" className="btn bg-background text-foreground">Open</Link>
+              <Link href="/saved" className="btn btn-primary">Open</Link>
             )}
-            <button type="button" onClick={() => setToast(null)} aria-label="Dismiss" className="flex size-10 items-center justify-center rounded-xl opacity-70 hover:opacity-100">
+            <button type="button" onClick={() => setToast(null)} aria-label="Dismiss" className="flex size-10 items-center justify-center rounded-full opacity-70 hover:opacity-100">
               <X className="size-4" aria-hidden />
             </button>
           </motion.div>

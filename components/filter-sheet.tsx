@@ -36,7 +36,7 @@ interface FilterSheetProps {
 
 function Option({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
-    <button type="button" onClick={onClick} aria-pressed={active} className={cn("chip border border-border", active && "chip-on border-foreground")}>{children}</button>
+    <button type="button" onClick={onClick} aria-pressed={active} className={cn("chip border border-border", active && "chip-on border-primary")}>{children}</button>
   );
 }
 
@@ -73,7 +73,7 @@ export function FilterSheet(props: FilterSheetProps) {
           <section>
             <h3 className="eyebrow mb-2.5">Location</h3>
             <select value={props.region} onChange={(event) => props.setRegion(event.target.value)} aria-label="Location"
-              className="field px-3">
+              className="field px-4">
               <option value="all">All of Malaysia</option>
               {Object.entries(REGIONS).filter(([value]) => value !== "unknown").map(([value, label]) => (
                 <option key={value} value={value}>{label} ({props.regionCounts[value] || 0})</option>

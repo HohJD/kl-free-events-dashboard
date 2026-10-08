@@ -27,7 +27,7 @@ export function MapSection({ events }: { events: Event[] }) {
     >
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <h2 className="flex items-center gap-2 text-base font-semibold tracking-tight">
-          <span className="flex size-7 items-center justify-center rounded-lg bg-foreground text-background">
+          <span className="flex size-7 items-center justify-center rounded-xl bg-primary text-primary-foreground">
             <MapPin className="size-4" />
           </span>
           Event map
@@ -36,7 +36,7 @@ export function MapSection({ events }: { events: Event[] }) {
           {located.length}/{events.length} mapped
         </p>
       </div>
-      <div className="h-[55vh] min-h-[360px] overflow-hidden rounded-2xl border border-border md:h-[62vh]">
+      <div className="h-[55vh] min-h-[360px] overflow-hidden rounded-3xl border border-border md:h-[62vh]">
         <EventMap events={events} />
       </div>
     </motion.section>

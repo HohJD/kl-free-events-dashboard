@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, BookmarkPlus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { statusOf, useSaved } from "@/lib/use-saved";
 import { daysUntil, nextUp } from "@/lib/tracker";
 
@@ -34,11 +34,12 @@ export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
   return (
     <section className="page-shell pb-6 pt-8 sm:pb-10 sm:pt-16">
       <motion.p {...fade(0)} className="eyebrow flex items-center gap-2 whitespace-nowrap">
-        <span className="size-1.5 rounded-full bg-emerald-500" aria-hidden />
+        <span className="relative flex size-2" aria-hidden><span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" /><span className="relative inline-flex size-2 rounded-full bg-primary" /></span>
         <span>{stats.total.toLocaleString("en-MY")} free opportunities<span className="max-[399px]:hidden"> · Updated {updated}</span></span>
       </motion.p>
       <motion.h1 {...fade(0.05)} className="mt-4 text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl md:text-7xl">
-        Your student life,<br className="sm:hidden" /> <span className="text-muted-foreground">sorted.</span>
+        Your student life,<br className="sm:hidden" />{" "}
+        <span className="squiggle">sorted.<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden><path d="M3 14 C 40 4, 70 18, 105 9 S 170 4, 197 11" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /></svg></span>
       </motion.h1>
       <motion.p {...fade(0.1)} className="page-sub">
         Free events, hackathons, scholarships and internships across Malaysia. Track what matters and get reminded before it closes.
@@ -56,15 +57,13 @@ export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
               <p className="stat-label">Applied</p>
             </Link>
             <Link href="/saved" className="stat">
-              <p className="stat-value">{nextDays === null ? "–" : nextDays <= 0 ? "Today" : `${nextDays}d`}</p>
+              <p className="stat-value text-primary">{nextDays === null ? "–" : nextDays <= 0 ? "Today" : `${nextDays}d`}</p>
               <p className="stat-label">{next ? next.title : "Nothing dated"}</p>
             </Link>
           </div>
         ) : (
-          <div className="flex max-w-xl items-center gap-3 rounded-2xl border border-border bg-card p-3.5 sm:p-4">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-foreground text-background">
-              <BookmarkPlus className="size-5" aria-hidden />
-            </span>
+          <div className="flex max-w-xl items-center gap-3 rounded-3xl border border-dashed border-primary/40 bg-[hsl(var(--tint))] p-3.5 sm:p-4">
+            <span className="flex size-11 shrink-0 -rotate-6 items-center justify-center rounded-2xl bg-card text-2xl shadow-sm" aria-hidden>📌</span>
             <p className="min-w-0 text-sm leading-snug text-muted-foreground">
               <span className="font-medium text-foreground">Start your tracker.</span> Tap <span className="font-medium text-foreground">Track</span> on anything below to get countdowns and calendar reminders.
             </p>

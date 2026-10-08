@@ -8,9 +8,13 @@ import { buildIcs, reminderUrl } from "@/lib/calendar";
 import { malaysiaDay } from "@/lib/filter-events";
 import { countdown, daysUntil } from "@/lib/tracker";
 import { STATUS_LABELS, statusOf, useSaved, type SavedEntry, type TrackStatus } from "@/lib/use-saved";
+import { KIND_EMOJI, KIND_LABELS, KIND_ORDER } from "@/lib/opportunities";
 import { cn } from "@/lib/utils";
 
 const ORDER: TrackStatus[] = ["interested", "applied", "done"];
+const EMOJI_FOR_LABEL: Record<string, string> = Object.fromEntries(KIND_ORDER.map((kind) => [KIND_LABELS[kind].one, KIND_EMOJI[kind]]));
+const emojiFor = (row: SavedEntry) => (row.label && EMOJI_FOR_LABEL[row.label]) || (row.kind === "event" ? "🎉" : "📌");
+const CHEERS = ["Nice one! 🎉", "Another one done ✨", "Look at you go 🚀", "Crushing it 💪", "Big W 🏆"];
 const spring = { type: "spring", bounce: 0, duration: 0.35 } as const;
 
 /** The next step for a tracked item, worded for what it is. */
@@ -32,7 +36,7 @@ function Ring({ value, total }: { value: number; total: number }) {
     <div className="relative size-[68px] shrink-0">
       <svg viewBox="0 0 64 64" className="size-full -rotate-90">
         <circle cx="32" cy="32" r={r} fill="none" stroke="hsl(var(--muted))" strokeWidth="5" />
-        <motion.circle cx="32" cy="32" r={r} fill="none" stroke="hsl(var(--foreground))" strokeWidth="5" strokeLinecap="round"
+        <motion.circle cx="32" cy="32" r={r} fill="none" stroke="hsl(var(--primary))" strokeWidth="5" strokeLinecap="round"
           strokeDasharray={c} initial={{ strokeDashoffset: c }} animate={{ strokeDashoffset: c * (1 - share) }} transition={{ duration: 0.8, ease: "easeOut" }} />
       </svg>
       <span className="absolute inset-0 flex items-center justify-center text-sm font-semibold tabular-nums">{Math.round(share * 100)}%</span>
@@ -43,6 +47,13 @@ function Ring({ value, total }: { value: number; total: number }) {
 export function SavedView() {
   const { saved, remove, setStatus, loaded } = useSaved();
   const [tab, setTab] = useState<TrackStatus>("interested");
+  const [cheer, setCheer] = useState<string | null>(null);
+  const move = (row: SavedEntry, to: TrackStatus) => {
+    setStatus(row.id, to);
+    if (to !== "done") return;
+    setCheer(CHEERS[Math.floor(Math.random() * CHEERS.length)]);
+    window.setTimeout(() => setCheer(null), 2200);
+  };
   const [today, setToday] = useState("");
   useEffect(() => setToday(malaysiaDay()), []);
 
@@ -79,8 +90,9 @@ export function SavedView() {
 
       {!loaded ? null : !saved.length ? (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-          className="mt-8 rounded-2xl border border-dashed border-border px-6 py-14 text-center">
-          <h2 className="text-lg font-semibold tracking-tight">Nothing tracked yet</h2>
+          className="mt-8 rounded-3xl border border-dashed border-primary/40 bg-[hsl(var(--tint))] px-6 py-14 text-center">
+          <p className="text-4xl" aria-hidden>📌</p>
+          <h2 className="mt-2 text-lg font-semibold tracking-tight">Nothing tracked yet</h2>
           <p className="mx-auto mt-1.5 max-w-sm text-sm text-muted-foreground">Tap <span className="font-medium text-foreground">Track</span> on any event, scholarship or internship. It shows up here with a countdown and a one-tap calendar reminder.</p>
           <Link href="/" className="btn btn-primary btn-lg mt-6">Discover things <ArrowRight className="size-4" aria-hidden /></Link>
         </motion.div>
@@ -102,12 +114,12 @@ export function SavedView() {
                   return (
                     <motion.a key={row.id} href={row.href} target="_blank" rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}
-                      className={cn("card flex w-[210px] shrink-0 snap-start flex-col p-4", index === 0 && "border-foreground bg-foreground text-background")}>
+                      className={cn("card flex w-[210px] shrink-0 snap-start flex-col p-4", index === 0 && "-rotate-1 border-primary bg-primary text-primary-foreground")}>
                       <p className="text-3xl font-semibold tabular-nums tracking-tight">
                         {days <= 0 ? "Now" : `${days}d`}
                       </p>
-                      <p className={cn("mt-1 text-[11px] font-medium uppercase tracking-[0.08em]", index === 0 ? "text-background/60" : "text-muted-foreground")}>
-                        {row.isDeadline ? "Deadline" : new Date(`${row.date}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })}{row.label ? ` · ${row.label}` : ""}
+                      <p className={cn("mt-1 text-[11px] font-medium uppercase tracking-[0.08em]", index === 0 ? "text-primary-foreground/80" : "text-muted-foreground")}>
+                        {emojiFor(row)} {row.isDeadline ? "Deadline" : new Date(`${row.date}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })}
                       </p>
                       <p className="mt-3 line-clamp-2 text-sm font-medium leading-snug">{row.title}</p>
                     </motion.a>
@@ -117,12 +129,12 @@ export function SavedView() {
             </section>
           ) : null}
 
-          <div role="tablist" aria-label="Status" className="mt-8 grid grid-cols-3 gap-1 rounded-xl bg-muted p-1">
+          <div role="tablist" aria-label="Status" className="mt-8 grid grid-cols-3 gap-1 rounded-full bg-muted p-1">
             {ORDER.map((status) => (
               <button key={status} role="tab" type="button" aria-selected={tab === status} onClick={() => setTab(status)}
-                className={cn("relative flex min-h-10 items-center justify-center gap-1.5 rounded-lg px-2 text-sm font-medium transition-colors",
+                className={cn("relative flex min-h-10 items-center justify-center gap-1.5 rounded-full px-2 text-sm font-medium transition-colors",
                   tab === status ? "text-foreground" : "text-muted-foreground hover:text-foreground")}>
-                {tab === status ? <motion.span layoutId="status-pill" className="absolute inset-0 rounded-lg bg-card shadow-sm dark:bg-input" transition={spring} /> : null}
+                {tab === status ? <motion.span layoutId="status-pill" className="absolute inset-0 rounded-full bg-card shadow-sm dark:bg-input" transition={spring} /> : null}
                 <span className="relative truncate">{status === "applied" ? "Applied" : STATUS_LABELS[status].title}</span>
                 <span className="relative text-xs tabular-nums opacity-60">{counts[status]}</span>
               </button>
@@ -140,7 +152,7 @@ export function SavedView() {
                     exit={{ opacity: 0, x: step.to === "interested" ? -40 : 40, transition: { duration: 0.2 } }} transition={spring}
                     className="card flex flex-col p-4">
                     <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      {row.label ? <span>{row.label}</span> : null}
+                      {row.label ? <span>{emojiFor(row)} {row.label}</span> : null}
                       {row.label && timer ? <span aria-hidden>·</span> : null}
                       {timer ? <span className={cn("pill", timer.hot && "pill-hot")}>{timer.text}</span> : null}
                     </p>
@@ -148,9 +160,9 @@ export function SavedView() {
                       className="mt-1 line-clamp-2 break-words text-[15px] font-semibold leading-snug tracking-tight underline-offset-4 hover:underline">{row.title}</a>
                     {row.note ? <p className="mt-0.5 line-clamp-1 text-[13px] text-muted-foreground">{row.note}</p> : null}
                     <div className="mt-auto flex items-center gap-1 pt-3">
-                      <button type="button" onClick={() => setStatus(row.id, step.to)}
-                        className={cn("btn", step.to === "interested" ? "btn-quiet" : "btn-primary")}>
-                        {step.to === "interested" ? <RotateCcw className="size-4" aria-hidden /> : <Check className="size-4" aria-hidden />} {step.label}
+                      <button type="button" onClick={() => move(row, step.to)}
+                        className="btn btn-quiet">
+                        {step.to === "interested" ? <RotateCcw className="size-4" aria-hidden /> : <Check className="size-4 text-primary" strokeWidth={2.5} aria-hidden />} {step.label}
                       </button>
                       <a href={row.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${row.title}`} className="icon-btn">
                         <ArrowUpRight className="size-[18px]" aria-hidden />
@@ -172,10 +184,10 @@ export function SavedView() {
             </AnimatePresence>
           </ul>
           {!rows.length ? (
-            <p className="mt-6 rounded-2xl border border-dashed border-border px-4 py-10 text-center text-sm text-muted-foreground">
+            <p className="mt-6 rounded-3xl border border-dashed border-border bg-card px-4 py-10 text-center text-sm text-muted-foreground">
               {tab === "interested" ? <>Nothing waiting. <Link href="/" className="font-medium text-foreground underline underline-offset-4">Find something new</Link></>
                 : tab === "applied" ? "Mark things you applied for or registered to and they'll move here."
-                : "Finished things land here. Nice work so far."}
+                : "Finished things land here. You got this 💪"}
             </p>
           ) : null}
           {!upNext.length && dated.length ? (
@@ -185,6 +197,15 @@ export function SavedView() {
           ) : null}
         </>
       )}
+      <AnimatePresence>
+        {cheer ? (
+          <motion.div role="status" initial={{ opacity: 0, y: 20, scale: 0.8 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 10, scale: 0.9 }}
+            transition={{ type: "spring", bounce: 0.5, duration: 0.45 }}
+            className="toast fixed inset-x-0 z-[55] mx-auto w-fit rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-xl">
+            {cheer}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </main>
   );
 }

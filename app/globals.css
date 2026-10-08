@@ -4,50 +4,52 @@
 
 @layer base {
   :root {
-    /* Student Repo by ATH: monochrome, quiet surfaces, one warm signal colour for urgency */
-    --background: 0 0% 99%;
-    --foreground: 240 6% 9%;
+    /* Student Repo by ATH: warm paper, ink, one friendly orange */
+    --background: 60 20% 96%;
+    --foreground: 30 10% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 240 6% 9%;
+    --card-foreground: 30 10% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 6% 9%;
-    --primary: 240 6% 9%;
+    --popover-foreground: 30 10% 11%;
+    --primary: 20 100% 45%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 240 5% 96%;
-    --secondary-foreground: 240 6% 9%;
-    --muted: 240 5% 96%;
-    --muted-foreground: 240 4% 44%;
-    --accent: 240 6% 9%;
+    --secondary: 48 22% 91%;
+    --secondary-foreground: 30 10% 11%;
+    --muted: 48 22% 91%;
+    --muted-foreground: 30 6% 42%;
+    --accent: 20 100% 45%;
     --accent-foreground: 0 0% 100%;
-    --signal: 24 90% 46%;
+    --signal: 18 95% 45%;
+    --tint: 26 100% 94%;
     --destructive: 0 72% 50%;
     --destructive-foreground: 0 0% 100%;
-    --border: 240 6% 91%;
-    --input: 240 5% 86%;
-    --ring: 240 6% 9%;
-    --shadow: 240 6% 9%;
-    --radius: 0.875rem;
+    --border: 45 14% 86%;
+    --input: 45 12% 80%;
+    --ring: 20 100% 45%;
+    --shadow: 30 20% 20%;
+    --radius: 1.25rem;
   }
 
   .dark {
-    --background: 240 5% 4%;
-    --foreground: 0 0% 96%;
-    --card: 240 4% 7%;
-    --card-foreground: 0 0% 96%;
-    --popover: 240 4% 8%;
-    --popover-foreground: 0 0% 96%;
-    --primary: 0 0% 96%;
-    --primary-foreground: 240 5% 6%;
-    --secondary: 240 4% 12%;
-    --secondary-foreground: 0 0% 96%;
-    --muted: 240 4% 11%;
-    --muted-foreground: 240 4% 62%;
-    --accent: 0 0% 96%;
-    --accent-foreground: 240 5% 6%;
-    --signal: 28 95% 62%;
-    --border: 240 4% 14%;
-    --input: 240 4% 20%;
-    --ring: 0 0% 90%;
+    --background: 30 8% 6%;
+    --foreground: 45 25% 94%;
+    --card: 30 6% 9%;
+    --card-foreground: 45 25% 94%;
+    --popover: 30 6% 10%;
+    --popover-foreground: 45 25% 94%;
+    --primary: 22 100% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 30 6% 14%;
+    --secondary-foreground: 45 25% 94%;
+    --muted: 30 6% 13%;
+    --muted-foreground: 40 8% 62%;
+    --accent: 22 100% 55%;
+    --accent-foreground: 0 0% 100%;
+    --signal: 24 100% 62%;
+    --tint: 22 60% 14%;
+    --border: 30 6% 16%;
+    --input: 30 6% 22%;
+    --ring: 22 100% 60%;
     --shadow: 0 0% 0%;
   }
 
@@ -85,16 +87,22 @@
 
   /* Cards: flat at rest, a hairline darkens on hover. */
   .card {
-    @apply relative min-w-0 rounded-2xl border border-border bg-card;
-    transition: border-color 200ms ease, box-shadow 200ms ease;
+    @apply relative min-w-0 rounded-3xl border border-border bg-card;
+    transition: transform 220ms cubic-bezier(.3,1.4,.5,1), border-color 200ms ease, box-shadow 200ms ease;
   }
   @media (hover: hover) and (pointer: fine) {
-    .card:hover { border-color: hsl(var(--foreground) / 0.22); box-shadow: 0 8px 24px -16px hsl(var(--shadow) / 0.25); }
+    .card:hover { transform: translateY(-2px); border-color: hsl(var(--primary) / 0.45); box-shadow: 0 12px 28px -18px hsl(var(--primary) / 0.55); }
   }
-  .rise { animation: rise 360ms cubic-bezier(.2,.8,.2,1) both; }
+  .rise { animation: rise 420ms cubic-bezier(.3,1.3,.5,1) both; }
+
+  /* Hand-drawn underline under a headline word. */
+  .squiggle { @apply relative inline-block text-primary; }
+  .squiggle svg { @apply pointer-events-none absolute -bottom-[0.12em] left-0 h-[0.28em] w-full; }
+  .squiggle path { stroke-dasharray: 260; stroke-dashoffset: 260; animation: draw 900ms 350ms cubic-bezier(.6,0,.3,1) forwards; }
 
   .thumb {
-    @apply flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-muted text-muted-foreground;
+    @apply flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-2xl text-2xl;
+    background: hsl(var(--tint));
   }
 
   .eyebrow { @apply text-[11px] font-medium uppercase tracking-[0.08em] text-muted-foreground; }
@@ -102,34 +110,34 @@
   .pill {
     @apply inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground;
   }
-  .pill-hot { color: hsl(var(--signal)); }
-  .pill-hot::before { content: ""; @apply size-1.5 rounded-full; background: hsl(var(--signal)); }
+  .pill-hot { @apply -my-0.5 rounded-full px-2 py-0.5 font-semibold; color: hsl(var(--signal)); background: hsl(var(--tint)); }
 
   .chip {
     @apply relative inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full px-4 text-sm font-medium text-muted-foreground transition-colors;
   }
   .chip:hover { @apply text-foreground; }
-  .chip-on { @apply bg-foreground font-medium text-background hover:text-background; }
+  .chip-on { @apply bg-primary font-semibold text-primary-foreground hover:text-primary-foreground; }
   .chip-count { @apply ml-1.5 text-xs tabular-nums opacity-60; }
 
   .page-title { @apply font-display text-[2.25rem] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-5xl; text-wrap: balance; }
   .page-sub { @apply mt-3 max-w-xl text-[15px] leading-relaxed text-muted-foreground sm:text-base; }
 
-  .btn { @apply inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl px-3.5 text-sm font-medium transition active:scale-[.97]; }
+  .btn { @apply inline-flex min-h-11 md:min-h-10 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-semibold transition active:scale-95; }
   .btn-lg { @apply min-h-12 px-5; }
-  .btn-primary { @apply bg-primary text-primary-foreground hover:opacity-90; }
+  .btn-primary { @apply bg-primary text-primary-foreground hover:brightness-105; box-shadow: 0 2px 0 hsl(var(--primary) / 0.35); }
+  .btn-ink { @apply bg-foreground text-background hover:opacity-90; }
   
-  .btn-quiet { @apply border border-border bg-card text-foreground hover:bg-muted; }
-  .icon-btn { @apply flex size-10 shrink-0 items-center justify-center rounded-xl text-muted-foreground transition hover:bg-muted hover:text-foreground active:scale-90; }
+  .btn-quiet { @apply border border-border bg-card text-foreground hover:border-primary/40 hover:bg-[hsl(var(--tint))]; }
+  .icon-btn { @apply flex size-11 md:size-10 shrink-0 items-center justify-center rounded-full text-muted-foreground transition hover:bg-[hsl(var(--tint))] hover:text-primary active:scale-90; }
 
   .field {
-    @apply h-11 w-full min-w-0 rounded-xl border border-border bg-card text-base text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none md:text-sm;
+    @apply h-11 w-full min-w-0 rounded-full border border-border bg-card text-base text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none md:text-sm;
     transition: border-color 150ms ease, box-shadow 150ms ease;
   }
-  .field:focus { box-shadow: 0 0 0 3px hsl(var(--ring) / 0.08); }
+  .field:focus { box-shadow: 0 0 0 4px hsl(var(--ring) / 0.15); }
 
   .toolbar-select {
-    @apply h-11 cursor-pointer appearance-none rounded-xl border border-border bg-card pl-3.5 pr-9 text-sm text-foreground;
+    @apply h-11 cursor-pointer appearance-none rounded-full border border-border bg-card pl-4 pr-9 text-sm text-foreground;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23888' stroke-width='1.6'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 0.7rem center;
@@ -137,19 +145,19 @@
   }
 
   .stat {
-    @apply min-w-0 rounded-2xl border border-border bg-card p-3.5 transition-colors hover:border-foreground/20 sm:p-4;
+    @apply min-w-0 rounded-3xl border border-border bg-card p-3.5 transition-colors hover:border-primary/40 sm:p-4;
   }
   .stat-value { @apply font-display text-2xl font-semibold tabular-nums leading-none tracking-tight sm:text-3xl; }
   .stat-label { @apply mt-1.5 truncate text-xs font-medium text-muted-foreground; }
 
   /* Phone tab bar */
   .site-tabs {
-    @apply fixed inset-x-4 z-50 mx-auto grid max-w-sm grid-cols-2 gap-1 rounded-2xl p-1 md:hidden;
+    @apply fixed inset-x-4 z-50 mx-auto grid max-w-sm grid-cols-2 gap-1 rounded-full p-1 md:hidden;
     box-shadow: 0 10px 30px -12px hsl(0 0% 0% / 0.35);
     bottom: calc(0.75rem + env(safe-area-inset-bottom));
   }
-  .site-tab { @apply relative flex min-h-12 items-center justify-center gap-2 rounded-xl text-sm font-medium text-muted-foreground; }
-  .site-tab-on { @apply text-background; }
+  .site-tab { @apply relative flex min-h-12 items-center justify-center gap-2 rounded-full text-sm font-semibold text-muted-foreground; }
+  .site-tab-on { @apply text-primary-foreground; }
 }
 
 :where(button, a, input, select):focus-visible {
@@ -157,7 +165,8 @@
   outline-offset: 3px;
 }
 
-@keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(10px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

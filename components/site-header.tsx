@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 function Logo() {
   return (
-    <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-foreground text-[11px] font-semibold tracking-tight text-background">
+    <span className="flex size-8 shrink-0 -rotate-6 items-center justify-center rounded-xl bg-primary text-xs font-bold tracking-tight text-primary-foreground transition-transform group-hover:rotate-0">
       SR
     </span>
   );
@@ -27,7 +27,7 @@ export function SiteHeader() {
     <>
       <header className="z-40 w-full border-b border-border bg-background/85 backdrop-blur-lg backdrop-saturate-150 md:sticky md:top-0">
         <div className="page-shell flex h-14 items-center gap-3 md:h-16">
-          <Link href="/" className="flex min-w-0 items-center gap-2.5" aria-label={`${SITE_FULL_NAME} home`}>
+          <Link href="/" className="group flex min-w-0 items-center gap-2.5" aria-label={`${SITE_FULL_NAME} home`}>
             <Logo />
             <span className="flex min-w-0 items-baseline gap-1.5 whitespace-nowrap">
               <span className="text-[15px] font-semibold tracking-tight">{SITE_NAME}</span>
@@ -37,9 +37,9 @@ export function SiteHeader() {
           <nav aria-label="Sections" className="ml-auto hidden items-center gap-1 md:flex">
             {SECTIONS.map(({ href, label, icon: Icon }) => (
               <Link key={href} href={href} aria-current={active === href ? "page" : undefined}
-                className={cn("relative flex h-9 items-center gap-2 rounded-lg px-3 text-sm font-medium transition-colors",
+                className={cn("relative flex h-9 items-center gap-2 rounded-full px-3.5 text-sm font-semibold transition-colors",
                   active === href ? "text-foreground" : "text-muted-foreground hover:text-foreground")}>
-                {active === href ? <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-lg bg-muted" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
+                {active === href ? <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-[hsl(var(--tint))]" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
                 <Icon className="relative size-4" aria-hidden />
                 <span className="relative">{label}</span>
                 {href === "/saved" && open ? <span className="relative text-xs tabular-nums text-muted-foreground">{open}</span> : null}
@@ -56,10 +56,10 @@ export function SiteHeader() {
         {SECTIONS.map(({ href, label, icon: Icon }) => (
           <Link key={href} href={href} aria-current={active === href ? "page" : undefined}
             className={cn("site-tab", active === href && "site-tab-on")}>
-            {active === href ? <motion.span layoutId="tab-pill" className="absolute inset-0 rounded-xl bg-foreground" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
+            {active === href ? <motion.span layoutId="tab-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
             <Icon className="relative size-[18px]" aria-hidden />
             <span className="relative">{label}</span>
-            {href === "/saved" && open ? <span className={cn("relative text-xs tabular-nums", active === href ? "text-background/60" : "text-muted-foreground")}>{open}</span> : null}
+            {href === "/saved" && open ? <span className={cn("relative text-xs tabular-nums", active === href ? "text-primary-foreground/75" : "text-muted-foreground")}>{open}</span> : null}
           </Link>
         ))}
       </nav>
