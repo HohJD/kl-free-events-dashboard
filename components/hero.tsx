@@ -63,7 +63,6 @@ export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
           </div>
         ) : (
           <div className="flex max-w-xl items-center gap-3 rounded-3xl border border-dashed border-input bg-card p-3.5 sm:p-4">
-            <span className="flex size-11 shrink-0 -rotate-6 items-center justify-center rounded-2xl bg-muted text-2xl" aria-hidden>📌</span>
             <p className="min-w-0 text-sm leading-snug text-muted-foreground">
               <span className="font-medium text-foreground">Start your tracker.</span> Tap <span className="font-medium text-foreground">Track</span> on anything below to get countdowns and calendar reminders.
             </p>

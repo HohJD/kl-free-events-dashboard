@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowUpRight, CalendarPlus, Check, Share2 } from "lucide-react";
-import { reminderUrl } from "@/lib/calendar";
-import { KIND_EMOJI, KIND_LABELS, daysLeft, type Opportunity } from "@/lib/opportunities";
+import { ArrowUpRight } from "lucide-react";
+import { KIND_LABELS, daysLeft, type Opportunity } from "@/lib/opportunities";
 import { REGIONS, eventRegion } from "@/lib/regions";
 import type { SavedEntry } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
@@ -52,23 +50,12 @@ export function trackEntry(row: Opportunity, today: string): Omit<SavedEntry, "s
 export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: {
   row: Opportunity; today: string; saved: boolean; onToggleSave: (entry: Omit<SavedEntry, "savedAt">) => void; index?: number;
 }) {
-  const [shared, setShared] = useState(false);
   const timing = when(row, today);
   const area = row.event ? REGIONS[eventRegion(row.event)] ?? "" : "";
   const context = row.event
     ? Array.from(new Set([row.place, area].filter((value) => value && value !== "Location unconfirmed"))).join(" · ")
     : [row.org, row.place === "Malaysia" ? "" : row.place].filter(Boolean).join(" · ");
   const entry = trackEntry(row, today);
-  const calendar = entry.date ? reminderUrl({ ...entry, title: row.title, date: entry.date, link: row.link }) : null;
-
-  const share = async () => {
-    try {
-      if (navigator.share) await navigator.share({ title: row.title, url: row.link });
-      else { await navigator.clipboard.writeText(row.link); setShared(true); setTimeout(() => setShared(false), 1500); }
-    } catch {
-      // cancelled
-    }
-  };
 
   return (
     <article className={cn("card flex h-full flex-col p-4", index < 12 && "rise")} style={index < 12 ? { animationDelay: `${index * 30}ms` } : undefined}>
@@ -78,14 +65,14 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
             // eslint-disable-next-line @next/next/no-img-element
             <img src={row.image} alt="" loading="lazy" decoding="async" className="size-full bg-white object-cover" />
           ) : (
-            <span aria-hidden>{KIND_EMOJI[row.kind]}</span>
+            <span className="text-base font-semibold text-muted-foreground" aria-hidden>{row.title.trim().charAt(0).toUpperCase()}</span>
           )}
         </span>
         <div className="min-w-0 flex-1">
           <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
-            <span className="shrink-0">{KIND_EMOJI[row.kind]} {KIND_LABELS[row.kind].one}</span>
+            <span className="shrink-0">{KIND_LABELS[row.kind].one}</span>
             <span aria-hidden>·</span>
-            <span className={cn("pill truncate", timing.urgent && "pill-hot")}>{timing.urgent ? "🔥 " : ""}{timing.text}</span>
+            <span className={cn("pill truncate", timing.urgent && "pill-hot")}>{timing.text}</span>
           </p>
           <h3 className="mt-1 line-clamp-2 break-words text-[15px] font-semibold leading-snug tracking-tight">{row.title}</h3>
         </div>
@@ -104,16 +91,6 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
           {row.kind === "tool" ? "Get it" : row.isDeadline ? "Apply" : "View"} <ArrowUpRight className="size-4" aria-hidden />
         </a>
         <SaveButton saved={saved} onToggle={onToggleSave} entry={entry} />
-        <span className="ml-auto flex items-center">
-          {calendar ? (
-            <a href={calendar} target="_blank" rel="noopener noreferrer" aria-label="Add to Google Calendar" title="Add to Google Calendar" className="icon-btn">
-              <CalendarPlus className="size-[18px]" strokeWidth={1.75} aria-hidden />
-            </a>
-          ) : null}
-          <button type="button" onClick={share} aria-label="Share" title="Share" className="icon-btn">
-            {shared ? <Check className="size-[18px] text-foreground" aria-hidden /> : <Share2 className="size-[18px]" strokeWidth={1.75} aria-hidden />}
-          </button>
-        </span>
       </div>
     </article>
   );

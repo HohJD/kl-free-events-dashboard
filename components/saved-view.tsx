@@ -3,18 +3,15 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, CalendarPlus, Check, Download, RotateCcw, Trash2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarPlus, Download, Trash2 } from "lucide-react";
 import { buildIcs, reminderUrl } from "@/lib/calendar";
 import { malaysiaDay } from "@/lib/filter-events";
 import { countdown, daysUntil } from "@/lib/tracker";
 import { STATUS_LABELS, statusOf, useSaved, type SavedEntry, type TrackStatus } from "@/lib/use-saved";
-import { KIND_EMOJI, KIND_LABELS, KIND_ORDER } from "@/lib/opportunities";
 import { cn } from "@/lib/utils";
 
 const ORDER: TrackStatus[] = ["interested", "applied", "done"];
-const EMOJI_FOR_LABEL: Record<string, string> = Object.fromEntries(KIND_ORDER.map((kind) => [KIND_LABELS[kind].one, KIND_EMOJI[kind]]));
-const emojiFor = (row: SavedEntry) => (row.label && EMOJI_FOR_LABEL[row.label]) || (row.kind === "event" ? "🎉" : "📌");
-const CHEERS = ["Nice one! 🎉", "Another one done ✨", "Look at you go 🚀", "Crushing it 💪", "Big W 🏆"];
+const CHEERS = ["Nice one.", "Done and dusted.", "One less thing.", "Look at you go."];
 const spring = { type: "spring", bounce: 0, duration: 0.35 } as const;
 
 /** What signing up is called on the organiser's side. */
@@ -89,8 +86,7 @@ export function SavedView() {
       {!loaded ? null : !saved.length ? (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
           className="mt-8 rounded-3xl border border-dashed border-input bg-card px-6 py-14 text-center">
-          <p className="text-4xl" aria-hidden>📌</p>
-          <h2 className="mt-2 text-lg font-semibold tracking-tight">Nothing tracked yet</h2>
+          <h2 className="text-lg font-semibold tracking-tight">Nothing tracked yet</h2>
           <p className="mx-auto mt-1.5 max-w-sm text-sm text-muted-foreground">Tap <span className="font-medium text-foreground">Track</span> on any event, scholarship or internship. It shows up here with a countdown and a one-tap calendar reminder.</p>
           <Link href="/" className="btn btn-primary btn-lg mt-6">Discover things <ArrowRight className="size-4" aria-hidden /></Link>
         </motion.div>
@@ -112,12 +108,12 @@ export function SavedView() {
                   return (
                     <motion.a key={row.id} href={row.href} target="_blank" rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}
-                      className={cn("card flex w-[210px] shrink-0 snap-start flex-col p-4", index === 0 && "-rotate-1 border-primary bg-primary text-primary-foreground")}>
+                      className={cn("card flex w-[210px] shrink-0 snap-start flex-col p-4", index === 0 && "border-primary bg-primary text-primary-foreground")}>
                       <p className="text-3xl font-semibold tabular-nums tracking-tight">
                         {days <= 0 ? "Now" : `${days}d`}
                       </p>
                       <p className={cn("mt-1 text-[11px] font-medium uppercase tracking-[0.08em]", index === 0 ? "text-primary-foreground/80" : "text-muted-foreground")}>
-                        {emojiFor(row)} {row.isDeadline ? "Deadline" : new Date(`${row.date}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })}
+                        {row.isDeadline ? "Deadline" : new Date(`${row.date}T00:00:00Z`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })}
                       </p>
                       <p className="mt-3 line-clamp-2 text-sm font-medium leading-snug">{row.title}</p>
                     </motion.a>
@@ -150,7 +146,7 @@ export function SavedView() {
                     exit={{ opacity: 0, x: status === "done" ? -40 : 40, transition: { duration: 0.2 } }} transition={spring}
                     className="card flex flex-col p-4">
                     <p className="flex items-center gap-1.5 text-xs text-muted-foreground">
-                      {row.label ? <span>{emojiFor(row)} {row.label}</span> : null}
+                      {row.label ? <span>{row.label}</span> : null}
                       {row.label && timer ? <span aria-hidden>·</span> : null}
                       {timer ? <span className={cn("pill", timer.hot && "pill-hot")}>{timer.text}</span> : null}
                     </p>
@@ -165,19 +161,11 @@ export function SavedView() {
                         </a>
                       ) : status === "applied" ? (
                         <>
-                          <button type="button" onClick={() => move(row, "done")} className="btn btn-primary">
-                            <Check className="size-4" strokeWidth={2.5} aria-hidden /> Done
-                          </button>
-                          <a href={row.href} target="_blank" rel="noopener noreferrer" aria-label={`Open ${row.title}`} title="Open page" className="icon-btn">
-                            <ArrowUpRight className="size-[18px]" aria-hidden />
-                          </a>
-                          <button type="button" onClick={() => move(row, "interested")} aria-label="Move back to Saved" title="Didn't sign up? Move back" className="icon-btn">
-                            <RotateCcw className="size-[18px]" aria-hidden />
-                          </button>
+                          <button type="button" onClick={() => move(row, "done")} className="btn btn-primary">Done</button>
+                          <button type="button" onClick={() => move(row, "interested")} className="btn text-muted-foreground hover:text-foreground">Not yet</button>
                         </>
                       ) : (
-                        <button type="button" onClick={() => move(row, "applied")} className="btn btn-quiet">
-                          <RotateCcw className="size-4" aria-hidden /> Undo
+                        <button type="button" onClick={() => move(row, "applied")} className="btn btn-quiet">Undo
                         </button>
                       )}
                       <span className="ml-auto flex items-center">

@@ -1,13 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { BookmarkCheck, LayoutGrid, Map, Search, SlidersHorizontal } from "lucide-react";
+import { BookmarkCheck, Search, SlidersHorizontal } from "lucide-react";
 import type { DateRange, SortMode } from "@/lib/filter-events";
 import { REGIONS } from "@/lib/regions";
 import { cn } from "@/lib/utils";
-
-export type ViewMode = "list" | "map";
 
 const DATE_OPTIONS: { value: DateRange; label: string }[] = [
   { value: "upcoming", label: "Any time" },
@@ -43,14 +40,13 @@ function Select<T extends string>({ label, value, onChange, options, counts }: {
 /** One row of controls for the opportunities list; phones move most of it into the Filters panel. */
 export function Toolbar({
   query, setQuery, dateRange, setDateRange, sort, setSort, region, setRegion, regionCounts,
-  showSaved, setShowSaved, savedCount, view, setView, canMap, onOpenSheet, sheetCount,
+  showSaved, setShowSaved, savedCount, onOpenSheet, sheetCount,
 }: {
   query: string; setQuery: (value: string) => void;
   dateRange: DateRange; setDateRange: (value: DateRange) => void;
   sort: SortMode; setSort: (value: SortMode) => void;
   region: string; setRegion: (value: string) => void; regionCounts: Record<string, number>;
   showSaved: boolean; setShowSaved: (value: boolean) => void; savedCount: number;
-  view: ViewMode; setView: (value: ViewMode) => void; canMap: boolean;
   onOpenSheet: () => void; sheetCount: number;
 }) {
   const searchRef = useRef<HTMLInputElement>(null);
@@ -91,18 +87,6 @@ export function Toolbar({
         {sheetCount ? <span className="flex size-5 items-center justify-center rounded-full bg-primary text-[11px] font-semibold text-primary-foreground">{sheetCount}</span> : null}
       </button>
 
-      {canMap ? (
-        <div className="flex h-11 shrink-0 items-center rounded-full border border-border bg-card p-1">
-          {([["list", LayoutGrid, "List view"], ["map", Map, "Map view"]] as const).map(([value, Icon, label]) => (
-            <button key={value} type="button" onClick={() => setView(value)} aria-pressed={view === value} aria-label={label}
-              className={cn("relative flex h-full items-center gap-1.5 rounded-full px-2.5 text-sm font-medium transition-colors sm:px-3",
-                view === value ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground")}>
-              {view === value ? <motion.span layoutId="view-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", bounce: 0, duration: 0.3 }} /> : null}
-              <Icon className="relative size-4" aria-hidden /><span className="relative hidden sm:inline">{label.split(" ")[0]}</span>
-            </button>
-          ))}
-        </div>
-      ) : null}
     </div>
   );
 }

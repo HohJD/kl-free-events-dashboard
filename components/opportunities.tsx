@@ -3,24 +3,23 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { CalendarPlus, X } from "lucide-react";
+import { X } from "lucide-react";
 import type { Event } from "@/lib/events";
 import type { Resource } from "@/lib/resources";
 import { malaysiaDay, type DateRange, type SortMode } from "@/lib/filter-events";
 import { forStudents } from "@/lib/event-discovery";
-import { REGIONS, eventRegion, filterRegion } from "@/lib/regions";
+import { REGIONS, eventRegion } from "@/lib/regions";
 import {
-  KIND_EMOJI, KIND_LABELS, KIND_ORDER, countByKind, eventsOf, filterOpportunities, fromEvent, fromResource,
+  KIND_LABELS, KIND_ORDER, countByKind, eventsOf, filterOpportunities, fromEvent, fromResource,
   type OpportunityKind,
 } from "@/lib/opportunities";
 import { reminderUrl } from "@/lib/calendar";
 import { useSaved, type SavedEntry } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
 import { Hero, type HeroStats } from "./hero";
-import { Toolbar, type ViewMode } from "./toolbar";
+import { Toolbar } from "./toolbar";
 import { FilterSheet } from "./filter-sheet";
 import { OpportunityCard } from "./opportunity-card";
-import { MapSection } from "./map-section";
 import { BackToTop } from "./back-to-top";
 
 interface OpportunitiesProps {
@@ -41,7 +40,6 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   const [sort, setSort] = useState<SortMode>("recommended");
   const [source, setSource] = useState("all");
   const [showSaved, setShowSaved] = useState(false);
-  const [view, setView] = useState<ViewMode>("list");
   const [sheetOpen, setSheetOpen] = useState(false);
   const [limit, setLimit] = useState(PAGE);
   const [today, setToday] = useState(() => malaysiaDay(new Date(generatedAt)));
@@ -94,7 +92,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   // Load the next page well before the visitor reaches the end, one page per approach,
   // so new cards are already laid out off-screen and the bottom of the page never jumps.
   const more = useRef<HTMLDivElement>(null);
-  const hasMore = view === "list" && shown.length > limit;
+  const hasMore = shown.length > limit;
   useEffect(() => {
     const node = more.current;
     if (!hasMore || !node || !("IntersectionObserver" in window)) return;
@@ -141,8 +139,6 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     setQuery(""); setSource("all"); setDateRange("upcoming"); setShowSaved(false); setKind("all"); chooseRegion("all"); setSort("recommended");
   };
 
-  const mapEvents = filterRegion(eventsOf(shown), region);
-  const canMap = kind === "all" || kind === "event" || kind === "hackathon";
 
   return (
     <div className="min-h-screen bg-background">
@@ -157,7 +153,6 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
                 <button key={value} type="button" onClick={() => chooseKind(value)} aria-pressed={on}
                   className={cn("chip", on && "font-semibold text-primary-foreground hover:text-primary-foreground")}>
                   {on ? <motion.span layoutId="kind-pill" className="absolute inset-0 rounded-full bg-primary" transition={{ type: "spring", bounce: 0.25, duration: 0.4 }} /> : null}
-                  {value !== "all" ? <span className="relative mr-1.5" aria-hidden>{KIND_EMOJI[value]}</span> : null}
                   <span className="relative">{value === "all" ? "All" : KIND_LABELS[value].many}</span>
                   <span className="chip-count relative">{count}</span>
                 </button>
@@ -170,7 +165,6 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
           sort={sort} setSort={setSort}
           region={region} setRegion={chooseRegion} regionCounts={regionCounts}
           showSaved={showSaved} setShowSaved={setShowSaved} savedCount={savedIds.size}
-          view={view} setView={setView} canMap={canMap}
           onOpenSheet={() => setSheetOpen(true)}
           sheetCount={[region !== "all", source !== "all", showSaved, sort !== "recommended", dateRange !== "upcoming"].filter(Boolean).length}
         />
@@ -186,9 +180,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
           <p className="mb-3 text-xs text-muted-foreground" aria-live="polite">
             <span className="font-medium text-foreground">{shown.length}</span> {shown.length === 1 ? "result" : "results"}
           </p>
-          {view === "map" && canMap ? (
-            <MapSection events={mapEvents} />
-          ) : shown.length ? (
+          {shown.length ? (
             <div className="grid items-stretch gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {shown.slice(0, limit).map((row, index) => (
                 <OpportunityCard key={row.id} row={row} today={today} index={index} saved={savedIds.has(row.id) || savedIds.has(row.link)} onToggleSave={toggleSaved} />
@@ -196,8 +188,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
             </div>
           ) : (
             <div className="flex flex-col items-center rounded-3xl border border-dashed border-border bg-card px-6 py-16 text-center">
-              <p className="text-4xl" aria-hidden>🔍</p>
-              <h2 className="mt-2 text-lg font-semibold tracking-tight">Nothing matches yet</h2>
+              <h2 className="text-lg font-semibold tracking-tight">Nothing matches yet</h2>
               <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
                 Try another type, place or date. Only listings that are confirmed free show up here.
               </p>
@@ -219,10 +210,10 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
           <motion.div role="status" initial={{ opacity: 0, y: 24, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.96 }}
             transition={{ type: "spring", bounce: 0.25, duration: 0.4 }}
             className="toast fixed inset-x-4 z-[55] mx-auto flex max-w-sm items-center gap-2 rounded-full bg-foreground p-1.5 pl-5 text-background shadow-xl">
-            <p className="min-w-0 flex-1 text-sm"><span className="font-semibold">Tracked ✨</span> <span className="line-clamp-1 opacity-70">{toast.title}</span></p>
+            <p className="min-w-0 flex-1 text-sm"><span className="font-semibold">Tracked</span> <span className="line-clamp-1 opacity-70">{toast.title}</span></p>
             {toast.calendar ? (
               <a href={toast.calendar} target="_blank" rel="noopener noreferrer" className="btn bg-background text-foreground">
-                <CalendarPlus className="size-4" aria-hidden /> Remind me
+                Remind me
               </a>
             ) : (
               <Link href="/saved" className="btn bg-background text-foreground">Open</Link>

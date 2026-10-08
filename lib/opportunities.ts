@@ -32,7 +32,7 @@ export interface Opportunity {
   note?: string;
   status?: string;
   source: string;
-  /** Category used by the map and the source filter (events only). */
+  /** Event category (events only). */
   category?: string;
   event?: Event;
 }
@@ -46,11 +46,6 @@ export const KIND_LABELS: Record<OpportunityKind, { one: string; many: string }>
   internship: { one: "Internship", many: "Internships" },
   graduate: { one: "Graduate role", many: "Graduate roles" },
   tool: { one: "Free tool", many: "Free tools" },
-};
-
-/** A friendly face for each kind: chips, card thumbnails and the tracker. */
-export const KIND_EMOJI: Record<OpportunityKind, string> = {
-  event: "🎉", hackathon: "🏆", scholarship: "🎓", internship: "💼", graduate: "🚀", tool: "🧰",
 };
 
 export function fromEvent(event: Event): Opportunity {
@@ -169,7 +164,7 @@ export function countByKind(rows: Opportunity[]): Record<string, number> {
   return counts;
 }
 
-/** Events only: what the map and the state counts use. */
+/** Events only: what the state counts use. */
 export function eventsOf(rows: Opportunity[]): Event[] {
   return rows.flatMap((row) => (row.event ? [row.event] : []));
 }

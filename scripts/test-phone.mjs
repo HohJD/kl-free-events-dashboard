@@ -56,19 +56,14 @@ try {
       await page.getByRole('dialog').getByRole('button', { name: 'Clear all' }).click();
       await page.getByRole('dialog').getByRole('button', { name: /^Show/ }).click();
 
-      // Track two things, use the toast, then switch type and view.
+      // Track two things, use the toast, then switch type.
       await page.getByRole('button', { name: /^Track / }).first().click();
       await page.getByRole('status').waitFor();
       await noOverflow('toast');
       if (runs === 0) await page.screenshot({ path: join(output, `phone-toast-${width}-${theme}.png`) });
       await page.getByRole('navigation', { name: 'Type' }).getByRole('button', { name: /^Scholarships/ }).click();
       await page.getByRole('button', { name: /^Track / }).first().click();
-      await page.getByRole('button', { name: 'Map view', exact: true }).click().catch(() => {});
       await page.getByRole('navigation', { name: 'Type' }).getByRole('button', { name: /^All/ }).click();
-      await page.getByRole('button', { name: 'Map view', exact: true }).click();
-      await page.locator('.leaflet-container').waitFor();
-      await noOverflow('map');
-      await page.getByRole('button', { name: 'List view', exact: true }).click();
 
       // Scroll to the very bottom like a thumb would: nothing on screen may jump, and once there it must hold still.
       await page.evaluate(() => {

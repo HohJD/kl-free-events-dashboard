@@ -75,15 +75,14 @@ try {
       await state.selectOption('perlis');
       if (width < 768) await page.getByRole('dialog').getByRole('button', { name: /^Show/ }).click();
       await page.waitForTimeout(100);
-      await page.getByRole('button', { name: 'Map view', exact: true }).click();
-      await page.locator('.leaflet-container').waitFor();
-      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'Map overflow');
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), 'State filter overflow');
+      assert.equal(await page.locator('.leaflet-container').count(), 0, 'Map removed');
       assert.deepEqual(errors, [], `Browser errors at ${theme}/${width}`);
       assert.deepEqual(forbiddenRequests, [], 'Retired upload/auth/model services still loaded');
       await context.close();
     }
   }
-  console.log(`Passed ${checked} layouts (all + scholarships), all state options, empty states and map. No upload/auth service calls. Screenshots: ${output}`);
+  console.log(`Passed ${checked} layouts (all + scholarships), all state options and empty states. No upload/auth service calls. Screenshots: ${output}`);
 } finally {
   await browser.close();
 }

@@ -35,12 +35,11 @@ export function SiteHeader() {
             </span>
           </Link>
           <nav aria-label="Sections" className="ml-auto hidden items-center gap-1 md:flex">
-            {SECTIONS.map(({ href, label, icon: Icon }) => (
+            {SECTIONS.map(({ href, label }) => (
               <Link key={href} href={href} aria-current={active === href ? "page" : undefined}
                 className={cn("relative flex h-9 items-center gap-2 rounded-full px-3.5 text-sm font-semibold transition-colors",
                   active === href ? "text-foreground" : "text-muted-foreground hover:text-foreground")}>
                 {active === href ? <motion.span layoutId="nav-pill" className="absolute inset-0 rounded-full bg-muted" transition={{ type: "spring", bounce: 0, duration: 0.35 }} /> : null}
-                <Icon className="relative size-4" aria-hidden />
                 <span className="relative">{label}</span>
                 {href === "/saved" && open ? <span className="relative text-xs tabular-nums text-muted-foreground">{open}</span> : null}
               </Link>
