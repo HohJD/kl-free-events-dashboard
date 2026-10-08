@@ -3,7 +3,7 @@ import { Bricolage_Grotesque, Instrument_Sans, IBM_Plex_Mono } from "next/font/g
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Providers } from "./providers";
-import { SiteHeader, MobileTabs } from "@/components/site-header";
+import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/footer";
 
 const display = Bricolage_Grotesque({
@@ -79,7 +79,6 @@ export default function RootLayout({
             {children}
             <Footer />
           </div>
-          <MobileTabs />
         </Providers>
       </body>
     </html>
