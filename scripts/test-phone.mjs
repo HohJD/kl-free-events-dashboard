@@ -101,9 +101,11 @@ try {
       assert.equal(await page.locator('[role=tabpanel] > li').count(), 2, 'tracked items listed, expired ones cleared');
       assert.equal(await page.locator('[role=tabpanel] > li', { hasText: /Past event|Old done item/ }).count(), 0, 'expired and done items removed');
       assert.equal(await page.evaluate(() => JSON.parse(localStorage.getItem('free-things-saved-v1')).length), 2, 'storage pruned');
-      // Register/Apply opens the organiser's page in a new tab and moves the card to "Signed up".
+      // Opening the organiser is not proof of registration; completion is explicit.
       const [popup] = await Promise.all([page.waitForEvent('popup'), page.locator('[role=tabpanel] > li').first().getByRole('link', { name: /^(Register|Apply|Get it)/ }).click()]);
       await popup.close();
+      assert.equal(await page.locator('[role=tabpanel] > li').count(), 2, 'opening a link does not mark registration complete');
+      await page.locator('[role=tabpanel] > li').first().getByRole('button', { name: 'Mark as signed up' }).click();
       await page.getByRole('tab', { name: /Signed up/ }).click();
       assert.equal(await page.locator('[role=tabpanel] > li').count(), 1, 'signed-up item listed');
       await page.locator('[role=tabpanel] > li').first().getByRole('button', { name: 'Not yet' }).click();

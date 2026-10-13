@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import type { OpportunityKind } from "@/lib/opportunities";
 import { statusOf, useSaved } from "@/lib/use-saved";
 import { daysUntil, nextUp } from "@/lib/tracker";
 
@@ -21,7 +22,7 @@ const fade = (delay: number) => ({
 });
 
 /** Headline plus the visitor's own week: what they track, what's next. */
-export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
+export function Hero({ stats, today, onExplore }: { stats: HeroStats; today: string; onExplore: (kind: OpportunityKind | "week") => void }) {
   const { saved, loaded } = useSaved();
   const updated = stats.generatedAt.toLocaleString("en-MY", {
     day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur",
@@ -37,15 +38,28 @@ export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
         <span className="relative flex size-2" aria-hidden><span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" /><span className="relative inline-flex size-2 rounded-full bg-primary" /></span>
         <span>{stats.total.toLocaleString("en-MY")} free opportunities<span className="max-[399px]:hidden"> · Updated {updated}</span></span>
       </motion.p>
-      <motion.h1 {...fade(0.05)} className="mt-4 text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl md:text-7xl">
+      <motion.h1 {...fade(0.05)} className="mt-4 text-[2rem] min-[375px]:text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl md:text-7xl">
         Your student life,<br className="sm:hidden" />{" "}
         <span className="squiggle">sorted.<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden><path d="M3 14 C 40 4, 70 18, 105 9 S 170 4, 197 11" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /></svg></span>
       </motion.h1>
       <motion.p {...fade(0.1)} className="page-sub">
-        Free events, hackathons, scholarships and internships across Malaysia. Track what matters and get reminded before it closes.
+        Events, funding, careers and free tools. Your next opportunity in Malaysia starts here.
       </motion.p>
 
-      <motion.div {...fade(0.15)} className="mt-6 sm:mt-8">
+      <motion.div {...fade(0.12)} className="mt-6 grid grid-cols-2 gap-2 lg:grid-cols-4" aria-label="Explore by goal">
+        {([
+          ["week", "Make plans", "Events this week"],
+          ["scholarship", "Fund your studies", "Scholarships & support"],
+          ["internship", "Start your career", "Find an internship"],
+          ["tool", "Build something", "Free tools for your ideas"],
+        ] as const).map(([kind, title, description]) => (
+          <button key={kind} type="button" onClick={() => onExplore(kind)} className="group rounded-2xl border border-border bg-card p-3 sm:p-4 text-left transition-colors hover:border-foreground/40 hover:bg-muted">
+            <span className="flex items-start justify-between gap-2 text-sm font-semibold">{title}<ArrowRight className="mt-0.5 size-4 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden /></span>
+            <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{description}</span>
+          </button>
+        ))}
+      </motion.div>
+      <motion.div {...fade(0.15)} className="mt-4 sm:mt-8">
         {loaded && saved.length ? (
           <div className="grid grid-cols-3 gap-2 sm:max-w-2xl sm:gap-3">
             <Link href="/saved" className="stat">
@@ -62,9 +76,9 @@ export function Hero({ stats, today }: { stats: HeroStats; today: string }) {
             </Link>
           </div>
         ) : (
-          <div className="flex max-w-xl items-center gap-3 rounded-3xl border border-dashed border-input bg-card p-3.5 sm:p-4">
+          <div className="flex max-w-xl items-center gap-3 sm:rounded-3xl sm:border sm:border-dashed sm:border-input sm:bg-card sm:p-4">
             <p className="min-w-0 text-sm leading-snug text-muted-foreground">
-              <span className="font-medium text-foreground">Start your tracker.</span> Tap <span className="font-medium text-foreground">Track</span> on anything below to get countdowns and calendar reminders.
+              Tap <span className="font-medium text-foreground">Track</span> to save an opportunity. No account needed.
             </p>
           </div>
         )}

@@ -47,9 +47,9 @@ export function SavedView() {
   };
 
   return (
-    <main className="page-shell pb-16 pt-8 sm:pt-12">
+    <main id="main-content" tabIndex={-1} className="page-shell pb-16 pt-8 sm:pt-12">
       <h1 className="page-title">My tracker</h1>
-      <p className="page-sub">Save it, then sign up on the organiser&apos;s page. Past events and closed deadlines clear themselves. Kept on this device, no account needed.</p>
+      <p className="page-sub">Save an opportunity, apply on the organiser’s page, then mark it as signed up here. Your tracker stays on this device; past events and deadlines clear automatically.</p>
 
       {!loaded ? null : !saved.length ? (
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
@@ -119,8 +119,7 @@ export function SavedView() {
                     {row.note ? <p className="mt-0.5 line-clamp-1 text-[13px] text-muted-foreground">{row.note}</p> : null}
                     <div className="mt-auto flex items-center gap-1 pt-3">
                       {tab === "interested" ? (
-                        // Signing up happens on the organiser's page; opening it moves the card to "Signed up".
-                        <a href={row.href} target="_blank" rel="noopener noreferrer" onClick={() => setStatus(row.id, "applied")} className="btn btn-primary">
+                        <a href={row.href} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                           {signUpLabel(row)} <ArrowUpRight className="size-4" aria-hidden />
                         </a>
                       ) : (
@@ -142,6 +141,7 @@ export function SavedView() {
                         </button>
                       </span>
                     </div>
+                    {tab === "interested" ? <button type="button" onClick={() => setStatus(row.id, "applied")} className="btn btn-quiet mt-3 self-start text-xs">Mark as signed up</button> : null}
                   </motion.li>
                 );
               })}
@@ -151,7 +151,7 @@ export function SavedView() {
             <p className="mt-6 rounded-3xl border border-dashed border-border bg-card px-4 py-10 text-center text-sm text-muted-foreground">
               {tab === "interested"
                 ? <>Nothing waiting. <Link href="/" className="font-medium text-foreground underline underline-offset-4">Find something new</Link></>
-                : "Tap Register or Apply on a saved item and it moves here."}
+                : "After registering or applying, choose ‘Mark as signed up’ on your saved item."}
             </p>
           ) : null}
         </>

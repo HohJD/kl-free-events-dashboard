@@ -107,7 +107,7 @@ function inDateRange(row: Opportunity, range: DateRange, today: string): boolean
   if (range === "all") return true;
   const end = row.endDate && row.endDate >= row.date ? row.endDate : row.date;
   // Rolling things (tools, internships, jobs with no deadline) always count as open.
-  if (!row.date) return range !== "past";
+  if (!row.date) return range === "upcoming" && row.isDeadline;
   const tomorrow = new Date(Date.parse(`${today}T00:00:00Z`) + 86400000).toISOString().slice(0, 10);
   const weekEnd = new Date(Date.parse(`${today}T00:00:00Z`) + 7 * 86400000).toISOString().slice(0, 10);
   switch (range) {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { BookmarkCheck, X } from "lucide-react";
 import type { DateRange, SortMode } from "@/lib/filter-events";
 import { REGIONS } from "@/lib/regions";
@@ -43,23 +43,35 @@ function Option({ active, onClick, children }: { active: boolean; onClick: () =>
 /** Phone-only panel holding the filters the desktop toolbar shows inline. */
 export function FilterSheet(props: FilterSheetProps) {
   const { open, onClose } = props;
+  const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
-    if (!open) return;
-    const onKey = (event: KeyboardEvent) => event.key === "Escape" && onClose();
+    const node = dialog.current;
+    if (!open || !node) return;
+    const previous = document.activeElement as HTMLElement | null;
+    node.showModal();
     const overflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    return () => { document.body.style.overflow = overflow; window.removeEventListener("keydown", onKey); };
-  }, [open, onClose]);
-  if (!open) return null;
+    return () => {
+      node.close();
+      document.body.style.overflow = overflow;
+      previous?.focus();
+    };
+  }, [open]);
   return (
-    <div className="fixed inset-0 z-[60] md:hidden" role="dialog" aria-modal="true" aria-labelledby="filter-title">
-      <button type="button" className="absolute inset-0 bg-black/40" aria-label="Close filters" onClick={onClose} />
+    <dialog ref={dialog} onKeyDown={(event) => {
+      if (event.key !== "Tab") return;
+      const controls = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button:not([tabindex="-1"]), select, input, a[href]'));
+      const first = controls[0];
+      const last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    }} onCancel={(event) => { event.preventDefault(); onClose(); }} className="fixed inset-0 m-0 h-[100dvh] max-h-none w-full max-w-none border-0 bg-transparent p-0 text-foreground backdrop:bg-black/40" aria-labelledby="filter-title">
+      <button type="button" className="absolute inset-0" tabIndex={-1} aria-label="Close filters" onClick={onClose} />
       <div className="sheet absolute inset-x-0 bottom-0 flex max-h-[85vh] flex-col rounded-t-3xl border-t border-border bg-background">
         <span className="mx-auto mt-2.5 h-1.5 w-10 shrink-0 rounded-full bg-muted-foreground/30" aria-hidden />
         <div className="flex items-center justify-between px-4 pb-2 pt-1">
           <h2 id="filter-title" className="text-lg font-semibold tracking-tight">Filters</h2>
-          <button type="button" onClick={onClose} aria-label="Close" className="flex size-11 items-center justify-center rounded-xl hover:bg-muted"><X className="size-5" /></button>
+          <button type="button" onClick={onClose} aria-label="Close" autoFocus className="flex size-11 items-center justify-center rounded-xl hover:bg-muted"><X className="size-5" /></button>
         </div>
         <div className="flex-1 space-y-6 overflow-y-auto px-4 py-4">
           <section>
@@ -120,6 +132,6 @@ export function FilterSheet(props: FilterSheetProps) {
           </button>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }

@@ -66,6 +66,7 @@ export default function RootLayout({
         )}
       >
         <Providers>
+          <a href="#main-content" className="skip-link">Skip to content</a>
           <SiteHeader />
           <div className="pb-24 md:pb-0">
             {children}

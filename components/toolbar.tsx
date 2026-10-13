@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { BookmarkCheck, Search, SlidersHorizontal } from "lucide-react";
+import { BookmarkCheck, Search, SlidersHorizontal, X } from "lucide-react";
 import type { DateRange, SortMode } from "@/lib/filter-events";
 import { REGIONS } from "@/lib/regions";
 import { cn } from "@/lib/utils";
@@ -52,7 +52,7 @@ export function Toolbar({
   const searchRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key === "/" && document.activeElement?.tagName !== "INPUT") { event.preventDefault(); searchRef.current?.focus(); }
+      if (event.key === "/" && !event.ctrlKey && !event.metaKey && !event.altKey && !(event.target instanceof HTMLElement && event.target.closest("input, textarea, select, [contenteditable=true], dialog"))) { event.preventDefault(); searchRef.current?.focus(); }
       if (event.key === "Escape") searchRef.current?.blur();
     };
     window.addEventListener("keydown", onKey);
@@ -67,7 +67,8 @@ export function Toolbar({
       <div className="relative min-w-0 flex-1 basis-0 md:basis-56">
         <Search className="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
         <input ref={searchRef} enterKeyHint="search" value={query} onChange={(event) => setQuery(event.target.value)} aria-label="Search listings"
-          placeholder="Search" className="field pl-11 pr-4" />
+          placeholder="Search opportunities" className="field pl-11 pr-11" />
+        {query ? <button type="button" aria-label="Clear search" onClick={() => { setQuery(""); searchRef.current?.focus(); }} className="absolute right-0 top-0 flex size-11 items-center justify-center rounded-full text-muted-foreground hover:text-foreground"><X className="size-4" aria-hidden /></button> : null}
       </div>
 
       <div className="hidden items-center gap-2 md:flex">

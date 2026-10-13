@@ -113,7 +113,7 @@ export function useSaved() {
 
 export const STATUS_LABELS: Record<TrackStatus, { title: string; hint: string }> = {
   interested: { title: "Saved", hint: "Not signed up yet" },
-  applied: { title: "Signed up", hint: "Opened the registration or application" },
+  applied: { title: "Signed up", hint: "You confirmed registration or application" },
 };
 
 export const statusOf = (row: SavedEntry): TrackStatus => row.status ?? "interested";

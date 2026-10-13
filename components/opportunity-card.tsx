@@ -29,6 +29,7 @@ function when(row: Opportunity, today: string): { text: string; urgent: boolean 
     if (left <= 14) return { text: `${left}d left`, urgent: true };
     return { text: `Closes ${formatDate(row.date)}`, urgent: false };
   }
+  if (!row.date) return { text: "Date to be confirmed", urgent: false };
   if (row.date === today) return { text: `Today${row.time ? `, ${formatTime(row.time)}` : ""}`, urgent: true };
   const range = row.endDate && row.endDate !== row.date ? ` to ${formatDate(row.endDate)}` : "";
   const time = formatTime(row.time);
@@ -84,10 +85,23 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
           {row.value && context ? " · " : ""}{context}
         </p>
       ) : null}
+      {row.summary ? <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{row.summary}</p> : null}
+      {row.eligibility || row.note || row.summary ? (
+        <details className="mt-2 text-sm">
+          <summary className="flex min-h-11 cursor-pointer items-center font-medium underline decoration-border underline-offset-4">Details & eligibility</summary>
+          <div className="space-y-3 border-t border-border pb-2 pt-3 text-sm leading-relaxed text-muted-foreground">
+            {row.summary ? <p>{row.summary}</p> : null}
+            <p><span className="font-medium text-foreground">Who can join: </span>{row.eligibility || "Check eligibility with the organiser."}</p>
+            {row.note ? <p><span className="font-medium text-foreground">Admission: </span>{row.note}</p> : null}
+            {row.date ? <p><span className="font-medium text-foreground">{row.isDeadline ? "Deadline" : "Date"}: </span>{formatDate(row.date)}{row.time ? `, ${formatTime(row.time)} (MYT)` : ""}</p> : null}
+            <p><span className="font-medium text-foreground">Source: </span>{row.source}</p>
+          </div>
+        </details>
+      ) : null}
       {row.status === "closed" ? <p className="mt-1 text-xs font-semibold text-destructive">Registration closed</p> : null}
 
       <div className="mt-auto flex items-center gap-1 pt-4">
-        <a href={row.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+        <a href={row.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary" aria-label={`${row.kind === "tool" ? "Get" : row.isDeadline ? "Apply for" : "View"} ${row.title} (opens in a new tab)`}>
           {row.kind === "tool" ? "Get it" : row.isDeadline ? "Apply" : "View"} <ArrowUpRight className="size-4" aria-hidden />
         </a>
         <SaveButton saved={saved} onToggle={onToggleSave} entry={entry} />

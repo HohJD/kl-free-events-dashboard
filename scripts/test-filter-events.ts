@@ -70,7 +70,12 @@ const base = { kind: 'all' as const, query: '', region: 'all', dateRange: 'upcom
 assert.equal(filterOpportunities(pool, base, '2026-09-08').length, 3);
 assert.deepEqual(filterOpportunities(pool, { ...base, kind: 'internship' }, '2026-09-08').map(r => r.title), ['Data intern']);
 assert.equal(filterOpportunities(pool, { ...base, region: 'penang' }, '2026-09-08').length, 1, 'nationwide scholarships survive a state filter');
-assert.equal(filterOpportunities(pool, { ...base, dateRange: 'today' }, '2026-09-08').length, 1, 'rolling roles count as open');
+assert.equal(filterOpportunities(pool, { ...base, dateRange: 'today' }, '2026-09-08').length, 0, 'undated roles do not match a specific day');
 assert.equal(filterOpportunities(pool, { ...base, query: 'yayasan' }, '2026-09-08').length, 1);
 assert.equal(KIND_LABELS.graduate.many, 'Graduate roles');
 console.log('Focus/category, state, calendar, stale expiry and Malaysia-date regression tests passed.');
+
+assert.equal(filterOpportunities([{ ...eventRow, date: '' }], base, '2026-09-08').length, 0, 'undated events do not match upcoming');
+for (const dateRange of ['today', 'tomorrow', 'week', 'month'] as const) {
+  assert.equal(filterOpportunities([internship], { ...base, dateRange }, '2026-09-08').length, 0, 'undated roles do not match a date window');
+}

@@ -40,6 +40,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   const [sort, setSort] = useState<SortMode>("recommended");
   const [source, setSource] = useState("all");
   const [showSaved, setShowSaved] = useState(false);
+  const [urlReady, setUrlReady] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [limit, setLimit] = useState(PAGE);
   const [today, setToday] = useState(() => malaysiaDay(new Date(generatedAt)));
@@ -69,15 +70,40 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     return () => window.removeEventListener("hashchange", redirect);
   }, []);
 
-  // Read /?type= & /?state= once so old links and the tab bar keep working.
+  // Restore the complete discovery view on reload, shared links and browser navigation.
   useEffect(() => {
-    const params = new URL(window.location.href).searchParams;
-    const type = params.get("type");
-    if (type && (KIND_ORDER as string[]).includes(type)) setKind(type as OpportunityKind);
-    const state = params.get("state");
-    if (state && Object.hasOwn(REGIONS, state)) setRegion(state);
-    if (params.get("category") === "Hackathon") setKind("hackathon");
+    const restore = () => {
+      const params = new URL(window.location.href).searchParams;
+      const type = params.get("type");
+      setKind(type && (KIND_ORDER as string[]).includes(type) ? type as OpportunityKind : params.get("category") === "Hackathon" ? "hackathon" : "all");
+      const state = params.get("state");
+      setRegion(state && Object.hasOwn(REGIONS, state) ? state : "all");
+      setQuery(params.get("q") || "");
+      const date = params.get("when");
+      setDateRange(date && ["today", "tomorrow", "week", "month"].includes(date) ? date as DateRange : "upcoming");
+      setSort(params.get("sort") === "soonest" ? "soonest" : "recommended");
+      setShowSaved(params.get("tracked") === "1");
+      setUrlReady(true);
+    };
+    restore();
+    window.addEventListener("popstate", restore);
+    return () => window.removeEventListener("popstate", restore);
   }, []);
+
+  useEffect(() => {
+    if (!urlReady) return;
+    const url = new URL(window.location.href);
+    const values = { type: kind === "all" ? "" : kind, state: region === "all" ? "" : region,
+      q: query, when: dateRange === "upcoming" ? "" : dateRange,
+      sort: sort === "recommended" ? "" : sort, tracked: showSaved ? "1" : "" };
+    for (const [key, value] of Object.entries(values)) {
+      if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
+    }
+    url.searchParams.delete("category");
+    window.history.replaceState(window.history.state, "", url);
+  }, [urlReady, kind, region, query, dateRange, sort, showSaved]);
+
+  useEffect(() => () => window.clearTimeout(toastTimer.current), []);
 
   const all = useMemo(() => [...events.map(fromEvent), ...resources.map(fromResource)], [events, resources]);
   // Built for uni students: events outside tech, business, careers and hackathons stay off the board.
@@ -105,7 +131,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     return () => observer.disconnect();
   }, [hasMore, limit]);
   // Counts ignore the filter they label, so each chip shows what picking it would give.
-  const upcoming = useMemo(() => filterOpportunities(inFocus, { ...filters, kind: "all", query: "", source: "all", onlySaved: false }, today), [inFocus, filters, today]);
+  const upcoming = useMemo(() => filterOpportunities(inFocus, { ...filters, kind: "all", query: "", region: "all", dateRange: "upcoming", source: "all", onlySaved: false }, today), [inFocus, filters, today]);
   const kindCounts = useMemo(() => countByKind(filterOpportunities(inFocus, { ...filters, kind: "all", onlySaved: false }, today)), [inFocus, filters, today]);
   const regionCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -125,28 +151,35 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     generatedAt: new Date(generatedAt),
   };
 
-  const setUrl = (key: string, value: string | null) => {
-    const url = new URL(window.location.href);
-    if (value) url.searchParams.set(key, value); else url.searchParams.delete(key);
-    window.history.replaceState(null, "", url);
-  };
-  const chooseKind = (value: OpportunityKind | "all") => {
-    setKind(value);
-    setUrl("type", value === "all" ? null : value);
-  };
-  const chooseRegion = (value: string) => { setRegion(value); setUrl("state", value === "all" ? null : value); };
+  const chooseKind = (value: OpportunityKind | "all") => setKind(value);
+  const chooseRegion = (value: string) => setRegion(value);
   const clearAll = () => {
-    setQuery(""); setSource("all"); setDateRange("upcoming"); setShowSaved(false); setKind("all"); chooseRegion("all"); setSort("recommended");
+    setQuery(""); setSource("all"); setDateRange("upcoming"); setShowSaved(false); setKind("all"); setRegion("all"); setSort("recommended");
   };
+  const startWith = (value: OpportunityKind | "week") => {
+    clearAll();
+    if (value === "week") { setDateRange("week"); setKind("event"); setSort("soonest"); }
+    else setKind(value);
+    document.getElementById("discover")?.scrollIntoView({ block: "start" });
+  };
+  const dateLabels: Record<string, string> = { today: "Today", tomorrow: "Tomorrow", week: "This week", month: "This month" };
+  const activeFilters = [
+    ...(kind !== "all" ? [{ label: KIND_LABELS[kind].many, clear: () => setKind("all") }] : []),
+    ...(query ? [{ label: `Search: ${query}`, clear: () => setQuery("") }] : []),
+    ...(region !== "all" ? [{ label: REGIONS[region], clear: () => setRegion("all") }] : []),
+    ...(dateRange !== "upcoming" ? [{ label: dateLabels[dateRange], clear: () => setDateRange("upcoming") }] : []),
+    ...(showSaved ? [{ label: "Tracked only", clear: () => setShowSaved(false) }] : []),
+    ...(sort !== "recommended" ? [{ label: "Soonest first", clear: () => setSort("recommended") }] : []),
+  ];
 
 
   return (
     <div className="min-h-screen bg-background">
-      <main>
-        <Hero stats={stats} today={today} />
-        <div className="sticky top-0 z-30 border-b border-border bg-background/85 pt-2 backdrop-blur-lg backdrop-saturate-150 md:top-16">
+      <main id="main-content" tabIndex={-1}>
+        <Hero stats={stats} today={today} onExplore={startWith} />
+        <div id="discover" className="scroll-mt-0 md:scroll-mt-16 sticky top-0 z-30 border-b border-border bg-background/85 pt-2 backdrop-blur-lg backdrop-saturate-150 md:top-16">
           <nav aria-label="Type" className="no-scrollbar fade-x page-shell flex items-center gap-1 overflow-x-auto pb-2">
-            {(["all", ...KIND_ORDER.filter((value) => kindCounts[value] || kind === value)] as const).map((value) => {
+            {(["all", ...KIND_ORDER] as const).map((value) => {
               const on = kind === value;
               const count = value === "all" ? Object.values(kindCounts).reduce((sum, n) => sum + n, 0) : kindCounts[value] ?? 0;
               return (
@@ -171,15 +204,27 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
         </div>
         <FilterSheet open={sheetOpen} onClose={() => setSheetOpen(false)} region={region} setRegion={chooseRegion} regionCounts={regionCounts}
           sort={sort} setSort={setSort} dateRange={dateRange} setDateRange={setDateRange} category={kind} setCategory={(value) => chooseKind(value as OpportunityKind | "all")}
-          categories={[]} categoryCounts={kindCounts} categoryLabel="Type"
+          categories={KIND_ORDER} categoryCounts={kindCounts} categoryLabel="Type"
           categoryNames={Object.fromEntries(KIND_ORDER.map((value) => [value, KIND_LABELS[value].many]))}
           source={source} setSource={setSource} sources={[]} showSaved={showSaved} setShowSaved={setShowSaved}
           savedCount={savedIds.size} resultCount={shown.length} onClear={clearAll} />
 
         <div className="page-shell pb-16 pt-4">
-          <p className="mb-3 text-xs text-muted-foreground" aria-live="polite">
-            <span className="font-medium text-foreground">{shown.length}</span> {shown.length === 1 ? "result" : "results"}
-          </p>
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+            <h2 className="text-lg font-semibold tracking-tight">{kind === "all" ? "Explore opportunities" : KIND_LABELS[kind].many}</h2>
+            <p className="text-sm text-muted-foreground" aria-live="polite" aria-atomic="true">
+              <span className="font-medium text-foreground">{shown.length}</span> {shown.length === 1 ? "result" : "results"}
+            </p>
+          </div>
+          {activeFilters.length ? (
+            <div className="mb-4 flex flex-wrap items-center gap-2" aria-label="Active filters">
+              {activeFilters.map(({ label, clear }) => <button key={label} type="button" onClick={clear} aria-label={`Remove ${label} filter`} className="btn btn-quiet max-w-full text-xs">
+                <span className="truncate">{label}</span><X className="size-3.5 shrink-0" aria-hidden />
+              </button>)}
+              <button type="button" onClick={clearAll} className="btn text-muted-foreground underline underline-offset-4">Reset all</button>
+            </div>
+          ) : null}
+          {region !== "all" ? <p className="mb-4 text-xs text-muted-foreground">Includes nationwide, online and location-unconfirmed opportunities. Check the organiser’s page for the exact location.</p> : null}
           {shown.length ? (
             <div className="grid items-stretch gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {shown.slice(0, limit).map((row, index) => (
@@ -190,7 +235,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
             <div className="flex flex-col items-center rounded-3xl border border-dashed border-border bg-card px-6 py-16 text-center">
               <h2 className="text-lg font-semibold tracking-tight">Nothing matches yet</h2>
               <p className="mt-2 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                Try another type, place or date. Only listings that are confirmed free show up here.
+                Try a broader search or remove a filter. You can also explore another opportunity type above.
               </p>
               <button type="button" onClick={clearAll} className="btn btn-primary btn-lg mt-5">Clear search and filters</button>
             </div>
