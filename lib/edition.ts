@@ -26,7 +26,7 @@ export const EDITIONS: Record<Edition, EditionConfig> = {
     short: "UK",
     timezone: "Europe/London",
     allLabel: "All of the UK",
-    tagline: "Free events in Oxford & nearby, UK career opportunities and tools for your next idea. All times are UK local.",
+    tagline: "Oxford events, UK opportunities, useful tools. All times are UK local.",
   },
 };
 

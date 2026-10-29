@@ -28,7 +28,7 @@
 - Specific date windows exclude undated entries; undated application opportunities remain in Any time.
 
 ## Oxford discovery (October 29)
-- The UK edition has an Oxford desk linking to official careers, micro-internship and financial-support pages. These are reference links, not scraped opportunities or guaranteed entitlements.
+- User preference: keep the interface minimal and useful. No university website directory or Oxford desk panel. UK hero has three compact shortcuts; retain discovery collections, deadlines and tracking. University sources may still supply verified individual opportunities.
 - UK learning/culture/community events may appear after the existing publication gates; Malaysia retains its narrower category focus.
 - `focus=local|online|closing` round-trips through the URL. Local means the `oxford` region (includes Oxfordshire), not all nationwide/unknown rows. Closing means a dated application deadline within 14 days, excluding rolling entries.
 - Save the edition’s `timeZone` on each tracked item. UK reminders use Europe/London; expiry uses each saved item’s local day. Legacy entries without a timezone retain the Malaysian fallback.

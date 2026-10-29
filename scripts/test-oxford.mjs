@@ -22,7 +22,7 @@ try {
     await page.getByRole('button', { name: 'Remove Oxford filter', exact: true }).waitFor();
     await page.evaluate(() => document.fonts.ready);
     assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
-    assert.equal(await page.getByRole('complementary', { name: 'Oxford student essentials' }).locator('a').count(), 3);
+    assert.equal(await page.getByRole('complementary', { name: 'Oxford student essentials' }).count(), 0);
     for (const button of await collections.getByRole('button').all()) assert.ok((await button.boundingBox()).height >= 44);
     await page.waitForTimeout(700);
     await page.screenshot({ path: join(tmpdir(), `oxford-${theme}-${width}.png`), fullPage: false });
@@ -32,7 +32,7 @@ try {
     await page.reload();
     await collections.getByRole('button', { name: /^Closing in 14 days/, pressed: true }).waitFor();
     await page.getByRole('button', { name: 'Remove Closing in 14 days filter', exact: true }).click();
-    await page.getByRole('button', { name: /Between lectures/ }).click();
+    await page.getByRole('button', { name: 'This week', exact: true }).click();
     await page.waitForFunction(() => new URL(location.href).searchParams.get('focus') === 'local' && new URL(location.href).searchParams.get('when') === 'week');
     await page.getByRole('group', { name: 'Country', exact: true }).getByRole('button', { name: 'Malaysia', exact: true }).click();
     await collections.waitFor({ state: 'hidden' });
@@ -55,5 +55,5 @@ try {
   const calendar = page.locator('[role=tabpanel] a[href*="calendar.google.com"]');
   assert.equal(new URL(await calendar.getAttribute('href')).searchParams.get('ctz'), 'Europe/London');
   await context.close();
-  console.log('Oxford browser checks passed at 3 sizes in both themes: URL restoration, collections, country switch, official links and touch targets.');
+  console.log('Oxford browser checks passed at 3 sizes in both themes: URL restoration, collections, country switch, minimal layout and touch targets.');
 } finally { await browser.close(); }
