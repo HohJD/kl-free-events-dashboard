@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useMemo, useSyncExternalStore } from "react";
-import { malaysiaDay } from "./filter-events";
+import { localDay } from "./filter-events";
 
 export type SavedKind = "event" | "resource";
 
@@ -9,6 +9,7 @@ export type SavedKind = "event" | "resource";
 export type TrackStatus = "interested" | "applied";
 
 export interface SavedEntry {
+  timeZone?: string;
   id: string;
   kind: SavedKind;
   title: string;
@@ -53,9 +54,9 @@ function load(): SavedEntry[] {
     const raw = localStorage.getItem(KEY);
     const rows: SavedEntry[] = raw ? JSON.parse(raw) : [];
     if (Array.isArray(rows) && rows.length) {
-      const today = malaysiaDay();
+      const now = new Date();
       const valid = rows.filter((row) => row && row.id && row.kind);
-      const kept = valid.filter((row) => current(row, today));
+      const kept = valid.filter((row) => current(row, localDay(now, row.timeZone === "Europe/London" ? "Europe/London" : "Asia/Kuala_Lumpur")));
       // No database: the browser copy tidies itself, so past events don't pile up.
       if (kept.length !== rows.length) localStorage.setItem(KEY, JSON.stringify(kept));
       return kept;

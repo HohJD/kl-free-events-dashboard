@@ -12,8 +12,8 @@ const NOT_FOR_STUDENTS = /\b(mm2h|my second home|retire(e|ment)|homestay|propert
 const UNDER_18_ONLY = /ages? \d+ to (1[0-7])\b/i;
 
 /** Events a uni student would actually go to: focus categories, minus the obvious misfits. */
-export function forStudents(event: Event): boolean {
-  if (!FOCUS_CATEGORIES.includes(event.category)) return false;
+export function forStudents(event: Event, edition = "my"): boolean {
+  if (edition !== "uk" && !FOCUS_CATEGORIES.includes(event.category)) return false;
   if (UNDER_18_ONLY.test(event.eligibility || "")) return false;
   return !NOT_FOR_STUDENTS.test(event.name);
 }

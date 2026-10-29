@@ -6,6 +6,7 @@ import { eventRegion } from "./regions";
 export type OpportunityKind = "event" | "hackathon" | "scholarship" | "internship" | "graduate" | "tool";
 
 export interface Opportunity {
+  timeZone?: string;
   id: string;
   kind: OpportunityKind;
   title: string;
@@ -127,7 +128,21 @@ function inRegion(row: Opportunity, region: string): boolean {
   return row.state === region;
 }
 
+export type DiscoveryFocus = "all" | "local" | "online" | "closing";
+export const FOCUS_LABELS: Record<DiscoveryFocus, string> = { all: "Everything", local: "Oxford & nearby", online: "Online", closing: "Closing in 14 days" };
+
+export function matchesFocus(row: Opportunity, focus: DiscoveryFocus, today: string): boolean {
+  if (focus === "local") return row.state === "oxford";
+  if (focus === "online") return row.state === "online";
+  if (focus === "closing") {
+    const left = daysLeft(row, today);
+    return !row.alwaysOpen && left !== null && left >= 0 && left <= 14;
+  }
+  return true;
+}
+
 export interface OpportunityFilters {
+  focus?: DiscoveryFocus;
   kind: OpportunityKind | "all";
   query: string;
   region: string;
@@ -141,6 +156,7 @@ export interface OpportunityFilters {
 export function filterOpportunities(rows: Opportunity[], filters: OpportunityFilters, today = malaysiaDay()): Opportunity[] {
   const query = filters.query.trim().normalize("NFKC").toLowerCase();
   return rows
+    .filter((row) => matchesFocus(row, filters.focus || "all", today))
     .filter((row) => filters.kind === "all" || row.kind === filters.kind)
     .filter((row) => inDateRange(row, filters.dateRange, today))
     .filter((row) => inRegion(row, filters.region))

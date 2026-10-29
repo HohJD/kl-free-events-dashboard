@@ -217,3 +217,7 @@
 .opportunity-details[open] summary svg { transform: rotate(180deg); }
 .opportunity-card { row-gap: 0.25rem; }
 .goal-card:focus-visible { outline-offset: 4px; }
+
+.oxford-guide { background: #182d47; color: #f3f0e8; }
+.dark .oxford-guide { background: #dce4ec; color: #182d47; }
+.oxford-guide a:hover { text-decoration: underline; text-underline-offset: 4px; }

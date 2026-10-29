@@ -39,6 +39,7 @@ export function googleCalendarUrl(event: Event): string | null {
 }
 
 export interface Reminder {
+  timeZone?: string;
   title: string;
   /** YYYY-MM-DD */
   date: string;
@@ -69,7 +70,7 @@ export function reminderUrl(item: Reminder): string | null {
     text: item.isDeadline ? `Deadline: ${item.title}` : item.title,
     dates,
     details: item.isDeadline ? `Applications close today. Apply here:\n${item.link}` : item.link,
-    ctz: "Asia/Kuala_Lumpur",
+    ctz: item.timeZone === "Europe/London" ? "Europe/London" : "Asia/Kuala_Lumpur",
   });
   if (item.place && !item.isDeadline) params.set("location", item.place);
   return `https://calendar.google.com/calendar/render?${params.toString()}`;

@@ -11,7 +11,7 @@ import { EDITIONS, editionOf, type Edition } from "@/lib/edition";
 import { forStudents } from "@/lib/event-discovery";
 import { REGIONS, REGION_SLUGS, eventRegion } from "@/lib/regions";
 import {
-  KIND_LABELS, KIND_ORDER, countByKind, eventsOf, filterOpportunities, fromEvent, fromResource,
+  FOCUS_LABELS, matchesFocus, type DiscoveryFocus, KIND_LABELS, KIND_ORDER, countByKind, eventsOf, filterOpportunities, fromEvent, fromResource,
   type OpportunityKind,
 } from "@/lib/opportunities";
 import { reminderUrl } from "@/lib/calendar";
@@ -40,6 +40,7 @@ const PAGE = 24;
 export function Opportunities({ editions }: OpportunitiesProps) {
   const [edition, setEdition] = useState<Edition>("my");
   const { events, resources, generatedAt, sources } = editions[edition];
+  const [focus, setFocus] = useState<DiscoveryFocus>("all");
   const [kind, setKind] = useState<OpportunityKind | "all">("all");
   const [query, setQuery] = useState("");
   const [region, setRegion] = useState("all");
@@ -71,7 +72,7 @@ export function Opportunities({ editions }: OpportunitiesProps) {
   }, [edition]);
 
   // Editions have different location slugs; switching clears the state filter.
-  useEffect(() => setRegion("all"), [edition]);
+  const changeEdition = (value: Edition) => { setEdition(value); setRegion("all"); setFocus("all"); };
 
   // Old shared links pointed at the giveaway tab; they now land on the home page.
   useEffect(() => {
@@ -85,7 +86,10 @@ export function Opportunities({ editions }: OpportunitiesProps) {
   useEffect(() => {
     const restore = () => {
       const params = new URL(window.location.href).searchParams;
-      setEdition(editionOf(params.get("edition")));
+      const restoredEdition = editionOf(params.get("edition"));
+      setEdition(restoredEdition);
+      const view = params.get("focus");
+      setFocus(restoredEdition === "uk" && view && ["local", "online", "closing"].includes(view) ? view as DiscoveryFocus : "all");
       const type = params.get("type");
       setKind(type && (KIND_ORDER as string[]).includes(type) ? type as OpportunityKind : params.get("category") === "Hackathon" ? "hackathon" : "all");
       const state = params.get("state");
@@ -105,7 +109,7 @@ export function Opportunities({ editions }: OpportunitiesProps) {
   useEffect(() => {
     if (!urlReady) return;
     const url = new URL(window.location.href);
-    const values = { edition: edition === "my" ? "" : edition, type: kind === "all" ? "" : kind, state: region === "all" ? "" : region,
+    const values = { focus: focus === "all" ? "" : focus, edition: edition === "my" ? "" : edition, type: kind === "all" ? "" : kind, state: region === "all" ? "" : region,
       q: query, when: dateRange === "upcoming" ? "" : dateRange,
       sort: sort === "recommended" ? "" : sort, tracked: showSaved ? "1" : "" };
     for (const [key, value] of Object.entries(values)) {
@@ -113,20 +117,20 @@ export function Opportunities({ editions }: OpportunitiesProps) {
     }
     url.searchParams.delete("category");
     window.history.replaceState(window.history.state, "", url);
-  }, [urlReady, edition, kind, region, query, dateRange, sort, showSaved]);
+  }, [urlReady, focus, edition, kind, region, query, dateRange, sort, showSaved]);
 
   useEffect(() => () => window.clearTimeout(toastTimer.current), []);
 
-  const all = useMemo(() => [...events.map(fromEvent), ...resources.map(fromResource)], [events, resources]);
-  // Built for uni students: events outside tech, business, careers and hackathons stay off the board.
-  const inFocus = useMemo(() => all.filter((row) => !row.event || forStudents(row.event)), [all]);
+  const all = useMemo(() => [...events.map(fromEvent), ...resources.map(fromResource)].map(row => ({ ...row, timeZone: EDITIONS[edition].timezone })), [events, resources, edition]);
+  // UK includes academic and cultural opportunities; Malaysia keeps its existing focus.
+  const inFocus = useMemo(() => all.filter((row) => !row.event || forStudents(row.event, edition)), [all, edition]);
   const filters = useMemo(
-    () => ({ kind, query, region, dateRange, sort, source, savedIds, onlySaved: showSaved }),
-    [kind, query, region, dateRange, sort, source, savedIds, showSaved],
+    () => ({ focus, kind, query, region, dateRange, sort, source, savedIds, onlySaved: showSaved }),
+    [focus, kind, query, region, dateRange, sort, source, savedIds, showSaved],
   );
   const shown = useMemo(() => filterOpportunities(inFocus, filters, today), [inFocus, filters, today]);
   // A new filter starts the list from the top again.
-  useEffect(() => setLimit(PAGE), [kind, query, region, dateRange, sort, source, showSaved]);
+  useEffect(() => setLimit(PAGE), [edition, focus, kind, query, region, dateRange, sort, source, showSaved]);
   // Load the next page well before the visitor reaches the end, one page per approach,
   // so new cards are already laid out off-screen and the bottom of the page never jumps.
   const more = useRef<HTMLDivElement>(null);
@@ -143,7 +147,8 @@ export function Opportunities({ editions }: OpportunitiesProps) {
     return () => observer.disconnect();
   }, [hasMore, limit]);
   // Counts ignore the filter they label, so each chip shows what picking it would give.
-  const upcoming = useMemo(() => filterOpportunities(inFocus, { ...filters, kind: "all", query: "", region: "all", dateRange: "upcoming", source: "all", onlySaved: false }, today), [inFocus, filters, today]);
+  const upcoming = useMemo(() => filterOpportunities(inFocus, { ...filters, focus: "all", kind: "all", query: "", region: "all", dateRange: "upcoming", source: "all", onlySaved: false }, today), [inFocus, filters, today]);
+  const collectionRows = useMemo(() => filterOpportunities(inFocus, { ...filters, focus: "all" }, today), [inFocus, filters, today]);
   const kindCounts = useMemo(() => countByKind(filterOpportunities(inFocus, { ...filters, kind: "all", onlySaved: false }, today)), [inFocus, filters, today]);
   const regionCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -166,16 +171,18 @@ export function Opportunities({ editions }: OpportunitiesProps) {
   const chooseKind = (value: OpportunityKind | "all") => setKind(value);
   const chooseRegion = (value: string) => setRegion(value);
   const clearAll = () => {
-    setQuery(""); setSource("all"); setDateRange("upcoming"); setShowSaved(false); setKind("all"); setRegion("all"); setSort("recommended");
+    setFocus("all"); setQuery(""); setSource("all"); setDateRange("upcoming"); setShowSaved(false); setKind("all"); setRegion("all"); setSort("recommended");
   };
-  const startWith = (value: OpportunityKind | "week") => {
+  const startWith = (value: OpportunityKind | "week" | "local" | "closing") => {
     clearAll();
-    if (value === "week") { setDateRange("week"); setKind("event"); setSort("soonest"); }
+    if (value === "week") { setDateRange("week"); setKind("event"); setSort("soonest"); if (edition === "uk") setFocus("local"); }
+    else if (value === "local" || value === "closing") { setFocus(value); setSort("soonest"); }
     else setKind(value);
     document.getElementById("discover")?.scrollIntoView({ block: "start" });
   };
   const dateLabels: Record<string, string> = { today: "Today", tomorrow: "Tomorrow", week: "This week", month: "This month" };
   const activeFilters = [
+    ...(focus !== "all" ? [{ label: FOCUS_LABELS[focus], clear: () => setFocus("all") }] : []),
     ...(kind !== "all" ? [{ label: KIND_LABELS[kind].many, clear: () => setKind("all") }] : []),
     ...(query ? [{ label: `Search: ${query}`, clear: () => setQuery("") }] : []),
     ...(region !== "all" ? [{ label: REGIONS[region], clear: () => setRegion("all") }] : []),
@@ -188,7 +195,7 @@ export function Opportunities({ editions }: OpportunitiesProps) {
   return (
     <div className="min-h-screen bg-background">
       <main id="main-content" tabIndex={-1}>
-        <Hero stats={stats} today={today} edition={edition} onEditionChange={setEdition} onExplore={startWith} />
+        <Hero stats={stats} today={today} edition={edition} onEditionChange={changeEdition} onExplore={startWith} />
         <div id="discover" className="scroll-mt-0 md:scroll-mt-16 sticky top-0 z-30 border-b border-border bg-background/85 pt-2 backdrop-blur-lg backdrop-saturate-150 md:top-16">
           <nav aria-label="Type" className="no-scrollbar fade-x page-shell flex items-center gap-1 overflow-x-auto pb-2">
             {(["all", ...KIND_ORDER] as const).map((value) => {
@@ -224,6 +231,11 @@ export function Opportunities({ editions }: OpportunitiesProps) {
           savedCount={savedIds.size} resultCount={shown.length} onClear={clearAll} />
 
         <div className="page-shell pb-16 pt-4">
+          {edition === "uk" ? <div className="mb-5 flex flex-wrap gap-2" role="group" aria-label="Oxford collections">
+            {(["all", "local", "online", "closing"] as const).map(value => <button key={value} type="button" aria-pressed={focus === value} onClick={() => setFocus(value)} className={cn("btn min-h-11 md:min-h-11 border", focus === value ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-muted-foreground")}>
+              {FOCUS_LABELS[value]}<span className="ml-1 text-xs tabular-nums opacity-65">{collectionRows.filter(row => matchesFocus(row, value, today)).length}</span>
+            </button>)}
+          </div> : null}
           <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-lg font-semibold tracking-tight">{kind === "all" ? "Explore opportunities" : KIND_LABELS[kind].many}</h2>
             <p className="text-sm text-muted-foreground" aria-live="polite" aria-atomic="true">
@@ -238,7 +250,7 @@ export function Opportunities({ editions }: OpportunitiesProps) {
               <button type="button" onClick={clearAll} className="btn text-muted-foreground underline underline-offset-4">Reset all</button>
             </div>
           ) : null}
-          {region !== "all" ? <p className="mb-4 text-xs text-muted-foreground">Includes nationwide, online and location-unconfirmed opportunities. Check the organiser’s page for the exact location.</p> : null}
+          {region !== "all" ? <p className="mb-4 text-xs text-muted-foreground">Location filters include nationwide, online and location-unconfirmed opportunities. {edition === "uk" ? "Oxford & nearby includes Oxfordshire. " : ""}Check the organiser’s page for the exact location.</p> : null}
           {shown.length ? (
             <div className="grid items-stretch gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {shown.slice(0, limit).map((row, index) => (

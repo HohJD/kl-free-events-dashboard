@@ -40,7 +40,7 @@ function when(row: Opportunity, today: string): { text: string; urgent: boolean 
 export function trackEntry(row: Opportunity, today: string): Omit<SavedEntry, "savedAt"> {
   const area = row.event ? REGIONS[eventRegion(row.event)] ?? "" : row.place;
   return {
-    id: row.id, kind: row.event ? "event" : "resource", title: row.title, href: row.link, section: "/",
+    timeZone: row.timeZone, id: row.id, kind: row.event ? "event" : "resource", title: row.title, href: row.link, section: "/",
     note: [row.event ? row.place : row.org, row.event ? when(row, today).text : row.value].filter(Boolean).join(" · "),
     label: KIND_LABELS[row.kind].one,
     date: row.date || undefined, endDate: row.endDate, time: row.time, isDeadline: row.isDeadline && !row.alwaysOpen,
@@ -93,7 +93,7 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
             {row.summary ? <p>{row.summary}</p> : null}
             <p><span className="font-medium text-foreground">Who can join: </span>{row.eligibility || "Check eligibility with the organiser."}</p>
             {row.note ? <p><span className="font-medium text-foreground">Admission: </span>{row.note}</p> : null}
-            {row.date ? <p><span className="font-medium text-foreground">{row.isDeadline ? "Deadline" : "Date"}: </span>{formatDate(row.date)}{row.time ? `, ${formatTime(row.time)} (MYT)` : ""}</p> : null}
+            {row.date ? <p><span className="font-medium text-foreground">{row.isDeadline ? "Deadline" : "Date"}: </span>{formatDate(row.date)}{row.time ? `, ${formatTime(row.time)} (${row.timeZone === "Europe/London" ? "UK local time" : "MYT"})` : ""}</p> : null}
             <p><span className="font-medium text-foreground">Source: </span>{row.source}</p>
           </div>
         </details>

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { OxfordGuide } from "./oxford-guide";
 import { EDITIONS, type Edition } from "@/lib/edition";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -23,7 +24,7 @@ const fade = (delay: number) => ({
 });
 
 /** Headline plus the visitor's own week: what they track, what's next. */
-export function Hero({ stats, today, edition, onEditionChange, onExplore }: { stats: HeroStats; today: string; edition: Edition; onEditionChange: (edition: Edition) => void; onExplore: (kind: OpportunityKind | "week") => void }) {
+export function Hero({ stats, today, edition, onEditionChange, onExplore }: { stats: HeroStats; today: string; edition: Edition; onEditionChange: (edition: Edition) => void; onExplore: (kind: OpportunityKind | "week" | "local" | "closing") => void }) {
   const { saved, loaded } = useSaved();
   const updated = stats.generatedAt.toLocaleString("en-MY", {
     day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: EDITIONS[edition].timezone,
@@ -35,12 +36,14 @@ export function Hero({ stats, today, edition, onEditionChange, onExplore }: { st
 
   return (
     <section className="page-shell pb-6 pt-8 sm:pb-10 sm:pt-16">
+      <div className={edition === "uk" ? "grid items-start gap-6 lg:grid-cols-[1.4fr_1fr] lg:gap-12" : ""}>
+      <div className="min-w-0">
       <motion.p {...fade(0)} className="eyebrow flex items-center gap-2 whitespace-nowrap">
         <span className="relative flex size-2" aria-hidden><span className="absolute inline-flex size-full animate-ping rounded-full bg-primary opacity-60" /><span className="relative inline-flex size-2 rounded-full bg-primary" /></span>
-        <span>{stats.total.toLocaleString("en-MY")} free opportunities<span className="max-[399px]:hidden"> · Updated {updated}</span></span>
+        <span>{stats.total.toLocaleString("en-MY")} opportunities<span className="max-[399px]:hidden"> · Updated {updated}</span></span>
       </motion.p>
       <motion.h1 {...fade(0.05)} className="mt-4 text-[2rem] min-[375px]:text-[2.5rem] font-semibold leading-[1.02] tracking-[-0.045em] sm:text-6xl md:text-7xl">
-        Your student life,<br className="sm:hidden" />{" "}
+        {edition === "uk" ? <>Your Oxford life,<br /></> : <>Your student life,<br className="sm:hidden" />{" "}</>}
         <span className="squiggle">sorted.<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden><path d="M3 14 C 40 4, 70 18, 105 9 S 170 4, 197 11" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /></svg></span>
       </motion.h1>
       <motion.p {...fade(0.1)} className="page-sub">
@@ -56,8 +59,17 @@ export function Hero({ stats, today, edition, onEditionChange, onExplore }: { st
         ))}
       </div>
 
+      </div>
+      {edition === "uk" ? <OxfordGuide /> : null}
+      </div>
+
       <motion.div {...fade(0.12)} className="mt-7 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4" aria-label="Explore by goal">
-        {([
+        {(edition === "uk" ? [
+          ["week", "Between lectures", "Local events this week"],
+          ["closing", "Don’t miss out", "Deadlines in the next 14 days"],
+          ["internship", "Try something new", "Internships & placements"],
+          ["local", "Stay closer", "Oxford & nearby opportunities"],
+        ] as const : [
           ["week", "Make plans", "Events this week"],
           ["scholarship", "Fund your studies", "Scholarships & support"],
           ["internship", "Start your career", "Find an internship"],

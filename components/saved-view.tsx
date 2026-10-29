@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, CalendarPlus, Download, Trash2 } from "lucide-react";
 import { buildIcs, reminderUrl } from "@/lib/calendar";
-import { malaysiaDay } from "@/lib/filter-events";
+import { malaysiaDay, localDay } from "@/lib/filter-events";
 import { countdown, daysUntil } from "@/lib/tracker";
 import { STATUS_LABELS, statusOf, useSaved, type SavedEntry, type TrackStatus } from "@/lib/use-saved";
 import { cn } from "@/lib/utils";
@@ -20,7 +20,7 @@ function signUpLabel(row: SavedEntry): string {
 }
 
 const calendarFor = (row: SavedEntry) =>
-  row.date ? reminderUrl({ title: row.title, date: row.date, endDate: row.endDate, time: row.time, place: row.place, link: row.href, isDeadline: row.isDeadline }) : null;
+  row.date ? reminderUrl({ timeZone: row.timeZone, title: row.title, date: row.date, endDate: row.endDate, time: row.time, place: row.place, link: row.href, isDeadline: row.isDeadline }) : null;
 
 export function SavedView() {
   const { saved, remove, setStatus, loaded } = useSaved();
@@ -70,7 +70,7 @@ export function SavedView() {
               </div>
               <div className="no-scrollbar -mx-4 flex snap-x scroll-px-4 gap-2.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:px-0">
                 {upNext.map((row, index) => {
-                  const days = daysUntil(row.date!, today);
+                  const days = daysUntil(row.date!, localDay(new Date(), row.timeZone === "Europe/London" ? "Europe/London" : "Asia/Kuala_Lumpur"));
                   return (
                     <motion.a key={row.id} href={row.href} target="_blank" rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }}
@@ -103,7 +103,7 @@ export function SavedView() {
           <ul key={tab} className="mt-4 grid gap-2.5 lg:grid-cols-2" role="tabpanel">
             <AnimatePresence initial={false} mode="popLayout">
               {rows.map((row) => {
-                const timer = today ? countdown(row, today) : null;
+                const timer = today ? countdown(row, localDay(new Date(), row.timeZone === "Europe/London" ? "Europe/London" : "Asia/Kuala_Lumpur")) : null;
                 const calendar = calendarFor(row);
                 return (
                   <motion.li key={row.id} layout initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }}
