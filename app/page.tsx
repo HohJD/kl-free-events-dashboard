@@ -6,6 +6,8 @@ import { eventRegion, REGIONS } from "@/lib/regions";
 export default function Home() {
   const { events, generatedAt, sources } = getEvents();
   const { resources } = getResources();
+  const ukEvents = getEvents('events_uk.json');
+  const ukResources = getResources('resources_uk.json');
 
   // JSON-LD for Google rich results (next 25 dated, located events).
   const structuredData = {
@@ -39,7 +41,12 @@ export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
-      <Opportunities events={events} resources={resources} generatedAt={generatedAt.toISOString()} sources={sources.length} />
+      <Opportunities
+        editions={{
+          my: { events, resources, generatedAt: generatedAt.toISOString(), sources: sources.length },
+          uk: { events: ukEvents.events, resources: ukResources.resources, generatedAt: ukEvents.generatedAt.toISOString(), sources: ukEvents.sources.length },
+        }}
+      />
     </>
   );
 }

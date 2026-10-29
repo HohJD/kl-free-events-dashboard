@@ -12,6 +12,8 @@ interface FilterSheetProps {
   region: string;
   setRegion: (value: string) => void;
   regionCounts: Record<string, number>;
+  regionSlugs: string[];
+  allLabel: string;
   sort: SortMode;
   setSort: (value: SortMode) => void;
   dateRange: DateRange;
@@ -86,9 +88,9 @@ export function FilterSheet(props: FilterSheetProps) {
             <h3 className="eyebrow mb-2.5">Location</h3>
             <select value={props.region} onChange={(event) => props.setRegion(event.target.value)} aria-label="Location"
               className="field px-4">
-              <option value="all">All of Malaysia</option>
-              {Object.entries(REGIONS).filter(([value]) => value !== "unknown").map(([value, label]) => (
-                <option key={value} value={value}>{label} ({props.regionCounts[value] || 0})</option>
+              <option value="all">{props.allLabel}</option>
+              {props.regionSlugs.map((value) => (
+                <option key={value} value={value}>{REGIONS[value] ?? value} ({props.regionCounts[value] || 0})</option>
               ))}
             </select>
           </section>

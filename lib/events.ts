@@ -229,8 +229,8 @@ function safeUrl(url: unknown): string {
   return '';
 }
 
-export function getEvents(): { events: Event[]; generatedAt: Date; count: number; sources: string[] } {
-  const filePath = path.join(process.cwd(), 'events.json');
+export function getEvents(file = 'events.json'): { events: Event[]; generatedAt: Date; count: number; sources: string[] } {
+  const filePath = path.join(process.cwd(), file);
   try {
     const raw = fs.readFileSync(filePath, 'utf8');
     const data: EventData = JSON.parse(raw);
@@ -250,7 +250,7 @@ export function getEvents(): { events: Event[]; generatedAt: Date; count: number
     const sources = Array.from(new Set(events.map((e) => e.source)));
     return { events, generatedAt: new Date(data.generated_at), count: events.length, sources };
   } catch (err) {
-    console.error('Error reading events.json:', err);
+    console.error(`Error reading ${file}:`, err);
     return { events: [], generatedAt: new Date(), count: 0, sources: [] };
   }
 }

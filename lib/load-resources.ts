@@ -15,9 +15,9 @@ function httpsUrl(value: unknown): string {
 
 /** Reads resources.json written by the scraper. Missing or invalid data
  * yields an empty list so the page still builds. */
-export function getResources(): { resources: Resource[]; generatedAt: Date | null } {
+export function getResources(file = 'resources.json'): { resources: Resource[]; generatedAt: Date | null } {
   try {
-    const raw = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'resources.json'), 'utf8'));
+    const raw = JSON.parse(fs.readFileSync(path.join(process.cwd(), file), 'utf8'));
     const resources = (Array.isArray(raw.resources) ? raw.resources : [])
       .filter((row: Resource) => row && KINDS.has(row.kind) && typeof row.title === 'string' && httpsUrl(row.link))
       .map((row: Resource) => ({

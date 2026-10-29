@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { EDITIONS, type Edition } from "@/lib/edition";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import type { OpportunityKind } from "@/lib/opportunities";
@@ -22,10 +23,10 @@ const fade = (delay: number) => ({
 });
 
 /** Headline plus the visitor's own week: what they track, what's next. */
-export function Hero({ stats, today, onExplore }: { stats: HeroStats; today: string; onExplore: (kind: OpportunityKind | "week") => void }) {
+export function Hero({ stats, today, edition, onEditionChange, onExplore }: { stats: HeroStats; today: string; edition: Edition; onEditionChange: (edition: Edition) => void; onExplore: (kind: OpportunityKind | "week") => void }) {
   const { saved, loaded } = useSaved();
   const updated = stats.generatedAt.toLocaleString("en-MY", {
-    day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Asia/Kuala_Lumpur",
+    day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: EDITIONS[edition].timezone,
   });
   const active = saved;
   const applied = saved.filter((row) => statusOf(row) === "applied").length;
@@ -43,18 +44,30 @@ export function Hero({ stats, today, onExplore }: { stats: HeroStats; today: str
         <span className="squiggle">sorted.<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden><path d="M3 14 C 40 4, 70 18, 105 9 S 170 4, 197 11" fill="none" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /></svg></span>
       </motion.h1>
       <motion.p {...fade(0.1)} className="page-sub">
-        Events, funding, careers and free tools. Your next opportunity in Malaysia starts here.
+        {EDITIONS[edition].tagline}
       </motion.p>
 
-      <motion.div {...fade(0.12)} className="mt-6 grid grid-cols-2 gap-2 lg:grid-cols-4" aria-label="Explore by goal">
+      <div role="group" aria-label="Country" className="mt-4 inline-flex items-center gap-1 rounded-full border border-border bg-card p-1">
+        {(["my", "uk"] as const).map((value) => (
+          <button key={value} type="button" onClick={() => onEditionChange(value)} aria-pressed={edition === value}
+            className={`min-h-11 rounded-full px-4 text-xs font-semibold transition-colors ${edition === value ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}>
+            {EDITIONS[value].label}
+          </button>
+        ))}
+      </div>
+
+      <motion.div {...fade(0.12)} className="mt-7 grid grid-cols-2 gap-2 sm:gap-3 lg:grid-cols-4" aria-label="Explore by goal">
         {([
           ["week", "Make plans", "Events this week"],
           ["scholarship", "Fund your studies", "Scholarships & support"],
           ["internship", "Start your career", "Find an internship"],
           ["tool", "Build something", "Free tools for your ideas"],
-        ] as const).map(([kind, title, description]) => (
-          <button key={kind} type="button" onClick={() => onExplore(kind)} className="group rounded-2xl border border-border bg-card p-3 sm:p-4 text-left transition-colors hover:border-foreground/40 hover:bg-muted">
-            <span className="flex items-start justify-between gap-2 text-sm font-semibold">{title}<ArrowRight className="mt-0.5 size-4 shrink-0 transition-transform group-hover:translate-x-1" aria-hidden /></span>
+        ] as const).map(([kind, title, description], index) => (
+          <button key={kind} type="button" onClick={() => onExplore(kind)} className="goal-card group flex flex-col items-start rounded-2xl border border-border bg-card p-3 sm:p-4 text-left transition-colors hover:border-foreground/40 hover:bg-muted">
+            <span className="mb-4 hidden w-full items-center justify-between sm:flex text-[11px] font-medium tabular-nums text-muted-foreground" aria-hidden>
+              <span>0{index + 1}</span><ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+            </span>
+            <span className="block text-sm font-semibold">{title}</span>
             <span className="mt-1 block text-xs leading-relaxed text-muted-foreground">{description}</span>
           </button>
         ))}
@@ -76,7 +89,7 @@ export function Hero({ stats, today, onExplore }: { stats: HeroStats; today: str
             </Link>
           </div>
         ) : (
-          <div className="flex max-w-xl items-center gap-3 sm:rounded-3xl sm:border sm:border-dashed sm:border-input sm:bg-card sm:p-4">
+          <div className="flex items-center gap-3">
             <p className="min-w-0 text-sm leading-snug text-muted-foreground">
               Tap <span className="font-medium text-foreground">Track</span> to save an opportunity. No account needed.
             </p>

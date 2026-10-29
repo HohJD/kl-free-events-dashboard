@@ -40,12 +40,14 @@ function Select<T extends string>({ label, value, onChange, options, counts }: {
 /** One row of controls for the opportunities list; phones move most of it into the Filters panel. */
 export function Toolbar({
   query, setQuery, dateRange, setDateRange, sort, setSort, region, setRegion, regionCounts,
+  regionSlugs, allLabel,
   showSaved, setShowSaved, savedCount, onOpenSheet, sheetCount,
 }: {
   query: string; setQuery: (value: string) => void;
   dateRange: DateRange; setDateRange: (value: DateRange) => void;
   sort: SortMode; setSort: (value: SortMode) => void;
   region: string; setRegion: (value: string) => void; regionCounts: Record<string, number>;
+  regionSlugs: string[]; allLabel: string;
   showSaved: boolean; setShowSaved: (value: boolean) => void; savedCount: number;
   onOpenSheet: () => void; sheetCount: number;
 }) {
@@ -59,8 +61,8 @@ export function Toolbar({
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const regionOptions = [{ value: "all", label: "All of Malaysia" },
-    ...Object.entries(REGIONS).filter(([value]) => value !== "unknown").map(([value, label]) => ({ value, label }))];
+  const regionOptions = [{ value: "all", label: allLabel },
+    ...regionSlugs.map((value) => ({ value, label: REGIONS[value] ?? value }))];
 
   return (
     <div className="page-shell flex items-center gap-2 pb-3 md:flex-wrap">

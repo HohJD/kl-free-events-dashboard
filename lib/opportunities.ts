@@ -123,7 +123,7 @@ function inDateRange(row: Opportunity, range: DateRange, today: string): boolean
 /** Nationwide and online things stay visible whatever state is chosen. */
 function inRegion(row: Opportunity, region: string): boolean {
   if (region === "all") return true;
-  if (!row.state || row.state === "malaysia" || row.state === "online" || row.state === "unknown") return true;
+  if (!row.state || row.state === "malaysia" || row.state === "united-kingdom" || row.state === "online" || row.state === "unknown") return true;
   return row.state === region;
 }
 

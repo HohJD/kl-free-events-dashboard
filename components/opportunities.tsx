@@ -6,9 +6,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import type { Event } from "@/lib/events";
 import type { Resource } from "@/lib/resources";
-import { malaysiaDay, type DateRange, type SortMode } from "@/lib/filter-events";
+import { localDay, type DateRange, type SortMode } from "@/lib/filter-events";
+import { EDITIONS, editionOf, type Edition } from "@/lib/edition";
 import { forStudents } from "@/lib/event-discovery";
-import { REGIONS, eventRegion } from "@/lib/regions";
+import { REGIONS, REGION_SLUGS, eventRegion } from "@/lib/regions";
 import {
   KIND_LABELS, KIND_ORDER, countByKind, eventsOf, filterOpportunities, fromEvent, fromResource,
   type OpportunityKind,
@@ -22,17 +23,23 @@ import { FilterSheet } from "./filter-sheet";
 import { OpportunityCard } from "./opportunity-card";
 import { BackToTop } from "./back-to-top";
 
-interface OpportunitiesProps {
+interface EditionData {
   events: Event[];
   resources: Resource[];
   generatedAt: string;
   sources: number;
 }
 
+interface OpportunitiesProps {
+  editions: Record<Edition, EditionData>;
+}
+
 const PAGE = 24;
 
 /** Everything free in one list: events, hackathons, scholarships, internships, graduate roles and tools. */
-export function Opportunities({ events, resources, generatedAt, sources }: OpportunitiesProps) {
+export function Opportunities({ editions }: OpportunitiesProps) {
+  const [edition, setEdition] = useState<Edition>("my");
+  const { events, resources, generatedAt, sources } = editions[edition];
   const [kind, setKind] = useState<OpportunityKind | "all">("all");
   const [query, setQuery] = useState("");
   const [region, setRegion] = useState("all");
@@ -43,7 +50,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   const [urlReady, setUrlReady] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [limit, setLimit] = useState(PAGE);
-  const [today, setToday] = useState(() => malaysiaDay(new Date(generatedAt)));
+  const [today, setToday] = useState(() => localDay(new Date(generatedAt), EDITIONS[edition].timezone));
   const { ids: savedIds, toggle } = useSaved();
   const [toast, setToast] = useState<{ title: string; calendar: string | null } | null>(null);
   const toastTimer = useRef<number>();
@@ -57,10 +64,14 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   }, [savedIds, toggle]);
 
   useEffect(() => {
-    setToday(malaysiaDay());
-    const timer = window.setInterval(() => setToday(malaysiaDay()), 60000);
+    const tz = EDITIONS[edition].timezone;
+    setToday(localDay(new Date(), tz));
+    const timer = window.setInterval(() => setToday(localDay(new Date(), tz)), 60000);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [edition]);
+
+  // Editions have different location slugs; switching clears the state filter.
+  useEffect(() => setRegion("all"), [edition]);
 
   // Old shared links pointed at the giveaway tab; they now land on the home page.
   useEffect(() => {
@@ -74,6 +85,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   useEffect(() => {
     const restore = () => {
       const params = new URL(window.location.href).searchParams;
+      setEdition(editionOf(params.get("edition")));
       const type = params.get("type");
       setKind(type && (KIND_ORDER as string[]).includes(type) ? type as OpportunityKind : params.get("category") === "Hackathon" ? "hackathon" : "all");
       const state = params.get("state");
@@ -93,7 +105,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   useEffect(() => {
     if (!urlReady) return;
     const url = new URL(window.location.href);
-    const values = { type: kind === "all" ? "" : kind, state: region === "all" ? "" : region,
+    const values = { edition: edition === "my" ? "" : edition, type: kind === "all" ? "" : kind, state: region === "all" ? "" : region,
       q: query, when: dateRange === "upcoming" ? "" : dateRange,
       sort: sort === "recommended" ? "" : sort, tracked: showSaved ? "1" : "" };
     for (const [key, value] of Object.entries(values)) {
@@ -101,7 +113,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
     }
     url.searchParams.delete("category");
     window.history.replaceState(window.history.state, "", url);
-  }, [urlReady, kind, region, query, dateRange, sort, showSaved]);
+  }, [urlReady, edition, kind, region, query, dateRange, sort, showSaved]);
 
   useEffect(() => () => window.clearTimeout(toastTimer.current), []);
 
@@ -176,7 +188,7 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
   return (
     <div className="min-h-screen bg-background">
       <main id="main-content" tabIndex={-1}>
-        <Hero stats={stats} today={today} onExplore={startWith} />
+        <Hero stats={stats} today={today} edition={edition} onEditionChange={setEdition} onExplore={startWith} />
         <div id="discover" className="scroll-mt-0 md:scroll-mt-16 sticky top-0 z-30 border-b border-border bg-background/85 pt-2 backdrop-blur-lg backdrop-saturate-150 md:top-16">
           <nav aria-label="Type" className="no-scrollbar fade-x page-shell flex items-center gap-1 overflow-x-auto pb-2">
             {(["all", ...KIND_ORDER] as const).map((value) => {
@@ -197,12 +209,14 @@ export function Opportunities({ events, resources, generatedAt, sources }: Oppor
           dateRange={dateRange} setDateRange={setDateRange}
           sort={sort} setSort={setSort}
           region={region} setRegion={chooseRegion} regionCounts={regionCounts}
+          regionSlugs={REGION_SLUGS[edition]} allLabel={EDITIONS[edition].allLabel}
           showSaved={showSaved} setShowSaved={setShowSaved} savedCount={savedIds.size}
           onOpenSheet={() => setSheetOpen(true)}
           sheetCount={[region !== "all", source !== "all", showSaved, sort !== "recommended", dateRange !== "upcoming"].filter(Boolean).length}
         />
         </div>
         <FilterSheet open={sheetOpen} onClose={() => setSheetOpen(false)} region={region} setRegion={chooseRegion} regionCounts={regionCounts}
+          regionSlugs={REGION_SLUGS[edition]} allLabel={EDITIONS[edition].allLabel}
           sort={sort} setSort={setSort} dateRange={dateRange} setDateRange={setDateRange} category={kind} setCategory={(value) => chooseKind(value as OpportunityKind | "all")}
           categories={KIND_ORDER} categoryCounts={kindCounts} categoryLabel="Type"
           categoryNames={Object.fromEntries(KIND_ORDER.map((value) => [value, KIND_LABELS[value].many]))}

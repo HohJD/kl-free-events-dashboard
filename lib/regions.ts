@@ -17,8 +17,17 @@ export const REGIONS: Record<string, string> = {
   sarawak: 'Sarawak',
   putrajaya: 'Putrajaya',
   labuan: 'Labuan',
+  'united-kingdom': 'United Kingdom',
+  london: 'London',
+  oxford: 'Oxford',
   online: 'Online',
   unknown: 'Location unconfirmed',
+};
+
+/** Location dropdown slugs per edition (REGIONS is the shared label map). */
+export const REGION_SLUGS: Record<string, string[]> = {
+  my: ['kuala-lumpur', 'selangor', 'penang', 'johor', 'perak', 'melaka', 'negeri-sembilan', 'pahang', 'kedah', 'kelantan', 'terengganu', 'perlis', 'sabah', 'sarawak', 'putrajaya', 'labuan', 'online'],
+  uk: ['london', 'oxford', 'online'],
 };
 
 export function eventRegion(event: Pick<Event, 'state'>): string {

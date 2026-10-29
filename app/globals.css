@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    /* Student Repo by ATH: black and white; emoji bring the colour */
+    /* Student Repo by ATH: quiet, neutral surfaces. */
     --background: 0 0% 99%;
     --foreground: 240 6% 9%;
     --card: 0 0% 100%;
@@ -210,3 +210,10 @@
   background: hsl(var(--primary));
 }
 .skip-link:focus { transform: translateY(0); }
+
+/* Disclosures retain native keyboard behavior with a consistent visual affordance. */
+.opportunity-details summary { list-style: none; }
+.opportunity-details summary::-webkit-details-marker { display: none; }
+.opportunity-details[open] summary svg { transform: rotate(180deg); }
+.opportunity-card { row-gap: 0.25rem; }
+.goal-card:focus-visible { outline-offset: 4px; }

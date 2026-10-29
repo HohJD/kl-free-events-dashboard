@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { KIND_LABELS, daysLeft, type Opportunity } from "@/lib/opportunities";
 import { REGIONS, eventRegion } from "@/lib/regions";
 import type { SavedEntry } from "@/lib/use-saved";
@@ -59,7 +59,7 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
   const entry = trackEntry(row, today);
 
   return (
-    <article className={cn("card flex h-full flex-col p-4", index < 12 && "rise")} style={index < 12 ? { animationDelay: `${index * 30}ms` } : undefined}>
+    <article className={cn("card opportunity-card flex h-full flex-col p-4 sm:p-5", index < 12 && "rise")} style={index < 12 ? { animationDelay: `${index * 30}ms` } : undefined}>
       <div className="flex items-start gap-3">
         <span className="thumb">
           {row.image ? (
@@ -70,15 +70,15 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
           )}
         </span>
         <div className="min-w-0 flex-1">
-          <p className="flex min-w-0 items-center gap-1.5 text-xs text-muted-foreground">
-            <span className="shrink-0">{KIND_LABELS[row.kind].one}</span>
-            <span aria-hidden>·</span>
-            <span className={cn("pill truncate", timing.urgent && "pill-hot")}>{timing.text}</span>
-          </p>
-          <h3 className="mt-1 line-clamp-2 break-words text-[15px] font-semibold leading-snug tracking-tight">{row.title}</h3>
+          <p className="eyebrow">{KIND_LABELS[row.kind].one}</p>
+          <h3 className="mt-1 line-clamp-2 break-words text-base font-semibold leading-snug tracking-tight">{row.title}</h3>
         </div>
       </div>
 
+      <p className={cn("mt-4 flex items-start gap-2 text-xs font-medium leading-relaxed", timing.urgent ? "text-foreground" : "text-muted-foreground")}>
+        <span className={cn("mt-1.5 size-1.5 shrink-0 rounded-full", timing.urgent ? "bg-foreground" : "bg-muted-foreground/40")} aria-hidden />
+        {timing.text}
+      </p>
       {context || row.value ? (
         <p className="mt-2.5 line-clamp-1 break-words text-[13px] text-muted-foreground">
           {row.value ? <span className="font-medium text-foreground">{row.value}</span> : null}
@@ -87,8 +87,8 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
       ) : null}
       {row.summary ? <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{row.summary}</p> : null}
       {row.eligibility || row.note || row.summary ? (
-        <details className="mt-2 text-sm">
-          <summary className="flex min-h-11 cursor-pointer items-center font-medium underline decoration-border underline-offset-4">Details & eligibility</summary>
+        <details className="opportunity-details mt-2 text-sm">
+          <summary className="flex min-h-11 cursor-pointer items-center justify-between gap-2 text-xs font-medium text-muted-foreground hover:text-foreground">Details & eligibility<ChevronDown className="size-4 shrink-0 transition-transform" aria-hidden /></summary>
           <div className="space-y-3 border-t border-border pb-2 pt-3 text-sm leading-relaxed text-muted-foreground">
             {row.summary ? <p>{row.summary}</p> : null}
             <p><span className="font-medium text-foreground">Who can join: </span>{row.eligibility || "Check eligibility with the organiser."}</p>
@@ -100,7 +100,7 @@ export function OpportunityCard({ row, today, saved, onToggleSave, index = 0 }: 
       ) : null}
       {row.status === "closed" ? <p className="mt-1 text-xs font-semibold text-destructive">Registration closed</p> : null}
 
-      <div className="mt-auto flex items-center gap-1 pt-4">
+      <div className="mt-auto flex items-center justify-between gap-2 border-t border-border pt-4">
         <a href={row.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary" aria-label={`${row.kind === "tool" ? "Get" : row.isDeadline ? "Apply for" : "View"} ${row.title} (opens in a new tab)`}>
           {row.kind === "tool" ? "Get it" : row.isDeadline ? "Apply" : "View"} <ArrowUpRight className="size-4" aria-hidden />
         </a>
