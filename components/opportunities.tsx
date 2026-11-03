@@ -54,7 +54,7 @@ export function Opportunities({ editions }: OpportunitiesProps) {
   const [today, setToday] = useState(() => localDay(new Date(generatedAt), EDITIONS[edition].timezone));
   const { ids: savedIds, toggle } = useSaved();
   const [toast, setToast] = useState<{ title: string; calendar: string | null } | null>(null);
-  const toastTimer = useRef<number>();
+  const toastTimer = useRef<number | undefined>(undefined);
   const toggleSaved = useCallback((entry: Omit<SavedEntry, "savedAt">) => {
     const adding = !savedIds.has(entry.id);
     toggle(entry);
